@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Strange Pigs",
+        "symbol": "SOPP",
+        "contractAddress": "0x72F38b2330cd187c13553dc92a0bE6334005EebA",
+        "network": "Fantom",
+        "maxSupply": 1080,
+        "mint": {
+            "weiCost": 35000000000000000000,
+            "mintImage": "/images/StrangePigs.gif",
+            "gasLimit": 285000
+        }
+    }
+]
