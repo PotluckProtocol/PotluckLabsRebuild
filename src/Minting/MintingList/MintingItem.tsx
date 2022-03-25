@@ -8,8 +8,8 @@ import { RoundedButton } from '../../components/RoundedButton';
 import { TextFit } from '../../components/TextFit';
 import { NETWORKS } from "../../types/Networks";
 import { Network } from '../../types/Networks';
-import { abi } from '../MintProject/MintProject';
 import { MintStateBadge } from '../../components/MintStateBadge';
+import { abi } from '../abi';
 
 export type MintingItemProps = {
     baseInformation: ProjectBaseInformation;
