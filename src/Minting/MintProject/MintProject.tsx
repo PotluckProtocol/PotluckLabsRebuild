@@ -117,8 +117,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
         init();
     }, [contractAddress, baseInformation]);
 
-
-
     const handleMintClick = async () => {
         await mintingContext.mint(mintAmount);
     }
@@ -153,9 +151,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
     return (
         <div>
-
-
-
             <MintingContainer>
                 <div className="mb-4">
                     <MintHeader height={100} className="flex items-center justify-center">{baseInformation.name}</MintHeader>
@@ -201,7 +196,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
             <BackLinkContainer className="mt-8">
                 <NavLink to={'/minting'}>Back to minting catalog</NavLink>
             </BackLinkContainer>
-
         </div>
     );
 }

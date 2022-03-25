@@ -33,7 +33,7 @@ export const MintingProvider: React.FC = ({ children }) => {
     const [isInitialized, setIsInitialized] = useState(false);
     const [contractAddress, setContractAddress] = useState<string>('');
     const [isMinting, setIsMinting] = useState(false);
-    const [mintCount, setMintCount] = useState(-1);
+    const [mintCount, setMintCount] = useState(0);
     const [whitelistCount, setWhitelistCount] = useState(0);
     const [mintState, setMintState] = useState<MintState>('NotStarted');
     const [mintingWrapper, setMintingWrapper] = useState<MintingContractWrapper>();

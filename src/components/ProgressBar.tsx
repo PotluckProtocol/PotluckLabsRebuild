@@ -18,6 +18,7 @@ const Bar = styled.div<BarProps>`
     height: 100%;
     width: ${props => props.percentageWidth};
     height: ${props => props.height};
+    transition: width .75s ease-in-out;
 `;
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({

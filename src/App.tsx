@@ -22,15 +22,9 @@ const App = () => {
       <div className="flex flex-row px-2">
         <div style={{ width: '230px' }} className="pt-1">
           <MenuItemList>
-            <MenuItem path="/" >
-              Home
-            </MenuItem>
-            <MenuItem path="minting">
-              Now minting
-            </MenuItem>
-            <MenuItem path="collections">
-              Collections
-            </MenuItem>
+            <MenuItem path="/" >Home</MenuItem>
+            <MenuItem path="/minting">Now minting</MenuItem>
+            <MenuItem path="/collections">Collections</MenuItem>
           </MenuItemList>
         </div>
         <div style={{ width: '100%' }} className="pt-4 px-4">
