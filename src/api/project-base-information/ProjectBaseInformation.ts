@@ -7,6 +7,7 @@ export type ProjectBaseInformation = {
     mint?: {
         weiCost: number;
         gasLimit: number;
+        maxPerTx: number;
         mintImage: string;
         noWhitelist?: boolean;
         forceEndedState?: boolean;

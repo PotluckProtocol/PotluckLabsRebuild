@@ -31,7 +31,6 @@ export class MintingContractWrapper extends EventEmitter {
 
     public async mint(amount: number, fromWallet: string) {
 
-
         const { mint } = this.projectBaseInformation;
         if (!mint) {
             return false;
@@ -51,7 +50,15 @@ export class MintingContractWrapper extends EventEmitter {
                 });
 
             // Emit change to minted count
-            this.getMintedCount();
+
+            const promises: Promise<any>[] = [];
+
+            promises.push(this.getMintedCount());
+            if (this.opts.hasWhitelist) {
+                promises.push(this.getWhitelistCount(fromWallet));
+            }
+
+            await Promise.all(promises);
 
             return true;
         } catch (e) {
@@ -79,7 +86,6 @@ export class MintingContractWrapper extends EventEmitter {
         } catch (e) {
             console.log(e);
         }
-        console.log(mintedCount);
 
         this.lastMintedSupply = mintedCount;
 
@@ -89,7 +95,7 @@ export class MintingContractWrapper extends EventEmitter {
 
     public async getWhitelistCount(walletAddress: string): Promise<number> {
         let wlCount: number = 0;
-        if (!this.opts.hasWhitelist) {
+        if (this.opts.hasWhitelist) {
             wlCount = await this.contract?.methods
                 .whiteListed(walletAddress)
                 .call();
@@ -122,7 +128,7 @@ export class MintingContractWrapper extends EventEmitter {
         }
 
         const results = await Promise.all(
-            methods.map(method => this.contract.methods[method].call())
+            methods.map(method => this.contract.methods[method]().call())
         );
 
         const paused: boolean = results[0];

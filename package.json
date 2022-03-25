@@ -18,6 +18,7 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.3",
+    "textfit": "^2.4.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0",
     "web3": "^1.7.1"
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.24",
+    "@types/textfit": "^2.4.2",
     "assert": "^2.0.0",
     "autoprefixer": "^10.4.4",
     "buffer": "^6.0.3",

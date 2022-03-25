@@ -7,7 +7,21 @@
         "maxSupply": 1080,
         "mint": {
             "weiCost": 35000000000000000000,
+            "maxPerTx": 10,
             "mintImage": "/images/StrangePigs.gif",
+            "gasLimit": 285000
+        }
+    },
+    {
+        "name": "Old Blood Of The Cave",
+        "symbol": "OLDBLOOD",
+        "contractAddress": "0xcd05E23d508cF053513475277eB4de9f55f75f35",
+        "network": "Fantom",
+        "maxSupply": 650,
+        "mint": {
+            "weiCost": 30000000000000000000,
+            "maxPerTx": 10,
+            "mintImage": "/images/OldBloodOfTheCave.gif",
             "gasLimit": 285000
         }
     }

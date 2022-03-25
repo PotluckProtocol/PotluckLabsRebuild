@@ -12,7 +12,6 @@ export type InitMinting = {
     gasLimit: number;
     abi: AbiItems;
     liveMintingCount?: boolean;
-    whitelistable?: boolean;
 }
 
 export type MintingContextType = {
@@ -63,6 +62,7 @@ export const MintingProvider: React.FC = ({ children }) => {
             if (walletAddress) {
                 mintingWrapper.getWhitelistCount(walletAddress);
             }
+
             console.log('should fetch them');
         }
 
@@ -97,11 +97,17 @@ export const MintingProvider: React.FC = ({ children }) => {
         setContractAddress(opts.contractAddress);
         setIsInitialized(true);
 
-        const mintingWrapper = new MintingContractWrapper(contract, baseInformation, {
-            liveMintingCount: opts.liveMintingCount
-        });
-        setMintingWrapper(mintingWrapper);
+        const hasWhitelist = baseInformation.mint && !baseInformation.mint.noWhitelist;
 
+        const mintingWrapper = new MintingContractWrapper(contract, baseInformation, {
+            liveMintingCount: opts.liveMintingCount,
+            hasWhitelist
+        });
+
+        // async background
+        mintingWrapper.getMintState();
+
+        setMintingWrapper(mintingWrapper);
     }
 
     const mint = async (amount: number): Promise<boolean> => {
