@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { MintProjectWrapper } from "./views/Minting/MintProject/MintProjectWrapper";
 import { MintingList } from "./views/Minting/MintingList/MintingList";
 import { Collection } from "./views/Collection/Collection";
+import { Team } from "./views/Team/Team";
 
 export const AppRoutes: React.FC = () => {
 
@@ -18,6 +19,7 @@ export const AppRoutes: React.FC = () => {
             <Route path="minting/:contractAddress" element={<MintProjectWrapper />} />
             <Route path="minting" element={<MintingList />} />
             <Route path="collections" element={<Collection />} />
+            <Route path="team" element={<Team />} />
         </Routes>
     )
 } 

@@ -24,9 +24,10 @@ const App = () => {
             <MenuItem path="/" >Home</MenuItem>
             <MenuItem path="/minting">Now minting</MenuItem>
             <MenuItem path="/collections">Collections</MenuItem>
+            <MenuItem path="/team">Team</MenuItem>
           </MenuItemList>
         </div>
-        <div style={{ width: '100%' }} className="pt-4 px-4">
+        <div style={{ width: '100%' }} className="pt-8 px-12">
           <AppRoutes />
         </div>
       </div>

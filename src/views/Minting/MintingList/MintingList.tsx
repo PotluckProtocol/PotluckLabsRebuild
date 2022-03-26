@@ -8,7 +8,7 @@ export const MintingList: React.FC = () => {
     const stillMinting = configs.filter(item => !item.mint?.forceEndedState);
 
     return (
-        <div className="flex flex-wrap px-8 gap-8">
+        <div className="flex flex-wrap gap-8">
             {stillMinting.map((item, index) => {
                 return (
                     <div key={index}>
