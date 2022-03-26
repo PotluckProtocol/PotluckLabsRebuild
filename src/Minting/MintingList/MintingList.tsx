@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { MintingProvider } from "../../api/minting/MintingContext";
 import { ProjectBaseInformationContext } from "../../api/project-base-information/ProjectBaseInformationContext";
-import { Loading } from "../../components/Loading";
 import { MintingItem } from "./MintingItem";
 
 export const MintingList: React.FC = () => {
