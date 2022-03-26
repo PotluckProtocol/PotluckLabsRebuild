@@ -1,5 +1,9 @@
 import { Member, MemberProps } from "./Member"
 
+/**
+ * @todo Read members from json file
+ */
+
 const MEMBERS: MemberProps[] = [{
     name: 'Tinfoil Realist',
     image: '/images/team/TinfoilRealist.png',
