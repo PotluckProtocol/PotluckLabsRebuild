@@ -1,8 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-import { MintProjectWrapper } from "./Minting/MintProject/MintProjectWrapper";
-import { MintingList } from "./Minting/MintingList/MintingList";
 import useAccount from "./api/account/useAccount";
-import { Collection } from "./Collections/Collection/Collection";
+
+import { Route, Routes } from "react-router-dom";
+import { MintProjectWrapper } from "./views/Minting/MintProject/MintProjectWrapper";
+import { MintingList } from "./views/Minting/MintingList/MintingList";
+import { Collection } from "./views/Collection/Collection";
 
 export const AppRoutes: React.FC = () => {
 

@@ -53,9 +53,7 @@ export const Loading: React.FC<LoadingProps> = ({ color, size, width }) => {
 
     return (
         <Spinner width={width} size={size} color={color}>
-            <div />
-            <div />
-            <div />
+            <div /><div /><div />
         </Spinner>
     )
 }

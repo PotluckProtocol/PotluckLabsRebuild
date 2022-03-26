@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { MintingContext } from '../../api/minting/MintingContext';
-import { ProjectBaseInformation } from "../../api/project-base-information/ProjectBaseInformation"
-import { weiToDisplayCost } from "../../api/utils/wei-to-display-cost";
-import { RoundedButton } from '../../components/RoundedButton';
-import { TextFit } from '../../components/TextFit';
-import { NETWORKS } from "../../types/Networks";
-import { Network } from '../../types/Networks';
-import { MintStateBadge } from '../../components/MintStateBadge';
+import { MintingContext } from '../../../api/minting/MintingContext';
+import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
+import { weiToDisplayCost } from "../../../utils/wei-to-display-cost";
+import { RoundedButton } from '../../../components/RoundedButton';
+import { TextFit } from '../../../components/TextFit';
+import { NETWORKS } from "../../../types/Networks";
+import { Network } from '../../../types/Networks';
+import { MintStateBadge } from '../../../components/MintStateBadge';
 import { abi } from '../abi';
 
 export type MintingItemProps = {

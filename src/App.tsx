@@ -9,7 +9,6 @@ import { AppRoutes } from './AppRoutes';
 const App = () => {
 
   const baseInformationContext = useContext(ProjectBaseInformationContext);
-  console.log(baseInformationContext)
   if (!baseInformationContext.isInitialized) {
     return <div>Loading</div>;
   }

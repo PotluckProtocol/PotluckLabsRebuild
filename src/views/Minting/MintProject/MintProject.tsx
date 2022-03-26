@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { MintingContext } from "../../api/minting/MintingContext";
-import { ProjectBaseInformationContext } from "../../api/project-base-information/ProjectBaseInformationContext";
-import { weiToDisplayCost } from "../../api/utils/wei-to-display-cost";
-import { AmountSelector } from "../../components/AmountSelector";
-import { MintStateBadge } from "../../components/MintStateBadge";
-import { ProgressBar } from "../../components/ProgressBar";
-import { RoundedButton } from "../../components/RoundedButton";
-import { TextFit } from "../../components/TextFit";
-import { Network, NETWORKS } from "../../types/Networks";
+import { MintingContext } from "../../../api/minting/MintingContext";
+import { ProjectBaseInformationContext } from "../../../api/project-base-information/ProjectBaseInformationContext";
+import { weiToDisplayCost } from "../../../utils/wei-to-display-cost";
+import { AmountSelector } from "../../../components/AmountSelector";
+import { MintStateBadge } from "../../../components/MintStateBadge";
+import { ProgressBar } from "../../../components/ProgressBar";
+import { RoundedButton } from "../../../components/RoundedButton";
+import { TextFit } from "../../../components/TextFit";
+import { Network, NETWORKS } from "../../../types/Networks";
 import { abi } from "../abi";
 
 export type MintProjectProps = {

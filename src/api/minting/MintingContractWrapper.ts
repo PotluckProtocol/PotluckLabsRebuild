@@ -77,14 +77,12 @@ export class MintingContractWrapper extends EventEmitter {
     public async getMintedCount(): Promise<number> {
         let mintedCount;
         try {
-            console.log(this.contract.options.address);
-
             mintedCount = await this.contract.methods
                 .totalSupply()
                 .call();
 
         } catch (e) {
-            console.log(e);
+            console.log('Failed to get mint count', e);
         }
 
         this.lastMintedSupply = mintedCount;

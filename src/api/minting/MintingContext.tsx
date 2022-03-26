@@ -62,8 +62,6 @@ export const MintingProvider: React.FC = ({ children }) => {
             if (walletAddress) {
                 mintingWrapper.getWhitelistCount(walletAddress);
             }
-
-            console.log('should fetch them');
         }
 
         return () => {
@@ -92,7 +90,7 @@ export const MintingProvider: React.FC = ({ children }) => {
 
         const baseInformation = baseInformationContext.getConfig(opts.contractAddress) as ProjectBaseInformation;
 
-        console.log('init');
+        console.log('Init Minting:', opts.contractAddress);
 
         setContractAddress(opts.contractAddress);
         setIsInitialized(true);

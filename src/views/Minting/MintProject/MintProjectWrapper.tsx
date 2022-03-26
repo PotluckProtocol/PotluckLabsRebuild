@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router";
-import { MintingProvider } from "../../api/minting/MintingContext";
+import { MintingProvider } from "../../../api/minting/MintingContext";
 import { MintProject } from "./MintProject";
 
 type RouteParams = {

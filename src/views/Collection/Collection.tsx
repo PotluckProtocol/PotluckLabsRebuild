@@ -1,14 +1,27 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Tab } from "../../components/Tabs/Tab"
 import { Tabs } from "../../components/Tabs/Tabs"
 
+type QueryParams = {
+    tab: string;
+}
 
 export const Collection: React.FC = () => {
 
-    const [selectedTab, setSelectedTab] = useState('tab1');
+    const [queryParams, setQueryParams] = useSearchParams();
+    const [selectedTab, setSelectedTab] = useState('roadmap');
+
+    useEffect(() => {
+        if (queryParams.has('tab')) {
+            setSelectedTab(queryParams.get('tab') as string);
+        }
+    });
 
     const handleTabChange = (tabId: string) => {
         setSelectedTab(tabId);
+        setQueryParams({ tab: tabId });
     }
 
     return (

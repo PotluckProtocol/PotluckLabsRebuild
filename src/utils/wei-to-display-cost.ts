@@ -1,4 +1,4 @@
-import { Network } from "../../types/Networks";
+import { Network } from "../types/Networks";
 
 export type WeiToDisplayCostOpts = {
     decimals?: number;

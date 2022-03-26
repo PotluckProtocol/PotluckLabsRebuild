@@ -27,7 +27,6 @@ export const ProjectBaseInformationProvider: React.FC = ({ children }) => {
     const getConfig = (contractAddress: string): ProjectBaseInformation => {
         const item = baseInformation.find(item => item.contractAddress === contractAddress);
         if (!item) {
-            console.log('was');
             throw new Error(`Could not find base information for ${contractAddress}`);
         }
         return item;

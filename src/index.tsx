@@ -7,7 +7,7 @@ import { AccountProvider } from './api/account/AccountContext';
 import { ProjectBaseInformationProvider } from './api/project-base-information/ProjectBaseInformationContext';
 import { BrowserRouter } from 'react-router-dom';
 
-console.log('wasssst');
+console.log('Application initializing');
 
 ReactDOM.render(
   <React.StrictMode>

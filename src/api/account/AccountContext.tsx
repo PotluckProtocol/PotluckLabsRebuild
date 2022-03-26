@@ -35,9 +35,11 @@ export const AccountProvider: React.FC = ({ children }) => {
             // Add listeners start
             ethereum.on("accountsChanged", (walletAddresses: string[]) => {
                 if (account) {
+                    const wallet = walletAddresses[0];
+                    console.log(`Account changed: ${wallet} (Network: ${networkId})`);
                     setAccount({
                         ...account,
-                        walletAddress: walletAddresses[0]
+                        walletAddress: wallet
                     });
                 }
             });
@@ -45,13 +47,7 @@ export const AccountProvider: React.FC = ({ children }) => {
                 window.location.reload();
             });
 
-            console.log('Account', {
-                walletAddress,
-                network: {
-                    id: networkId
-                },
-                web3Instance
-            })
+            console.log(`Using account: ${walletAddress} (Network: ${networkId})`);
 
             setAccount({
                 walletAddress,
