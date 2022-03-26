@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
 import styled from "styled-components";
-import { AccountContext } from "../api/account/AccountContext";
-import Button from "./Button";
+import { ConnectWalletButton } from "./ConnectWalletButton";
+import { BiMenu } from "react-icons/bi";
 
 const StyledNavBar = styled.nav`
     height: 80px;
@@ -12,37 +11,27 @@ const StyledImage = styled.img`
     width: 80%;
 `
 
-const toShortWallet = (walletAddr: string): string => {
-    return [
-        walletAddr.substring(0, 4),
-        walletAddr.substring(walletAddr.length - 6)
-    ].join('...');
+export type NavBarProps = {
+    onMenuClick: () => void;
 }
 
-export const NavBar: React.FC = () => {
-
-    const accountContext = useContext(AccountContext);
-
-    const handleConnectClick = () => {
-        accountContext.connect();
-    }
-
-    let connectButtonText = 'Connect Wallet';
-    if (accountContext.isConnecting) {
-        connectButtonText = 'Connecting...';
-    } else if (accountContext.account) {
-        connectButtonText = toShortWallet(accountContext.account.walletAddress);
-    }
-
+export const NavBar: React.FC<NavBarProps> = ({
+    onMenuClick
+}) => {
     return (
         <StyledNavBar className="flex items-center justify-between">
+            <div className="md:hidden">
+                <button onClick={() => onMenuClick()}>
+                    <BiMenu size={40} color="white" />
+                </button>
+            </div>
             <div>
-                <StyledImage src="/images/PotluckLabs_Logo.png" />
+                <StyledImage className="float-right md:float-none" src="/images/PotluckLabs_Logo.png" />
             </div>
 
-            <div>
-                <Button variant="outlined" onClick={handleConnectClick}>{connectButtonText}</Button>
+            <div className="hidden md:block">
+                <ConnectWalletButton />
             </div>
-        </StyledNavBar>
+        </StyledNavBar >
     )
 }

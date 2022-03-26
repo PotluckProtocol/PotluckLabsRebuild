@@ -7,6 +7,7 @@ const StyledListItem = styled.li`
 
 export type MenuItemProps = {
     path: string;
+    onNavigate?: () => void
 }
 
 export const MenuItem: React.FC<MenuItemProps> = (props) => {
@@ -21,7 +22,7 @@ export const MenuItem: React.FC<MenuItemProps> = (props) => {
 
     return (
         <StyledListItem role="listitem">
-            <NavLink to={props.path} style={styleInject} className="rounded-md">
+            <NavLink to={props.path} style={styleInject} onClick={props.onNavigate} className="rounded-md">
                 {props.children}
             </NavLink>
         </StyledListItem>
