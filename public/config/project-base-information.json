@@ -3,7 +3,7 @@
         "name": "Strange Pigs",
         "symbol": "SOPP",
         "contractAddress": "0x72F38b2330cd187c13553dc92a0bE6334005EebA",
-        "network": "Fantom",
+        "network": "FTM",
         "maxSupply": 1080,
         "mint": {
             "weiCost": 35000000000000000000,
@@ -16,7 +16,7 @@
         "name": "Old Blood Of The Cave",
         "symbol": "OLDBLOOD",
         "contractAddress": "0xcd05E23d508cF053513475277eB4de9f55f75f35",
-        "network": "Fantom",
+        "network": "FTM",
         "maxSupply": 650,
         "mint": {
             "weiCost": 30000000000000000000,

@@ -41,7 +41,7 @@ const NetworkButton = styled(Button)`
 export const ConnectWalletButton: React.FC = () => {
     const accountContext = useContext(AccountContext);
 
-    const handleConnectClick = () => {
+    const handleButtonClick = () => {
         accountContext.connect();
     }
 
@@ -57,7 +57,7 @@ export const ConnectWalletButton: React.FC = () => {
 
     return (
         <ButtonGroup singleMode={useSingleButtonMode} className="flex justify-center items-center">
-            <Button variant="outlined" onClick={handleConnectClick}>
+            <Button variant="outlined" onClick={handleButtonClick}>
                 {connectButtonText}
             </Button>
             {(!!accountContext.account) && (

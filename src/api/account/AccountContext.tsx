@@ -1,10 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import Web3 from 'web3';
+import { Web3Context } from "../web3/Web3Context";
 import { Account } from "./Account"
 
 export type AccountContextType = {
     account: Account | null;
-    connect(): Promise<void>;
+    connect: () => Promise<void>;
     isConnecting: boolean;
 }
 
@@ -12,6 +13,7 @@ export const AccountContext = createContext<AccountContextType>(null as any);
 
 export const AccountProvider: React.FC = ({ children }) => {
 
+    const web3Context = useContext(Web3Context);
     const [account, setAccount] = useState<Account>();
     const [connecting, setConnecting] = useState<boolean>(false);
 
@@ -49,19 +51,18 @@ export const AccountProvider: React.FC = ({ children }) => {
 
             console.log(`Using account: ${walletAddress} (Network: ${networkId})`);
 
+            web3Context.setWeb3(networkId, web3Instance);
+
             setAccount({
                 walletAddress,
                 network: {
                     id: networkId
-                },
-                web3Instance
+                }
             });
 
             setConnecting(false);
         }
     }
-
-
 
     const contextValue: AccountContextType = {
         account: account || null,

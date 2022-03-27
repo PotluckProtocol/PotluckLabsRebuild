@@ -10,6 +10,7 @@ import { NETWORKS } from "../../../types/Networks";
 import { Network } from '../../../types/Networks';
 import { MintStateBadge } from '../../../components/MintStateBadge';
 import { abi } from '../abi';
+import useAccount from '../../../api/account/useAccount';
 
 export type MintingItemProps = {
     baseInformation: ProjectBaseInformation;
@@ -62,6 +63,9 @@ export const MintingItem: React.FC<MintingItemProps> = ({
     const [isInitialized, setIsInitialized] = useState(false);
     const navigate = useNavigate();
     const minting = useContext(MintingContext);
+    const account = useAccount();
+
+    const walletAddress = account?.walletAddress;
 
     const { contractAddress } = baseInformation;
 
@@ -88,7 +92,7 @@ export const MintingItem: React.FC<MintingItemProps> = ({
         }
 
         init();
-    }, [contractAddress]);
+    }, [contractAddress, walletAddress]);
 
     if (!isInitialized) {
         return <div>Loading</div>;

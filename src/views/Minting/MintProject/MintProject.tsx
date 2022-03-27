@@ -11,6 +11,7 @@ import { RoundedButton } from "../../../components/RoundedButton";
 import { TextFit } from "../../../components/TextFit";
 import { Network, NETWORKS } from "../../../types/Networks";
 import { abi } from "../abi";
+import useAccount from "../../../api/account/useAccount";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -83,12 +84,15 @@ const BackLinkContainer = styled.div`
 export const MintProject: React.FC<MintProjectProps> = ({
     contractAddress
 }) => {
+    const account = useAccount();
     const baseInformation = useContext(ProjectBaseInformationContext)
         .getConfig(contractAddress);
 
     const [mintAmount, setMintAmount] = useState(1);
     const [isInitializing, setIsInitializing] = useState(false);
     const mintingContext = useContext(MintingContext);
+
+    const walletAddress = account?.walletAddress;
 
     useEffect(() => {
         const init = async () => {
@@ -115,7 +119,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
         }
 
         init();
-    }, [contractAddress, baseInformation]);
+    }, [contractAddress, walletAddress, baseInformation]);
 
     const handleMintClick = async () => {
         await mintingContext.mint(mintAmount);

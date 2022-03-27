@@ -5,6 +5,8 @@ import { AbiItems, Contract } from '../../types/Contracts';
 import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 import { ProjectBaseInformationContext } from "../project-base-information/ProjectBaseInformationContext";
 import { MINTED_COUNT_CHANGED_EVENT, MintingContractWrapper, MintState, MINT_STATE_CHANGED_EVENT, WHITELIST_COUNT_CHANGED_EVENT } from "./MintingContractWrapper";
+import { Web3Context } from "../web3/Web3Context";
+import { resolveNetwork } from "../network/resolveNetwork";
 
 export type InitMinting = {
     contractAddress: string;
@@ -29,6 +31,7 @@ export const MintingContext = createContext<MintingContextType>(null as any);
 
 export const MintingProvider: React.FC = ({ children }) => {
     const baseInformationContext = useContext(ProjectBaseInformationContext);
+    const web3Context = useContext(Web3Context);
     const account = useAccount();
     const [isInitialized, setIsInitialized] = useState(false);
     const [contractAddress, setContractAddress] = useState<string>('');
@@ -79,16 +82,14 @@ export const MintingProvider: React.FC = ({ children }) => {
     }
 
     const init = async (opts: InitMinting) => {
-        const web3 = account?.web3Instance;
-        if (!web3) {
-            return;
-        }
+        const baseInformation = baseInformationContext.getConfig(opts.contractAddress) as ProjectBaseInformation;
+
+        const { web3, isPublic } = web3Context.getWeb3(resolveNetwork(baseInformation.network).networkId);
+        console.log('PUBLIC', isPublic);
         const contract = new web3.eth.Contract(
             opts.abi,
             opts.contractAddress
         );
-
-        const baseInformation = baseInformationContext.getConfig(opts.contractAddress) as ProjectBaseInformation;
 
         console.log('Init Minting:', opts.contractAddress);
 
