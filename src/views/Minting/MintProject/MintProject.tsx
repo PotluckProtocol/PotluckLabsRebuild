@@ -12,6 +12,8 @@ import { TextFit } from "../../../components/TextFit";
 import { Network, NETWORKS } from "../../../types/Networks";
 import { abi } from "../abi";
 import useAccount from "../../../api/account/useAccount";
+import { MintPrice } from "../../../components/MintPrice";
+import { resolveNetwork } from "../../../api/network/resolveNetwork";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -47,9 +49,7 @@ const LabelText = styled.span`
     display: block;
 `;
 
-const PriceText = styled.span`
-    font-size: 2.5rem;
-    line-height: 2.5rem;
+const StyledMintPrice = styled(MintPrice)`
     color: #1bf2a4;
     font-weight: 800;
     display: block;
@@ -137,11 +137,13 @@ export const MintProject: React.FC<MintProjectProps> = ({
         return <div>Initializing</div>;
     }
 
+    const network = resolveNetwork(baseInformation.network);
+
     const getCost = (amount: number) => {
         return weiToDisplayCost(
             (baseInformation?.mint?.weiCost as number) * amount,
-            NETWORKS.find(item => item.symbol === 'FTM') as Network,
-            { decimals: 0 }
+            network,
+            { decimals: network.symbol === 'AVAX' ? 1 : 0 }
         )
     }
 
@@ -151,7 +153,16 @@ export const MintProject: React.FC<MintProjectProps> = ({
         ? Math.min(whitelistCount, baseInformation.mint.maxPerTx)
         : baseInformation.mint.maxPerTx;
 
-    const mintButtonDisabled = (maxPerTx === 0 || mintAmount === 0);
+    const notConnected = !account;
+    const wrongNetwork = network.networkId !== account?.network.id;
+    let mintButtonText = 'Mint';
+    if (notConnected) {
+        mintButtonText = 'Connect wallet';
+    } else if (wrongNetwork) {
+        mintButtonText = 'Wrong network';
+    }
+
+    const mintButtonDisabled = notConnected || wrongNetwork || maxPerTx === 0 || mintAmount === 0;
 
     return (
         <div>
@@ -175,7 +186,11 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         </div>
 
                         <LabelText>Price:</LabelText>
-                        <PriceText>{getCost(1)}</PriceText>
+                        <StyledMintPrice
+                            fontSizeRem={2.5}
+                            network={network}
+                            weiPrice={baseInformation.mint.weiCost}
+                        />
 
                         <div className="mt-3">
                             <LabelText>Amount:</LabelText>
@@ -192,7 +207,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
                     <ImageContainer className="p-8 pt-0">
                         <Image className="rounded-xl" src={baseInformation.mint?.mintImage} />
-                        <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>Mint</StyledRoundedButton>
+                        <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
                     </ImageContainer>
                 </div>
             </MintingContainer>

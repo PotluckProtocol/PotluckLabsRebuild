@@ -30,9 +30,11 @@ export const AccountProvider: React.FC = ({ children }) => {
                 method: "eth_requestAccounts",
             }) as string[];
 
-            const networkId = await ethereum.request({
-                method: "net_version",
-            }) as number;
+            const networkId = Number(
+                await ethereum.request({
+                    method: "net_version",
+                })
+            );
 
             // Add listeners start
             ethereum.on("accountsChanged", (walletAddresses: string[]) => {

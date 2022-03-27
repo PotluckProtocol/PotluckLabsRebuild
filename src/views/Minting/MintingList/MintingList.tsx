@@ -5,7 +5,7 @@ import { MintingItem } from "./MintingItem";
 
 export const MintingList: React.FC = () => {
     const configs = useContext(ProjectBaseInformationContext).getConfigs();
-    const stillMinting = configs.filter(item => !item.mint?.forceEndedState);
+    const stillMinting = configs.filter(item => item.mint && !item.mint.forceEndedState);
 
     return (
         <div className="flex flex-wrap gap-8">

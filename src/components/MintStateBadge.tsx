@@ -9,6 +9,7 @@ const Badge = styled.div`
     text-align: center;
     border-radius: 2rem;
     color: #0c6947;
+    white-space: nowrap;
 `;
 
 export type MintStateBadgeProps = {

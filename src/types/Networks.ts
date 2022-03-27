@@ -5,9 +5,16 @@ export type Network = {
     decimals: number;
 }
 
-export const NETWORKS: Network[] = [{
-    name: 'Fantom Opera',
-    symbol: 'FTM',
-    networkId: 250,
-    decimals: 18
-}]
+export const NETWORKS: Network[] = [
+    {
+        name: 'Fantom Opera',
+        symbol: 'FTM',
+        networkId: 250,
+        decimals: 18
+    }, {
+        name: 'Avalanche Mainnet',
+        symbol: 'AVAX',
+        networkId: 43114,
+        decimals: 18
+    }
+]

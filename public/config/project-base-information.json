@@ -3,6 +3,7 @@
         "name": "Strange Pigs",
         "symbol": "SOPP",
         "contractAddress": "0x72F38b2330cd187c13553dc92a0bE6334005EebA",
+        "coverImage": "/images/StrangePigs.cover.png",
         "network": "FTM",
         "maxSupply": 1080,
         "mint": {
@@ -13,9 +14,34 @@
         }
     },
     {
+        "name": "COTC2 Serums (AVAX)",
+        "symbol": "COTC2Serum",
+        "contractAddress": "0xE0DDB7865Fc6f9ceDF95Dd9a8826c7CC965d16E3",
+        "coverImage": "",
+        "network": "AVAX",
+        "maxSupply": 2000,
+        "hideInProjects": true,
+        "mint": {
+            "gasLimit": 285000,
+            "maxPerTx": 10,
+            "noWhitelist": true,
+            "mintImage": "/images/COTC2Serum.png",
+            "weiCost": 500000000000000000
+        }
+    },
+    {
+        "name": "Creatures of the Cave 2 (AVAX)",
+        "symbol": "COTCTWO",
+        "contractAddress": "0x4Cc85D7B4fA064bF609741C822D2D1244c848c9C",
+        "coverImage": "/images/COTC2.cover.jpg",
+        "network": "AVAX",
+        "maxSupply": 2000
+    },
+    {
         "name": "Old Blood Of The Cave",
         "symbol": "OLDBLOOD",
         "contractAddress": "0xcd05E23d508cF053513475277eB4de9f55f75f35",
+        "coverImage": "/images/OldBloodOfTheCave.cover.jpg",
         "network": "FTM",
         "maxSupply": 650,
         "mint": {

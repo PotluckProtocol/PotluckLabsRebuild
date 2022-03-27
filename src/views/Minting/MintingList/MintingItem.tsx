@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { MintingContext } from '../../../api/minting/MintingContext';
 import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
-import { weiToDisplayCost } from "../../../utils/wei-to-display-cost";
 import { RoundedButton } from '../../../components/RoundedButton';
 import { TextFit } from '../../../components/TextFit';
-import { NETWORKS } from "../../../types/Networks";
-import { Network } from '../../../types/Networks';
 import { MintStateBadge } from '../../../components/MintStateBadge';
 import { abi } from '../abi';
 import useAccount from '../../../api/account/useAccount';
+import { resolveNetwork } from '../../../api/network/resolveNetwork';
+import { MintPrice } from '../../../components/MintPrice';
 
 export type MintingItemProps = {
     baseInformation: ProjectBaseInformation;
@@ -41,11 +40,8 @@ const StyledImage = styled.img`
     border-radius: 2rem;
 `;
 
-const StyledPrice = styled.div`
+const StyledPrice = styled(MintPrice)`
     font-weight: 900;
-    font-size: 30px;
-    line-height: 30px;
-    margin: 20px 0;
     color: #1bf2a4;
 `
 
@@ -106,11 +102,7 @@ export const MintingItem: React.FC<MintingItemProps> = ({
         navigate(`${baseInformation.contractAddress}`)
     }
 
-    const cost = weiToDisplayCost(
-        baseInformation.mint.weiCost,
-        NETWORKS.find(network => network.symbol === 'FTM') as Network,
-        { decimals: 0 }
-    );
+    const network = resolveNetwork(baseInformation.network);
 
     return (
         <StyledContainer className="rounded-lg">
@@ -119,7 +111,13 @@ export const MintingItem: React.FC<MintingItemProps> = ({
                 <StyledMintStateBadge mintState={minting.mintState} />
                 <StyledImage src={baseInformation.mint?.mintImage} />
             </StyledImageContainer>
-            <StyledPrice className="mt-2">{cost}</StyledPrice>
+            <StyledPrice
+                className='my-4'
+                fontSizeRem={2}
+                weiPrice={baseInformation.mint.weiCost}
+                network={network}
+                fitToHeight={34}
+            />
             <RoundedButton onClick={handleClick}>TO MINT</RoundedButton>
         </StyledContainer>
     )

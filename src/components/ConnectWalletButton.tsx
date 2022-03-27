@@ -56,15 +56,17 @@ export const ConnectWalletButton: React.FC = () => {
     const useSingleButtonMode = !accountContext.account;
 
     return (
-        <ButtonGroup singleMode={useSingleButtonMode} className="flex justify-center items-center">
-            <Button variant="outlined" onClick={handleButtonClick}>
-                {connectButtonText}
-            </Button>
-            {(!!accountContext.account) && (
-                <NetworkButton>
-                    <NetworkIcon networkId={accountContext.account.network.id} size={30} />
-                </NetworkButton>
-            )}
-        </ButtonGroup>
+        <div>
+            <ButtonGroup singleMode={useSingleButtonMode} className="flex justify-center items-center">
+                <Button variant="outlined" onClick={handleButtonClick}>
+                    {connectButtonText}
+                </Button>
+                {(!!accountContext.account) && (
+                    <NetworkButton>
+                        <NetworkIcon networkId={accountContext.account.network.id} size={30} />
+                    </NetworkButton>
+                )}
+            </ButtonGroup>
+        </div>
     )
 }
