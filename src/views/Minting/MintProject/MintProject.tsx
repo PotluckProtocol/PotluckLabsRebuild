@@ -217,7 +217,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <Image className="rounded-xl" src={baseInformation.mint?.mintImage} />
                         <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
                         {(isConnected && wrongNetwork) && (<p>Change your network to <b>{network.name}</b>.</p>)}
-                        {(mintingContext.isMinting) && (<p>Minting in progress.s</p>)}
+                        {(mintingContext.isMinting) && (<p>Minting in progress.</p>)}
                         { }
                     </ImageContainer>
                 </div>

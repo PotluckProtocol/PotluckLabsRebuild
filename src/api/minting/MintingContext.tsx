@@ -147,7 +147,11 @@ export const MintingProvider: React.FC = ({ children }) => {
                 return false;
             }
 
-            return mintingWrapper.mint(amount, walletAddress);
+            const res = await mintingWrapper.mint(amount, walletAddress);
+            return res;
+        } catch (e) {
+            console.log(e);
+            throw e;
         } finally {
             setIsMinting(false);
         }

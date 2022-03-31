@@ -36,28 +36,36 @@ export class MintingContractWrapper extends EventEmitter {
             return false;
         }
 
-        /**
-         * @info
-         * Ugly hack for enabling SuperSerum mint on AVAX.
-         * This contract has mint method without amount.
-         * @todo remove me after AVAX SuperSerum is sold out.
-         */
-        if (this.projectBaseInformation.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
-            amount = undefined as any;
-        }
-
         const totalGasLimit = String(amount * mint.gasLimit);
         const totalCostWei = String(amount * mint.weiCost);
 
         try {
-            await this.contract.methods
-                .mint(amount)
-                .send({
-                    gasLimit: totalGasLimit,
-                    from: fromWallet,
-                    to: this.contract.options.address,
-                    value: totalCostWei
-                });
+            /**
+             * @info
+             * Ugly hack for enabling SuperSerum mint on AVAX.
+             * This contract has mint method without amount.
+             * @todo remove me after AVAX SuperSerum is sold out.
+             */
+            if (this.projectBaseInformation.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
+                await this.contract.methods
+                    .mint()
+                    .send({
+                        gasLimit: totalGasLimit,
+                        from: fromWallet,
+                        to: this.contract.options.address,
+                        value: totalCostWei
+                    });
+            } else {
+                await this.contract.methods
+                    .mint(amount)
+                    .send({
+                        gasLimit: totalGasLimit,
+                        from: fromWallet,
+                        to: this.contract.options.address,
+                        value: totalCostWei
+                    });
+            }
+
 
             // Emit change to minted count
 
@@ -72,6 +80,7 @@ export class MintingContractWrapper extends EventEmitter {
 
             return true;
         } catch (e) {
+            console.log('Mint failed', e)
             return false;
         }
     }
