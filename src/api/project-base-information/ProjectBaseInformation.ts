@@ -1,3 +1,5 @@
+import { NumericLiteral } from "typescript";
+
 export type ProjectBaseInformation = {
     name: string;
     symbol: string;
@@ -6,6 +8,7 @@ export type ProjectBaseInformation = {
     network: 'Fantom' | 'Avalanche' | 'Polygon';
     maxSupply: number;
     hideInProjects?: boolean;
+    overrideIpfsGateway?: string;
     mint?: {
         weiCost: number;
         gasLimit: number;
@@ -13,5 +16,11 @@ export type ProjectBaseInformation = {
         mintImage: string;
         noWhitelist?: boolean;
         forceEndedState?: boolean;
+    }
+    mutate?: {
+        targetContractAddress: string;
+        approveGasLimit: number;
+        mutetaGasLimit: number;
+        serumUnitNotation?: string;
     }
 }

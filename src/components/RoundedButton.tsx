@@ -7,10 +7,15 @@ export const RoundedButton = styled.button`
     color: black;
     padding: 0 20px;
     margin-bottom: 10px;
+    transition: background-color 250ms linear;
 
     :disabled {
         cursor: not-allowed;
         background-color: #869e95;
         color: #60746d;
+    }
+
+    :hover:not(:disabled) {
+        background-color: #8dffd6;
     }
 `;

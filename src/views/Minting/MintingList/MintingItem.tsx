@@ -10,6 +10,7 @@ import { abi } from '../abi';
 import useAccount from '../../../api/account/useAccount';
 import { resolveNetwork } from '../../../api/network/resolveNetwork';
 import { MintPrice } from '../../../components/MintPrice';
+import { NetworkIcon } from '../../../components/NetworkIcon';
 
 export type MintingItemProps = {
     baseInformation: ProjectBaseInformation;
@@ -51,6 +52,17 @@ const StyledMintStateBadge = styled(MintStateBadge)`
     right: 50%;
     transform: translate(50%, 0);
     position: absolute;
+`;
+
+const PositionedNetworkIcon = styled(NetworkIcon)`
+    top: -0.25rem;
+    left: -0.25rem;
+    position: absolute;
+`;
+
+const ToMintButton = styled(RoundedButton)`
+    font-size: 1.1rem;
+    line-height: 1.7rem;
 `;
 
 export const MintingItem: React.FC<MintingItemProps> = ({
@@ -99,7 +111,7 @@ export const MintingItem: React.FC<MintingItemProps> = ({
     }
 
     const handleClick = () => {
-        navigate(`${baseInformation.contractAddress}`)
+        navigate(`/minting/${baseInformation.contractAddress}`)
     }
 
     const network = resolveNetwork(baseInformation.network);
@@ -110,6 +122,7 @@ export const MintingItem: React.FC<MintingItemProps> = ({
             <StyledImageContainer>
                 <StyledMintStateBadge mintState={minting.mintState} />
                 <StyledImage src={baseInformation.mint?.mintImage} />
+                <PositionedNetworkIcon networkId={network.networkId} size={35} />
             </StyledImageContainer>
             <StyledPrice
                 className='my-4'
@@ -118,7 +131,7 @@ export const MintingItem: React.FC<MintingItemProps> = ({
                 network={network}
                 fitToHeight={34}
             />
-            <RoundedButton onClick={handleClick}>TO MINT</RoundedButton>
+            <ToMintButton onClick={handleClick}>TO MINT</ToMintButton>
         </StyledContainer>
     )
 }

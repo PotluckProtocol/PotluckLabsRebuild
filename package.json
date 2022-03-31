@@ -19,6 +19,7 @@
     "react-router": "^6.2.2",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "react-select": "^5.2.2",
     "styled-components": "^5.3.3",
     "textfit": "^2.4.0",
     "typescript": "^4.4.2",
@@ -64,6 +65,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "tailwindcss": "^3.0.23",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "webpack-bundle-analyzer": "^4.5.0"
   }
 }

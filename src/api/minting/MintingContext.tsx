@@ -86,8 +86,34 @@ export const MintingProvider: React.FC = ({ children }) => {
 
         const { web3, isPublic } = web3Context.getWeb3(resolveNetwork(baseInformation.network).networkId);
         console.log('PUBLIC', isPublic);
+
+        let abi = opts.abi;
+
+        /**
+         * @info
+         * Ugly hack for enabling SuperSerum mint on AVAX.
+         * This contract has mint method without amount.
+         * Replaces the mint method inputs from original abi
+         * with the one without arguments.
+         * @todo remove me after AVAX SuperSerum is sold out.
+         */
+        if (opts.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
+            // For satisfying type checker
+            if (Array.isArray(abi)) {
+                abi = [...abi];
+
+                const index = abi.findIndex(item => item.type === 'function' && item.name === 'mint');
+                if (index > -1) {
+                    abi[index] = {
+                        ...abi[index],
+                        inputs: []
+                    }
+                }
+            }
+        }
+
         const contract = new web3.eth.Contract(
-            opts.abi,
+            abi,
             opts.contractAddress
         );
 

@@ -36,6 +36,16 @@ export class MintingContractWrapper extends EventEmitter {
             return false;
         }
 
+        /**
+         * @info
+         * Ugly hack for enabling SuperSerum mint on AVAX.
+         * This contract has mint method without amount.
+         * @todo remove me after AVAX SuperSerum is sold out.
+         */
+        if (this.projectBaseInformation.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
+            amount = undefined as any;
+        }
+
         const totalGasLimit = String(amount * mint.gasLimit);
         const totalCostWei = String(amount * mint.weiCost);
 

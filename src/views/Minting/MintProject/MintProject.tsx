@@ -14,6 +14,7 @@ import { abi } from "../abi";
 import useAccount from "../../../api/account/useAccount";
 import { MintPrice } from "../../../components/MintPrice";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
+import { NetworkIcon } from "../../../components/NetworkIcon";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -79,6 +80,12 @@ const BackLinkContainer = styled.div`
     margin-left: auto;
     text-align: center;
     font-size: 1.25rem;
+`;
+
+const PositionedNetworkIcon = styled(NetworkIcon)`
+    right: 1.5rem;
+    top: -0.5rem;
+    position: absolute;
 `;
 
 export const MintProject: React.FC<MintProjectProps> = ({
@@ -153,16 +160,16 @@ export const MintProject: React.FC<MintProjectProps> = ({
         ? Math.min(whitelistCount, baseInformation.mint.maxPerTx)
         : baseInformation.mint.maxPerTx;
 
-    const notConnected = !account;
+    const isConnected = !!account;
     const wrongNetwork = network.networkId !== account?.network.id;
     let mintButtonText = 'Mint';
-    if (notConnected) {
+    if (!isConnected) {
         mintButtonText = 'Connect wallet';
     } else if (wrongNetwork) {
         mintButtonText = 'Wrong network';
     }
 
-    const mintButtonDisabled = notConnected || wrongNetwork || maxPerTx === 0 || mintAmount === 0;
+    const mintButtonDisabled = !isConnected || wrongNetwork || maxPerTx === 0 || mintAmount === 0 || mintingContext.isMinting;
 
     return (
         <div>
@@ -206,14 +213,18 @@ export const MintProject: React.FC<MintProjectProps> = ({
                     </MintTooling>
 
                     <ImageContainer className="p-8 pt-0">
+                        <PositionedNetworkIcon size={40} networkId={network.networkId} />
                         <Image className="rounded-xl" src={baseInformation.mint?.mintImage} />
                         <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
+                        {(isConnected && wrongNetwork) && (<p>Change your network to <b>{network.name}</b>.</p>)}
+                        {(mintingContext.isMinting) && (<p>Minting in progress.s</p>)}
+                        { }
                     </ImageContainer>
                 </div>
             </MintingContainer>
 
             <BackLinkContainer className="mt-8">
-                <NavLink to={'/minting'}>Back to minting catalog</NavLink>
+                <NavLink to={'/'}>Back to minting catalog</NavLink>
             </BackLinkContainer>
         </div>
     );
