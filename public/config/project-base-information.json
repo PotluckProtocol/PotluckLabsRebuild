@@ -73,6 +73,22 @@
     {
         "name": "COTC2 Super Serums",
         "symbol": "COTCSS",
+        "contractAddress": "0x969b2Bda44a8a6Be009Bf264fcF62e079f581b97",
+        "coverImage": "/images/COTCSSAvax.png",
+        "network": "FTM",
+        "maxSupply": 200,
+        "hideInProjects": true,
+        "overrideIpfsGateway": "https://potlucklabs.mypinata.cloud/ipfs/",
+        "mutate": {
+            "targetContractAddress": "0xBbF352cEa87A49aeF9d5A5dDA16de2240814732a",
+            "approveGasLimit": 75000,
+            "mutetaGasLimit": 285000,
+            "serumUnitNotation": "Super Serum"
+        }
+    },
+    {
+        "name": "COTC2 Super Serums",
+        "symbol": "COTCSS",
         "contractAddress": "0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858",
         "coverImage": "/images/COTCSSAvax.png",
         "network": "AVAX",
@@ -84,6 +100,13 @@
             "noWhitelist": true,
             "mintImage": "/images/COTCSSAvax.png",
             "weiCost": 2000000000000000000
+        },
+        "overrideIpfsGateway": "https://potlucklabs.mypinata.cloud/ipfs/",
+        "mutate": {
+            "targetContractAddress": "0xb22C5f6e91B073ECC321Cfa7C01e1e2b56564ab2",
+            "approveGasLimit": 75000,
+            "mutetaGasLimit": 285000,
+            "serumUnitNotation": "Super Serum"
         }
     },
     {

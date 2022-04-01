@@ -11,6 +11,12 @@ const StyledImage = styled.img`
     width: 80%;
 `
 
+const BetaText = styled.span`
+    font-weight: 600;
+    font-size: .85rem;
+    color: red;
+`;
+
 export type NavBarProps = {
     onMenuClick: () => void;
 }
@@ -25,8 +31,10 @@ export const NavBar: React.FC<NavBarProps> = ({
                     <BiMenu size={40} color="white" />
                 </button>
             </div>
-            <div>
+            <div className="flex items-center">
+                <BetaText className="mr-3 md:hidden">BETA</BetaText>
                 <StyledImage className="float-right md:float-none" src="/images/PotluckLabs_Logo.png" />
+                <BetaText className="ml-3 hidden md:inline">BETA</BetaText>
             </div>
 
             <div className="hidden md:block">

@@ -223,7 +223,7 @@ export const Mutate: React.FC<MutateProps> = ({
                     <div className="flex justify-center">
                         <Select
                             isDisabled={mutateContext.serumIds.length === 0}
-                            placeholder={`Select ${serumNotation}...`}
+                            placeholder={`Select one...`}
                             options={[{ options: serumOptions }] as any}
                             onChange={handleSelectChange as any}
                             isSearchable={false}
