@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { MintingContext } from "../../../api/minting/MintingContext";
@@ -24,7 +24,6 @@ const MintingContainer = styled.div`
     width: 100%;
     max-width: 768px;
     border-radius: 2rem;
-    padding: 20px;
     margin: 0 auto;
     background: rgb(3,26,18);
     background: linear-gradient(0deg, rgba(3,26,18,1) 0%, rgba(12,105,71,1) 100%);
@@ -64,6 +63,7 @@ const ImageContainer = styled.div`
 const Image = styled.img`
     box-shadow: rgba(27, 242, 165, 0.4) 1px 1px 40px 1px;
     max-width: 250px;
+    display: inline-block;
 `;
 
 const StyledRoundedButton = styled(RoundedButton)`
@@ -171,17 +171,25 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
     const mintButtonDisabled = !isConnected || wrongNetwork || maxPerTx === 0 || mintAmount === 0 || mintingContext.isMinting;
 
+    const info: ReactNode = (
+        <>
+            {(isConnected && wrongNetwork) && (<p>Change your network to <b>{network.name}</b>.</p>)}
+            {(mintingContext.isMinting) && (<p>Minting in progress.</p>)}
+        </>
+    )
+
     return (
         <div>
-            <MintingContainer>
-                <div className="mb-4">
+            <MintingContainer className="p-2">
+                <div className="mb-4 px-4">
                     <MintHeader height={100} className="flex items-center justify-center">{baseInformation.name}</MintHeader>
                 </div>
 
-                <div className="flex justify-between">
-                    <MintTooling className="p-8 pt-0">
-                        <div className="mb-2">
-                            <MintStateBadge mintState={mintState} />
+                <div className="grid grid-cols-1 md:flex">
+                    <MintTooling className="p-4 md:p-8 pt-0 md:pt-0 order-1 md:order-none">
+                        <div className="mb-2 flex items-center">
+                            <NetworkIcon className="md:hidden inline-block mr-4" size={30} networkId={network.networkId} />
+                            <MintStateBadge mintState={mintState} className="inline-block" />
                         </div>
 
                         <LabelText>Minted:</LabelText>
@@ -210,20 +218,23 @@ export const MintProject: React.FC<MintProjectProps> = ({
                                 <div className="mt-3">The wallet is eligible for <b>{whitelistCount}</b> whitelist mints.</div>
                             </div>
                         )}
+
+                        <div className="mt-6 md:hidden">
+                            <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
+                            <div>{info}</div>
+                        </div>
                     </MintTooling>
 
-                    <ImageContainer className="p-8 pt-0">
-                        <PositionedNetworkIcon size={40} networkId={network.networkId} />
-                        <Image className="rounded-xl" src={baseInformation.mint?.mintImage} />
-                        <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
-                        {(isConnected && wrongNetwork) && (<p>Change your network to <b>{network.name}</b>.</p>)}
-                        {(mintingContext.isMinting) && (<p>Minting in progress.</p>)}
-                        { }
+                    <ImageContainer className="p-4 md:p-8 pt-0 md:pt-0 order-0 md:order-none">
+                        <PositionedNetworkIcon className="hidden md:inline-block" size={40} networkId={network.networkId} />
+                        <Image className="w-full md:w-auto rounded-xl" src={baseInformation.mint?.mintImage} />
+                        <StyledRoundedButton className="hidden md:inline-block" disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
+                        <div className="hidden md:inline-block">{info}</div>
                     </ImageContainer>
                 </div>
             </MintingContainer>
 
-            <BackLinkContainer className="mt-8">
+            <BackLinkContainer className="my-8">
                 <NavLink to={'/'}>Back to minting catalog</NavLink>
             </BackLinkContainer>
         </div>

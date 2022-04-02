@@ -48,7 +48,7 @@ export const MutateWrapper: React.FC = () => {
     return (
         <div>
             <Title className="my-2 mb-8">Mutate</Title>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-6">
                 {contractAddresses.map(contractAddress => {
                     const baseInformation = baseInformationContext.getConfig(contractAddress);
                     const network = resolveNetwork(baseInformation.network);

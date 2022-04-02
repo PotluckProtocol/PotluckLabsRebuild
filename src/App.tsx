@@ -63,7 +63,7 @@ const App = () => {
               </MenuItem>
             </MenuItemList>
           </Menu>
-          <div style={{ width: '100%' }} className="pt-8 px-12">
+          <div style={{ width: '100%' }} className="pt-8 px-6 md:px-12">
             <AppRoutes />
           </div>
         </div >
