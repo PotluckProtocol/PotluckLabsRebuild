@@ -2,13 +2,13 @@
 
 const ICON_MAP: { [networkId: number]: string } = {
     // Matic
-    137: '/images/Networks/matic.svg',
+    137: '/images/networks/matic.svg',
 
     // Fantom
-    250: '/images/Networks/fantom.svg',
+    250: '/images/networks/fantom.svg',
 
     // Avalanche
-    43114: '/images/Networks/avalanche.svg'
+    43114: '/images/networks/avalanche.svg'
 }
 
 export type NetworkIconProps = {
