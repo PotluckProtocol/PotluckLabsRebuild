@@ -86,9 +86,6 @@ export const MintingItem: React.FC<MintingItemProps> = ({
             try {
                 await minting.init({
                     contractAddress,
-                    abi,
-                    gasLimit: baseInformation.mint.gasLimit,
-                    weiCost: baseInformation.mint.weiCost,
                     liveMintingCount: false
                 });
             } catch (e) {

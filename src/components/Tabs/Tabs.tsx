@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { TabReactElement } from "./Tab";
 
 export type TabsProps = {
+    className?: string;
     activeTabId: string;
     onTabChange: (tabId: string) => void;
 }
@@ -18,45 +19,52 @@ type TabItemButtomProps = ComponentPropsWithoutRef<'button'> & {
 }
 
 const TabItemButton = styled.button<TabItemButtomProps>`
-    background: none;
+    background-color: ${props => props.active ? '#0c6947' : 'none'};
+    transition: background-color 100ms linear;
     border: none;
-    padding: 5px 15px;
-    border-bottom: ${props => props.active ? '2px solid #0c6947' : 'none'};
-    margin-bottom: ${props => props.active ? '0' : '2'}px; 
+    font-size: 1rem;
+    font-weight: 600;
+    border-top-right-radius: .25rem;
+    border-top-left-radius: .25rem;
+    padding: .3rem 1rem;
+`;
+
+const TabContent = styled.div`
+    padding: 1rem;
+    border: 1px solid #0c6947;
 `;
 
 export const Tabs: React.FC<TabsProps> = ({
     activeTabId,
     onTabChange,
+    className,
     children
 }) => {
-    const tabChildren = children as TabReactElement[];
-    try {
-        (tabChildren as TabReactElement[]).forEach(child => {
-            if (child.type.name !== 'Tab') {
-                throw new Error();
-            }
-        });
-    } catch (e) {
-        throw new Error('Tabs component should have only Tab components as childs');
+    const tabChildren = (children as TabReactElement[]).filter(child => child && child.type.name === 'Tab');
+
+    let activeTab = activeTabId;
+    let activeTabContent = tabChildren.find(child => child.props.id === activeTabId)?.props.children;
+    if (!activeTabContent && tabChildren.length > 0) {
+        activeTab = tabChildren[0].props.id;
+        activeTabContent = tabChildren[0].props.children;
     }
 
     const headerItems = tabChildren.map(({ props: childProps }, index) => (
-        <TabItem key={index}>
-            <TabItemButton active={childProps.id === activeTabId} onClick={() => onTabChange(childProps.id)}>
+        <TabItem key={index} role="tab">
+            <TabItemButton active={childProps.id === activeTab} onClick={() => onTabChange(childProps.id)}>
                 {childProps.header}
             </TabItemButton>
         </TabItem>
     ));
 
     return (
-        <div>
-            <ul className="flex justify-start items-center">
+        <div className={className}>
+            <ul className="flex justify-start items-center" role="tablist">
                 {headerItems}
             </ul>
-            <div>
-                {tabChildren.find(child => child.props.id === activeTabId)?.props.children}
-            </div>
+            <TabContent>
+                {activeTabContent}
+            </TabContent>
         </div>
     )
 }

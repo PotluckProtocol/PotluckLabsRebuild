@@ -18,6 +18,7 @@ import { NetworkIcon } from "../../../components/NetworkIcon";
 
 export type MintProjectProps = {
     contractAddress: string;
+    hideCatalogNavigationLink?: boolean;
 }
 
 const MintingContainer = styled.div`
@@ -89,7 +90,8 @@ const PositionedNetworkIcon = styled(NetworkIcon)`
 `;
 
 export const MintProject: React.FC<MintProjectProps> = ({
-    contractAddress
+    contractAddress,
+    hideCatalogNavigationLink
 }) => {
     const account = useAccount();
     const baseInformation = useContext(ProjectBaseInformationContext)
@@ -112,9 +114,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
             try {
                 await mintingContext.init({
                     contractAddress,
-                    abi,
-                    gasLimit: baseInformation.mint.gasLimit,
-                    weiCost: baseInformation.mint.weiCost,
                     liveMintingCount: true
                 });
             } catch (e) {
@@ -233,10 +232,11 @@ export const MintProject: React.FC<MintProjectProps> = ({
                     </ImageContainer>
                 </div>
             </MintingContainer>
-
-            <BackLinkContainer className="my-8">
-                <NavLink to={'/'}>Back to minting catalog</NavLink>
-            </BackLinkContainer>
+            {!hideCatalogNavigationLink && (
+                <BackLinkContainer className="my-8">
+                    <NavLink to={'/'}>Back to minting catalog</NavLink>
+                </BackLinkContainer>
+            )}
         </div>
     );
 }

@@ -7,12 +7,10 @@ import { ProjectBaseInformationContext } from "../project-base-information/Proje
 import { MINTED_COUNT_CHANGED_EVENT, MintingContractWrapper, MintState, MINT_STATE_CHANGED_EVENT, WHITELIST_COUNT_CHANGED_EVENT } from "./MintingContractWrapper";
 import { Web3Context } from "../web3/Web3Context";
 import { resolveNetwork } from "../network/resolveNetwork";
+import { abi } from "../../views/Minting/abi";
 
 export type InitMinting = {
     contractAddress: string;
-    weiCost: number;
-    gasLimit: number;
-    abi: AbiItems;
     liveMintingCount?: boolean;
 }
 
@@ -61,6 +59,7 @@ export const MintingProvider: React.FC = ({ children }) => {
             )
 
             // Get mint count immediately
+            mintingWrapper.getMintState();
             mintingWrapper.getMintedCount();
             if (walletAddress) {
                 mintingWrapper.getWhitelistCount(walletAddress);
@@ -87,8 +86,7 @@ export const MintingProvider: React.FC = ({ children }) => {
         const { web3, isPublic } = web3Context.getWeb3(resolveNetwork(baseInformation.network).networkId);
         console.log('PUBLIC', isPublic);
 
-        let abi = opts.abi;
-
+        let mintingAbi = abi;
         /**
          * @info
          * Ugly hack for enabling SuperSerum mint on AVAX.
@@ -99,13 +97,13 @@ export const MintingProvider: React.FC = ({ children }) => {
          */
         if (opts.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
             // For satisfying type checker
-            if (Array.isArray(abi)) {
-                abi = [...abi];
+            if (Array.isArray(mintingAbi)) {
+                mintingAbi = [...mintingAbi];
 
-                const index = abi.findIndex(item => item.type === 'function' && item.name === 'mint');
+                const index = mintingAbi.findIndex(item => item.type === 'function' && item.name === 'mint');
                 if (index > -1) {
-                    abi[index] = {
-                        ...abi[index],
+                    mintingAbi[index] = {
+                        ...mintingAbi[index],
                         inputs: []
                     }
                 }
@@ -113,14 +111,11 @@ export const MintingProvider: React.FC = ({ children }) => {
         }
 
         const contract = new web3.eth.Contract(
-            abi,
+            mintingAbi,
             opts.contractAddress
         );
 
         console.log('Init Minting:', opts.contractAddress);
-
-        setContractAddress(opts.contractAddress);
-        setIsInitialized(true);
 
         const hasWhitelist = baseInformation.mint && !baseInformation.mint.noWhitelist;
 
@@ -130,9 +125,9 @@ export const MintingProvider: React.FC = ({ children }) => {
         });
 
         // async background
-        mintingWrapper.getMintState();
-
+        setContractAddress(opts.contractAddress);
         setMintingWrapper(mintingWrapper);
+        setIsInitialized(true);
     }
 
     const mint = async (amount: number): Promise<boolean> => {

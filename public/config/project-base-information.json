@@ -18,8 +18,15 @@
         "symbol": "SOPP",
         "contractAddress": "0x72F38b2330cd187c13553dc92a0bE6334005EebA",
         "coverImage": "/images/projects/strangepigs/strangepigs.cover.png",
+        "description": [
+            "The Potluck Pigs were out roaming the fields near the Cave at night. Soon on the horizon a strange object came into view. Most shrugged it off as nothing, until it came closer and closer. The pigs began to see the outline of an oblong shape with strangely beautiful lights glimmering and sparkling. For an unknown reason, they felt weirdly drawn to the lights.",
+            "The object now hovering above the pasture, opened from underneath, as a beam of light began to pull them one by one into the ship. As the pigs entered, fear began to shoot through the bodies as they saw the restraints on tables and the experimental equipment. It was too late for them, they could no longer stop it and go back. No one could have ever imagined what would happen to the pigs on that ship..."
+        ],
+        "loreAudio": "/images/projects/strangepigs/Strange_Pigs_The_Return.mp3",
+        "roadmapImage": "/images/projects/strangepigs/roadmap.png",
         "network": "FTM",
         "maxSupply": 1080,
+        "artistId": "slicedatup",
         "mint": {
             "weiCost": 35000000000000000000,
             "maxPerTx": 10,

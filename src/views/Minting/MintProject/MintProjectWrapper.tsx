@@ -7,12 +7,18 @@ type RouteParams = {
     contractAddress: string;
 }
 
-export const MintProjectWrapper: React.FC = () => {
+type MintProjectWrapperProps = {
+    contractAddress?: string;
+    embedded?: boolean;
+}
+
+export const MintProjectWrapper: React.FC<MintProjectWrapperProps> = (props) => {
     const params = useParams<RouteParams>();
+    const contractAddress: string = props.contractAddress ? props.contractAddress : params.contractAddress as string;
 
     return (
         <MintingProvider>
-            <MintProject contractAddress={params.contractAddress as string} />
+            <MintProject hideCatalogNavigationLink={props.embedded} contractAddress={contractAddress} />
         </MintingProvider>
     );
 }

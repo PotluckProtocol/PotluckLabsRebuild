@@ -1,9 +1,16 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { ReactNode, useEffect, useState } from "react";
+import { useSearchParams, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Artist } from "../../../api/artists/Artist";
+import { useIsMinting } from "../../../api/minting/useIsMinting";
 import useProjectBaseInformation from "../../../api/project-base-information/useProjectBaseInformation";
+import { ImageCarousel } from "../../../components/ImageCarousel";
+import { ImageWithPreview } from "../../../components/ImageWithPreview";
 import { Tab, Tabs } from "../../../components/Tabs"
+import { MintProjectWrapper } from "../../Minting/MintProject/MintProjectWrapper";
+import { ArtistsBio } from "./ArtistsBio";
+
+const DEFAULT_ROADMAP_IMAGE_PATH = '/images/main_roadmap.png';
 
 const Title = styled.h1`
     color: #1bf2a4;
@@ -16,12 +23,20 @@ const Title = styled.h1`
 const Paragraph = styled.p`
     color: #bdd0c9;
     margin-bottom: 1rem;
+    text-align: justify;
 `;
 
+type RouteParams = {
+    contractAddress: string;
+}
+
 export const Project: React.FC = () => {
-    const baseInformation = useProjectBaseInformation('0x72F38b2330cd187c13553dc92a0bE6334005EebA');
+    const { contractAddress } = useParams<RouteParams>();
+    const baseInformation = useProjectBaseInformation(contractAddress || '');
+    const artistsTabVisible = !!baseInformation.artists?.length;
     const [queryParams, setQueryParams] = useSearchParams();
-    const [selectedTab, setSelectedTab] = useState('roadmap');
+    const [selectedTab, setSelectedTab] = useState('');
+    const isMinting = useIsMinting(contractAddress || '');
 
     useEffect(() => {
         if (queryParams.has('tab')) {
@@ -34,32 +49,70 @@ export const Project: React.FC = () => {
         setQueryParams({ tab: tabId });
     }
 
-    return (
+    let description: ReactNode = null;
+    if (baseInformation.description && baseInformation.description.length > 0) {
+        const arr = Array.isArray(baseInformation.description) ? baseInformation.description : [baseInformation.description];
+        description = arr.map((text, index) => (
+            <Paragraph key={index} children={text} />
+        ));
+    }
 
-        <div className="grid grid-cols-2 gap-12">
-            <div>
-                <Title>{baseInformation.name}</Title>
-                <Paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae sollicitudin risus. Maecenas luctus tempor elit, vitae fringilla arcu euismod ullamcorper. Sed mauris massa, rhoncus sed ultrices sed, lacinia non sem. Pellentesque viverra turpis eu lacus dictum feugiat. Cras maximus nisi at nulla tincidunt, vitae malesuada dui posuere. Phasellus laoreet ligula at elit dictum pellentesque. Cras facilisis, metus eu volutpat sagittis, nibh enim placerat lacus, non dapibus sem velit nec mauris. Phasellus nec semper ligula. Sed et facilisis arcu. Nullam feugiat lacinia sem ut eleifend. Aliquam ultricies dolor nisl, pretium fermentum mi bibendum vel. Phasellus in libero mauris. Curabitur dictum sem a erat faucibus molestie.
-                </Paragraph>
-                <Paragraph>
-                    Praesent sodales vehicula enim. Nulla facilisi. Vestibulum finibus erat ac risus accumsan scelerisque. Duis efficitur venenatis finibus. Proin risus metus, mattis et consectetur non, ullamcorper vel felis. Sed mi lacus, convallis sed pellentesque vitae, laoreet ut nisl. Proin euismod dolor ac nibh consectetur eleifend. Duis non justo tellus. Sed lobortis arcu ut lacus sollicitudin facilisis. Aliquam nulla leo, egestas quis tellus eget, varius pharetra odio.
-                </Paragraph>
-                <Paragraph>
-                    Nullam et metus ac nulla efficitur laoreet non sed magna. Nam interdum lectus magna, vitae tristique mi finibus sed. Quisque volutpat felis ut velit faucibus, sit amet fermentum quam sagittis. Mauris id nisl placerat, commodo nulla at, dignissim nulla. Vivamus varius fermentum turpis, vitae lobortis massa rhoncus ac. Maecenas quis commodo orci, dapibus ornare magna. Vestibulum cursus volutpat molestie. Etiam iaculis augue nec tellus condimentum, in sodales lorem sollicitudin. Suspendisse ac facilisis sapien.
-                </Paragraph>
-                <Paragraph>
-                    Cras tristique finibus volutpat. Suspendisse ac metus non eros porttitor congue vitae et tellus. Curabitur elementum placerat quam id eleifend. Duis vitae accumsan est. Praesent tempus ultrices finibus. Vestibulum euismod sem et ipsum fermentum eleifend. Aenean vitae tincidunt erat, at varius lectus. Vestibulum purus magna, mollis ac augue in, venenatis ullamcorper nisl. Vivamus tincidunt ligula tempor, egestas erat at, pharetra leo. Ut sollicitudin dapibus justo, id dignissim tortor blandit sit amet. Cras vitae hendrerit velit.
-                </Paragraph>
+    const attributionsTabVisible = !!baseInformation.attributions?.length;
+    const artistsTabHeaderText = baseInformation.artists?.length === 1 ? 'Artist' : 'Artists';
+
+    const roadmapImageUrl = baseInformation.roadmapImage
+        ? baseInformation.roadmapImage
+        : DEFAULT_ROADMAP_IMAGE_PATH;
+
+    if (isMinting === null) {
+        return <div>Loading</div>
+    }
+
+    return (
+        <>
+            {isMinting && (
+                <div className="mb-10">
+                    <MintProjectWrapper
+                        contractAddress={baseInformation.contractAddress}
+                        embedded={true}
+                    />
+                </div>
+            )}
+            <div className="mb-10">
+                <ImageCarousel
+                    images={Array(8).fill(baseInformation.coverImage)}
+                    height={isMinting ? 250 : 500}
+                />
             </div>
-            <div>
-                <Tabs activeTabId={selectedTab} onTabChange={handleTabChange}>
-                    <Tab id="roadmap" header="Roadmap">Roadmap comes here</Tab>
-                    <Tab id="artist" header="Artist">And artist bio here</Tab>
-                    <Tab id="attributions" header="Attributions">And Attributions here</Tab>
-                </Tabs>
+
+            <Title>{baseInformation.name}</Title>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12">
+                <div>
+                    {baseInformation.loreAudio && (
+                        <div className="mb-6">
+                            <audio controls>
+                                <source src={baseInformation.loreAudio} type="audio/mpeg" />
+                            </audio>
+                        </div>
+                    )}
+                    <div>{description}</div>
+                </div>
+                <div>
+                    <Tabs activeTabId={selectedTab} onTabChange={handleTabChange} className="mb-6">
+                        {artistsTabVisible && (
+                            <Tab id="artists" header={artistsTabHeaderText}>
+                                <ArtistsBio artists={baseInformation.artists as Artist[]} />
+                            </Tab>
+                        )}
+                        <Tab id="roadmap" header="Roadmap">
+                            <ImageWithPreview src={roadmapImageUrl} />
+                        </Tab>
+                        {attributionsTabVisible && (<Tab id="attributions" header="Attributions">And Attributions here</Tab>)}
+                    </Tabs>
+                </div>
             </div>
-        </div>
+        </>
     )
 
 }

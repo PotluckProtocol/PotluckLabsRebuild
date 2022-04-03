@@ -7,7 +7,7 @@ import { NavBar } from './components/Navbar';
 import { AppRoutes } from './AppRoutes';
 import { Menu } from './components/Menu/Menu';
 import { ConnectWalletButton } from './components/ConnectWalletButton';
-import { BiChevronsLeft, BiLinkExternal } from 'react-icons/bi'
+import { BiChevronsLeft, BiLinkExternal } from 'react-icons/bi';
 import styled from 'styled-components';
 
 const ErrorFallback: React.FC<FallbackProps> = ({ error }) => {
@@ -54,7 +54,7 @@ const App = () => {
               {/*<MenuItem path="/minting" onNavigate={closeMenu}>Now minting</MenuItem>*/}
               <MenuItem path="/mutatess?contractAddress=0x969b2Bda44a8a6Be009Bf264fcF62e079f581b97&contractAddress=0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858" onNavigate={closeMenu}>Mutate Super Serums!</MenuItem>
               <MenuItem path="/mutate?contractAddress=0x82913BB5587e42c7307cdA8bACab396c647ac20d&contractAddress=0xE0DDB7865Fc6f9ceDF95Dd9a8826c7CC965d16E3" onNavigate={closeMenu}>Mutate Serums</MenuItem>
-              {/*  <MenuItem path="/projects" onNavigate={closeMenu}>Projects</MenuItem>*/}
+              <MenuItem path="/projects" onNavigate={closeMenu}>Projects</MenuItem>
               <MenuItem path="/team" onNavigate={closeMenu}>Team</MenuItem>
               <MenuItem path="https://claim.potluck-labs.com/" onNavigate={closeMenu}>
                 <div className="flex items-center">

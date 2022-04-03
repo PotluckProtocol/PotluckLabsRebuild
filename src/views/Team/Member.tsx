@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TwitterIcon } from "../../components/TwitterIcon";
+import { SocialIcon } from "../../components/SocialIcon";
 
 export type MemberProps = {
     name: string;
@@ -47,11 +47,10 @@ export const Member: React.FC<MemberProps> = ({
             <Background>
                 <Title>{words[0]}<br />{words[1]}</Title>
                 <img className="w-100" src={image} />
-
             </Background>
-            <LinksContainer>
+            <LinksContainer className='my-2'>
                 <Link href={twitterUrl} target="_blank">
-                    <TwitterIcon width={30} />
+                    <SocialIcon size={30} social='twitter' />
                 </Link>
             </LinksContainer>
         </div>

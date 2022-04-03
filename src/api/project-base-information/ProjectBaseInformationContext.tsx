@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { ProjectBaseInformation } from "./ProjectBaseInformation";
+import { Artist } from "../artists/Artist";
+import { ProjectBaseInformation, ProjectBaseInformationRaw } from "./ProjectBaseInformation";
 
 export type ProjectBaseInformationContextType = {
     isInitialized: boolean;
@@ -15,9 +16,33 @@ export const ProjectBaseInformationProvider: React.FC = ({ children }) => {
 
     useEffect(() => {
         const getConfig = async () => {
-            const res = await fetch('/config/project-base-information.json');
-            const info = await res.json();
-            setBaseInformation(info);
+            const [configRes, artistsRes] = await Promise.all([
+                fetch('/config/project-base-information.json'),
+                fetch('/config/artists.json')
+            ]);
+
+            const allArtists = await artistsRes.json() as Artist[];
+            const configs = await configRes.json() as ProjectBaseInformationRaw[];
+
+            const populatedConfigs: ProjectBaseInformation[] = configs.map(item => {
+                const { artistId, ...rest } = item;
+
+                let artists: Artist[] | undefined;
+                if (artistId && artistId.length > 0) {
+                    const artistIdArr = Array.isArray(artistId) ? artistId : [artistId];
+                    artists = artistIdArr
+                        .map(id => allArtists.find(artist => artist.id === id))
+                        .filter(Boolean) as Artist[]
+                }
+
+                return {
+                    ...rest,
+                    artists
+                }
+            });
+
+
+            setBaseInformation(populatedConfigs);
             setIsInitialized(true);
         }
 

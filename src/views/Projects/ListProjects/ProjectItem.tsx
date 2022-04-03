@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import { resolveNetwork } from "../../../api/network/resolveNetwork"
 import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
@@ -8,13 +9,17 @@ export type ProjectItemProps = {
     baseInformation: ProjectBaseInformation
 }
 
-const Container = styled.div`
+const NavLinkContainer = styled(NavLink)`
     position: relative;
     background: rgb(3,26,18);
     background: linear-gradient(0deg, rgba(3,26,18,1) 0%, rgba(12,105,71,1) 100%);
     text-align: center;
     padding: 0.5rem;
     border-radius: 1.5rem;
+ 
+    &:hover {
+        outline: #1bf2a4 2px solid;
+    }
 `;
 
 const PositionedNetworkIcon = styled(NetworkIcon)`
@@ -38,13 +43,6 @@ const Title = styled(TextFit)`
     color: #1bf2a4;
 `;
 
-const ItemsContainer = styled.div`
-    text-align: center;
-    border: 1px solid #1bf2a4;
-    border-radius: 0.75rem;
-`;
-
-
 const ItemCountLabel = styled.div`
     font-size: .8rem;
 `;
@@ -53,7 +51,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
     baseInformation
 }) => {
     return (
-        <Container>
+        <NavLinkContainer to={`/projects/${baseInformation.contractAddress}`}>
             <CoverImage src={baseInformation.coverImage} />
             <PositionedNetworkIcon size={35} networkId={resolveNetwork(baseInformation.network).networkId} />
             <Content>
@@ -62,6 +60,6 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
                     <ItemCountLabel><b>{baseInformation.maxSupply}</b> pieces</ItemCountLabel>
                 </div>
             </Content>
-        </Container >
+        </NavLinkContainer>
     )
 }

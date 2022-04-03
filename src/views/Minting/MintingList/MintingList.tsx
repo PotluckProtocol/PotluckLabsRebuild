@@ -21,8 +21,6 @@ export const MintingList: React.FC = () => {
     const configs = useContext(ProjectBaseInformationContext).getConfigs();
     const stillMinting = configs.filter(item => item.mint && !item.mint.forceEndedState);
 
-
-
     return (
         <>
             <PageHeader className="mb-6">Minting now</PageHeader>

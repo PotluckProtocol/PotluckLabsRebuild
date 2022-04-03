@@ -17,7 +17,7 @@ const Container = styled.div`
     height: 100vh;
     width: 230px;
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
-    z-index: 9999;
+    z-index: 8889;
     box-shadow: 4px 0px 20px rgba(12, 105, 71, 0.3);
 
     &.open {
@@ -39,7 +39,7 @@ const Shroud = styled.div`
     left: 0;
     height: 100vh;
     width: 100vh;
-    z-index: 9998;
+    z-index: 8888;
     background: rgba(0,0,0,0.65);
     animation: fadeIn .5s;
 
