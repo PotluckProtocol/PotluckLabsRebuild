@@ -1,5 +1,12 @@
 [
     {
+        "id": "plottwist",
+        "name": "Plot Twist",
+        "social": {
+            "twitter": "https://twitter.com/PlotTwistFTM"
+        }
+    },
+    {
         "id": "slicedatup",
         "name": "SliceDatUp",
         "social": {
@@ -7,10 +14,87 @@
         }
     },
     {
+        "id": "botboy",
+        "name": "Bot Boy",
+        "social": {
+            "twitter": "https://twitter.com/ThisBotBoy"
+        }
+    },
+    {
+        "id": "shplarg",
+        "name": "Shplarg The Genie",
+        "social": {
+            "twitter": "https://twitter.com/shhplarg"
+        }
+    },
+    {
+        "id": "bushdoctor",
+        "name": "Bushdoctor",
+        "social": {
+            "twitter": "https://twitter.com/bushdoctor77"
+        }
+    },
+    {
+        "id": "kvarters",
+        "name": "Kvarters",
+        "social": {
+            "twitter": "https://twitter.com/kvarters"
+        }
+    },
+    {
+        "id": "teensonacid",
+        "name": "Teens on Acid",
+        "social": {
+            "twitter": "https://twitter.com/TEENSONACID"
+        }
+    },
+    {
         "id": "mateusz",
         "name": "Mateusz Woliński",
         "social": {
             "instagram": "https://www.instagram.com/iksde.mati.3d.edition/"
+        }
+    },
+    {
+        "id": "zombiestiltskin",
+        "name": "Zombiestiltskin",
+        "social": {
+            "twitter": "https://twitter.com/zombiestiltskin"
+        }
+    },
+    {
+        "id": "mash_ow",
+        "name": "mash_ow",
+        "social": {
+            "twitter": "https://twitter.com/mash_ow"
+        }
+    },
+    {
+        "id": "jackshure",
+        "name": "Jack Shure",
+        "social": {
+            "twitter": "https://twitter.com/jackshure1"
+        }
+    },
+    {
+        "id": "aspenth",
+        "name": "Aspenth",
+        "social": {
+            "twitter": "https://twitter.com/0x_aspenth"
+        }
+    },
+    {
+        "id": "nimbus",
+        "name": "Nimbus",
+        "social": {
+            "twitter": "https://twitter.com/FantomNimbus"
+        }
+    },
+    {
+        "id": "hex",
+        "name": "Hex",
+        "social": {
+            "twitter": "https://twitter.com/hexademaximal"
         }
     }
 ]

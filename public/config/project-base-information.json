@@ -1,5 +1,267 @@
 [
     {
+        "name": "Creatures Of The Cave",
+        "symbol": "COTC",
+        "contractAddress": "0xDAC2031173c07BD622759051Df373b708A1acbcE",
+        "coverImage": "/images/projects/cotc/cotc.cover.jpg",
+        "network": "FTM",
+        "artistId": "plottwist",
+        "releaseDate": "2021-12-27",
+        "description": "The Creatures of the Cave by Potluck Protocol and PlotTwist ",
+        "maxSupply": 800,
+        "images": [
+            "/images/projects/cotc/image01.png",
+            "/images/projects/cotc/image02.png",
+            "/images/projects/cotc/image03.png"
+        ]
+    },
+    {
+        "name": "Potluck Pigs",
+        "symbol": "PLPG",
+        "contractAddress": "0x5439232D0F01F53BdEAbE3a8f19588efdfBf9c64",
+        "coverImage": "/images/projects/potluckpigs/potluckpigs.cover.png",
+        "network": "FTM",
+        "artistId": "slicedatup",
+        "releaseDate": "2021-12-30",
+        "description": "Potluck Pigs are 1080 unique pigs living on the Fantom blockchain. Potluck Pigs bring you prosperity through their energy. HODL and we are going to make it.",
+        "maxSupply": 1080,
+        "images": [
+            "/images/projects/potluckpigs/image01.png",
+            "/images/projects/potluckpigs/image02.png",
+            "/images/projects/potluckpigs/image03.png"
+        ]
+    },
+    {
+        "name": "Bot Squad Llamas",
+        "symbol": "BSLA",
+        "contractAddress": "0x0C448D0eA6Ef8ccda75ad4BBA4A7Ea59EbbeAC66",
+        "coverImage": "/images/projects/botsquadllamas/botsquadllamas.cover.png",
+        "network": "FTM",
+        "artistId": "botboy",
+        "releaseDate": "2022-01-07",
+        "description": "820 Bot Squad of Llamas that are taking over the Fantom Network",
+        "maxSupply": 820,
+        "images": [
+            "/images/projects/botsquadllamas/image01.png",
+            "/images/projects/botsquadllamas/image02.png",
+            "/images/projects/botsquadllamas/image03.png"
+        ]
+    },
+    {
+        "name": "Psychedelic R-Evolution",
+        "symbol": "FACE",
+        "contractAddress": "0x6e61144e7123f5936B1f299553f2c4C4fF3E2acE",
+        "coverImage": "/images/projects/psychedelicrevolution/psychedelicrevolution.cover.png",
+        "network": "FTM",
+        "artistId": "shplarg",
+        "releaseDate": "2022-01-14",
+        "description": "1080 Psychedelic Faces. Humanity, through escapism, has turned to psychedelic drugs and this in turn is how they now see themselves.",
+        "maxSupply": 1080,
+        "images": [
+            "/images/projects/psychedelicrevolution/image01.png",
+            "/images/projects/psychedelicrevolution/image02.png",
+            "/images/projects/psychedelicrevolution/image03.png"
+        ]
+    },
+    {
+        "name": "Strange Ones",
+        "symbol": "TSOA",
+        "contractAddress": "0x954dBf7f372C12283f5c5feAe11ea3652Eb73352",
+        "coverImage": "/images/projects/strangeones/cover.png",
+        "network": "FTM",
+        "artistId": "slicedatup",
+        "releaseDate": "2022-01-21",
+        "description": "1080 Strange Ones. They come from the outer realms, invading the Fantom Block Chain. Do they have good intentions? Only time will tell.",
+        "maxSupply": 1080,
+        "images": [
+            "/images/projects/strangeones/image01.png",
+            "/images/projects/strangeones/image02.png",
+            "/images/projects/strangeones/image03.png"
+        ]
+    },
+    {
+        "name": "Engraved Spirits",
+        "symbol": "ENGS",
+        "contractAddress": "0xD0C7Fdb0B9D9f54f41DF4D44959FFf479172781e",
+        "coverImage": "/images/projects/engravedspirits/cover.png",
+        "network": "FTM",
+        "artistId": [
+            "bushdoctor",
+            "kvarters"
+        ],
+        "releaseDate": "2022-01-23",
+        "description": "550 Engraved Spirits on the Fantom Network. Allow the Spirits to help you see your true inner self.",
+        "maxSupply": 550,
+        "images": [
+            "/images/projects/engravedspirits/image01.png",
+            "/images/projects/engravedspirits/image02.png",
+            "/images/projects/engravedspirits/image03.png"
+        ]
+    },
+    {
+        "name": "Astrokid",
+        "symbol": "ASTRO",
+        "contractAddress": "0x3d7E7157459A352ada13ed8dA1Ba54a08A883965",
+        "coverImage": "/images/projects/astrokidftm/cover.png",
+        "network": "FTM",
+        "artistId": "teensonacid",
+        "releaseDate": "2022-02-02",
+        "description": "3333 Astrokids navigating their way through Fantom, Avalanche, and Matic. Inspired by the nostalgia of 80s and 90s cartoons and comics with the styling of Australian neo-pop artist Josh Thorsen, founder of Teens On Acid, Astrokids are like no other project you've seen before.",
+        "maxSupply": 1111,
+        "images": [
+            "/images/projects/astrokidftm/image01.png",
+            "/images/projects/astrokidftm/image02.png",
+            "/images/projects/astrokidftm/image03.png",
+            "/images/projects/astrokidftm/image04.png"
+        ]
+    },
+    {
+        "name": "Goddess of the Cave",
+        "symbol": "GCOTC",
+        "contractAddress": "0x6D312E9B304D05DA5CAc459b2FcC2CCaBBaeE757",
+        "coverImage": "/images/projects/goddessofthecave/cover.png",
+        "network": "FTM",
+        "artistId": "mateusz",
+        "releaseDate": "2022-02-04",
+        "description": [
+            "The Goddess of the Cave has descended among us, worshipped by creatures and feared by many.",
+            "Collection was airdropped for the holders of Creatures of the Cave with 1:1 ratio."
+        ],
+        "maxSupply": 888,
+        "images": [
+            "/images/projects/goddessofthecave/image01.png",
+            "/images/projects/goddessofthecave/image02.png",
+            "/images/projects/goddessofthecave/image03.png"
+        ]
+    },
+    {
+        "name": "Rat Pack Mafia",
+        "symbol": "RPMA",
+        "contractAddress": "0x3dd927A8E88ED180249Dffe8FC83d505695D6e15",
+        "coverImage": "/images/projects/ratpackmafia/cover.png",
+        "network": "AVAX",
+        "artistId": "zombiestiltskin",
+        "releaseDate": "2022-02-05",
+        "description": [
+            "First members of the Rat Pack",
+            "3500 Rat Pack Members have taken over the Avalanche Network. They have come to claim the neighborhood as their own. They treat their members like family and you definitely want to be family."
+        ],
+        "maxSupply": 1000,
+        "images": [
+            "/images/projects/ratpackmafia/image01.png",
+            "/images/projects/ratpackmafia/image02.png",
+            "/images/projects/ratpackmafia/image03.png"
+        ]
+    },
+    {
+        "name": "Potluck Realm Orcs",
+        "symbol": "PLRO",
+        "contractAddress": "0xdC2BC583f45450e6Ae271C48C941b10e073380B5",
+        "coverImage": "/images/projects/potluckrealmorcs/cover.png",
+        "network": "FTM",
+        "artistId": "mash_ow",
+        "releaseDate": "2022-02-11",
+        "description": "1500 of the Potluck Realm Orcs ready for battle on the Fantom Network.",
+        "maxSupply": 1500,
+        "images": [
+            "/images/projects/potluckrealmorcs/image01.png",
+            "/images/projects/potluckrealmorcs/image02.png",
+            "/images/projects/potluckrealmorcs/image03.png"
+        ]
+    },
+    {
+        "name": "Astrokid",
+        "symbol": "ASTRO",
+        "contractAddress": "0x24b7b369CCB384E451c9bcBF41dE4C74eC21F43C",
+        "coverImage": "/images/projects/astrokidavax/cover.png",
+        "network": "AVAX",
+        "artistId": "teensonacid",
+        "releaseDate": "2022-02-16",
+        "description": "3333 Astrokids navigating their way through Fantom, Avalanche, and Matic. Inspired by the nostalgia of 80s and 90s cartoons and comics with the styling of Australian neo-pop artist Josh Thorsen, founder of Teens On Acid, Astrokids are like no other project you've seen before.",
+        "maxSupply": 1111,
+        "images": [
+            "/images/projects/astrokidavax/image01.png",
+            "/images/projects/astrokidavax/image02.png",
+            "/images/projects/astrokidavax/image03.png",
+            "/images/projects/astrokidavax/image04.png"
+        ]
+    },
+    {
+        "name": "COTC2 Serums",
+        "symbol": "COTC2Serum",
+        "contractAddress": "0x82913BB5587e42c7307cdA8bACab396c647ac20d",
+        "coverImage": "/images/projects/cotc2serumftm/serum.png",
+        "network": "FTM",
+        "artistId": "aspenth",
+        "releaseDate": "2022-02-16",
+        "description": "6000 Creatures have been exposed to dangerous serums. No one could have ever imagined this final outcome.",
+        "maxSupply": 4000,
+        "images": [
+            "/images/projects/cotc2serumftm/serum.png"
+        ],
+        "mutate": {
+            "targetContractAddress": "0xDbD1D1f5E81c39c5b7931A8dFfDB78e260bF288a",
+            "approveGasLimit": 75000,
+            "mutetaGasLimit": 285000
+        }
+    },
+    {
+        "name": "Creatures of the Cave 2",
+        "symbol": "COTCTWO",
+        "contractAddress": "0xDbD1D1f5E81c39c5b7931A8dFfDB78e260bF288a",
+        "coverImage": "/images/projects/cotc2ftm/cover.png",
+        "network": "FTM",
+        "artistId": [
+            "nimbus",
+            "hex"
+        ],
+        "releaseDate": "2022-02-18",
+        "description": "4000 Creatures have been exposed to dangerous serums. No one could have ever imagined this final outcome.",
+        "maxSupply": 4000,
+        "images": [
+            "/images/projects/cotc2ftm/image01.png",
+            "/images/projects/cotc2ftm/image02.png",
+            "/images/projects/cotc2ftm/image03.png"
+        ]
+    },
+    {
+        "name": "COTC2 Super Serums",
+        "symbol": "COTCSS",
+        "contractAddress": "0x969b2Bda44a8a6Be009Bf264fcF62e079f581b97",
+        "coverImage": "/images/projects/cotc2superserumftm/serum.png",
+        "network": "FTM",
+        "artistId": "aspenth",
+        "releaseDate": "2022-02-16",
+        "description": "300 Super Serums... What mayhem will they bring",
+        "maxSupply": 200,
+        "images": [
+            "/images/projects/cotc2superserumftm/serum.png"
+        ],
+        "overrideIpfsGateway": "https://potlucklabs.mypinata.cloud/ipfs/",
+        "mutate": {
+            "targetContractAddress": "0xBbF352cEa87A49aeF9d5A5dDA16de2240814732a",
+            "approveGasLimit": 75000,
+            "mutetaGasLimit": 285000,
+            "serumUnitNotation": "Super Serum"
+        }
+    },
+    {
+        "name": "Dead Family",
+        "symbol": "DEAD",
+        "contractAddress": "0x84A106AfdDeFD79c5Be976e93773B07C299B9BE0",
+        "coverImage": "/images/projects/deadfamilyftm/cover.png",
+        "network": "FTM",
+        "artistId": "jackshure",
+        "releaseDate": "2022-02-25",
+        "description": "Inspired by his time on tour with the Dead along with the influence brought from Egyptian mythologies, Jack Shure brings to life his first generative NFT collection Dead Family. Join the family!",
+        "maxSupply": 777,
+        "images": [
+            "/images/projects/deadfamilyftm/image01.png",
+            "/images/projects/deadfamilyftm/image02.png",
+            "/images/projects/deadfamilyftm/image03.png"
+        ]
+    },
+    {
         "name": "Dead Family",
         "symbol": "DEAD",
         "contractAddress": "0x30745c13181b3e21c1439f0faa912b08e73d8547",
@@ -14,10 +276,28 @@
         }
     },
     {
+        "name": "Astrokid",
+        "symbol": "ASTRO",
+        "contractAddress": "0xA0E1A63E39D2C97d93c79115234c4cdFE6f33067",
+        "coverImage": "/images/projects/astrokidmatic/cover.png",
+        "network": "MATIC",
+        "artistId": "teensonacid",
+        "releaseDate": "2022-03-02",
+        "description": "3333 Astrokids navigating their way through Fantom, Avalanche, and Matic. Inspired by the nostalgia of 80s and 90s cartoons and comics with the styling of Australian neo-pop artist Josh Thorsen, founder of Teens On Acid, Astrokids are like no other project you've seen before.",
+        "maxSupply": 1111,
+        "images": [
+            "/images/projects/astrokidmatic/image01.png",
+            "/images/projects/astrokidmatic/image02.png",
+            "/images/projects/astrokidmatic/image03.png",
+            "/images/projects/astrokidmatic/image04.png"
+        ]
+    },
+    {
         "name": "Strange Pigs",
         "symbol": "SOPP",
         "contractAddress": "0x72F38b2330cd187c13553dc92a0bE6334005EebA",
         "coverImage": "/images/projects/strangepigs/strangepigs.cover.png",
+        "releaseDate": "2022-03-11",
         "description": [
             "The Potluck Pigs were out roaming the fields near the Cave at night. Soon on the horizon a strange object came into view. Most shrugged it off as nothing, until it came closer and closer. The pigs began to see the outline of an oblong shape with strangely beautiful lights glimmering and sparkling. For an unknown reason, they felt weirdly drawn to the lights.",
             "The object now hovering above the pasture, opened from underneath, as a beam of light began to pull them one by one into the ship. As the pigs entered, fear began to shoot through the bodies as they saw the restraints on tables and the experimental equipment. It was too late for them, they could no longer stop it and go back. No one could have ever imagined what would happen to the pigs on that ship..."
@@ -26,6 +306,11 @@
         "roadmapImage": "/images/projects/strangepigs/roadmap.png",
         "network": "FTM",
         "maxSupply": 1080,
+        "images": [
+            "/images/projects/strangepigs/image01.png",
+            "/images/projects/strangepigs/image02.png",
+            "/images/projects/strangepigs/image03.png"
+        ],
         "artistId": "slicedatup",
         "mint": {
             "weiCost": 35000000000000000000,
@@ -37,38 +322,21 @@
     {
         "name": "COTC2 Serums",
         "symbol": "COTC2Serum",
-        "contractAddress": "0x82913BB5587e42c7307cdA8bACab396c647ac20d",
-        "coverImage": "/images/projects/cotc2/cotc2serumftm.cover.png",
-        "network": "FTM",
-        "maxSupply": 4000,
-        "hideInProjects": true,
-        "mint": {
-            "gasLimit": 285000,
-            "maxPerTx": 10,
-            "noWhitelist": true,
-            "forceEndedState": true,
-            "mintImage": "/images/projects/cotc2/cotc2serumftm.cover.png",
-            "weiCost": 20000000000000000000
-        },
-        "mutate": {
-            "targetContractAddress": "0xDbD1D1f5E81c39c5b7931A8dFfDB78e260bF288a",
-            "approveGasLimit": 75000,
-            "mutetaGasLimit": 285000
-        }
-    },
-    {
-        "name": "COTC2 Serums",
-        "symbol": "COTC2Serum",
         "contractAddress": "0xE0DDB7865Fc6f9ceDF95Dd9a8826c7CC965d16E3",
-        "coverImage": "/images/projects/cotc2/cotc2serumavax.cover.png",
+        "coverImage": "/images/projects/cotc2serumavax/serum.png",
+        "releaseDate": "2022-03-19",
+        "description": "6000 Creatures have been exposed to dangerous serums. No one could have ever imagined this final outcome.",
         "network": "AVAX",
         "maxSupply": 2000,
-        "hideInProjects": true,
+        "artistId": "aspenth",
+        "images": [
+            "/images/projects/cotc2serumavax/serum.png"
+        ],
         "mint": {
             "gasLimit": 285000,
             "maxPerTx": 10,
             "noWhitelist": true,
-            "mintImage": "/images/projects/cotc2/cotc2serumavax.cover.png",
+            "mintImage": "/images/projects/cotc2serumavax/serum.png",
             "weiCost": 500000000000000000
         },
         "mutate": {
@@ -78,34 +346,40 @@
         }
     },
     {
-        "name": "COTC2 Super Serums",
-        "symbol": "COTCSS",
-        "contractAddress": "0x969b2Bda44a8a6Be009Bf264fcF62e079f581b97",
-        "coverImage": "/images/projects/cotc2/cotc2superserumftm.cover.png",
-        "network": "FTM",
-        "maxSupply": 200,
-        "hideInProjects": true,
-        "overrideIpfsGateway": "https://potlucklabs.mypinata.cloud/ipfs/",
-        "mutate": {
-            "targetContractAddress": "0xBbF352cEa87A49aeF9d5A5dDA16de2240814732a",
-            "approveGasLimit": 75000,
-            "mutetaGasLimit": 285000,
-            "serumUnitNotation": "Super Serum"
-        }
+        "name": "Creatures of the Cave 2",
+        "symbol": "COTCTWO",
+        "contractAddress": "0xDbD1D1f5E81c39c5b7931A8dFfDB78e260bF288a",
+        "coverImage": "/images/projects/cotc2avax/cover.jpg",
+        "network": "AVAX",
+        "artistId": [
+            "nimbus",
+            "hex"
+        ],
+        "releaseDate": "2022-03-19",
+        "description": "2000 Creatures have been exposed to dangerous serums. No one could have ever imagined this final outcome.",
+        "maxSupply": 2000,
+        "images": [
+            "/images/projects/cotc2avax/cover.jpg"
+        ]
     },
     {
         "name": "COTC2 Super Serums",
         "symbol": "COTCSS",
         "contractAddress": "0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858",
-        "coverImage": "/images/projects/cotc2/cotc2superserumavax.cover.png",
+        "coverImage": "/images/projects/cotc2superserumavax/serum.png",
+        "releaseDate": "2022-03-19",
+        "description": "300 Super Serums... What mayhem will they bring",
         "network": "AVAX",
         "maxSupply": 100,
-        "hideInProjects": true,
+        "artistId": "aspenth",
+        "images": [
+            "/images/projects/cotc2superserumavax/serum.png"
+        ],
         "mint": {
             "gasLimit": 285000,
             "maxPerTx": 1,
             "noWhitelist": true,
-            "mintImage": "/images/projects/cotc2/cotc2superserumavax.cover.png",
+            "mintImage": "/images/projects/cotc2superserumavax/serum.png",
             "weiCost": 2000000000000000000
         },
         "overrideIpfsGateway": "https://potlucklabs.mypinata.cloud/ipfs/",
@@ -117,20 +391,66 @@
         }
     },
     {
-        "name": "Creatures of the Cave 2",
-        "symbol": "COTCTWO",
-        "contractAddress": "0x4Cc85D7B4fA064bF609741C822D2D1244c848c9C",
-        "coverImage": "/images/projects/cotc2/cotc2.cover.jpg",
-        "network": "AVAX",
-        "maxSupply": 2000
-    },
-    {
         "name": "Old Blood Of The Cave",
         "symbol": "OLDBLOOD",
         "contractAddress": "0xcd05E23d508cF053513475277eB4de9f55f75f35",
         "coverImage": "/images/projects/oldblood/oldblood.cover.jpg",
         "network": "FTM",
         "maxSupply": 650,
+        "attributions": [
+            {
+                "url": "https://sketchfab.com/3d-models/lobster-3ab14e5ce84141cda62c3405d8086157",
+                "name": "Ant Gregory - Lobster"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/claret-wine-jug-17156cfa731b443faf760d4dc7538809",
+                "name": "Ant Gregory - Claret Wine Jug"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/sleeping-dragon-8c005da8895a48cabfa3fb182e4762a0",
+                "name": "Chris - Sleeping Dragon"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/human-skull-free-7081b32caeda47b5a0ef4d039f244b6e",
+                "name": "roxyjungle - Human skull FREE"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/tree-scan-free-5f669cbd4a624c648e1bbc1598086a60",
+                "name": "Epic_Tree_Store - Tree Scan Free"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/orange-open-3d-scan-e1337f3aa3ba4007aff505fabbb4c0ae",
+                "name": "grafi - Orange Open 3D scan"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/simple-hat-for-ray-ii-fb83cd5fdc114bceb9367dcbe00a33a5",
+                "name": "ChamberSu1996 - Simple Hat For Ray II"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/angelica-27f75fa94c384000bb6a79a3000f8e80",
+                "name": "NikZava284 ✓ - Angelica"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/red-rose-74520e87c3ed46898668c83356dd9cfa",
+                "name": "Lassi Kaukonen - Red rose"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/antique-table-f01054c29829452a9f87437de57a3f6f",
+                "name": "Tyron - Antique Table"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/the-king-s-hall-d18155613363445b9b68c0c67196d98d",
+                "name": "Skokloster Castle (Skoklosters slott) - The King´s Hall"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/wine-bottle-7c6212148a5447b88643876ec12276b7",
+                "name": "aya.albayati - Wine Bottle"
+            },
+            {
+                "url": "https://sketchfab.com/3d-models/big-gold-plate-fd3fdda08ae845a089705fd0e904f732",
+                "name": "IUPUI University Library - Big Gold Plate"
+            }
+        ],
         "mint": {
             "weiCost": 30000000000000000000,
             "maxPerTx": 10,
