@@ -17,32 +17,55 @@ const NetworkHeader = styled.h2`
     font-weight: 800;
 `;
 
+const todayOrInFuture = (dateStr: string): boolean => {
+    const date = new Date(dateStr);
+    const now = new Date();
+
+    date.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
+
+    return date.valueOf() > now.valueOf();
+}
+
 export const MintingList: React.FC = () => {
     const configs = useContext(ProjectBaseInformationContext).getConfigs();
-    const stillMinting = configs.filter(item => item.mint && !item.mint.forceEndedState);
+    const allMinting = configs.filter(item => item.mint && !item.mint.forceEndedState);
+
+    const upcomingMints = allMinting.filter(item => item.releaseDate && todayOrInFuture(item.releaseDate));
+    const nowMinting = allMinting.filter(item => item.releaseDate && !todayOrInFuture(item.releaseDate));
 
     return (
         <>
+            {(upcomingMints.length > 0) && (
+                <>
+                    <PageHeader className="mb-6">Upcoming launches</PageHeader>
+                    <div className="mb-6">
+                        {upcomingMints.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <MintingProvider>
+                                        <MintingItem baseInformation={item} />
+                                    </MintingProvider>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </>
+            )}
+
             <PageHeader className="mb-6">Minting now</PageHeader>
 
-            {NETWORKS.map((network, index) => (
-                <div key={index}>
-                    <NetworkHeader className="mb-4">{network.name}</NetworkHeader>
-                    <div className="flex flex-wrap gap-8 mb-8">
-                        {stillMinting
-                            .filter(item => resolveNetwork(item.network).networkId === network.networkId)
-                            .map((item, index) => {
-                                return (
-                                    <div key={index}>
-                                        <MintingProvider>
-                                            <MintingItem baseInformation={item} />
-                                        </MintingProvider>
-                                    </div>
-                                )
-                            })}
-                    </div>
-                </div>
-            ))}
+            <div className="flex flex-wrap gap-8 mb-8">
+                {nowMinting.map((item, index) => {
+                    return (
+                        <div key={index}>
+                            <MintingProvider>
+                                <MintingItem baseInformation={item} />
+                            </MintingProvider>
+                        </div>
+                    )
+                })}
+            </div>
         </>
     );
 }

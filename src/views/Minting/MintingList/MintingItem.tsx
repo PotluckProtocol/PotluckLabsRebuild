@@ -11,6 +11,8 @@ import useAccount from '../../../api/account/useAccount';
 import { resolveNetwork } from '../../../api/network/resolveNetwork';
 import { MintPrice } from '../../../components/MintPrice';
 import { NetworkIcon } from '../../../components/NetworkIcon';
+import { resolveIdentInfo } from '../../../api/project-base-information/ProjectBaseInformationContext';
+import moment, { Moment } from 'moment';
 
 export type MintingItemProps = {
     baseInformation: ProjectBaseInformation;
@@ -65,6 +67,11 @@ const ToMintButton = styled(RoundedButton)`
     line-height: 1.7rem;
 `;
 
+const DateText = styled.span`
+    font-size: 1.4rem;
+    font-weight: 500;
+`;
+
 export const MintingItem: React.FC<MintingItemProps> = ({
     baseInformation
 }) => {
@@ -74,18 +81,22 @@ export const MintingItem: React.FC<MintingItemProps> = ({
     const account = useAccount();
 
     const walletAddress = account?.walletAddress;
+    const hasContract = !!baseInformation.contractAddress;
+    const hasMintSpec = !!baseInformation.mint;
 
-    const { contractAddress } = baseInformation;
+    const releaseDate: Moment | null = (baseInformation.releaseDate) ? moment(baseInformation.releaseDate).utc() : null;
+
+    const isUpcoming = releaseDate && releaseDate.isAfter(new Date());
 
     useEffect(() => {
         const init = async () => {
-            if (!baseInformation.mint) {
+            if (!hasContract || !hasMintSpec) {
                 return;
             }
 
             try {
                 await minting.init({
-                    contractAddress,
+                    contractAddress: baseInformation.contractAddress,
                     liveMintingCount: false
                 });
             } catch (e) {
@@ -96,8 +107,13 @@ export const MintingItem: React.FC<MintingItemProps> = ({
             }
         }
 
+        if (!baseInformation.contractAddress) {
+            setIsInitialized(true);
+            return;
+        }
+
         init();
-    }, [contractAddress, walletAddress]);
+    }, [baseInformation.contractAddress, walletAddress]);
 
     if (!isInitialized) {
         return <div>Loading</div>;
@@ -108,27 +124,32 @@ export const MintingItem: React.FC<MintingItemProps> = ({
     }
 
     const handleClick = () => {
-        navigate(`/minting/${baseInformation.contractAddress}`)
+        navigate(`/projects/${resolveIdentInfo(baseInformation)}`);
     }
 
     const network = resolveNetwork(baseInformation.network);
 
+    const buttonText = (isUpcoming && minting.mintState === 'NotStarted') ? 'OPEN' : 'TO MINT';
+
     return (
         <StyledContainer className="rounded-lg">
-            <StyledHeader height={100}>{baseInformation.name}</StyledHeader>
-            <StyledImageContainer>
+            {isUpcoming && (
+                <DateText>{releaseDate.format('MMMM Do')}</DateText>
+            )}
+            <StyledHeader className="flex items-center" height={100}>{baseInformation.name}</StyledHeader>
+            <StyledImageContainer className="mb-2">
                 <StyledMintStateBadge mintState={minting.mintState} />
                 <StyledImage src={baseInformation.mint?.mintImage} />
                 <PositionedNetworkIcon networkId={network.networkId} size={35} />
             </StyledImageContainer>
             <StyledPrice
-                className='my-4'
+                className='mt-4 mb-4'
                 fontSizeRem={2}
                 weiPrice={baseInformation.mint.weiCost}
                 network={network}
                 fitToHeight={34}
             />
-            <ToMintButton onClick={handleClick}>TO MINT</ToMintButton>
+            <ToMintButton onClick={handleClick}>{buttonText}</ToMintButton>
         </StyledContainer>
     )
 }

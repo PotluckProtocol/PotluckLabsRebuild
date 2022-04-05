@@ -18,7 +18,7 @@ export const MintProjectWrapper: React.FC<MintProjectWrapperProps> = (props) => 
 
     return (
         <MintingProvider>
-            <MintProject hideCatalogNavigationLink={props.embedded} contractAddress={contractAddress} />
+            <MintProject contractAddress={contractAddress} />
         </MintingProvider>
     );
 }

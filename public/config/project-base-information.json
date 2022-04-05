@@ -265,13 +265,21 @@
         "name": "Dead Family",
         "symbol": "DEAD",
         "contractAddress": "0x30745c13181b3e21c1439f0faa912b08e73d8547",
-        "coverImage": "/images/projects/deadfamily/deadfamilyavax.cover.jpg",
+        "coverImage": "/images/projects/deadfamilyavax/cover.png",
         "network": "AVAX",
+        "artistId": "jackshure",
+        "description": "Inspired by his time on tour with the Dead along with the influence brought from Egyptian mythologies, Jack Shure brings to life his first generative NFT collection Dead Family. Join the family!",
+        "releaseDate": "2022-02-25",
         "maxSupply": 254,
+        "images": [
+            "/images/projects/deadfamilyavax/image01.png",
+            "/images/projects/deadfamilyavax/image02.png",
+            "/images/projects/deadfamilyavax/image03.png"
+        ],
         "mint": {
             "weiCost": 800000000000000000,
             "maxPerTx": 10,
-            "mintImage": "/images/projects/deadfamily/deadfamilyavax.mint.gif",
+            "mintImage": "/images/projects/deadfamily/mint.gif",
             "gasLimit": 285000
         }
     },
@@ -395,8 +403,10 @@
         "symbol": "OLDBLOOD",
         "contractAddress": "0xcd05E23d508cF053513475277eB4de9f55f75f35",
         "coverImage": "/images/projects/oldblood/oldblood.cover.jpg",
+        "releaseDate": "2022-03-25",
         "network": "FTM",
         "maxSupply": 650,
+        "artistId": "",
         "attributions": [
             {
                 "url": "https://sketchfab.com/3d-models/lobster-3ab14e5ce84141cda62c3405d8086157",
@@ -456,6 +466,31 @@
             "maxPerTx": 10,
             "mintImage": "/images/projects/oldblood/oldblood.mint.gif",
             "gasLimit": 285000
+        }
+    },
+    {
+        "name": "Revolutionary Apes",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/revolutionaryapes/cover.png",
+        "network": "FTM",
+        "artistId": [
+            "shplarg",
+            "kodkar"
+        ],
+        "releaseDate": "2022-04-08T19:00:00.000Z",
+        "description": "Humanity through escapism has turned to psychedelic drugs. Humanity was driven to endangerment through constant gentrification, racism, war, and inequality. In parallel, Apes have broken free of captivity and have reclaimed their position in nature. Through use of Human-made tools/devices, Apes have developed higher cognitive abilities. It would seem that humanity -- tripping off its disposition, has now adopted the mentality of apes. Whereas the society of apes mirrors the modern world of humanity. Though with this adoption of societal values, perhaps ape-kind will also adopt human viciousness and prejudice",
+        "maxSupply": 1080,
+        "images": [
+            "/images/projects/revolutionaryapes/image01.png",
+            "/images/projects/revolutionaryapes/image02.png",
+            "/images/projects/revolutionaryapes/image03.png"
+        ],
+        "mint": {
+            "gasLimit": 285000,
+            "maxPerTx": 10,
+            "mintImage": "/images/projects/revolutionaryapes/mint.gif",
+            "weiCost": 25000000000000000000
         }
     }
 ]

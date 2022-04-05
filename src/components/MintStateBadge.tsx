@@ -21,17 +21,18 @@ export const MintStateBadge: React.FC<MintStateBadgeProps> = ({
     className,
     mintState
 }) => {
-    let stateText: string;
-    if (mintState === 'Ended') {
+    let render: boolean = true;
+    let stateText: string = '';
+    if (mintState === 'NotStarted') {
+        render = false;
+    } else if (mintState === 'Ended') {
         stateText = 'ENDED';
-    } else if (mintState === 'NotStarted') {
-        stateText = 'NOT YET';
     } else if (mintState === 'WhitelistOpen') {
         stateText = 'WHITELIST';
     } else {
         stateText = 'LIVE!';
     }
 
-    return <Badge className={className}>{stateText}</Badge>;
+    return (render ? (<Badge className={className}>{stateText}</Badge>) : null);
 
 }

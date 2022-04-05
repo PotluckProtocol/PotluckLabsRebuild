@@ -17,3 +17,5 @@ export const Tab: React.FC<TabProps> = ({
         </div>
     )
 }
+
+Tab.displayName = 'Tab';

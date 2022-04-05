@@ -9,8 +9,6 @@ import { MintStateBadge } from "../../../components/MintStateBadge";
 import { ProgressBar } from "../../../components/ProgressBar";
 import { RoundedButton } from "../../../components/RoundedButton";
 import { TextFit } from "../../../components/TextFit";
-import { Network, NETWORKS } from "../../../types/Networks";
-import { abi } from "../abi";
 import useAccount from "../../../api/account/useAccount";
 import { MintPrice } from "../../../components/MintPrice";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
@@ -90,8 +88,7 @@ const PositionedNetworkIcon = styled(NetworkIcon)`
 `;
 
 export const MintProject: React.FC<MintProjectProps> = ({
-    contractAddress,
-    hideCatalogNavigationLink
+    contractAddress
 }) => {
     const account = useAccount();
     const baseInformation = useContext(ProjectBaseInformationContext)
@@ -232,11 +229,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
                     </ImageContainer>
                 </div>
             </MintingContainer>
-            {!hideCatalogNavigationLink && (
-                <BackLinkContainer className="my-8">
-                    <NavLink to={'/'}>Back to minting catalog</NavLink>
-                </BackLinkContainer>
-            )}
         </div>
     );
 }

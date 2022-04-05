@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import styled from "styled-components";
 import { Artist } from "../../../api/artists/Artist"
 import { SocialIcon, SocialIconProps } from "../../../components/SocialIcon";
@@ -31,14 +32,16 @@ export const ArtistsBio: React.FC<ArtistsBioProps> = ({
 }) => {
     return (
         <div>
-            {artists.map(artist => {
+            {artists.map((artist, index) => {
+                const isLast = index === artists.length - 1;
+                const classes = classNames({ 'mb-4': !isLast });
                 return (
-                    <div key={artist.id}>
+                    <div className={classes} key={artist.id}>
                         <ArtistName>{artist.name}</ArtistName>
                         {artist.description && (<Description>{artist.description}</Description>)}
                         <div>
                             {artist.social?.twitter && createSocialItem('twitter', artist.social.twitter)}
-                            {artist.social?.instagram && createSocialItem('twitter', artist.social.instagram)}
+                            {artist.social?.instagram && createSocialItem('instagram', artist.social.instagram)}
                         </div>
                     </div>
                 );

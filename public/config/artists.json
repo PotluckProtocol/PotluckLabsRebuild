@@ -96,5 +96,12 @@
         "social": {
             "twitter": "https://twitter.com/hexademaximal"
         }
+    },
+    {
+        "id": "kodkar",
+        "name": "A Kodkar",
+        "social": {
+            "twitter": "https://twitter.com/a_kodkar"
+        }
     }
 ]

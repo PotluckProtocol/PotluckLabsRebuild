@@ -1,10 +1,26 @@
 import { createContext, useEffect, useState } from "react";
+import { Network } from "../../types/Networks";
 import { Artist } from "../artists/Artist";
+import { resolveNetwork } from "../network/resolveNetwork";
 import { ProjectBaseInformation, ProjectBaseInformationRaw } from "./ProjectBaseInformation";
+
+export const createConfigNameIdent = (name: string, network: Network): string => {
+    return `${network.symbol.toLocaleLowerCase()}-${name.replaceAll(' ', '-')}`;
+}
+
+export const resolveIdentInfo = (baseInformation: ProjectBaseInformation): string => {
+    if (baseInformation.contractAddress) {
+        return baseInformation.contractAddress;
+    } else {
+        return createConfigNameIdent(baseInformation.name, resolveNetwork(baseInformation.network));
+    }
+}
+
+export const isContract = (contractAddressOrNameIdent: string): boolean => contractAddressOrNameIdent.startsWith('0x');
 
 export type ProjectBaseInformationContextType = {
     isInitialized: boolean;
-    getConfig(contractAddress: string): ProjectBaseInformation;
+    getConfig(contractAddressOrNameIdent: string): ProjectBaseInformation;
     getConfigs(): ProjectBaseInformation[];
 }
 
@@ -49,10 +65,16 @@ export const ProjectBaseInformationProvider: React.FC = ({ children }) => {
         getConfig();
     }, []);
 
-    const getConfig = (contractAddress: string): ProjectBaseInformation => {
-        const item = baseInformation.find(item => item.contractAddress === contractAddress);
+    const getConfig = (contractAddressOrIdentName: string): ProjectBaseInformation => {
+        const item = baseInformation.find(item => {
+            if (isContract(contractAddressOrIdentName)) {
+                return item.contractAddress === contractAddressOrIdentName
+            } else {
+                return createConfigNameIdent(item.name, resolveNetwork(item.network)) === contractAddressOrIdentName;
+            }
+        });
         if (!item) {
-            throw new Error(`Could not find base information for ${contractAddress}`);
+            throw new Error(`Could not find base information for ${contractAddressOrIdentName}`);
         }
         return item;
     }

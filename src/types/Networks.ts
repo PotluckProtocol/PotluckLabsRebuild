@@ -16,5 +16,10 @@ export const NETWORKS: Network[] = [
         symbol: 'AVAX',
         networkId: 43114,
         decimals: 18
+    }, {
+        name: 'Polygon Mainnet',
+        symbol: 'MATIC',
+        networkId: 137,
+        decimals: 18
     }
 ]

@@ -4,6 +4,7 @@ import styled, { CSSProperties } from "styled-components";
 import { useImageWidth } from "../hooks/useImageWidth";
 import useInterval from "../hooks/useInterval";
 import { useLoadMultipleImagesBackground } from "../hooks/useLoadMultipleImagesBackground";
+import { Loading } from "./Loading";
 
 const IMAGE_PADDING_PX = 16;
 
@@ -111,7 +112,12 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = (props) => {
 
 
     if (images === null || imageWidth === null) {
-        return <div>loading...</div>
+        const loadingHeight = Math.min(props.height - 20, 120);
+        return (
+            <div className="text-center flex items-center justify-center" style={{ height: props.height }}>
+                <Loading width={loadingHeight} />
+            </div>
+        );
     }
 
     const handleNext = () => {

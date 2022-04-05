@@ -24,8 +24,9 @@ export type ProjectBaseInformationRaw = {
     artistId?: string | string[];
     description?: string | string[];
     roadmapImage?: string;
+    images?: string[];
     loreAudio?: string;
-    attributions?: Array<{ name: string, link: string }>;
+    attributions?: Array<{ name: string, url: string }>;
 
     // Settings like
     hideInProjects?: boolean;

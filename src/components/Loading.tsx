@@ -13,7 +13,7 @@ const Spinner = styled.div<LoadingProps>`
         width:  ${props => `${props.width - 16}px`};
         height:  ${props => `${props.width - 16}px`};
         margin: 8px;
-        border: ${props => `${props.size} solid`};
+        border: ${props => `${props.size}px solid`};
         border-radius: 50%;
         animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         border-color: ${props => `${props.color} transparent transparent transparent`};

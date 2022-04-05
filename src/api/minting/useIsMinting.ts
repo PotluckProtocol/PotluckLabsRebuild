@@ -1,19 +1,27 @@
 import { useContext, useEffect } from "react"
+import useProjectBaseInformation from "../project-base-information/useProjectBaseInformation";
 import { MintingContext } from "./MintingContext"
 
-export const useIsMinting = (contractAddress: string): boolean | null => {
+export const useIsMinting = (contractAddressOrNameIdent: string): boolean | null => {
     const mintingContext = useContext(MintingContext);
-
+    const baseInformation = useProjectBaseInformation(contractAddressOrNameIdent);
     useEffect(() => {
         const init = async () => {
-            await mintingContext.init({
-                contractAddress,
-                liveMintingCount: false
-            });
+            if (baseInformation.contractAddress && baseInformation.mint) {
+                await mintingContext.init({
+                    contractAddress: baseInformation.contractAddress,
+                    liveMintingCount: false
+                });
+            }
         }
 
         init();
-    }, [contractAddress]);
+    }, [baseInformation.contractAddress, baseInformation.mint]);
+
+    if (!baseInformation.mint || !baseInformation.contractAddress) {
+        return false;
+    }
+
 
     if (!mintingContext || !mintingContext.isInitialized) {
         return null;

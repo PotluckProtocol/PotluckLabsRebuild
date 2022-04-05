@@ -1,6 +1,7 @@
 import textfit from 'textfit';
 import { useRef, useEffect } from "react";
 import styled from 'styled-components';
+import debounce from 'lodash/debounce';
 
 export type TextFitProps = {
     height?: number
@@ -21,27 +22,27 @@ export const TextFit: React.FC<TextFitProps> = ({ height, children, className })
     useEffect(() => {
         const timeouts: Array<ReturnType<typeof setTimeout>> = [];
 
-        if (ref.current) {
-            const fit = () => {
-                textfit(ref.current as HTMLElement, { multiLine: true });
-            }
+        const fit = () => textfit(ref.current as HTMLElement, { multiLine: true });
+        const debouncedFit = debounce(fit, 100);
 
+        if (ref.current) {
             // Really ugly hack
-            // Call fit 3 times:
-            // - Firstly immediately,
-            // - Secondly immediately in on next async tick
-            // - Thridly after 100ms async
+            // Call fit 4 times - just to be sure...
             // to be sure that fitting is done. 
             fit();
             timeouts.push(
                 setTimeout(fit, 0),
                 setTimeout(fit, 100),
-                setTimeout(fit, 500)
+                setTimeout(fit, 500),
+                setTimeout(fit, 1000)
             );
+
+            window.addEventListener('resize', debouncedFit);
         }
 
         return () => {
             timeouts.forEach(timer => clearTimeout(timer));
+            window.removeEventListener('resize', debouncedFit);
         }
 
     }, [children, ref, height]);

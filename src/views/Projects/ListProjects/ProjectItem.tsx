@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import { resolveNetwork } from "../../../api/network/resolveNetwork"
 import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
+import { resolveIdentInfo } from "../../../api/project-base-information/ProjectBaseInformationContext"
 import { NetworkIcon } from "../../../components/NetworkIcon"
 import { TextFit } from "../../../components/TextFit"
 
@@ -50,8 +51,9 @@ const ItemCountLabel = styled.div`
 export const ProjectItem: React.FC<ProjectItemProps> = ({
     baseInformation
 }) => {
+    const projectNavPart = resolveIdentInfo(baseInformation);
     return (
-        <NavLinkContainer to={`/projects/${baseInformation.contractAddress}`}>
+        <NavLinkContainer to={`/projects/${projectNavPart}`}>
             <CoverImage src={baseInformation.coverImage} />
             <PositionedNetworkIcon size={35} networkId={resolveNetwork(baseInformation.network).networkId} />
             <Content>

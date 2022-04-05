@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 import styled from "styled-components";
+import moment from 'moment';
 import { Artist } from "../../../api/artists/Artist";
 import { useIsMinting } from "../../../api/minting/useIsMinting";
 import useProjectBaseInformation from "../../../api/project-base-information/useProjectBaseInformation";
@@ -9,6 +10,7 @@ import { ImageWithPreview } from "../../../components/ImageWithPreview";
 import { Tab, Tabs } from "../../../components/Tabs"
 import { MintProjectWrapper } from "../../Minting/MintProject/MintProjectWrapper";
 import { ArtistsBio } from "./ArtistsBio";
+import { Attributions } from "./Attributions";
 
 const DEFAULT_ROADMAP_IMAGE_PATH = '/images/main_roadmap.png';
 
@@ -26,17 +28,23 @@ const Paragraph = styled.p`
     text-align: justify;
 `;
 
+const ComingSoonHeader = styled.p`
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 0 3rem;
+`;
+
 type RouteParams = {
-    contractAddress: string;
+    contractAddressOrNameIdent: string;
 }
 
 export const Project: React.FC = () => {
-    const { contractAddress } = useParams<RouteParams>();
-    const baseInformation = useProjectBaseInformation(contractAddress || '');
+    const { contractAddressOrNameIdent } = useParams<RouteParams>();
+    const baseInformation = useProjectBaseInformation(contractAddressOrNameIdent || '');
     const artistsTabVisible = !!baseInformation.artists?.length;
     const [queryParams, setQueryParams] = useSearchParams();
     const [selectedTab, setSelectedTab] = useState('');
-    const isMinting = useIsMinting(contractAddress || '');
+    const isMinting = useIsMinting(contractAddressOrNameIdent || '');
 
     useEffect(() => {
         if (queryParams.has('tab')) {
@@ -68,6 +76,27 @@ export const Project: React.FC = () => {
         return <div>Loading</div>
     }
 
+    let comingSoonHeader: ReactNode;
+    if (!isMinting && !baseInformation.contractAddress) {
+        let timePart: ReactNode = <div>Public mint coming soon!</div>;
+        if (baseInformation.releaseDate) {
+            const m = moment(baseInformation.releaseDate)
+            const strTime = `${m.utc().format('MMMM Do YYYY, h:mm A')} UTC`;
+            timePart = (
+                <div>
+                    <div>Public mint on</div>
+                    <div>{strTime}</div>
+                </div>
+            );
+        }
+
+        comingSoonHeader = (
+            <ComingSoonHeader>
+                {timePart}
+            </ComingSoonHeader>
+        );
+    }
+
     return (
         <>
             {isMinting && (
@@ -78,9 +107,12 @@ export const Project: React.FC = () => {
                     />
                 </div>
             )}
+
+            {comingSoonHeader}
+
             <div className="mb-10">
                 <ImageCarousel
-                    images={Array(8).fill(baseInformation.coverImage)}
+                    images={baseInformation.images || []}
                     height={isMinting ? 250 : 500}
                 />
             </div>
@@ -108,7 +140,11 @@ export const Project: React.FC = () => {
                         <Tab id="roadmap" header="Roadmap">
                             <ImageWithPreview src={roadmapImageUrl} />
                         </Tab>
-                        {attributionsTabVisible && (<Tab id="attributions" header="Attributions">And Attributions here</Tab>)}
+                        {attributionsTabVisible && (
+                            <Tab id="attributions" header="Attributions">
+                                <Attributions attributions={baseInformation.attributions as any} />
+                            </Tab>
+                        )}
                     </Tabs>
                 </div>
             </div>
