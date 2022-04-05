@@ -286,7 +286,7 @@
         "mint": {
             "weiCost": 800000000000000000,
             "maxPerTx": 10,
-            "mintImage": "/images/projects/deadfamily/mint.gif",
+            "mintImage": "/images/projects/deadfamilyavax/mint.gif",
             "gasLimit": 285000
         }
     },
