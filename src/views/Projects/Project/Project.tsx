@@ -111,6 +111,7 @@ export const Project: React.FC = () => {
             {comingSoonHeader}
 
             <div className="mb-10">
+                <p className="text-center mb-2">Preview pieces from the collection</p>
                 <ImageCarousel
                     images={baseInformation.images || []}
                     height={isMinting ? 250 : 500}
