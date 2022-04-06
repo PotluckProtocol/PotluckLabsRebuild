@@ -2,7 +2,8 @@ import EventEmitter from "events";
 import { Contract } from "../../types/Contracts";
 import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 
-const LIVE_MINTING_COUNT_INTERVAL_MS = 7500;
+const LIVE_MINT_STATE_INTERVAL_MS = 4000;
+const LIVE_MINTING_COUNT_INTERVAL_MS = 4000;
 
 export const WHITELIST_COUNT_CHANGED_EVENT = 'whitelistCountChanged';
 export const MINTED_COUNT_CHANGED_EVENT = 'mintedCountChanged';
@@ -12,6 +13,7 @@ export type MintState = 'NotStarted' | 'WhitelistOpen' | 'Open' | 'Ended';
 
 export type MintingContractWrapperOpts = {
     liveMintingCount?: boolean;
+    liveMintStateRefresh?: boolean;
     hasWhitelist?: boolean;
 }
 
@@ -19,6 +21,7 @@ export class MintingContractWrapper extends EventEmitter {
 
     private lastMintedSupply: number = 0;
     private liveMintingInterval: any = null;
+    private liveStateInterval: any = null;
 
     constructor(
         private contract: Contract,
@@ -171,6 +174,10 @@ export class MintingContractWrapper extends EventEmitter {
         if (this.liveMintingInterval) {
             clearInterval(this.liveMintingInterval);
         }
+
+        if (this.liveStateInterval) {
+            clearInterval(this.liveStateInterval);
+        }
     }
 
     private init() {
@@ -183,6 +190,12 @@ export class MintingContractWrapper extends EventEmitter {
             this.liveMintingInterval = setInterval(() => {
                 this.getMintedCount();
             }, LIVE_MINTING_COUNT_INTERVAL_MS);
+        }
+
+        if (!this.projectBaseInformation.mint.forceEndedState && this.opts.liveMintStateRefresh) {
+            this.liveStateInterval = setInterval(() => {
+                this.getMintState();
+            }, LIVE_MINT_STATE_INTERVAL_MS);
         }
     }
 

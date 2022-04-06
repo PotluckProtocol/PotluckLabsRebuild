@@ -99,7 +99,7 @@ export const Project: React.FC = () => {
 
     return (
         <>
-            {isMinting && (
+            {baseInformation.contractAddress && (
                 <div className="mb-10">
                     <MintProjectWrapper
                         contractAddress={baseInformation.contractAddress}

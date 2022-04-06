@@ -21,10 +21,9 @@ export const MintStateBadge: React.FC<MintStateBadgeProps> = ({
     className,
     mintState
 }) => {
-    let render: boolean = true;
     let stateText: string = '';
     if (mintState === 'NotStarted') {
-        render = false;
+        stateText = 'UPCOMING';
     } else if (mintState === 'Ended') {
         stateText = 'ENDED';
     } else if (mintState === 'WhitelistOpen') {
@@ -33,6 +32,6 @@ export const MintStateBadge: React.FC<MintStateBadgeProps> = ({
         stateText = 'LIVE!';
     }
 
-    return (render ? (<Badge className={className}>{stateText}</Badge>) : null);
+    return (<Badge className={className}>{stateText}</Badge>);
 
 }

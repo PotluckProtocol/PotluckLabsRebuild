@@ -13,6 +13,7 @@ import useAccount from "../../../api/account/useAccount";
 import { MintPrice } from "../../../components/MintPrice";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { NetworkIcon } from "../../../components/NetworkIcon";
+import moment from "moment";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -87,6 +88,22 @@ const PositionedNetworkIcon = styled(NetworkIcon)`
     position: absolute;
 `;
 
+const InfoBox = styled.div`
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+    background-color: #063323;
+`;
+
+const InfoBoxHeader = styled.h3`
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #1bf2a4;
+`;
+
+const InfoBoxContent = styled.div`
+    font-size: 0.9rem;
+    `;
+
 export const MintProject: React.FC<MintProjectProps> = ({
     contractAddress
 }) => {
@@ -111,7 +128,8 @@ export const MintProject: React.FC<MintProjectProps> = ({
             try {
                 await mintingContext.init({
                     contractAddress,
-                    liveMintingCount: true
+                    liveMintingCount: true,
+                    liveMintingState: true
                 });
             } catch (e) {
                 console.error('Error on minting init', e);
@@ -150,27 +168,39 @@ export const MintProject: React.FC<MintProjectProps> = ({
         )
     }
 
-    const { mintState, whitelistCount } = mintingContext;
+    let { mintState, whitelistCount } = mintingContext;
     const isWhitelistState = mintState === 'WhitelistOpen';
     const maxPerTx = (isWhitelistState)
         ? Math.min(whitelistCount, baseInformation.mint.maxPerTx)
         : baseInformation.mint.maxPerTx;
 
+    const soldOut = baseInformation.maxSupply <= mintingContext.mintCount;
+    const isMintableState = mintState === 'Open' || isWhitelistState;
     const isConnected = !!account;
     const wrongNetwork = network.networkId !== account?.network.id;
+
     let mintButtonText = 'Mint';
-    if (!isConnected) {
+    if (soldOut) {
+        mintButtonText = 'SOLD OUT!';
+    } else if (!isConnected) {
         mintButtonText = 'Connect wallet';
     } else if (wrongNetwork) {
         mintButtonText = 'Wrong network';
     }
 
-    const mintButtonDisabled = !isConnected || wrongNetwork || maxPerTx === 0 || mintAmount === 0 || mintingContext.isMinting;
+    const mintButtonDisabled = (
+        !isConnected ||
+        !isMintableState ||
+        wrongNetwork ||
+        maxPerTx === 0 ||
+        mintAmount === 0 ||
+        mintingContext.isMintInProgress
+    );
 
     const info: ReactNode = (
         <>
             {(isConnected && wrongNetwork) && (<p>Change your network to <b>{network.name}</b>.</p>)}
-            {(mintingContext.isMinting) && (<p>Minting in progress.</p>)}
+            {(mintingContext.isMintInProgress) && (<p>Minting in progress.</p>)}
         </>
     )
 
@@ -183,18 +213,68 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
                 <div className="grid grid-cols-1 md:flex">
                     <MintTooling className="p-4 md:p-8 pt-0 md:pt-0 order-1 md:order-none">
-                        <div className="mb-2 flex items-center">
-                            <NetworkIcon className="md:hidden inline-block mr-4" size={30} networkId={network.networkId} />
-                            <MintStateBadge mintState={mintState} className="inline-block" />
+
+                        {/* Alternative network icon for small screens */}
+                        <div className="md:hidden mb-4 flex justify-center">
+                            <NetworkIcon size={50} networkId={network.networkId} />
                         </div>
 
-                        <LabelText>Minted:</LabelText>
+                        {mintState === 'Open' && (
+                            <InfoBox className="mb-3">
+                                <InfoBoxHeader>Minting now!</InfoBoxHeader>
+                                <InfoBoxContent>
+                                    This project is open for minting.
+                                </InfoBoxContent>
+                            </InfoBox>
+                        )}
 
-                        <ProgressBar min={0} height={8} max={baseInformation.maxSupply} value={mintingContext.mintCount} />
-                        <div className="flex justify-between">
-                            <div></div>
-                            <MintCount>{mintingContext.mintCount} / {baseInformation.maxSupply}</MintCount>
-                        </div>
+                        {soldOut && (
+                            <InfoBox className="mb-3">
+                                <InfoBoxHeader>Sold out!</InfoBoxHeader>
+                                <InfoBoxContent>
+                                    This project is sold out.
+                                </InfoBoxContent>
+                            </InfoBox>
+                        )}
+
+                        {mintState === 'NotStarted' && (
+                            <InfoBox className="mb-3">
+                                <InfoBoxHeader>Launching soon!</InfoBoxHeader>
+                                {baseInformation.whitelistDate && (
+                                    <InfoBoxContent className="mb-2">
+                                        Whitelist sale starts on {`${moment(baseInformation.whitelistDate).utc().format('MMMM Do, h:mm A')} UTC`}
+                                    </InfoBoxContent>
+                                )}
+                                <InfoBoxContent>
+                                    Public sale starts on {`${moment(baseInformation.releaseDate).utc().format('MMMM Do, h:mm A')} UTC`}
+                                </InfoBoxContent>
+                            </InfoBox>
+                        )}
+
+                        {mintState === 'WhitelistOpen' && (
+                            <InfoBox className="mb-3">
+                                <InfoBoxHeader>Whitelist sale is open!</InfoBoxHeader>
+                                <InfoBoxContent>
+                                    {isConnected
+                                        ? <>This wallet is eligible for <b>{whitelistCount}</b> whitelist mints.</>
+                                        : <>Connect your wallet to see your eligibility for the whitelist.</>}
+                                </InfoBoxContent>
+                                <InfoBoxContent className="mt-2">
+                                    Public sale starts on {`${moment(baseInformation.releaseDate).utc().format('MMMM Do, h:mm A')} UTC`}
+                                </InfoBoxContent>
+                            </InfoBox>
+                        )}
+
+                        {mintState !== 'NotStarted' && (
+                            <>
+                                <LabelText>Minted:</LabelText>
+                                <ProgressBar min={0} height={8} max={baseInformation.maxSupply} value={mintingContext.mintCount} />
+                                <div className="flex justify-between">
+                                    <div />
+                                    <MintCount>{mintingContext.mintCount} / {baseInformation.maxSupply}</MintCount>
+                                </div>
+                            </>
+                        )}
 
                         <LabelText>Price:</LabelText>
                         <StyledMintPrice
@@ -209,12 +289,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
                             <div className="mt-3">Price in total: {getCost(mintAmount)}</div>
                         </div>
 
-                        {isWhitelistState && (
-                            <div className="mt-3">
-                                <div className="mt-3">The wallet is eligible for <b>{whitelistCount}</b> whitelist mints.</div>
-                            </div>
-                        )}
-
                         <div className="mt-6 md:hidden">
                             <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
                             <div>{info}</div>
@@ -225,10 +299,10 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <PositionedNetworkIcon className="hidden md:inline-block" size={40} networkId={network.networkId} />
                         <Image className="w-full md:w-auto rounded-xl" src={baseInformation.mint?.mintImage} />
                         <StyledRoundedButton className="hidden md:inline-block" disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
-                        <div className="hidden md:inline-block">{info}</div>
+                        <div className="hidden md:block">{info}</div>
                     </ImageContainer>
                 </div>
-            </MintingContainer>
-        </div>
+            </MintingContainer >
+        </div >
     );
 }

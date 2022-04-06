@@ -12,12 +12,13 @@ import { abi } from "../../views/Minting/abi";
 export type InitMinting = {
     contractAddress: string;
     liveMintingCount?: boolean;
+    liveMintingState?: boolean;
 }
 
 export type MintingContextType = {
     isInitialized: boolean;
     contractAddress: string;
-    isMinting: boolean;
+    isMintInProgress: boolean;
     mintCount: number;
     mintState: MintState;
     whitelistCount: number;
@@ -83,8 +84,7 @@ export const MintingProvider: React.FC = ({ children }) => {
     const init = async (opts: InitMinting) => {
         const baseInformation = baseInformationContext.getConfig(opts.contractAddress) as ProjectBaseInformation;
 
-        const { web3, isPublic } = web3Context.getWeb3(resolveNetwork(baseInformation.network).networkId);
-        console.log('PUBLIC', isPublic);
+        const { web3 } = web3Context.getWeb3(resolveNetwork(baseInformation.network).networkId);
 
         let mintingAbi = abi;
         /**
@@ -121,6 +121,7 @@ export const MintingProvider: React.FC = ({ children }) => {
 
         const mintingWrapper = new MintingContractWrapper(contract, baseInformation, {
             liveMintingCount: opts.liveMintingCount,
+            liveMintStateRefresh: opts.liveMintingState,
             hasWhitelist
         });
 
@@ -161,7 +162,7 @@ export const MintingProvider: React.FC = ({ children }) => {
         mintCount,
         mintState,
         whitelistCount,
-        isMinting
+        isMintInProgress: isMinting
     }
 
     return (

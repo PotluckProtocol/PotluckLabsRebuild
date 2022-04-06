@@ -491,8 +491,8 @@
     },
     {
         "name": "Revolutionary Apes",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "RVAP",
+        "contractAddress": "0xE3763f557933B3396795ad3920Dd7D191359CcEF",
         "coverImage": "/images/projects/revolutionaryapes/cover.png",
         "network": "FTM",
         "artistId": [
@@ -500,6 +500,7 @@
             "kodkar"
         ],
         "releaseDate": "2022-04-08T19:00:00.000Z",
+        "whitelistDate": "2022-04-07T19:00:00.000Z",
         "description": "Humanity through escapism has turned to psychedelic drugs. Humanity was driven to endangerment through constant gentrification, racism, war, and inequality. In parallel, Apes have broken free of captivity and have reclaimed their position in nature. Through use of Human-made tools/devices, Apes have developed higher cognitive abilities. It would seem that humanity -- tripping off its disposition, has now adopted the mentality of apes. Whereas the society of apes mirrors the modern world of humanity. Though with this adoption of societal values, perhaps ape-kind will also adopt human viciousness and prejudice",
         "maxSupply": 1080,
         "roadmapImage": "/images/projects/revolutionaryapes/roadmap.png",

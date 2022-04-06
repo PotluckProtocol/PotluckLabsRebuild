@@ -18,7 +18,8 @@ export type ProjectBaseInformationRaw = {
     coverImage: string;
     network: 'FTM' | 'AVAX' | 'MATIC';
     maxSupply: number;
-    releaseDate?: string;
+    releaseDate: string;
+    whitelistDate?: string;
 
     // Specific information
     artistId?: string | string[];

@@ -138,7 +138,9 @@ export const MintingItem: React.FC<MintingItemProps> = ({
             )}
             <StyledHeader className="flex items-center" height={100}>{baseInformation.name}</StyledHeader>
             <StyledImageContainer className="mb-2">
-                <StyledMintStateBadge mintState={minting.mintState} />
+                {minting.mintState !== 'NotStarted' && (
+                    <StyledMintStateBadge mintState={minting.mintState} />
+                )}
                 <StyledImage src={baseInformation.mint?.mintImage} />
                 <PositionedNetworkIcon networkId={network.networkId} size={35} />
             </StyledImageContainer>

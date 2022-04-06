@@ -40,9 +40,6 @@ export const Tabs: React.FC<TabsProps> = ({
     className,
     children
 }) => {
-
-    console.log(children);
-
     const tabChildren = (children as TabReactElement[]).filter(child => child && child.type.displayName === 'Tab');
 
     let activeTab = activeTabId;
