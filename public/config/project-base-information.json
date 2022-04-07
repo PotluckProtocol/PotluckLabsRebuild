@@ -368,7 +368,7 @@
     {
         "name": "Creatures of the Cave 2",
         "symbol": "COTCTWO",
-        "contractAddress": "0xDbD1D1f5E81c39c5b7931A8dFfDB78e260bF288a",
+        "contractAddress": "0x4Cc85D7B4fA064bF609741C822D2D1244c848c9C",
         "coverImage": "/images/projects/cotc2avax/cover.jpg",
         "network": "AVAX",
         "artistId": [
@@ -494,6 +494,7 @@
         "symbol": "RVAP",
         "contractAddress": "0xE3763f557933B3396795ad3920Dd7D191359CcEF",
         "coverImage": "/images/projects/revolutionaryapes/cover.png",
+        "loreAudio": "/images/projects/revolutionaryapes/Revolutionary_Apes.mp3",
         "network": "FTM",
         "artistId": [
             "shplarg",
