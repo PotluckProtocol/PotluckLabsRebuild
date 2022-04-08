@@ -3,6 +3,7 @@ import { useContext, useState } from "react"
 import { createSearchParams, useSearchParams } from "react-router-dom";
 import Select from 'react-select';
 import styled from "styled-components";
+import { MintingProvider } from "../../../api/minting/MintingContext";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation";
 import { ProjectBaseInformationContext } from "../../../api/project-base-information/ProjectBaseInformationContext"
@@ -193,7 +194,9 @@ export const ListProjects: React.FC = () => {
                         {catItem.title && (<CategoryTitle className="mb-4">{catItem.title}</CategoryTitle>)}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {catItem.projects.map((project) => (
-                                <ProjectItem key={project.contractAddress || project.name} baseInformation={project} />
+                                <MintingProvider key={project.contractAddress || project.name}>
+                                    <ProjectItem baseInformation={project} />
+                                </MintingProvider>
                             ))}
                         </div>
                     </div>

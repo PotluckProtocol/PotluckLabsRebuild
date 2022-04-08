@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { MintingProvider } from "../../../api/minting/MintingContext";
-import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { ProjectBaseInformationContext } from "../../../api/project-base-information/ProjectBaseInformationContext";
-import { NETWORKS } from "../../../types/Networks";
 import { MintingItem } from "./MintingItem";
 
 const PageHeader = styled.h1`
