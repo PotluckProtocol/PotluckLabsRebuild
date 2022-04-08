@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import useAccount from "../../../api/account/useAccount"
 import { MintingContext } from "../../../api/minting/MintingContext"
+import { MintState } from "../../../api/minting/MintingContractWrapper"
 import { useMinting } from "../../../api/minting/useMinting"
 import { resolveNetwork } from "../../../api/network/resolveNetwork"
 import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
@@ -11,7 +12,8 @@ import { NetworkIcon } from "../../../components/NetworkIcon"
 import { TextFit } from "../../../components/TextFit"
 
 export type ProjectItemProps = {
-    baseInformation: ProjectBaseInformation
+    baseInformation: ProjectBaseInformation;
+    onMintStateResolved: (contractAddress: string, isCurrentlyMinting: boolean) => void;
 }
 
 const NavLinkContainer = styled(NavLink)`
@@ -68,10 +70,19 @@ const ItemCountLabel = styled.div`
 `;
 
 export const ProjectItem: React.FC<ProjectItemProps> = ({
-    baseInformation
+    baseInformation,
+    onMintStateResolved
 }) => {
     const projectNavPart = resolveIdentInfo(baseInformation);
     const { isInitialized: mintingIsInitialized, mintingContext } = useMinting(baseInformation);
+    const mintState = mintingContext?.mintState;
+
+    useEffect(() => {
+        const mintStateOpen = mintingContext && (mintingContext.mintState === 'WhitelistOpen' || mintingContext.mintState === 'Open');
+        if (mintingIsInitialized && baseInformation.contractAddress && mintStateOpen) {
+            onMintStateResolved(baseInformation.contractAddress, true);
+        }
+    }, [mintingIsInitialized, mintState]);
 
     if (!mintingIsInitialized) {
         return <>'loading'</>;

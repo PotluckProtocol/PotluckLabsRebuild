@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import { useContext, useState } from "react"
 import { createSearchParams, useSearchParams } from "react-router-dom";
 import Select from 'react-select';
@@ -69,6 +68,9 @@ const CATEGORY_MAP: { [key: string]: { label: string } } = {
     },
     chain: {
         label: 'Chain'
+    },
+    'minting-status': {
+        label: 'Minting Status'
     }
 }
 
@@ -109,6 +111,7 @@ const CategoryTitle = styled.h3`
 `;
 
 export const ListProjects: React.FC = () => {
+    const [stillMinting, setStillMinting] = useState<string[]>([]);
     const [queryParams, setQueryParams] = useSearchParams();
     const [activeCategoryId, setActiveCategoryId] = useState<string>(queryParams.has('cat') ? queryParams.get('cat') as string : '-');
     const [activeSortId, setActiveSortId] = useState<Sort>(queryParams.has('sort') ? queryParams.get('sort') as Sort : 'release-date-desc');
@@ -134,6 +137,12 @@ export const ListProjects: React.FC = () => {
         setQueryParams(searchParams);
     }
 
+    const handleProjectItemMintStateResolved = (contractAddress: string, isStillMinting: boolean) => {
+        if (isStillMinting) {
+            setStillMinting([...stillMinting, contractAddress]);
+        }
+    }
+
     const activeSorter = SORT_MAP[activeSortId];
 
     const allProjects = baseInformationContext
@@ -156,6 +165,15 @@ export const ListProjects: React.FC = () => {
                 });
             }
         });
+    } else if (activeCategoryId === 'minting-status') {
+        categorizedItems.push({
+            title: 'Currently minting',
+            projects: sortedProjects.filter(project => stillMinting.includes(project.contractAddress))
+        })
+        categorizedItems.push({
+            title: 'Other projects',
+            projects: sortedProjects.filter(project => !stillMinting.includes(project.contractAddress))
+        })
     } else {
         categorizedItems.push({
             title: null,
@@ -195,7 +213,10 @@ export const ListProjects: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {catItem.projects.map((project) => (
                                 <MintingProvider key={project.contractAddress || project.name}>
-                                    <ProjectItem baseInformation={project} />
+                                    <ProjectItem
+                                        baseInformation={project}
+                                        onMintStateResolved={handleProjectItemMintStateResolved}
+                                    />
                                 </MintingProvider>
                             ))}
                         </div>
