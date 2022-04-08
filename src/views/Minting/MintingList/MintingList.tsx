@@ -17,22 +17,14 @@ const NetworkHeader = styled.h2`
     font-weight: 800;
 `;
 
-const todayOrInFuture = (dateStr: string): boolean => {
-    const date = new Date(dateStr);
-    const now = new Date();
-
-    date.setHours(0, 0, 0, 0);
-    now.setHours(0, 0, 0, 0);
-
-    return date.valueOf() > now.valueOf();
-}
-
 export const MintingList: React.FC = () => {
     const configs = useContext(ProjectBaseInformationContext).getConfigs();
     const allMinting = configs.filter(item => item.mint && !item.mint.forceEndedState);
 
-    const upcomingMints = allMinting.filter(item => item.releaseDate && todayOrInFuture(item.releaseDate));
-    const nowMinting = allMinting.filter(item => item.releaseDate && !todayOrInFuture(item.releaseDate));
+    const now = Date.now();
+
+    const upcomingMints = allMinting.filter(item => item.releaseDate && new Date(item.releaseDate).valueOf() > now);
+    const nowMinting = allMinting.filter(item => item.releaseDate && new Date(item.releaseDate).valueOf() <= now);
 
     return (
         <>
