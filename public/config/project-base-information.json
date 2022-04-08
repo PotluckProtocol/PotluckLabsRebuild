@@ -119,6 +119,25 @@
         ]
     },
     {
+        "name": "Bot Kid Llamas",
+        "symbol": "BKLA",
+        "contractAddress": "0x05C59236d4F0EEB315ed96ee7B411fe5A6F9De13",
+        "coverImage": "/images/projects/botkidllamas/cover.png",
+        "network": "FTM",
+        "artistId": "botboy",
+        "releaseDate": "2022-02-03",
+        "description": [
+            "820 Bot Kid Llamas have arrived on the Fantom Network.",
+            "Bot Kid Llamas were aidropped for the owners of Bot Squad Llamas in ratio of 1:1."
+        ],
+        "maxSupply": 820,
+        "images": [
+            "/images/projects/botkidllamas/image01.png",
+            "/images/projects/botkidllamas/image02.png",
+            "/images/projects/botkidllamas/image03.png"
+        ]
+    },
+    {
         "name": "Goddess of the Cave",
         "symbol": "GCOTC",
         "contractAddress": "0x6D312E9B304D05DA5CAc459b2FcC2CCaBBaeE757",
