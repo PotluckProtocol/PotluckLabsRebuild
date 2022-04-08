@@ -495,6 +495,48 @@
         }
     },
     {
+        "name": "Super Serum Creatures",
+        "symbol": "PLSS",
+        "contractAddress": "0xBbF352cEa87A49aeF9d5A5dDA16de2240814732a",
+        "coverImage": "/images/projects/cotc2supercreaturesftm/cover.png",
+        "network": "FTM",
+        "artistId": [
+            "nimbus",
+            "hex"
+        ],
+        "releaseDate": "2022-04-02",
+        "description": "200 Creatures have been exposed to dangerous Super Serums. What is this mayhem it has caused??",
+        "maxSupply": 200,
+        "roadmapImage": "/images/projects/cotc2/roadmap.png",
+        "images": [
+            "/images/projects/cotc2supercreaturesftm/image01.png",
+            "/images/projects/cotc2supercreaturesftm/image02.png",
+            "/images/projects/cotc2supercreaturesftm/image03.png",
+            "/images/projects/cotc2supercreaturesftm/image04.png"
+        ]
+    },
+    {
+        "name": "Super Serum Creatures",
+        "symbol": "PLSS",
+        "contractAddress": "0xb22C5f6e91B073ECC321Cfa7C01e1e2b56564ab2",
+        "coverImage": "/images/projects/cotc2supercreaturesavax/cover.png",
+        "network": "AVAX",
+        "artistId": [
+            "nimbus",
+            "hex"
+        ],
+        "releaseDate": "2022-04-02",
+        "description": "100 Creatures have been exposed to dangerous Super Serums. What is this mayhem it has caused??",
+        "maxSupply": 100,
+        "roadmapImage": "/images/projects/cotc2/roadmap.png",
+        "images": [
+            "/images/projects/cotc2supercreaturesavax/image01.png",
+            "/images/projects/cotc2supercreaturesavax/image02.png",
+            "/images/projects/cotc2supercreaturesavax/image03.png",
+            "/images/projects/cotc2supercreaturesavax/image04.png"
+        ]
+    },
+    {
         "name": "Revolutionary Apes",
         "symbol": "RVAP",
         "contractAddress": "0xE3763f557933B3396795ad3920Dd7D191359CcEF",
