@@ -14,7 +14,12 @@
             "/images/projects/cotc/image01.png",
             "/images/projects/cotc/image02.png",
             "/images/projects/cotc/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "creaturesofthecave"
+            }
+        }
     },
     {
         "name": "Potluck Pigs",
@@ -30,7 +35,12 @@
             "/images/projects/potluckpigs/image01.png",
             "/images/projects/potluckpigs/image02.png",
             "/images/projects/potluckpigs/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "potluckpigs"
+            }
+        }
     },
     {
         "name": "Bot Squad Llamas",
@@ -46,7 +56,12 @@
             "/images/projects/botsquadllamas/image01.png",
             "/images/projects/botsquadllamas/image02.png",
             "/images/projects/botsquadllamas/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "botsquadllamas"
+            }
+        }
     },
     {
         "name": "Psychedelic R-Evolution",
@@ -63,7 +78,12 @@
             "/images/projects/psychedelicrevolution/image01.png",
             "/images/projects/psychedelicrevolution/image02.png",
             "/images/projects/psychedelicrevolution/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "psychedelicrevolution"
+            }
+        }
     },
     {
         "name": "Strange Ones",
@@ -79,7 +99,12 @@
             "/images/projects/strangeones/image01.png",
             "/images/projects/strangeones/image02.png",
             "/images/projects/strangeones/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "strangeones"
+            }
+        }
     },
     {
         "name": "Engraved Spirits",
@@ -98,7 +123,12 @@
             "/images/projects/engravedspirits/image01.png",
             "/images/projects/engravedspirits/image02.png",
             "/images/projects/engravedspirits/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "engravedspirits"
+            }
+        }
     },
     {
         "name": "Astrokid",
@@ -116,7 +146,12 @@
             "/images/projects/astrokidftm/image02.png",
             "/images/projects/astrokidftm/image03.png",
             "/images/projects/astrokidftm/image04.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "astrokid"
+            }
+        }
     },
     {
         "name": "Bot Kid Llamas",
@@ -135,7 +170,12 @@
             "/images/projects/botkidllamas/image01.png",
             "/images/projects/botkidllamas/image02.png",
             "/images/projects/botkidllamas/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "botkidllamas"
+            }
+        }
     },
     {
         "name": "Goddess of the Cave",
@@ -155,7 +195,12 @@
             "/images/projects/goddessofthecave/image01.png",
             "/images/projects/goddessofthecave/image02.png",
             "/images/projects/goddessofthecave/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "goddessofthecave"
+            }
+        }
     },
     {
         "name": "Rat Pack Mafia",
@@ -175,7 +220,12 @@
             "/images/projects/ratpackmafia/image01.png",
             "/images/projects/ratpackmafia/image02.png",
             "/images/projects/ratpackmafia/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "ratpack"
+            }
+        }
     },
     {
         "name": "Potluck Realm Orcs",
@@ -191,7 +241,12 @@
             "/images/projects/potluckrealmorcs/image01.png",
             "/images/projects/potluckrealmorcs/image02.png",
             "/images/projects/potluckrealmorcs/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "potluckrealmorcs"
+            }
+        }
     },
     {
         "name": "Astrokid",
@@ -209,7 +264,12 @@
             "/images/projects/astrokidavax/image02.png",
             "/images/projects/astrokidavax/image03.png",
             "/images/projects/astrokidavax/image04.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "astrokidavax"
+            }
+        }
     },
     {
         "name": "COTC2 Serums",
@@ -226,6 +286,11 @@
         "images": [
             "/images/projects/cotc2serumftm/serum.png"
         ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "creaturesofthecaveserum"
+            }
+        },
         "mutate": {
             "targetContractAddress": "0xDbD1D1f5E81c39c5b7931A8dFfDB78e260bF288a",
             "approveGasLimit": 75000,
@@ -251,7 +316,12 @@
             "/images/projects/cotc2ftm/image01.png",
             "/images/projects/cotc2ftm/image02.png",
             "/images/projects/cotc2ftm/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "creaturesofthecave2"
+            }
+        }
     },
     {
         "name": "COTC2 Super Serums",
@@ -267,6 +337,11 @@
         "images": [
             "/images/projects/cotc2superserumftm/serum.png"
         ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "creaturesofthecavesuperserum"
+            }
+        },
         "overrideIpfsGateway": "https://potlucklabs.mypinata.cloud/ipfs/",
         "mutate": {
             "targetContractAddress": "0xBbF352cEa87A49aeF9d5A5dDA16de2240814732a",
@@ -290,7 +365,12 @@
             "/images/projects/deadfamilyftm/image01.png",
             "/images/projects/deadfamilyftm/image02.png",
             "/images/projects/deadfamilyftm/image03.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "deadfamily"
+            }
+        }
     },
     {
         "name": "Dead Family",
@@ -308,6 +388,11 @@
             "/images/projects/deadfamilyavax/image02.png",
             "/images/projects/deadfamilyavax/image03.png"
         ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "deadfamilyavax"
+            }
+        },
         "mint": {
             "weiCost": 800000000000000000,
             "maxPerTx": 10,
@@ -331,7 +416,12 @@
             "/images/projects/astrokidmatic/image02.png",
             "/images/projects/astrokidmatic/image03.png",
             "/images/projects/astrokidmatic/image04.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "astrokidmatic"
+            }
+        }
     },
     {
         "name": "Strange Pigs",
@@ -352,6 +442,11 @@
             "/images/projects/strangepigs/image02.png",
             "/images/projects/strangepigs/image03.png"
         ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "strangepigs"
+            }
+        },
         "artistId": "slicedatup",
         "mint": {
             "weiCost": 35000000000000000000,
@@ -453,6 +548,11 @@
             "/images/projects/oldblood/image03.png",
             "/images/projects/oldblood/image04.png"
         ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "oldbloodofthecave"
+            }
+        },
         "attributions": [
             {
                 "url": "https://sketchfab.com/3d-models/lobster-3ab14e5ce84141cda62c3405d8086157",
@@ -533,7 +633,12 @@
             "/images/projects/cotc2supercreaturesftm/image02.png",
             "/images/projects/cotc2supercreaturesftm/image03.png",
             "/images/projects/cotc2supercreaturesftm/image04.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "cotcsscreatures"
+            }
+        }
     },
     {
         "name": "Super Serum Creatures",
@@ -554,7 +659,12 @@
             "/images/projects/cotc2supercreaturesavax/image02.png",
             "/images/projects/cotc2supercreaturesavax/image03.png",
             "/images/projects/cotc2supercreaturesavax/image04.png"
-        ]
+        ],
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "cotcsscreaturesavax"
+            }
+        }
     },
     {
         "name": "Revolutionary Apes",
@@ -577,6 +687,9 @@
             "/images/projects/revolutionaryapes/image02.png",
             "/images/projects/revolutionaryapes/image03.png"
         ],
+        "secondaryMarketplace": {
+            "NFTKey": {}
+        },
         "mint": {
             "gasLimit": 285000,
             "maxPerTx": 10,

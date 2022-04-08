@@ -33,6 +33,12 @@ export type ProjectBaseInformationRaw = {
     hideInProjects?: boolean;
     overrideIpfsGateway?: string;
 
+    secondaryMarketplace?: {
+        NFTKey?: {
+            collectionUrlPart?: string;
+        }
+    }
+
     // Minting if any
     mint?: {
         weiCost: number;

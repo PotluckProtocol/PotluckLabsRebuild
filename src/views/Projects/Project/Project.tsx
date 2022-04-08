@@ -12,6 +12,7 @@ import { MintProjectWrapper } from "../../Minting/MintProject/MintProjectWrapper
 import { ArtistsBio } from "./ArtistsBio";
 import { Attributions } from "./Attributions";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
+import { SecMarketLink } from "./SecMarketLink";
 
 const DEFAULT_ROADMAP_IMAGE_PATH = '/images/main_roadmap.png';
 
@@ -125,6 +126,18 @@ export const Project: React.FC = () => {
 
     const { blockchainExplorer } = resolveNetwork(baseInformation.network);
     const showBlockchainExplorerLink = !!baseInformation.contractAddress;
+    const showSecondaryLink = !!baseInformation.secondaryMarketplace?.NFTKey;
+
+    let secondaryLink: ReactNode;
+    if (showSecondaryLink) {
+        if (baseInformation.secondaryMarketplace?.NFTKey) {
+            secondaryLink = (
+                <SecMarketLink nftKey={baseInformation.secondaryMarketplace.NFTKey}>
+                    <ExternalButton>NFTKey</ExternalButton>
+                </SecMarketLink>
+            )
+        }
+    }
 
     return (
         <>
@@ -154,13 +167,14 @@ export const Project: React.FC = () => {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12">
                 <div>
                     { /* Section for external links (explorer, marketlace etc) */}
-                    {showBlockchainExplorerLink && (
+                    {(showBlockchainExplorerLink || showSecondaryLink) && (
                         <div className="flex gap-4 mb-4">
                             {showBlockchainExplorerLink && (
                                 <a href={fixUrl(blockchainExplorer.url, `address/${baseInformation.contractAddress}`)} target="_blank">
                                     <ExternalButton>{blockchainExplorer.name}</ExternalButton>
                                 </a>
                             )}
+                            {secondaryLink}
                         </div>
                     )}
 

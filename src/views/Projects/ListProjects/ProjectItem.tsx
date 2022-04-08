@@ -85,7 +85,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
     }, [mintingIsInitialized, mintState]);
 
     if (!mintingIsInitialized) {
-        return <>'loading'</>;
+        return null;
     }
 
     const showMintingCount = (
