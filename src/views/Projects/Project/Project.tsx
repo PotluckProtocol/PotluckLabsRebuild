@@ -11,6 +11,7 @@ import { Tab, Tabs } from "../../../components/Tabs"
 import { MintProjectWrapper } from "../../Minting/MintProject/MintProjectWrapper";
 import { ArtistsBio } from "./ArtistsBio";
 import { Attributions } from "./Attributions";
+import { resolveNetwork } from "../../../api/network/resolveNetwork";
 
 const DEFAULT_ROADMAP_IMAGE_PATH = '/images/main_roadmap.png';
 
@@ -34,6 +35,15 @@ const ComingSoonHeader = styled.p`
     margin: 0 0 3rem;
 `;
 
+const ExternalButton = styled.button`
+    border: 1px solid #1bf2a4;
+    background: none;
+    color:#1bf2a4;
+    font-size: 1rem;
+    padding: .25rem .5rem;
+    border-radius: .5rem;
+`;
+
 type RouteParams = {
     contractAddressOrNameIdent: string;
 }
@@ -46,6 +56,12 @@ const getMiddleIndex = (count: number): number | undefined => {
     } else {
         return Math.floor(count / 2) - 1
     }
+}
+
+const fixUrl = (url: string, path: string): string => {
+    url = url.endsWith('/') ? url : `${url}/`;
+    path = path.startsWith('/') ? path.substring(1) : path;
+    return url + path;
 }
 
 export const Project: React.FC = () => {
@@ -107,6 +123,9 @@ export const Project: React.FC = () => {
         );
     }
 
+    const { blockchainExplorer } = resolveNetwork(baseInformation.network);
+    const showBlockchainExplorerLink = !!baseInformation.contractAddress;
+
     return (
         <>
             {baseInformation.contractAddress && (
@@ -134,6 +153,17 @@ export const Project: React.FC = () => {
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12">
                 <div>
+                    { /* Section for external links (explorer, marketlace etc) */}
+                    {showBlockchainExplorerLink && (
+                        <div className="flex gap-4 mb-4">
+                            {showBlockchainExplorerLink && (
+                                <a href={fixUrl(blockchainExplorer.url, `address/${baseInformation.contractAddress}`)} target="_blank">
+                                    <ExternalButton>{blockchainExplorer.name}</ExternalButton>
+                                </a>
+                            )}
+                        </div>
+                    )}
+
                     {baseInformation.loreAudio && (
                         <div className="mb-6">
                             <audio controls>
