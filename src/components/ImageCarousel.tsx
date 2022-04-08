@@ -12,6 +12,7 @@ export type ImageCarouselProps = {
     images: string[];
     height: number;
     changeImageAfterMs?: number;
+    startFromIndex?: number;
 }
 
 const LookupWindow = styled.div`
@@ -67,7 +68,7 @@ const Image = styled.img<ImageProps>`
 
 export const ImageCarousel: React.FC<ImageCarouselProps> = (props) => {
 
-    const [middleImageIndex, setMiddleImageIndex] = useState(0);
+    const [middleImageIndex, setMiddleImageIndex] = useState(typeof props.startFromIndex === 'number' ? props.startFromIndex : 0);
     const [containerWidth, setContainerWidth] = useState<number | null>(null);
     const containerRef = useRef(null);
     const images = useLoadMultipleImagesBackground(props.images);

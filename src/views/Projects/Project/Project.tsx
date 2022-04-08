@@ -38,6 +38,16 @@ type RouteParams = {
     contractAddressOrNameIdent: string;
 }
 
+const getMiddleIndex = (count: number): number | undefined => {
+    if (count === 0) {
+        return undefined;
+    } else if (count === 1 || count === 2) {
+        return 0;
+    } else {
+        return Math.floor(count / 2) - 1
+    }
+}
+
 export const Project: React.FC = () => {
     const { contractAddressOrNameIdent } = useParams<RouteParams>();
     const baseInformation = useProjectBaseInformation(contractAddressOrNameIdent || '');
@@ -114,7 +124,9 @@ export const Project: React.FC = () => {
                 <p className="text-center mb-2">Preview pieces from the collection</p>
                 <ImageCarousel
                     images={baseInformation.images || []}
+                    startFromIndex={getMiddleIndex(baseInformation.images?.length || 0)}
                     height={isMinting ? 250 : 500}
+                    changeImageAfterMs={5000}
                 />
             </div>
 
