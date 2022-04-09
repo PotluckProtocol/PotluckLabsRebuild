@@ -242,7 +242,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                                 <InfoBoxHeader>Launching soon!</InfoBoxHeader>
                                 {baseInformation.whitelistDate && (
                                     <InfoBoxContent className="mb-2">
-                                        Whitelist sale starts on {`${moment(baseInformation.whitelistDate).utc().format('MMMM Do, h:mm A')} UTC`}
+                                        Whitelist presale starts on {`${moment(baseInformation.whitelistDate).utc().format('MMMM Do, h:mm A')} UTC`}
                                     </InfoBoxContent>
                                 )}
                                 <InfoBoxContent>
@@ -256,8 +256,8 @@ export const MintProject: React.FC<MintProjectProps> = ({
                                 <InfoBoxHeader>Whitelist sale is open!</InfoBoxHeader>
                                 <InfoBoxContent>
                                     {isConnected
-                                        ? <>This wallet is eligible for <b>{whitelistCount}</b> whitelist mints.</>
-                                        : <>Connect your wallet to see your eligibility for the whitelist.</>}
+                                        ? <>This wallet is eligible for <b>{whitelistCount}</b> whitelisted presale spots.</>
+                                        : <>Connect your wallet to see your eligibility for the presale whitelist.</>}
                                 </InfoBoxContent>
                                 <InfoBoxContent className="mt-2">
                                     Public sale starts on {`${moment(baseInformation.releaseDate).utc().format('MMMM Do, h:mm A')} UTC`}
