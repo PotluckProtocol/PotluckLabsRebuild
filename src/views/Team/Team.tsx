@@ -7,7 +7,7 @@ import { Member, MemberProps } from "./Member"
 const MEMBERS: MemberProps[] = [{
     name: 'Tinfoil Realist',
     image: '/images/team/TinfoilRealist.png',
-    twitterUrl: 'https://twitter.com/TinFoilRealist'
+    twitterUrl: 'https://twitter.com/TinFoilRealist_'
 }, {
     name: 'True Voodoo',
     image: '/images/team/TrueVoodoo.png',
