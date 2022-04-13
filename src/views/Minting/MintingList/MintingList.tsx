@@ -32,7 +32,7 @@ export const MintingList: React.FC = () => {
                     <div className="mb-6">
                         {upcomingMints.map((item, index) => {
                             return (
-                                <div key={index}>
+                                <div key={index} className='mx-auto sm:mx-0'>
                                     <MintingProvider>
                                         <MintingItem baseInformation={item} />
                                     </MintingProvider>
@@ -48,7 +48,7 @@ export const MintingList: React.FC = () => {
             <div className="flex flex-wrap gap-8 mb-8">
                 {nowMinting.map((item, index) => {
                     return (
-                        <div key={index}>
+                        <div key={index} className='mx-auto sm:mx-0'>
                             <MintingProvider>
                                 <MintingItem baseInformation={item} />
                             </MintingProvider>
