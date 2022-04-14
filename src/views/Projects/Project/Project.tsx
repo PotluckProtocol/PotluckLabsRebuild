@@ -71,6 +71,7 @@ export const Project: React.FC = () => {
     const artistsTabVisible = !!baseInformation.artists?.length;
     const [queryParams, setQueryParams] = useSearchParams();
     const [selectedTab, setSelectedTab] = useState('');
+
     const isMinting = useIsMinting(contractAddressOrNameIdent || '');
 
     useEffect(() => {
@@ -145,22 +146,23 @@ export const Project: React.FC = () => {
                 <div className="mb-10">
                     <MintProjectWrapper
                         contractAddress={baseInformation.contractAddress}
-                        embedded={true}
                     />
                 </div>
             )}
 
             {comingSoonHeader}
 
-            <div className="mb-10">
-                <p className="text-center mb-2">Preview pieces from the collection</p>
-                <ImageCarousel
-                    images={baseInformation.images || []}
-                    startFromIndex={getMiddleIndex(baseInformation.images?.length || 0)}
-                    height={isMinting ? 250 : 500}
-                    changeImageAfterMs={5000}
-                />
-            </div>
+            {(baseInformation.images || []).length > 0 && (
+                <div className="mb-10">
+                    <p className="text-center mb-2">Preview pieces from the collection</p>
+                    <ImageCarousel
+                        images={baseInformation.images || []}
+                        startFromIndex={getMiddleIndex(baseInformation.images?.length || 0)}
+                        height={isMinting ? 250 : 500}
+                        changeImageAfterMs={5000}
+                    />
+                </div>
+            )}
 
             <Title>{baseInformation.name}</Title>
 

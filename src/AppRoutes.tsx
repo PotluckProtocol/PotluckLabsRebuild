@@ -11,8 +11,6 @@ export const AppRoutes: React.FC = () => {
     return (
         <Routes>
             <Route path="" element={<MintingList />} />
-            <Route path="minting/:contractAddress" element={<MintProjectWrapper />} />
-            {/*     <Route path="minting" element={<MintingList />} /> */}
             <Route path="projects" element={<ListProjects />} />
             <Route path="projects/:contractAddressOrNameIdent" element={<MintingProvider><Project /></MintingProvider>} />
             <Route path="team" element={<Team />} />

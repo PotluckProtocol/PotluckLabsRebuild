@@ -23,7 +23,8 @@ export type MintingContextType = {
     mintState: MintState;
     whitelistCount: number;
     init: (opts: InitMinting) => Promise<void>;
-    mint: (amount: number) => Promise<boolean>;
+    mint: (amount: number) => Promise<{ succeed: boolean, tokenIds?: number[] }>;
+    fetchImageUrls: (tokenIds: number[]) => Promise<string[]>;
 }
 
 export const MintingContext = createContext<MintingContextType>(null as any);
@@ -131,7 +132,7 @@ export const MintingProvider: React.FC = ({ children }) => {
         setIsInitialized(true);
     }
 
-    const mint = async (amount: number): Promise<boolean> => {
+    const mint = async (amount: number): Promise<{ succeed: boolean, tokenIds?: number[] }> => {
         checkInitialized();
 
         setIsMinting(true);
@@ -140,7 +141,7 @@ export const MintingProvider: React.FC = ({ children }) => {
             // To be sure
             if (!mintingWrapper) {
                 console.warn('Minting contract or minting opts is undefined');
-                return false;
+                return { succeed: false };
             }
 
             const res = await mintingWrapper.mint(amount, walletAddress);
@@ -153,10 +154,19 @@ export const MintingProvider: React.FC = ({ children }) => {
         }
     }
 
+    const fetchImageUrls = async (tokenIds: number[]): Promise<string[]> => {
+        checkInitialized();
+        if (mintingWrapper) {
+            return mintingWrapper.getImageUrls(tokenIds);
+        } else {
+            return [];
+        }
+    }
+
     const contextValue: MintingContextType = {
         init,
         mint,
-
+        fetchImageUrls,
         isInitialized,
         contractAddress,
         mintCount,

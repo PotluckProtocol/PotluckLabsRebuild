@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { ComponentPropsWithoutRef, useEffect, useRef, useState } from "react";
 import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
 import styled, { CSSProperties } from "styled-components";
@@ -13,6 +14,7 @@ export type ImageCarouselProps = {
     height: number;
     changeImageAfterMs?: number;
     startFromIndex?: number;
+    nonActiveImageOpacity?: string;
 }
 
 const LookupWindow = styled.div`
@@ -55,6 +57,7 @@ const Ball = styled.span<BallProps>`
 
 type ImageProps = ComponentPropsWithoutRef<'image'> & {
     active: boolean;
+    nonActiveOpacity: string;
 }
 
 const Image = styled.img<ImageProps>`
@@ -62,12 +65,11 @@ const Image = styled.img<ImageProps>`
     border-radius: 2rem;
     display: inline-block;
     padding: 0 ${IMAGE_PADDING_PX}px;
-    opacity: ${props => props.active ? '1' : '.2'};
+    opacity: ${props => props.active ? '1' : props.nonActiveOpacity};
     transition: opacity 500ms ease-in-out;
 `;
 
 export const ImageCarousel: React.FC<ImageCarouselProps> = (props) => {
-
     const [middleImageIndex, setMiddleImageIndex] = useState(typeof props.startFromIndex === 'number' ? props.startFromIndex : 0);
     const [containerWidth, setContainerWidth] = useState<number | null>(null);
     const containerRef = useRef(null);
@@ -109,7 +111,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = (props) => {
 
     useEffect(() => {
         resolveContainerWidth();
-    }, [containerRef.current, imageWidth]);
+    }, [containerRef.current, images, imageWidth]);
 
 
     if (images === null || imageWidth === null) {
@@ -142,6 +144,8 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = (props) => {
         styleObject.transform = `translateX(${translateX}px)`;
     }
 
+    const opacity = (props.nonActiveImageOpacity) ? props.nonActiveImageOpacity : '.2';
+
     return (
         <div>
             <LookupWindow>
@@ -152,9 +156,14 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = (props) => {
                         </NoStyleButton>
                     )}
                 </NavContainer>
-                <ImageContainer ref={containerRef} style={styleObject} className="flex items-center">
+                <ImageContainer ref={containerRef} style={styleObject}>
                     {containerWidth && images.map((image, index) => (
-                        <Image active={index === middleImageIndex} key={index} src={image} />
+                        <Image
+                            key={index}
+                            nonActiveOpacity={opacity}
+                            active={index === middleImageIndex}
+                            src={image}
+                        />
                     ))}
                 </ImageContainer>
                 <NavContainer className="absolute right-0 top-0 bottom-0 flex items-center justify-center">

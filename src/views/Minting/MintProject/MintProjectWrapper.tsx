@@ -7,9 +7,8 @@ type RouteParams = {
     contractAddress: string;
 }
 
-type MintProjectWrapperProps = {
+export type MintProjectWrapperProps = {
     contractAddress?: string;
-    embedded?: boolean;
 }
 
 export const MintProjectWrapper: React.FC<MintProjectWrapperProps> = (props) => {

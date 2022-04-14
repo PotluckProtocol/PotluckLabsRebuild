@@ -1,5 +1,6 @@
 import EventEmitter from "events";
 import { Contract } from "../../types/Contracts";
+import { assureIpfsUrl } from "../../utils/assure-ipfs-url";
 import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 
 const LIVE_MINT_STATE_INTERVAL_MS = 4000;
@@ -32,17 +33,20 @@ export class MintingContractWrapper extends EventEmitter {
         this.init();
     }
 
-    public async mint(amount: number, fromWallet: string) {
+    public async mint(amount: number, fromWallet: string, fastMint: boolean = false): Promise<{ succeed: boolean, tokenIds?: number[] }> {
 
         const { mint } = this.projectBaseInformation;
         if (!mint) {
-            return false;
+            return { succeed: false };
         }
 
         const totalGasLimit = String(amount * mint.gasLimit);
         const totalCostWei = String(amount * mint.weiCost);
 
         try {
+
+            const preMintWalletBalance = await this.getBalanceCount(fromWallet);
+
             /**
              * @info
              * Ugly hack for enabling SuperSerum mint on AVAX.
@@ -69,22 +73,41 @@ export class MintingContractWrapper extends EventEmitter {
                     });
             }
 
+            let tokenIds: number[] | undefined;
 
-            // Emit change to minted count
+            // If fast mint then do not fetch image data
+            if (!fastMint) {
+                tokenIds = [];
 
-            const promises: Promise<any>[] = [];
+                let afterMintWalletBalance;
+                while (afterMintWalletBalance !== preMintWalletBalance + amount) {
+                    await this.sleep(1000);
+                    afterMintWalletBalance = await this.getBalanceCount(fromWallet);
+                }
 
-            promises.push(this.getMintedCount());
-            if (this.opts.hasWhitelist) {
-                promises.push(this.getWhitelistCount(fromWallet));
+                for (let i = preMintWalletBalance; i < afterMintWalletBalance; i++) {
+                    const id = await this.getTokenId(fromWallet, i);
+                    tokenIds.push(id);
+                }
             }
 
-            await Promise.all(promises);
+            // Emit change to minted count and whitelist count
+            try {
+                const promises: Promise<any>[] = [];
+                promises.push(this.getMintedCount());
+                if (this.opts.hasWhitelist) {
+                    promises.push(this.getWhitelistCount(fromWallet));
+                }
+                await Promise.all(promises);
+            } catch (e) {
+                console.log('Failed to read minted count or whitelist count after mint');
+                // Noop, not so important
+            }
 
-            return true;
+            return { succeed: true, tokenIds }
         } catch (e) {
             console.log('Mint failed', e)
-            return false;
+            return { succeed: false };
         }
     }
 
@@ -167,6 +190,21 @@ export class MintingContractWrapper extends EventEmitter {
         return state;
     }
 
+    public async getImageUrls(tokenIds: number[]): Promise<string[]> {
+        const imageUrls: string[] = [];
+
+        for (const tokenId of tokenIds) {
+            let tokenUri = await this.getTokenUri(tokenId);
+            tokenUri = assureIpfsUrl(tokenUri, this.projectBaseInformation.overrideIpfsGateway || undefined);
+            const metadataResponse = await fetch(tokenUri);
+            const metadata = await metadataResponse.json();
+
+            const imageUrl = assureIpfsUrl(metadata.image, tokenUri.split('/ipfs/')[0] + '/ipfs/')
+            imageUrls.push(imageUrl);
+        }
+
+        return imageUrls;
+    }
 
     public clearListeners(): void {
         this.removeAllListeners();
@@ -178,6 +216,25 @@ export class MintingContractWrapper extends EventEmitter {
         if (this.liveStateInterval) {
             clearInterval(this.liveStateInterval);
         }
+    }
+
+    private async getBalanceCount(walletAddress: string): Promise<number> {
+        const res = await this.contract.methods.balanceOf(walletAddress).call();
+        return Number(res);
+    }
+
+    private async getTokenId(walletAddress: string, index: number): Promise<number> {
+        const res = await this.contract.methods.tokenOfOwnerByIndex(walletAddress, index).call();
+        return Number(res);
+    }
+
+    private async getTokenUri(tokenId: number): Promise<string> {
+        const res = await this.contract.methods.tokenURI(tokenId).call();
+        return res;
+    }
+
+    private async sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     private init() {

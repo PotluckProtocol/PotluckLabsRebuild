@@ -18,9 +18,10 @@ export const useLoadMultipleImagesBackground = (srcs: string[]) => {
             const promises: Promise<string | Error>[] = srcs.map(src => loadImage(src).catch(e => e as Error))
             const results = await Promise.all(promises);
             const nonFailedSrcs = results.filter(result => !(result instanceof Error));
-
             setLoadedSrcs(nonFailedSrcs as string[]);
         }
+
+        setLoadedSrcs(null);
 
         loadImages()
     }, [srcs])

@@ -14,10 +14,10 @@ import { MintPrice } from "../../../components/MintPrice";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { NetworkIcon } from "../../../components/NetworkIcon";
 import moment from "moment";
+import { Reveal } from "./Reveal";
 
 export type MintProjectProps = {
     contractAddress: string;
-    hideCatalogNavigationLink?: boolean;
 }
 
 const MintingContainer = styled.div`
@@ -73,15 +73,6 @@ const StyledRoundedButton = styled(RoundedButton)`
     bottom: 10px;
 `;
 
-const BackLinkContainer = styled.div`
-    width: 100%;
-    max-width: 768px;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-    font-size: 1.25rem;
-`;
-
 const PositionedNetworkIcon = styled(NetworkIcon)`
     right: 1.5rem;
     top: -0.5rem;
@@ -102,7 +93,7 @@ const InfoBoxHeader = styled.h3`
 
 const InfoBoxContent = styled.div`
     font-size: 0.9rem;
-    `;
+`;
 
 export const MintProject: React.FC<MintProjectProps> = ({
     contractAddress
@@ -114,6 +105,9 @@ export const MintProject: React.FC<MintProjectProps> = ({
     const [mintAmount, setMintAmount] = useState(1);
     const [isInitializing, setIsInitializing] = useState(false);
     const mintingContext = useContext(MintingContext);
+
+    const [isRevealButtonVisible, setIsRevealButtonVisible] = useState(false);
+    const [mintedTokenIds, setMintedTokenIds] = useState<number[]>([]);
 
     const walletAddress = account?.walletAddress;
 
@@ -143,7 +137,11 @@ export const MintProject: React.FC<MintProjectProps> = ({
     }, [contractAddress, walletAddress, baseInformation]);
 
     const handleMintClick = async () => {
-        await mintingContext.mint(mintAmount);
+        const res = await mintingContext.mint(mintAmount);
+        if (Array.isArray(res.tokenIds)) {
+            setMintedTokenIds([...mintedTokenIds, ...res.tokenIds]);
+            setIsRevealButtonVisible(true);
+        }
     }
 
     const handleAmountChange = (value: number) => {
@@ -292,6 +290,14 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <div className="mt-6 md:hidden">
                             <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
                             <div>{info}</div>
+
+                            {isRevealButtonVisible && (
+                                <Reveal
+                                    className="mb-10"
+                                    tokenIds={mintedTokenIds}
+                                    shadowImage={baseInformation.coverImage}
+                                />
+                            )}
                         </div>
                     </MintTooling>
 
@@ -300,6 +306,15 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <Image className="w-full md:w-auto rounded-xl" src={baseInformation.mint?.mintImage} />
                         <StyledRoundedButton className="hidden md:inline-block" disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
                         <div className="hidden md:block">{info}</div>
+                        {isRevealButtonVisible && (
+                            <div className="hidden md:block">
+                                <Reveal
+                                    className="mb-10"
+                                    tokenIds={mintedTokenIds}
+                                    shadowImage={baseInformation.coverImage}
+                                />
+                            </div>
+                        )}
                     </ImageContainer>
                 </div>
             </MintingContainer >
