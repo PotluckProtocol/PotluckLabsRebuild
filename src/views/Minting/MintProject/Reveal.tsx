@@ -114,7 +114,7 @@ export const Reveal: React.FC<RevealProps> = (props) => {
     return (
         <>
             <RevealButton disabled={mintingContext.isMintInProgress} onClick={handleClickRevealButton}>
-                REVEAL <b>{props.tokenIds.length}</b> pieces!
+                REVEAL <b>{props.tokenIds.length}</b> {props.tokenIds.length === 1 ? 'piece' : 'pieces'}!
             </RevealButton>
             {isOpen && createPortal(a, document.body)}
         </>
