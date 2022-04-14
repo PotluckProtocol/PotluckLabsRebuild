@@ -55,7 +55,7 @@ const getMiddleIndex = (count: number): number | undefined => {
     } else if (count === 1 || count === 2) {
         return 0;
     } else {
-        return Math.floor(count / 2) - 1
+        return Math.round(count / 2) - 1
     }
 }
 
