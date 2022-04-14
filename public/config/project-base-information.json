@@ -397,7 +397,7 @@
             "weiCost": 800000000000000000,
             "maxPerTx": 10,
             "mintImage": "/images/projects/deadfamilyavax/mint.gif",
-            "gasLimit": 285000
+            "gasLimit": 315000
         }
     },
     {
