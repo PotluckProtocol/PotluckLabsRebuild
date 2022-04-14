@@ -101,7 +101,7 @@ export const Reveal: React.FC<RevealProps> = (props) => {
                         startFromIndex={Math.min(latestSeenIndex, loadedImageUrls.length - 1)}
                         height={screenSize === 'xs' ? 400 : 600}
                         changeImageAfterMs={10000}
-                        nonActiveImageOpacity='.05'
+                        nonActiveImageOpacity='.15'
                     />
                     <CenteredRoundedButton className='mt-8' onClick={handleClose}>
                         Close reveal
