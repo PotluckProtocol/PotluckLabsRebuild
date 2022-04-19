@@ -381,7 +381,7 @@
         "artistId": "jackshure",
         "description": "Inspired by his time on tour with the Dead along with the influence brought from Egyptian mythologies, Jack Shure brings to life his first generative NFT collection Dead Family. Join the family!",
         "releaseDate": "2022-03-04",
-        "maxSupply": 254,
+        "maxSupply": 96,
         "roadmapImage": "/images/projects/deadfamilyavax/roadmap.png",
         "images": [
             "/images/projects/deadfamilyavax/image01.png",
@@ -394,6 +394,7 @@
             }
         },
         "mint": {
+            "forceEndedState": true,
             "weiCost": 800000000000000000,
             "maxPerTx": 10,
             "mintImage": "/images/projects/deadfamilyavax/mint.gif",
