@@ -700,8 +700,8 @@
     },
     {
         "name": "AcidCat",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "ACDC",
+        "contractAddress": "0xa81c9D00D29Afdc83b7e788a29Ec96A5BD81A8EA",
         "coverImage": "/images/projects/acidcatftm/cover.png",
         "network": "FTM",
         "artistId": "teensonacid",
@@ -718,7 +718,7 @@
         ],
         "mint": {
             "gasLimit": 285000,
-            "maxPerTx": 10,
+            "maxPerTx": 5,
             "mintImage": "/images/projects/acidcatftm/mint.gif",
             "weiCost": 20000000000000000000
         }
