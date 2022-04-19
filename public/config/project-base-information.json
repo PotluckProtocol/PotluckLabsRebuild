@@ -697,5 +697,30 @@
             "mintImage": "/images/projects/revolutionaryapes/mint.gif",
             "weiCost": 25000000000000000000
         }
+    },
+    {
+        "name": "AcidCat",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/acidcatftm/cover.png",
+        "network": "FTM",
+        "artistId": "teensonacid",
+        "releaseDate": "2022-04-20T20:00:00.000Z",
+        "whitelistDate": "2022-04-20T19:00:00.000Z",
+        "description": "The AcidCats  Phase Two by Teens On Acid are the Acidverse's official mascots ready to join you on a journey of mind expansion and enlightenment through 80s and 90s nostaligia with a uniquely japanese flavour.",
+        "maxSupply": 1667,
+        "roadmapImage": "/images/projects/acidcatftm/roadmap.png",
+        "images": [
+            "/images/projects/acidcatftm/image01.png",
+            "/images/projects/acidcatftm/image02.png",
+            "/images/projects/acidcatftm/image03.jpg",
+            "/images/projects/acidcatftm/image04.jpg"
+        ],
+        "mint": {
+            "gasLimit": 285000,
+            "maxPerTx": 10,
+            "mintImage": "/images/projects/acidcatftm/mint.gif",
+            "weiCost": 20000000000000000000
+        }
     }
 ]
