@@ -172,7 +172,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
         ? Math.min(whitelistCount, baseInformation.mint.maxPerTx)
         : baseInformation.mint.maxPerTx;
 
-    const soldOut = baseInformation.maxSupply <= mintingContext.mintCount;
+    const soldOut = mintState === 'Ended';
     const isMintableState = mintState === 'Open' || isWhitelistState;
     const isConnected = !!account;
     const wrongNetwork = network.networkId !== account?.network.id;
@@ -263,13 +263,25 @@ export const MintProject: React.FC<MintProjectProps> = ({
                             </InfoBox>
                         )}
 
-                        {mintState !== 'NotStarted' && (
+                        {!['NotStarted', 'Ended'].includes(mintState) && (
                             <>
                                 <LabelText>Minted:</LabelText>
                                 <ProgressBar min={0} height={8} max={baseInformation.maxSupply} value={mintingContext.mintCount} />
                                 <div className="flex justify-between">
                                     <div />
                                     <MintCount>{mintingContext.mintCount} / {baseInformation.maxSupply}</MintCount>
+                                </div>
+                            </>
+                        )}
+
+                        {/* Omnichain supplys might vary so if mint state is ended show always whole supply minted */}
+                        {mintState === 'Ended' && (
+                            <>
+                                <LabelText>Minted:</LabelText>
+                                <ProgressBar min={0} height={8} max={baseInformation.maxSupply} value={baseInformation.maxSupply} />
+                                <div className="flex justify-between">
+                                    <div />
+                                    <MintCount>{baseInformation.maxSupply} / {baseInformation.maxSupply}</MintCount>
                                 </div>
                             </>
                         )}

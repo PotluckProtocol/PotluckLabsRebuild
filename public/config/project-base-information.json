@@ -720,7 +720,8 @@
             "gasLimit": 285000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/acidcatftm/mint.gif",
-            "weiCost": 20000000000000000000
+            "weiCost": 20000000000000000000,
+            "forceEndedState": true
         }
     }
 ]
