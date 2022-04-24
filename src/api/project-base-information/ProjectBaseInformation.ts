@@ -21,6 +21,9 @@ export type ProjectBaseInformationRaw = {
     releaseDate: string;
     whitelistDate?: string;
 
+    // For projects without contract
+    internalId?: string;
+
     // Specific information
     artistId?: string | string[];
     description?: string | string[];

@@ -18,6 +18,8 @@ export const resolveIdentInfo = (baseInformation: ProjectBaseInformation): strin
 
 export const isContract = (contractAddressOrNameIdent: string): boolean => contractAddressOrNameIdent.startsWith('0x');
 
+export const isInternalId = (contractAddressOrNameIdent: string): boolean => contractAddressOrNameIdent.startsWith('internal::');
+
 export type ProjectBaseInformationContextType = {
     isInitialized: boolean;
     getConfig(contractAddressOrNameIdent: string): ProjectBaseInformation;
@@ -69,6 +71,8 @@ export const ProjectBaseInformationProvider: React.FC = ({ children }) => {
         const item = baseInformation.find(item => {
             if (isContract(contractAddressOrIdentName)) {
                 return item.contractAddress === contractAddressOrIdentName
+            } else if (isInternalId(contractAddressOrIdentName)) {
+                return item.internalId === contractAddressOrIdentName
             } else {
                 return createConfigNameIdent(item.name, resolveNetwork(item.network)) === contractAddressOrIdentName;
             }

@@ -1,8 +1,8 @@
-export type Network = {
+import { Token } from "./Token";
+
+export type Network = Token & {
     name: string;
-    symbol: string;
     networkId: number;
-    decimals: number;
     blockchainExplorer: {
         name: string;
         url: string;
