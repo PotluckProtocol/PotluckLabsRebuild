@@ -29,7 +29,7 @@ export const MintingList: React.FC = () => {
             {(upcomingMints.length > 0) && (
                 <>
                     <PageHeader className="mb-6">Upcoming launches</PageHeader>
-                    <div className="mb-6">
+                    <div className="flex flex-wrap gap-8 mb-8">
                         {upcomingMints.map((item, index) => {
                             return (
                                 <div key={index} className='mx-auto sm:mx-0'>

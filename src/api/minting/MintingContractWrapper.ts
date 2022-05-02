@@ -165,20 +165,20 @@ export class MintingContractWrapper extends EventEmitter {
             return 'Ended';
         }
 
-        const methods: string[] = ['paused'];
-        if (this.opts.hasWhitelist) {
-            methods.push('whitelistedOnly');
-        }
-
         const results = await Promise.all(
-            methods.map(method => this.contract.methods[method]().call())
+            ['paused', 'whitelistedOnly']
+                .map(method => this.contract.methods[method]().call())
         );
 
         const paused: boolean = results[0];
         const whitelistedOnly: boolean = results[1] || false;
 
+        // Escape hatch for marking those projects NotStarted which has have 
+        // unpaused state false but have no whitelist existing.
+        const notStartedEscapeHatch = !this.opts.hasWhitelist && whitelistedOnly;
+
         let state: MintState;
-        if (paused) {
+        if (paused || notStartedEscapeHatch) {
             state = 'NotStarted';
         } else if (whitelistedOnly) {
             state = 'WhitelistOpen';
