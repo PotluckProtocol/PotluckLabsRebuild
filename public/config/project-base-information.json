@@ -725,6 +725,31 @@
         }
     },
     {
+        "name": "AcidCat",
+        "symbol": "ACDC",
+        "contractAddress": "0x794dD7AdfD4508057AB4C182BCB3C0231c55345D",
+        "coverImage": "/images/projects/acidcatavax/cover.png",
+        "network": "AVAX",
+        "artistId": "teensonacid",
+        "releaseDate": "2022-05-04T19:00:00.000Z",
+        "description": "The AcidCats  Phase Two by Teens On Acid are the Acidverse's official mascots ready to join you on a journey of mind expansion and enlightenment through 80s and 90s nostaligia with a uniquely japanese flavour.",
+        "maxSupply": 1666,
+        "roadmapImage": "/images/projects/acidcatavax/roadmap.png",
+        "images": [
+            "/images/projects/acidcatavax/image01.png",
+            "/images/projects/acidcatavax/image02.png",
+            "/images/projects/acidcatavax/image03.jpg",
+            "/images/projects/acidcatavax/image04.jpg"
+        ],
+        "mint": {
+            "gasLimit": 285000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/acidcatavax/mint.gif",
+            "weiCost": 500000000000000000,
+            "noWhitelist": true
+        }
+    },
+    {
         "name": "Cyberfantomic",
         "internalId": "internal::cyberfantomic",
         "symbol": "",
