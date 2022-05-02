@@ -15,6 +15,7 @@ import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { NetworkIcon } from "../../../components/NetworkIcon";
 import moment from "moment";
 import { Reveal } from "./Reveal";
+import classNames from "classnames";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -181,7 +182,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
     if (soldOut) {
         mintButtonText = 'SOLD OUT!';
     } else if (!isConnected) {
-        mintButtonText = 'Connect wallet';
+        mintButtonText = 'Not connected';
     } else if (wrongNetwork) {
         mintButtonText = 'Wrong network';
     }
