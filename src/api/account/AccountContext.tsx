@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import Web3 from 'web3';
 import { Web3Context } from "../web3/Web3Context";
 import { Account } from "./Account"
@@ -6,8 +6,11 @@ import { Account } from "./Account"
 export type AccountContextType = {
     account: Account | null;
     connect: () => Promise<void>;
+    disconnect: () => Promise<void>;
     isConnecting: boolean;
 }
+
+const WALLET_PROVIDER_KEY = 'walletProvider';
 
 export const AccountContext = createContext<AccountContextType>(null as any);
 
@@ -16,6 +19,12 @@ export const AccountProvider: React.FC = ({ children }) => {
     const web3Context = useContext(Web3Context);
     const [account, setAccount] = useState<Account>();
     const [connecting, setConnecting] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (localStorage.getItem(WALLET_PROVIDER_KEY)) {
+            connect();
+        }
+    }, []);
 
     const connect = async () => {
 
@@ -38,13 +47,8 @@ export const AccountProvider: React.FC = ({ children }) => {
 
             // Add listeners start
             ethereum.on("accountsChanged", (walletAddresses: string[]) => {
-                if (account) {
-                    const wallet = walletAddresses[0];
-                    console.log(`Account changed: ${wallet} (Network: ${networkId})`);
-                    setAccount({
-                        ...account,
-                        walletAddress: wallet
-                    });
+                if (walletAddresses[0]) {
+                    window.location.reload();
                 }
             });
             ethereum.on("chainChanged", () => {
@@ -62,14 +66,23 @@ export const AccountProvider: React.FC = ({ children }) => {
                 }
             });
 
+            localStorage.setItem(WALLET_PROVIDER_KEY, 'metamask');
+
             setConnecting(false);
         }
+    }
+
+    const disconnect = async () => {
+        setAccount(null as any);
+        localStorage.removeItem(WALLET_PROVIDER_KEY);
+        window.location.reload();
     }
 
     const contextValue: AccountContextType = {
         account: account || null,
         isConnecting: connecting,
-        connect
+        connect,
+        disconnect
     }
 
     return (

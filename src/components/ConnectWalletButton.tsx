@@ -42,7 +42,11 @@ export const ConnectWalletButton: React.FC = () => {
     const accountContext = useContext(AccountContext);
 
     const handleButtonClick = () => {
-        accountContext.connect();
+        if (accountContext.account) {
+            accountContext.disconnect();
+        } else {
+            accountContext.connect();
+        }
     }
 
     let connectButtonText = 'Connect Wallet';
