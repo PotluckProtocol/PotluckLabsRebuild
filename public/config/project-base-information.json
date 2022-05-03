@@ -722,6 +722,36 @@
             "mintImage": "/images/projects/acidcatftm/mint.gif",
             "weiCost": 20000000000000000000,
             "forceEndedState": true
+        },
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "acidcats"
+            }
+        }
+    },
+    {
+        "name": "Strange Gods",
+        "symbol": "SGPP",
+        "contractAddress": "0xf35F4f0fB969ACc3615ef0E954b8d912d1420778",
+        "coverImage": "/images/projects/strangegods/cover.png",
+        "network": "FTM",
+        "artistId": "slicedatup",
+        "releaseDate": "2022-05-02T20:00:00.000Z",
+        "description": "The Strange Gods were not pleased with what has been happening down on the farm. They have watched as the Strange Ones did unspeakable things to the Potluck Pigs. They will no longer allow life to remain the same. Because of their righteous anger, the Gods declared that they would wipe out the entire population of Potluck Pigs, Strange Ones, and Strange Pigs, unless a sacrifice was made. In an attempt to appease the Strange Gods and to achieve the highest level of deity, You must lay a Potluck Pig, a Strange One, and a Strange Pig at the alter to be sacrificed to save the farm from complete desolation.",
+        "maxSupply": 550,
+        "roadmapImage": "/images/projects/strangegods/roadmap.png",
+        "images": [
+            "/images/projects/strangegods/image01.png",
+            "/images/projects/strangegods/image02.png",
+            "/images/projects/strangegods/image03.png",
+            "/images/projects/strangegods/image04.png"
+        ],
+        "mint": {
+            "gasLimit": 285000,
+            "maxPerTx": 10,
+            "mintImage": "/images/projects/strangegods/mint.gif",
+            "weiCost": 150000000000000000000,
+            "noWhitelist": true
         }
     },
     {
