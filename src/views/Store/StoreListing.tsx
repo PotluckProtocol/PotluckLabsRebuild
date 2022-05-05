@@ -1,6 +1,6 @@
-import { ReactNode, useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import useAccount from "../../api/account/useAccount";
+import useUser from "../../api/account/useUser";
 import { StoreProvider } from "../../api/stores/StoreContext"
 import { StoresContext } from "../../api/stores/StoresContext";
 import { ConnectWalletButton } from "../../components/ConnectWalletButton";
@@ -20,14 +20,14 @@ const LabsBalanceText = styled.span`
 
 export const StoreListing: React.FC = () => {
     const storesContext = useContext(StoresContext);
-    const account = useAccount();
+    const user = useUser();
     const labs = useLabsBalance();
 
     if (!storesContext.isInitialized) {
         return null;
     }
 
-    if (!account) {
+    if (!user.account) {
         return (
             <div className="mt-8">
                 <div className="mb-4 text-center">Connect your wallet to access the $LABS Store.</div>
@@ -39,11 +39,9 @@ export const StoreListing: React.FC = () => {
     const storeConfigs = storesContext.configs;
     return (
         <>
-            {account && (
-                <AccountBalance className="mb-8 flex justify-center items-center">
-                    Connected wallet has <LabsBalanceText className='mx-2'>{labs.isLoading ? <Loading width={20} /> : labs.balance.toFixed(2)}</LabsBalanceText> $LABS
-                </AccountBalance>
-            )}
+            <AccountBalance className="mb-8 flex justify-center items-center">
+                Connected wallet has <LabsBalanceText className='mx-2'>{labs.isLoading ? <Loading width={20} /> : labs.balance.toFixed(2)}</LabsBalanceText> $LABS
+            </AccountBalance>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {

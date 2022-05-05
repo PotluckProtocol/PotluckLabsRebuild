@@ -1,7 +1,13 @@
+import { ethers } from "ethers";
 import EventEmitter from "events";
-import { Contract } from "../../types/Contracts";
 import { assureIpfsUrl } from "../../utils/assure-ipfs-url";
 import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
+
+export class InsufficientMintingBalanceError extends Error {
+    constructor(msg?: string) {
+        super(msg);
+    }
+}
 
 const LIVE_MINT_STATE_INTERVAL_MS = 4000;
 const LIVE_MINTING_COUNT_INTERVAL_MS = 4000;
@@ -25,7 +31,7 @@ export class MintingContractWrapper extends EventEmitter {
     private liveStateInterval: any = null;
 
     constructor(
-        private contract: Contract,
+        private contract: ethers.Contract,
         private projectBaseInformation: ProjectBaseInformation,
         private opts: MintingContractWrapperOpts
     ) {
@@ -54,23 +60,9 @@ export class MintingContractWrapper extends EventEmitter {
              * @todo remove me after AVAX SuperSerum is sold out.
              */
             if (this.projectBaseInformation.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
-                await this.contract.methods
-                    .mint()
-                    .send({
-                        gasLimit: totalGasLimit,
-                        from: fromWallet,
-                        to: this.contract.options.address,
-                        value: totalCostWei
-                    });
+                await this.waitTx(this.contract.mint({ value: totalCostWei, gasLimit: totalGasLimit }));
             } else {
-                await this.contract.methods
-                    .mint(amount)
-                    .send({
-                        gasLimit: totalGasLimit,
-                        from: fromWallet,
-                        to: this.contract.options.address,
-                        value: totalCostWei
-                    });
+                await this.waitTx(this.contract.mint(amount, { value: totalCostWei, gasLimit: totalGasLimit }));
             }
 
             let tokenIds: number[] | undefined;
@@ -105,9 +97,13 @@ export class MintingContractWrapper extends EventEmitter {
             }
 
             return { succeed: true, tokenIds }
-        } catch (e) {
-            console.log('Mint failed', e)
-            return { succeed: false };
+        } catch (e: any) {
+            if (e.data?.code === -32000 && e.data?.message.includes('insufficient balance')) {
+                throw new InsufficientMintingBalanceError();
+            } else {
+                console.log('Mint failed', e)
+                return { succeed: false };
+            }
         }
     }
 
@@ -115,19 +111,17 @@ export class MintingContractWrapper extends EventEmitter {
         if (typeof this.projectBaseInformation.maxSupply === 'number') {
             return this.projectBaseInformation.maxSupply;
         } else {
-            return this.contract.methods.maxSupply().call();
+            return this.contract.maxSupply();
         }
     }
 
     public async getMintedCount(): Promise<number> {
-        let mintedCount;
+        let mintedCount: number;
         try {
-            mintedCount = await this.contract.methods
-                .totalSupply()
-                .call();
-
+            mintedCount = Number(await this.contract.totalSupply());
         } catch (e) {
             console.log('Failed to get mint count', e);
+            throw e;
         }
 
         this.lastMintedSupply = mintedCount;
@@ -139,9 +133,7 @@ export class MintingContractWrapper extends EventEmitter {
     public async getWhitelistCount(walletAddress: string): Promise<number> {
         let wlCount: number = 0;
         if (this.opts.hasWhitelist) {
-            wlCount = await this.contract?.methods
-                .whiteListed(walletAddress)
-                .call();
+            wlCount = await this.contract.whiteListed(walletAddress);
         }
 
         this.emit(WHITELIST_COUNT_CHANGED_EVENT, wlCount);
@@ -165,16 +157,14 @@ export class MintingContractWrapper extends EventEmitter {
             return 'Ended';
         }
 
-
-
-
-        const paused: boolean = await this.contract.methods.paused().call();
+        const paused: boolean = await this.contract.paused();
         let whitelistedOnly = false;
         try {
-            whitelistedOnly = await this.contract.methods.whitelistedOnly().call();
+            whitelistedOnly = await this.contract.whitelistedOnly();
         } catch (e) {
             whitelistedOnly = false;
         }
+
         // Escape hatch for marking those projects NotStarted which has have 
         // unpaused state false but have no whitelist existing.
         const notStartedEscapeHatch = !this.opts.hasWhitelist && whitelistedOnly;
@@ -221,17 +211,17 @@ export class MintingContractWrapper extends EventEmitter {
     }
 
     private async getBalanceCount(walletAddress: string): Promise<number> {
-        const res = await this.contract.methods.balanceOf(walletAddress).call();
+        const res = await this.contract.balanceOf(walletAddress);
         return Number(res);
     }
 
     private async getTokenId(walletAddress: string, index: number): Promise<number> {
-        const res = await this.contract.methods.tokenOfOwnerByIndex(walletAddress, index).call();
+        const res = await this.contract.tokenOfOwnerByIndex(walletAddress, index);
         return Number(res);
     }
 
     private async getTokenUri(tokenId: number): Promise<string> {
-        const res = await this.contract.methods.tokenURI(tokenId).call();
+        const res = await this.contract.tokenURI(tokenId);
         return res;
     }
 
@@ -256,6 +246,11 @@ export class MintingContractWrapper extends EventEmitter {
                 this.getMintState();
             }, LIVE_MINT_STATE_INTERVAL_MS);
         }
+    }
+
+    private async waitTx(promise: Promise<any>) {
+        const tx = await promise;
+        await tx.wait();
     }
 
 }

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import useAccount from "../../api/account/useAccount";
+import useUser from "../../api/account/useUser";
 import { MutateProvider } from "../../api/mutate/MutateContext";
 import { resolveNetwork } from "../../api/network/resolveNetwork";
 import { ProjectBaseInformationContext } from "../../api/project-base-information/ProjectBaseInformationContext";
@@ -40,9 +40,9 @@ const Shroud = styled.div`
 export const MutateWrapper: React.FC = () => {
     const [queryParams] = useSearchParams();
     const baseInformationContext = useContext(ProjectBaseInformationContext);
-    const account = useAccount();
+    const user = useUser();
 
-    const accountNetworkId = account?.network.id;
+    const accountNetworkId = user.account?.network.networkId;
     const contractAddresses = queryParams.getAll('contractAddress');
 
     return (
@@ -54,7 +54,7 @@ export const MutateWrapper: React.FC = () => {
                     const network = resolveNetwork(baseInformation.network);
                     const isDisabled = network.networkId !== accountNetworkId;
 
-                    const isConnected = !!account;
+                    const isConnected = !!user.account;
 
                     const serumNotation = (baseInformation.mutate?.serumUnitNotation)
                         ? baseInformation.mutate.serumUnitNotation

@@ -1,11 +1,11 @@
 import { createContext, useState, useContext } from "react";
-import useAccount from "../account/useAccount";
+import useUser from "../account/useUser";
 import { ProjectBaseInformationContext } from "../project-base-information/ProjectBaseInformationContext";
 import { MutateContractWrapper } from "./MutateContractWrapper";
-import { Web3Context } from "../web3/Web3Context";
 import { resolveNetwork } from "../network/resolveNetwork";
 import { serumAbi } from "./abis/serum";
 import { targetAbi } from "./abis/target";
+import { ethers } from "ethers";
 
 export type InitMutate = {
     serumContractAddress: string;
@@ -28,8 +28,7 @@ export const MutateContext = createContext<MutateContextType>(null as any);
 
 export const MutateProvider: React.FC = ({ children }) => {
     const baseInformationContext = useContext(ProjectBaseInformationContext);
-    const web3Context = useContext(Web3Context);
-    const account = useAccount();
+    const user = useUser();
 
     const [isApproving, setIsApproving] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
@@ -59,24 +58,18 @@ export const MutateProvider: React.FC = ({ children }) => {
             throw new Error(`Project baseInformation does not contain mutate spec`);
         }
 
-        const { web3 } = web3Context.getWeb3(resolveNetwork(baseInformation.network).networkId);
-        const serumContract = new web3.eth.Contract(
-            serumAbi,
-            opts.serumContractAddress
-        );
+        const signerOrProvider = user.getSignerOrProvider(resolveNetwork(baseInformation.network).networkId);
 
-        const targetContract = new web3.eth.Contract(
-            targetAbi,
-            baseInformation.mutate.targetContractAddress
-        );
+        const serumContract = new ethers.Contract(opts.serumContractAddress, serumAbi, signerOrProvider);
+        const targetContract = new ethers.Contract(baseInformation.mutate.targetContractAddress, targetAbi, signerOrProvider);
 
         console.log('Init Mutate', opts.serumContractAddress);
 
         const mutateWrapper = new MutateContractWrapper(serumContract, targetContract, baseInformation);
         setMutateWrapper(mutateWrapper);
 
-        if (account) {
-            await getSerumIds(mutateWrapper, account.walletAddress);
+        if (user.account) {
+            await getSerumIds(mutateWrapper, user.account.walletAddress);
         }
 
         setIsInitialized(true);
@@ -85,14 +78,14 @@ export const MutateProvider: React.FC = ({ children }) => {
     const mutate = async (serumTokenId: number): Promise<{ succeed: boolean, imageUrl?: string }> => {
         checkInitialized();
 
-        if (!mutateWrapper || !account) {
+        if (!mutateWrapper || !user.account) {
             return { succeed: false };
         }
 
         setIsMutating(true);
         try {
-            const res = await mutateWrapper.mutate(account.walletAddress, serumTokenId);
-            await getSerumIds(mutateWrapper, account.walletAddress);
+            const res = await mutateWrapper.mutate(user.account.walletAddress, serumTokenId);
+            await getSerumIds(mutateWrapper, user.account.walletAddress);
             return res;
         } finally {
             setIsMutating(false);
@@ -102,13 +95,13 @@ export const MutateProvider: React.FC = ({ children }) => {
     const approveAll = async (): Promise<boolean> => {
         checkInitialized();
 
-        if (!mutateWrapper || !account) {
+        if (!mutateWrapper || !user.account) {
             return false;
         }
 
         setIsApproving(true);
         try {
-            const res = await mutateWrapper.approveAll(account.walletAddress);
+            const res = await mutateWrapper.approveAll(user.account.walletAddress);
             return res;
         } finally {
             setIsApproving(false);
@@ -118,11 +111,11 @@ export const MutateProvider: React.FC = ({ children }) => {
     const isApproved = async (): Promise<boolean> => {
         checkInitialized();
 
-        if (!mutateWrapper || !account) {
+        if (!mutateWrapper || !user.account) {
             return false;
         }
 
-        return mutateWrapper.isApproved(account.walletAddress);
+        return mutateWrapper.isApproved(user.account.walletAddress);
     }
 
     const contextValue: MutateContextType = {

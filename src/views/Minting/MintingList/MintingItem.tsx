@@ -6,8 +6,7 @@ import { ProjectBaseInformation } from "../../../api/project-base-information/Pr
 import { RoundedButton } from '../../../components/RoundedButton';
 import { TextFit } from '../../../components/TextFit';
 import { MintStateBadge } from '../../../components/MintStateBadge';
-import { abi } from '../abi';
-import useAccount from '../../../api/account/useAccount';
+import useUser from '../../../api/account/useUser';
 import { resolveNetwork } from '../../../api/network/resolveNetwork';
 import { MintPrice } from '../../../components/MintPrice';
 import { NetworkIcon } from '../../../components/NetworkIcon';
@@ -78,9 +77,9 @@ export const MintingItem: React.FC<MintingItemProps> = ({
     const [isInitialized, setIsInitialized] = useState(false);
     const navigate = useNavigate();
     const minting = useContext(MintingContext);
-    const account = useAccount();
+    const user = useUser();
 
-    const walletAddress = account?.walletAddress;
+    const walletAddress = user.account?.walletAddress;
     const hasContract = !!baseInformation.contractAddress;
     const hasMintSpec = !!baseInformation.mint;
 

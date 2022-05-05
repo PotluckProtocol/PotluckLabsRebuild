@@ -1,7 +1,7 @@
 
 import { ReactNode, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import useAccount from "../../api/account/useAccount";
+import useUser from "../../api/account/useUser";
 import { MutateContext } from "../../api/mutate/MutateContext";
 import { ProjectBaseInformation } from "../../api/project-base-information/ProjectBaseInformation";
 import { RoundedButton } from "../../components/RoundedButton";
@@ -91,7 +91,7 @@ const simpleTextContent = (text: string): ReactNode => {
 export const Mutate: React.FC<MutateProps> = ({
     baseInformation
 }) => {
-    const account = useAccount();
+    const user = useUser();
     const [isInitialized, setIsInitialized] = useState<boolean>(false);
     const [isApproved, setIsApproved] = useState<boolean>(false);
     const [selectedSerumId, setSelectedSerumId] = useState<number | null>(null);
@@ -100,7 +100,7 @@ export const Mutate: React.FC<MutateProps> = ({
     const mutateContext = useContext(MutateContext);
     const [loadedRevealImageError, loadedRevealImageSrc, resetLoadedReveal] = useLoadImageBackground(revealedImageUrl);
 
-    const walletAddress = account?.walletAddress;
+    const walletAddress = user.account?.walletAddress;
     const serumNotation = (baseInformation.mutate?.serumUnitNotation)
         ? baseInformation.mutate.serumUnitNotation
         : 'Serum';

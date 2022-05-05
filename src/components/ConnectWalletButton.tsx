@@ -67,7 +67,7 @@ export const ConnectWalletButton: React.FC = () => {
                 </Button>
                 {(!!accountContext.account) && (
                     <NetworkButton>
-                        <NetworkIcon networkId={accountContext.account.network.id} size={30} />
+                        <NetworkIcon networkId={accountContext.account.network.networkId} size={30} />
                     </NetworkButton>
                 )}
             </ButtonGroup>

@@ -1,21 +1,20 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { MintingContext } from "../../../api/minting/MintingContext";
 import { ProjectBaseInformationContext } from "../../../api/project-base-information/ProjectBaseInformationContext";
 import { weiToDisplayCost } from "../../../utils/wei-to-display-cost";
 import { AmountSelector } from "../../../components/AmountSelector";
-import { MintStateBadge } from "../../../components/MintStateBadge";
 import { ProgressBar } from "../../../components/ProgressBar";
 import { RoundedButton } from "../../../components/RoundedButton";
 import { TextFit } from "../../../components/TextFit";
-import useAccount from "../../../api/account/useAccount";
 import { MintPrice } from "../../../components/MintPrice";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { NetworkIcon } from "../../../components/NetworkIcon";
 import moment from "moment";
 import { Reveal } from "./Reveal";
-import classNames from "classnames";
+import useUser from "../../../api/account/useUser";
+import { toast } from "react-toastify";
+import { InsufficientMintingBalanceError } from "../../../api/minting/MintingContractWrapper";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -99,7 +98,7 @@ const InfoBoxContent = styled.div`
 export const MintProject: React.FC<MintProjectProps> = ({
     contractAddress
 }) => {
-    const account = useAccount();
+    const user = useUser();
     const baseInformation = useContext(ProjectBaseInformationContext)
         .getConfig(contractAddress);
 
@@ -110,7 +109,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
     const [isRevealButtonVisible, setIsRevealButtonVisible] = useState(false);
     const [mintedTokenIds, setMintedTokenIds] = useState<number[]>([]);
 
-    const walletAddress = account?.walletAddress;
+    const walletAddress = user.account?.walletAddress;
 
     useEffect(() => {
         const init = async () => {
@@ -138,11 +137,18 @@ export const MintProject: React.FC<MintProjectProps> = ({
     }, [contractAddress, walletAddress, baseInformation]);
 
     const handleMintClick = async () => {
-        const res = await mintingContext.mint(mintAmount);
-        if (Array.isArray(res.tokenIds)) {
-            setMintedTokenIds([...mintedTokenIds, ...res.tokenIds]);
-            setIsRevealButtonVisible(true);
+        try {
+            const res = await mintingContext.mint(mintAmount);
+            if (Array.isArray(res.tokenIds)) {
+                setMintedTokenIds([...mintedTokenIds, ...res.tokenIds]);
+                setIsRevealButtonVisible(true);
+            }
+        } catch (e: any) {
+            if (e instanceof InsufficientMintingBalanceError) {
+                toast('Insufficient wallet balance', { type: 'error', theme: 'colored' });
+            }
         }
+
     }
 
     const handleAmountChange = (value: number) => {
@@ -175,8 +181,8 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
     const soldOut = mintState === 'Ended';
     const isMintableState = mintState === 'Open' || isWhitelistState;
-    const isConnected = !!account;
-    const wrongNetwork = network.networkId !== account?.network.id;
+    const isConnected = !!user.account;
+    const wrongNetwork = network.networkId !== user.account?.network.networkId;
 
     let mintButtonText = 'Mint';
     if (soldOut) {

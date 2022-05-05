@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components";
-import useAccount from "../../api/account/useAccount";
 import useProjectBaseInformation from "../../api/project-base-information/useProjectBaseInformation";
 import { Store } from "../../api/stores/Store";
 import { StoreContext } from "../../api/stores/StoreContext";
@@ -12,6 +11,7 @@ import { ImPriceTag } from 'react-icons/im';
 import { LABS_TOKEN } from "./labs/Labs";
 import { NetworkIcon } from "../../components/NetworkIcon";
 import { toast } from "react-toastify";
+import useUser from "../../api/account/useUser";
 
 export type StoreProps = {
     storeConfig: Store;
@@ -117,19 +117,16 @@ const Disclaimer = styled.div`
     font-size: .7rem;
 `
 
-
-
 export const StoreItem: React.FC<StoreProps> = ({
     accountLabsBalance,
     storeConfig,
     onAfterBuy
 }) => {
-
+    const user = useUser();
     const [isBuying, setIsBuying] = useState(false);
-    const account = useAccount()
     const storeContext = useContext(StoreContext);
     const baseInformation = useProjectBaseInformation(storeConfig.projectContractAddressOrName);
-    const walletAddress = account?.walletAddress;
+    const walletAddress = user.account?.walletAddress;
 
     useEffect(() => {
         if (walletAddress) {
@@ -161,11 +158,11 @@ export const StoreItem: React.FC<StoreProps> = ({
     }
 
     const itemPriceNumeric = weiToNumber(storeConfig.priceWei, LABS_TOKEN);
-    const isWrongNetwork = account?.network.id !== 250;
+    const isWrongNetwork = user.account?.network.networkId !== 250;
     const nowMs = Date.now();
     const saleActive = storeConfig.saleEndsOn.valueOf() > nowMs;
     const accountHasEnoughBalance = accountLabsBalance >= itemPriceNumeric;
-    const buyButtonDisabled = !account || !saleActive || isBuying || !accountHasEnoughBalance;
+    const buyButtonDisabled = !user.account || !saleActive || isBuying || !accountHasEnoughBalance;
 
     return (
         <div className="relative">
@@ -198,7 +195,7 @@ export const StoreItem: React.FC<StoreProps> = ({
                     </PriceContainer>
                 </div>
 
-                <BuyButton className='mt-2' disabled={buyButtonDisabled} onClick={handleClick}>Buy</BuyButton>
+                <BuyButton className='mt-2' disabled={buyButtonDisabled} onClick={handleClick}>{isBuying ? 'Buying...' : 'Buy'}</BuyButton>
 
                 <Disclaimer className='mt-2'>$LABS are sent into Potluck Labs wallet directly. Whitelist spot will be available on mint.</Disclaimer>
 

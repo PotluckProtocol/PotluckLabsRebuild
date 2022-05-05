@@ -1,5 +1,5 @@
+import { ethers } from "ethers";
 import EventEmitter from "events";
-import { Contract } from "../../types/Contracts";
 import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 
 const DEFAULT_IPFS_GATEWAY = 'https://cloudflare-ipfs.com/ipfs';
@@ -7,8 +7,8 @@ const DEFAULT_IPFS_GATEWAY = 'https://cloudflare-ipfs.com/ipfs';
 export class MutateContractWrapper extends EventEmitter {
 
     constructor(
-        private serumContract: Contract,
-        private targetContract: Contract,
+        private serumContract: ethers.Contract,
+        private targetContract: ethers.Contract,
         private projectBaseInformation: ProjectBaseInformation
     ) {
         super();
@@ -16,22 +16,14 @@ export class MutateContractWrapper extends EventEmitter {
     }
 
     public async isApproved(account: string): Promise<boolean> {
-        const res = await this.serumContract.methods
-            .isApprovedForAll(account, this.targetContract.options.address)
-            .call();
+        const res = await this.serumContract.isApprovedForAll(account, this.targetContract.options.address)
         return res as boolean;
     }
 
     public async approveAll(account: string) {
-        const gasLimit = String(this.projectBaseInformation.mutate?.approveGasLimit);
         try {
-            await this.serumContract.methods
-                .setApprovalForAll(this.targetContract.options.address, true)
-                .send({
-                    gasLimit,
-                    from: account,
-                    to: this.serumContract.options.address
-                });
+            const tx = await this.serumContract.setApprovalForAll(this.targetContract.options.address, true);
+            await tx.wait();
 
             return true;
         } catch (e) {
@@ -44,13 +36,8 @@ export class MutateContractWrapper extends EventEmitter {
         try {
             const latestIdBeforeMutation = await this.getLatestTargetTokenId(account);
 
-            await this.targetContract.methods
-                .mutate(Number(serumTokenId))
-                .send({
-                    gasLimit: String(this.projectBaseInformation.mutate?.mutetaGasLimit),
-                    from: account,
-                    to: this.targetContract.options.address
-                });
+            const tx = await this.targetContract.mutate(Number(serumTokenId));
+            await tx.wait();
 
             let latestId: number | null = null;
             let runCount: number = 0;
@@ -88,16 +75,12 @@ export class MutateContractWrapper extends EventEmitter {
     }
 
     public async getSerumIds(account: string): Promise<number[]> {
-        const serumBalance = await this.serumContract.methods
-            .balanceOf(account)
-            .call();
+        const serumBalance = await this.serumContract.balanceOf(account);
 
         const ids: number[] = [];
 
         for (let i = 0; i < Number(serumBalance); i++) {
-            const tokenId = await this.serumContract.methods
-                .tokenOfOwnerByIndex(account, i)
-                .call();
+            const tokenId = await this.serumContract.tokenOfOwnerByIndex(account, i);
 
             ids.push(Number(tokenId));
         }
@@ -110,18 +93,14 @@ export class MutateContractWrapper extends EventEmitter {
     }
 
     private async getLatestTargetTokenId(account: string): Promise<number | null> {
-        const targetBalance = await this.targetContract.methods
-            .balanceOf(account)
-            .call();
+        const targetBalance = await this.targetContract.balanceOf(account);
 
         const latestIndex = (Number(targetBalance) || 0) - 1;
         if (latestIndex === -1) {
             return null;
         }
 
-        const tokenId = await this.targetContract.methods
-            .tokenOfOwnerByIndex(account, latestIndex)
-            .call();
+        const tokenId = await this.targetContract.tokenOfOwnerByIndex(account, latestIndex);
 
         const tokenIdNum = Number(tokenId);
         return (typeof tokenIdNum === 'number' && !isNaN(tokenIdNum))
@@ -130,9 +109,7 @@ export class MutateContractWrapper extends EventEmitter {
     }
 
     private async getTargetTokenImageUrl(tokenId: number): Promise<string> {
-        const ipfsLink = await this.targetContract.methods
-            .tokenURI(tokenId)
-            .call() as string;
+        const ipfsLink = await this.targetContract.tokenURI(tokenId);
 
         const ipfsUrl = this.assureIpfsUri(ipfsLink);
         if (!ipfsUrl) {

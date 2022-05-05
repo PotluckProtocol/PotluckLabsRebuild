@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import useAccount from "../account/useAccount";
+import useUser from "../account/useUser";
 import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 import { MintingContext, MintingContextType } from "./MintingContext";
 
@@ -17,9 +17,9 @@ export const useMinting = (baseInformation: ProjectBaseInformation, opts: UseMin
 
     const [isInitialized, setIsInitialized] = useState(false);
     const mintingContext = useContext(MintingContext);
-    const account = useAccount();
+    const user = useUser();
 
-    const walletAddress = account?.walletAddress;
+    const walletAddress = user.account?.walletAddress;
     const hasContract = !!baseInformation.contractAddress;
     const hasMintSpec = !!baseInformation.mint;
 

@@ -1,10 +1,8 @@
-import Web3 from "web3";
+import { Signer } from "ethers";
+import { Network } from "../../types/Networks";
 
 export type Account = {
     walletAddress: string;
-    network: {
-        id: number;
-        // name: string;
-        // symbol: string;
-    }
+    network: Network;
+    signer: Signer;
 }

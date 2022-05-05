@@ -1,6 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import Web3 from 'web3';
-import { Web3Context } from "../web3/Web3Context";
+
+import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { ethers } from 'ethers';
+import { resolveNetwork } from "../network/resolveNetwork";
 import { Account } from "./Account"
 
 export type AccountContextType = {
@@ -8,22 +9,32 @@ export type AccountContextType = {
     connect: () => Promise<void>;
     disconnect: () => Promise<void>;
     isConnecting: boolean;
+    isInitialized: boolean;
 }
 
 const WALLET_PROVIDER_KEY = 'walletProvider';
 
 export const AccountContext = createContext<AccountContextType>(null as any);
 
-export const AccountProvider: React.FC = ({ children }) => {
+export const AccountProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
-    const web3Context = useContext(Web3Context);
-    const [account, setAccount] = useState<Account>();
+    const [account, setAccount] = useState<Account | null>(null);
     const [connecting, setConnecting] = useState<boolean>(false);
+    const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
     useEffect(() => {
-        if (localStorage.getItem(WALLET_PROVIDER_KEY)) {
-            connect();
+        const connectWallet = async () => {
+            const ethereum = (window as any).ethereum as any;
+            if (ethereum && ethereum.isMetaMask) {
+                if (localStorage?.getItem(WALLET_PROVIDER_KEY) === 'metamask') {
+                    await connect();
+                }
+            }
+
+            setIsInitialized(true);
         }
+
+        connectWallet();
     }, []);
 
     const connect = async () => {
@@ -33,37 +44,32 @@ export const AccountProvider: React.FC = ({ children }) => {
             setConnecting(true);
 
             const ethereum = (window as any).ethereum as any;
-            const web3Instance = new Web3(ethereum);
+            const provider = new ethers.providers.Web3Provider(ethereum);
 
-            const [walletAddress] = await ethereum.request({
-                method: "eth_requestAccounts",
-            }) as string[];
+            await provider.send("eth_requestAccounts", []) as string[];
 
-            const networkId = Number(
-                await ethereum.request({
-                    method: "net_version",
-                })
-            );
+            const signer = provider.getSigner();
+
+            const walletAddress = await signer.getAddress();
+            const networkId = await signer.getChainId();
 
             // Add listeners start
-            ethereum.on("accountsChanged", (walletAddresses: string[]) => {
+            ethereum.on("accountsChanged", async (walletAddresses: string[]) => {
                 if (walletAddresses[0]) {
                     window.location.reload();
                 }
             });
+
             ethereum.on("chainChanged", () => {
                 window.location.reload();
             });
 
             console.log(`Using account: ${walletAddress} (Network: ${networkId})`);
 
-            web3Context.setWeb3(networkId, web3Instance);
-
             setAccount({
+                network: resolveNetwork(networkId),
                 walletAddress,
-                network: {
-                    id: networkId
-                }
+                signer
             });
 
             localStorage.setItem(WALLET_PROVIDER_KEY, 'metamask');
@@ -73,14 +79,15 @@ export const AccountProvider: React.FC = ({ children }) => {
     }
 
     const disconnect = async () => {
-        setAccount(null as any);
         localStorage.removeItem(WALLET_PROVIDER_KEY);
+        setAccount(null);
         window.location.reload();
     }
 
     const contextValue: AccountContextType = {
         account: account || null,
         isConnecting: connecting,
+        isInitialized,
         connect,
         disconnect
     }

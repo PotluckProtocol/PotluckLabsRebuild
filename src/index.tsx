@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AccountProvider } from './api/account/AccountContext';
 import { ProjectBaseInformationProvider } from './api/project-base-information/ProjectBaseInformationContext';
-import { Web3Provider } from './api/web3/Web3Context';
 import { BrowserRouter } from 'react-router-dom';
 
 console.log('Application initializing');
@@ -14,11 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ProjectBaseInformationProvider>
-        <Web3Provider>
-          <AccountProvider>
-            <App />
-          </AccountProvider>
-        </Web3Provider>
+        <AccountProvider>
+          <App />
+        </AccountProvider>
       </ProjectBaseInformationProvider>
     </BrowserRouter>
   </React.StrictMode>,

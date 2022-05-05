@@ -1,13 +1,11 @@
 import { createContext, useEffect, useState, useContext } from "react";
-import { Account } from "../account/Account";
-import useAccount from "../account/useAccount";
-import { AbiItems, Contract } from '../../types/Contracts';
 import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 import { ProjectBaseInformationContext } from "../project-base-information/ProjectBaseInformationContext";
 import { MINTED_COUNT_CHANGED_EVENT, MintingContractWrapper, MintState, MINT_STATE_CHANGED_EVENT, WHITELIST_COUNT_CHANGED_EVENT } from "./MintingContractWrapper";
-import { Web3Context } from "../web3/Web3Context";
 import { resolveNetwork } from "../network/resolveNetwork";
 import { abi } from "../../views/Minting/abi";
+import { ethers } from "ethers";
+import useUser from "../account/useUser";
 
 export type InitMinting = {
     contractAddress: string;
@@ -31,8 +29,7 @@ export const MintingContext = createContext<MintingContextType>(null as any);
 
 export const MintingProvider: React.FC = ({ children }) => {
     const baseInformationContext = useContext(ProjectBaseInformationContext);
-    const web3Context = useContext(Web3Context);
-    const account = useAccount();
+    const user = useUser();
     const [isInitialized, setIsInitialized] = useState(false);
     const [contractAddress, setContractAddress] = useState<string>('');
     const [isMinting, setIsMinting] = useState(false);
@@ -41,7 +38,7 @@ export const MintingProvider: React.FC = ({ children }) => {
     const [mintState, setMintState] = useState<MintState>('NotStarted');
     const [mintingWrapper, setMintingWrapper] = useState<MintingContractWrapper>();
 
-    const walletAddress = account?.walletAddress || '';
+    const walletAddress = user.account?.walletAddress || '';
 
     useEffect(() => {
         if (mintingWrapper) {
@@ -75,7 +72,6 @@ export const MintingProvider: React.FC = ({ children }) => {
         }
     }, [mintingWrapper, walletAddress, setMintCount, setMintState, setWhitelistCount])
 
-
     const checkInitialized = () => {
         if (!isInitialized) {
             throw new Error('Contract not initialized');
@@ -85,9 +81,8 @@ export const MintingProvider: React.FC = ({ children }) => {
     const init = async (opts: InitMinting) => {
         const baseInformation = baseInformationContext.getConfig(opts.contractAddress) as ProjectBaseInformation;
 
-        const { web3 } = web3Context.getWeb3(resolveNetwork(baseInformation.network).networkId);
-
         let mintingAbi = abi;
+
         /**
          * @info
          * Ugly hack for enabling SuperSerum mint on AVAX.
@@ -111,9 +106,10 @@ export const MintingProvider: React.FC = ({ children }) => {
             }
         }
 
-        const contract = new web3.eth.Contract(
+        const contract = new ethers.Contract(
+            opts.contractAddress,
             mintingAbi,
-            opts.contractAddress
+            user.getSignerOrProvider(resolveNetwork(baseInformation.network).networkId)
         );
 
         console.log('Init Minting:', opts.contractAddress);
@@ -126,7 +122,6 @@ export const MintingProvider: React.FC = ({ children }) => {
             hasWhitelist
         });
 
-        // async background
         setContractAddress(opts.contractAddress);
         setMintingWrapper(mintingWrapper);
         setIsInitialized(true);
@@ -146,9 +141,6 @@ export const MintingProvider: React.FC = ({ children }) => {
 
             const res = await mintingWrapper.mint(amount, walletAddress);
             return res;
-        } catch (e) {
-            console.log(e);
-            throw e;
         } finally {
             setIsMinting(false);
         }
