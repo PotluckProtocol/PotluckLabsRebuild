@@ -772,39 +772,58 @@
             "/images/projects/acidcatavax/image04.jpg"
         ],
         "mint": {
-            "gasLimit": 285000,
+            "gasLimit": 350000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/acidcatavax/mint.gif",
             "weiCost": 500000000000000000,
-            "noWhitelist": true
+            "noWhitelist": true,
+            "forceEndedState": true
         }
     },
     {
         "name": "Cyberfantomic",
-        "internalId": "internal::cyberfantomic",
+        "internalId": "internal::ftm::cyberfantomic",
         "symbol": "",
         "contractAddress": "",
-        "coverImage": "/images/projects/cyberfantomic/cover.png",
+        "coverImage": "/images/projects/cyberfantomicftm/cover.png",
         "network": "FTM",
         "artistId": "blackcatdead",
         "releaseDate": "2022-05-06T20:00:00.000Z",
         "whitelistDate": "2022-05-06T19:00:00.000Z",
         "description": "The first generative collection from accomplished 1/1 cross-chain artist BlackCatDead. Collection features 10 mystery NFTS which entitles the holder to make a customized 1/1.",
-        "maxSupply": 888,
+        "maxSupply": 444,
         "images": [
-            "/images/projects/cyberfantomic/image01.png",
-            "/images/projects/cyberfantomic/image02.png",
-            "/images/projects/cyberfantomic/image03.png",
-            "/images/projects/cyberfantomic/image04.png",
-            "/images/projects/cyberfantomic/image05.png",
-            "/images/projects/cyberfantomic/image06.png",
-            "/images/projects/cyberfantomic/image07.png"
+            "/images/projects/cyberfantomicftm/image01.png",
+            "/images/projects/cyberfantomicftm/image02.png",
+            "/images/projects/cyberfantomicftm/image03.png",
+            "/images/projects/cyberfantomicftm/image04.png"
         ],
         "mint": {
             "gasLimit": 285000,
             "maxPerTx": 10,
-            "mintImage": "/images/projects/cyberfantomic/mint.gif",
+            "mintImage": "/images/projects/cyberfantomicftm/mint.gif",
             "weiCost": 30000000000000000000
         }
+    },
+    {
+        "name": "Cyberfantomic",
+        "internalId": "internal::avax::cyberfantomic",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/cyberfantomicavax/cover.jpg",
+        "network": "AVAX",
+        "artistId": "blackcatdead",
+        "releaseDate": "2022-05-06T20:00:00.000Z",
+        "description": "The first generative collection from accomplished 1/1 cross-chain artist BlackCatDead. Collection features 10 mystery NFTS which entitles the holder to make a customized 1/1.",
+        "maxSupply": 444,
+        "externalMintLocation": {
+            "name": "Campfire",
+            "url": "https://campfire.exchange/"
+        },
+        "images": [
+            "/images/projects/cyberfantomicavax/image05.png",
+            "/images/projects/cyberfantomicavax/image06.png",
+            "/images/projects/cyberfantomicavax/image07.png"
+        ]
     }
 ]
