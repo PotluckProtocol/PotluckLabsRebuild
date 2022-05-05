@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { ProjectBaseInformationContext } from './api/project-base-information/ProjectBaseInformationContext';
 import { MenuItem } from './components/Menu/MenuItem';
@@ -23,6 +23,10 @@ const ErrorFallback: React.FC<FallbackProps> = ({ error }) => {
     )
 }
 
+const SmallText = styled.div`
+    color: white;
+`;
+
 const StyledExternalLinkIcon = styled(BiLinkExternal)`
     display: inline-block;
     margin-left: .75rem;
@@ -32,14 +36,31 @@ const App = () => {
 
     const user = useUser();
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const [showHint, setShowHint] = useState(false);
     const baseInformationContext = useContext(ProjectBaseInformationContext);
 
+    useEffect(() => {
+        const handle = setTimeout(() => {
+            setShowHint(true);
+        }, 3000);
+
+        return () => {
+            clearTimeout(handle);
+        }
+    }, []);
 
     if (!baseInformationContext.isInitialized || !user.isInitialized) {
         return (
-            <div>
-                <Loading width={150} size={8} />
-            </div>
+            <>
+                <div className="flex justify-center mt-12">
+                    <Loading width={150} size={8} />
+                </div>
+                {showHint && (
+                    <SmallText className="px-6 text-center flex justify-center mt-12">
+                        Uuh ooh, maybe your wallet extension is locked?
+                    </SmallText>
+                )}
+            </>
         )
     }
 
