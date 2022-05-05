@@ -16,18 +16,18 @@ export class MutateContractWrapper extends EventEmitter {
     }
 
     public async isApproved(account: string): Promise<boolean> {
-        const res = await this.serumContract.isApprovedForAll(account, this.targetContract.options.address)
+        const res = await this.serumContract.isApprovedForAll(account, this.targetContract.address)
         return res as boolean;
     }
 
     public async approveAll(account: string) {
         try {
-            const tx = await this.serumContract.setApprovalForAll(this.targetContract.options.address, true);
+            const tx = await this.serumContract.setApprovalForAll(this.targetContract.address, true);
             await tx.wait();
 
             return true;
         } catch (e) {
-            console.log(`Error on approving contract ${this.targetContract.options.address}`, e);
+            console.log(`Error on approving contract ${this.targetContract.address}`, e);
             return false;
         }
     }

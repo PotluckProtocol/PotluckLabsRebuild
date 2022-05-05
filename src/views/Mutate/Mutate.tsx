@@ -137,8 +137,12 @@ export const Mutate: React.FC<MutateProps> = ({
 
         // Button click will approve
         if (!isApproved) {
+            try {
             const approved = await mutateContext.approveAll();
             setIsApproved(approved);
+            } catch (e) {
+                console.log('Approving failed', e);
+            }
             return;
         }
 
