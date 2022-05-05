@@ -782,9 +782,8 @@
     },
     {
         "name": "Cyberfantomic",
-        "internalId": "internal::ftm::cyberfantomic",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "BLCD",
+        "contractAddress": "0x5612f86D1c0Cf420B8217f08d55dB209311A7948",
         "coverImage": "/images/projects/cyberfantomicftm/cover.png",
         "network": "FTM",
         "artistId": "blackcatdead",

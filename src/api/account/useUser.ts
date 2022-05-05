@@ -6,22 +6,10 @@ import { AccountContext } from "./AccountContext";
 export type ProviderOrSigner = ethers.providers.Provider | ethers.Signer;
 
 const PUBLIC_PROVIDER_MAP: any = {
-    137: {
-        isPublic: true,
-        web3: new ethers.providers.JsonRpcProvider('https://rpc-mainnet.matic.network'),
-    },
-    250: {
-        isPublic: true,
-        web3: new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
-    },
-    4002: {
-        isPublic: true,
-        web3: new ethers.providers.JsonRpcProvider('https://rpc.testnet.fantom.network/')
-    },
-    43114: {
-        isPublic: true,
-        web3: new ethers.providers.JsonRpcProvider('https://api.avax.network/ext/bc/C/rpc')
-    }
+    137: new ethers.providers.JsonRpcProvider('https://rpc-mainnet.matic.network'),
+    250: new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/'),
+    4002: new ethers.providers.JsonRpcProvider('https://rpc.testnet.fantom.network/'),
+    43114: new ethers.providers.JsonRpcProvider('https://api.avax.network/ext/bc/C/rpc')
 }
 
 export type User = {
@@ -41,7 +29,7 @@ const useUser = (): User => {
             return account.signer;
         } else {
             console.log('No account found, using public provider');
-            return PUBLIC_PROVIDER_MAP[networkId].web3 as ProviderOrSigner;
+            return PUBLIC_PROVIDER_MAP[networkId] as ProviderOrSigner;
         }
     }
 

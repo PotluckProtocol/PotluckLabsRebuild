@@ -1,6 +1,6 @@
 [
     {
-        "projectContractAddressOrName": "internal::ftm::cyberfantomic",
+        "projectContractAddressOrName": "0x5612f86D1c0Cf420B8217f08d55dB209311A7948",
         "type": "WHITELIST",
         "priceTokenContractAddress": "0x623d0f6a58e563C8627Da26B567269A18555aa52",
         "priceWei": "500000000000000000000",

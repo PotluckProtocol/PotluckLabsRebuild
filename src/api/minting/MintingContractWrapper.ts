@@ -111,7 +111,7 @@ export class MintingContractWrapper extends EventEmitter {
         if (typeof this.projectBaseInformation.maxSupply === 'number') {
             return this.projectBaseInformation.maxSupply;
         } else {
-            return this.contract.maxSupply();
+            return Number(this.contract.maxSupply());
         }
     }
 
@@ -133,7 +133,7 @@ export class MintingContractWrapper extends EventEmitter {
     public async getWhitelistCount(walletAddress: string): Promise<number> {
         let wlCount: number = 0;
         if (this.opts.hasWhitelist) {
-            wlCount = await this.contract.whiteListed(walletAddress);
+            wlCount = Number(await this.contract.whiteListed(walletAddress));
         }
 
         this.emit(WHITELIST_COUNT_CHANGED_EVENT, wlCount);
