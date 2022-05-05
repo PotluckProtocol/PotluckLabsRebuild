@@ -45,6 +45,11 @@ const ExternalButton = styled.button`
     border-radius: .5rem;
 `;
 
+const ExternalLink = styled.a`
+    color: #00f69d;
+    text-decoration: underline;
+`;
+
 type RouteParams = {
     contractAddressOrNameIdent: string;
 }
@@ -114,6 +119,11 @@ export const Project: React.FC = () => {
                 <div>
                     <div>Public mint on</div>
                     <div>{strTime}</div>
+                    {baseInformation.externalMintLocation && (
+                        <div>
+                            On <ExternalLink href={baseInformation.externalMintLocation.url}>{baseInformation.externalMintLocation.name}</ExternalLink>
+                        </div>
+                    )}
                 </div>
             );
         }

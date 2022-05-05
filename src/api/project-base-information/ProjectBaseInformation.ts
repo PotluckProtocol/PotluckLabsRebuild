@@ -52,6 +52,11 @@ export type ProjectBaseInformationRaw = {
         forceEndedState?: boolean;
     }
 
+    externalMintLocation?: {
+        name: string;
+        url: string;
+    }
+
     // Mutate if any
     mutate?: {
         targetContractAddress: string;
