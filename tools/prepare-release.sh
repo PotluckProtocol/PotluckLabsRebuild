@@ -4,6 +4,10 @@ CALL_DIR=$(pwd)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TARGET_DIR=${SCRIPT_DIR}/../../PotluckLabsDeploy
 
+echo "Building"
+cd $SCRIPT_DIR/..
+npm run build
+
 echo "Target directory: ${TARGET_DIR}"
 
 echo "Removing old files..."
