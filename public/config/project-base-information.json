@@ -798,8 +798,8 @@
             "/images/projects/cyberfantomicftm/image04.png"
         ],
         "mint": {
-            "gasLimit": 285000,
-            "maxPerTx": 10,
+            "gasLimit": 350000,
+            "maxPerTx": 5,
             "mintImage": "/images/projects/cyberfantomicftm/mint.gif",
             "weiCost": 30000000000000000000
         }
@@ -817,7 +817,7 @@
         "maxSupply": 444,
         "externalMintLocation": {
             "name": "Campfire",
-            "url": "https://campfire.exchange/"
+            "url": "https://campfire.exchange/collections/0xbdcc8a9461ed33eed78b1943c404471218696629/minting"
         },
         "images": [
             "/images/projects/cyberfantomicavax/image05.png",
