@@ -17,7 +17,7 @@ export class ERC20TokenWrapper extends EventEmitter {
 
     public async balanceOf(address: string): Promise<Wei> {
         const res = await this.contract.balanceOf(address);
-        return Number(res).toString() as Wei;
+        return res.toString() as Wei;
     }
 
     public async transfer(to: string, amountWei: string): Promise<void> {

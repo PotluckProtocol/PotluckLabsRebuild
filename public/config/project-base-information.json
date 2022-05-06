@@ -395,7 +395,7 @@
         },
         "mint": {
             "forceEndedState": true,
-            "weiCost": 800000000000000000,
+            "weiCost": "800000000000000000",
             "maxPerTx": 10,
             "mintImage": "/images/projects/deadfamilyavax/mint.gif",
             "gasLimit": 315000
@@ -450,7 +450,7 @@
         },
         "artistId": "slicedatup",
         "mint": {
-            "weiCost": 35000000000000000000,
+            "weiCost": "35000000000000000000",
             "maxPerTx": 10,
             "mintImage": "/images/projects/strangepigs/strangepigs.mint.gif",
             "gasLimit": 285000
@@ -476,7 +476,7 @@
             "maxPerTx": 10,
             "noWhitelist": true,
             "mintImage": "/images/projects/cotc2serumavax/serum.png",
-            "weiCost": 500000000000000000
+            "weiCost": "500000000000000000"
         },
         "mutate": {
             "targetContractAddress": "0x4Cc85D7B4fA064bF609741C822D2D1244c848c9C",
@@ -522,7 +522,7 @@
             "maxPerTx": 1,
             "noWhitelist": true,
             "mintImage": "/images/projects/cotc2superserumavax/serum.png",
-            "weiCost": 2000000000000000000
+            "weiCost": "2000000000000000000"
         },
         "overrideIpfsGateway": "https://potlucklabs.mypinata.cloud/ipfs/",
         "mutate": {
@@ -609,7 +609,7 @@
             }
         ],
         "mint": {
-            "weiCost": 30000000000000000000,
+            "weiCost": "30000000000000000000",
             "maxPerTx": 10,
             "mintImage": "/images/projects/oldblood/oldblood.mint.gif",
             "gasLimit": 285000
@@ -695,7 +695,7 @@
             "gasLimit": 285000,
             "maxPerTx": 10,
             "mintImage": "/images/projects/revolutionaryapes/mint.gif",
-            "weiCost": 25000000000000000000
+            "weiCost": "25000000000000000000"
         }
     },
     {
@@ -720,7 +720,7 @@
             "gasLimit": 285000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/acidcatftm/mint.gif",
-            "weiCost": 20000000000000000000,
+            "weiCost": "20000000000000000000",
             "forceEndedState": true
         },
         "secondaryMarketplace": {
@@ -750,7 +750,7 @@
             "gasLimit": 285000,
             "maxPerTx": 10,
             "mintImage": "/images/projects/strangegods/mint.gif",
-            "weiCost": 150000000000000000000,
+            "weiCost": "150000000000000000000",
             "noWhitelist": true
         }
     },
@@ -775,7 +775,7 @@
             "gasLimit": 350000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/acidcatavax/mint.gif",
-            "weiCost": 500000000000000000,
+            "weiCost": "500000000000000000",
             "noWhitelist": true,
             "forceEndedState": true
         }
@@ -801,7 +801,8 @@
             "gasLimit": 350000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/cyberfantomicftm/mint.gif",
-            "weiCost": 30000000000000000000
+            "weiCost": "30000000000000000000",
+            "forceEndedState": true
         }
     },
     {

@@ -15,6 +15,7 @@ import { Reveal } from "./Reveal";
 import useUser from "../../../api/account/useUser";
 import { toast } from "react-toastify";
 import { InsufficientMintingBalanceError } from "../../../api/minting/MintingContractWrapper";
+import { BigNumber, ethers } from "ethers";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -166,11 +167,17 @@ export const MintProject: React.FC<MintProjectProps> = ({
     const network = resolveNetwork(baseInformation.network);
 
     const getCost = (amount: number) => {
-        return weiToDisplayCost(
-            (baseInformation?.mint?.weiCost as number) * amount,
-            network,
-            { decimals: network.symbol === 'AVAX' ? 1 : 0 }
-        )
+
+        if (baseInformation?.mint?.weiCost) {
+            const bigNumber = BigNumber.from(baseInformation.mint.weiCost);
+            return weiToDisplayCost(
+                bigNumber.mul(amount).toString(),
+                network,
+                { decimals: network.symbol === 'AVAX' ? 1 : 0 }
+            )
+        } else {
+            return '';
+        }
     }
 
     let { mintState, whitelistCount } = mintingContext;

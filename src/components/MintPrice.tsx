@@ -9,7 +9,7 @@ export type MintPriceProps = {
     fontSizeRem: number,
     fitToHeight?: number,
     network: Network;
-    weiPrice: number;
+    weiPrice: number | string;
 }
 
 const Price = styled.span`

@@ -46,8 +46,9 @@ export class MintingContractWrapper extends EventEmitter {
             return { succeed: false };
         }
 
+        const bigNumber = ethers.BigNumber.from(mint.weiCost);
         const totalGasLimit = String(amount * mint.gasLimit);
-        const totalCostWei = String(amount * mint.weiCost);
+        const totalCostWei = String(bigNumber.mul(amount));
 
         try {
 

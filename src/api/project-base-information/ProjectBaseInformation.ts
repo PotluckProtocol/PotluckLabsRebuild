@@ -44,7 +44,7 @@ export type ProjectBaseInformationRaw = {
 
     // Minting if any
     mint?: {
-        weiCost: number;
+        weiCost: string;
         gasLimit: number;
         maxPerTx: number;
         mintImage: string;
