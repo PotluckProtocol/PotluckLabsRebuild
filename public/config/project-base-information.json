@@ -791,6 +791,7 @@
         "whitelistDate": "2022-05-06T19:00:00.000Z",
         "description": "The first generative collection from accomplished 1/1 cross-chain artist BlackCatDead. Collection features 10 mystery NFTS which entitles the holder to make a customized 1/1.",
         "maxSupply": 444,
+        "loreAudio": "/images/projects/cyberfantomicftm/Cyberfantomic_-_Soul_Lock.mp3",
         "images": [
             "/images/projects/cyberfantomicftm/image01.png",
             "/images/projects/cyberfantomicftm/image02.png",
@@ -803,6 +804,11 @@
             "mintImage": "/images/projects/cyberfantomicftm/mint.gif",
             "weiCost": "30000000000000000000",
             "forceEndedState": true
+        },
+        "secondaryMarketplace": {
+            "NFTKey": {
+                "collectionUrlPart": "cyberfantomic"
+            }
         }
     },
     {
@@ -816,6 +822,7 @@
         "releaseDate": "2022-05-06T20:00:00.000Z",
         "description": "The first generative collection from accomplished 1/1 cross-chain artist BlackCatDead. Collection features 10 mystery NFTS which entitles the holder to make a customized 1/1.",
         "maxSupply": 444,
+        "loreAudio": "/images/projects/cyberfantomicftm/Cyberfantomic_-_Soul_Lock.mp3",
         "externalMintLocation": {
             "name": "Campfire",
             "url": "https://campfire.exchange/collections/0xbdcc8a9461ed33eed78b1943c404471218696629/minting"
