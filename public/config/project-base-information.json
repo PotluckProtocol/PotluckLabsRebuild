@@ -832,5 +832,51 @@
             "/images/projects/cyberfantomicavax/image06.png",
             "/images/projects/cyberfantomicavax/image07.png"
         ]
+    },
+    {
+        "name": "Hunters Of Evil",
+        "symbol": "HOE",
+        "contractAddress": "0xD813DA9995C753145927e25b8ecc18E6bF2b6AE0",
+        "coverImage": "/images/projects/huntersofevil/cover.png",
+        "network": "FTM",
+        "artistId": "danetron",
+        "releaseDate": "2022-05-13T20:00:00.000Z",
+        "whitelistDate": "2022-05-13T19:30:00.000Z",
+        "description": "There’s something strange happening in the small town of Wessgrave. Strange peculiar things. There are monsters feeding on the people. The Hunters are man’s last defense. Fighting back evil is what they do, but for how long? How long can they fight the monstrosities of darkness before they themselves become infected with madness?",
+        "maxSupply": 777,
+        "images": [
+            "/images/projects/huntersofevil/image01.png",
+            "/images/projects/huntersofevil/image02.png",
+            "/images/projects/huntersofevil/image03.png",
+            "/images/projects/huntersofevil/image04.png"
+        ],
+        "mint": {
+            "gasLimit": 350000,
+            "maxPerTx": 10,
+            "mintImage": "/images/projects/huntersofevil/mint.gif",
+            "weiCost": "25000000000000000000"
+        }
+    },
+    {
+        "name": "Hunters Of Evil",
+        "internalId": "internal::avax::hunters",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/huntersofevilavax/cover.png",
+        "network": "AVAX",
+        "artistId": "danetron",
+        "releaseDate": "2022-05-13T20:00:00.000Z",
+        "description": "There’s something strange happening in the small town of Wessgrave. Strange peculiar things. There are monsters feeding on the people. The Hunters are man’s last defense. Fighting back evil is what they do, but for how long? How long can they fight the monstrosities of darkness before they themselves become infected with madness?",
+        "maxSupply": 333,
+        "externalMintLocation": {
+            "name": "Campfire",
+            "url": "https://campfire.exchange/collections/0xc991eb54dea1cc20d5b945aea63ffe69192cb3cf/minting"
+        },
+        "images": [
+            "/images/projects/huntersofevilavax/image01.png",
+            "/images/projects/huntersofevilavax/image02.png",
+            "/images/projects/huntersofevilavax/image03.png",
+            "/images/projects/huntersofevilavax/image04.png"
+        ]
     }
 ]
