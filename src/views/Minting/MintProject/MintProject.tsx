@@ -283,7 +283,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                                 <ProgressBar min={0} height={8} max={baseInformation.maxSupply} value={mintingContext.mintCount} />
                                 <div className="flex justify-between">
                                     <div />
-                                    <MintCount>{mintingContext.mintCount} / {baseInformation.maxSupply}</MintCount>
+                                    <MintCount>{Math.min(mintingContext.mintCount, baseInformation.maxSupply)} / {baseInformation.maxSupply}</MintCount>
                                 </div>
                             </>
                         )}

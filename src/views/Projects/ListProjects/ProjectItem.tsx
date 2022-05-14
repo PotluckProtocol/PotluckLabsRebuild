@@ -89,7 +89,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
         mintingContext &&
         ['WhitelistOpen', 'Open'].includes(mintingContext.mintState)
     );
-    let leftToBeMinted: number | undefined;
+    let leftToBeMinted: number = 0;
     if (showMintingCount) {
         leftToBeMinted = baseInformation.maxSupply - mintingContext.mintCount;
     }
@@ -97,7 +97,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
     return (
         <NavLinkContainer to={`/projects/${projectNavPart}`}>
             <CoverImage src={baseInformation.coverImage} />
-            {showMintingCount && (
+            {(showMintingCount && leftToBeMinted > 0) && (
                 <PositionedMintingBadge>
                     <span style={{ fontWeight: 800, fontSize: '.95rem', lineHeight: '.95rem' }}>{leftToBeMinted}</span>
                     <span style={{ fontSize: '.7rem', lineHeight: '.7rem' }}>&nbsp;left</span>
@@ -107,7 +107,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
             <Content>
                 <Title height={30} className="my-2">{baseInformation.name}</Title>
                 <div className="flex items-end justify-end">
-                    <ItemCountLabel><b>{baseInformation.maxSupply}</b> pieces</ItemCountLabel>
+                    <ItemCountLabel>{baseInformation.maxSupply === -1 ? (<>TBA</>) : (<><b>{baseInformation.maxSupply}</b> pieces</>)}</ItemCountLabel>
                 </div>
             </Content>
         </NavLinkContainer>

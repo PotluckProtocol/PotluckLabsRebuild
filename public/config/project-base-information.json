@@ -878,5 +878,25 @@
             "/images/projects/huntersofevilavax/image03.png",
             "/images/projects/huntersofevilavax/image04.png"
         ]
+    },
+    {
+        "name": "Nekro Demonz",
+        "internalId": "internal::ftm::nekro",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/nekrodemonzftm/cover.png",
+        "network": "FTM",
+        "artistId": "nekrofux",
+        "releaseDate": "2022-05-20T20:00:00.000Z",
+        "description": "TBA",
+        "maxSupply": -1,
+        "images": [
+            "/images/projects/nekrodemonzftm/image01.png",
+            "/images/projects/nekrodemonzftm/image02.png",
+            "/images/projects/nekrodemonzftm/image03.png",
+            "/images/projects/nekrodemonzftm/image04.png",
+            "/images/projects/nekrodemonzftm/image05.png",
+            "/images/projects/nekrodemonzftm/image06.png"
+        ]
     }
 ]
