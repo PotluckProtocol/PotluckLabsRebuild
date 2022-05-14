@@ -848,13 +848,14 @@
             "/images/projects/huntersofevil/image01.png",
             "/images/projects/huntersofevil/image02.png",
             "/images/projects/huntersofevil/image03.png",
-            "/images/projects/huntersofevil/image04.png"
+            "/images/projects/huntersofevil/image04.png",
         ],
         "mint": {
             "gasLimit": 350000,
             "maxPerTx": 10,
             "mintImage": "/images/projects/huntersofevil/mint.gif",
-            "weiCost": "25000000000000000000"
+            "weiCost": "25000000000000000000",
+            "forceEndedState": true
         }
     },
     {
