@@ -63,7 +63,9 @@ export class MintingContractWrapper extends EventEmitter {
             if (this.projectBaseInformation.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
                 await this.waitTx(this.contract.mint({ value: totalCostWei, gasLimit: totalGasLimit }));
             } else {
-                await this.waitTx(this.contract.mint(amount, { value: totalCostWei, gasLimit: totalGasLimit }));
+                // If erc20 mint no need for sending value as it is not payable method
+                const value = (this.projectBaseInformation.mint?.priceErc20Token) ? undefined : totalCostWei;
+                await this.waitTx(this.contract.mint(amount, { value, gasLimit: totalGasLimit }));
             }
 
             let tokenIds: number[] | undefined;

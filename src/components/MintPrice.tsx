@@ -1,14 +1,13 @@
 import classNames from "classnames";
+import { BigNumber, utils } from "ethers";
 import styled from "styled-components";
-import { Network } from "../types/Networks";
-import { weiToDisplayCost } from "../utils/wei-to-display-cost";
 import { TextFit } from "./TextFit";
 
 export type MintPriceProps = {
     className?: string;
     fontSizeRem: number,
     fitToHeight?: number,
-    network: Network;
+    symbol: string;
     weiPrice: number | string;
 }
 
@@ -20,11 +19,11 @@ export const MintPrice: React.FC<MintPriceProps> = ({
     className,
     fontSizeRem,
     fitToHeight,
-    network,
+    symbol,
     weiPrice
 }) => {
-    const decimals = network.symbol === 'AVAX' ? 1 : 0;
-    const price = weiToDisplayCost(weiPrice, network, { decimals, excludeSymbol: true });
+    const decimals = symbol === 'AVAX' ? 1 : 0;
+    const price = (+utils.formatEther(BigNumber.from(weiPrice))).toFixed(decimals);
 
     const symbolFontSize = fontSizeRem - 0.5;
     const priceFontSize = fontSizeRem;
@@ -32,7 +31,7 @@ export const MintPrice: React.FC<MintPriceProps> = ({
     const content = (
         <>
             <Price style={{ fontSize: `${priceFontSize}rem`, lineHeight: `${priceFontSize}rem` }}>{price}</Price>
-            <span style={{ fontSize: `${symbolFontSize}rem`, lineHeight: `${symbolFontSize}rem` }}>{network.symbol}</span>
+            <span style={{ fontSize: `${symbolFontSize}rem`, lineHeight: `${symbolFontSize}rem` }}>{symbol}</span>
         </>
     )
 

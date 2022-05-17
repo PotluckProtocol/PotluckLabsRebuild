@@ -127,7 +127,6 @@ export const MintingItem: React.FC<MintingItemProps> = ({
     }
 
     const network = resolveNetwork(baseInformation.network);
-
     const buttonText = (isUpcoming && minting.mintState === 'NotStarted') ? 'OPEN' : 'TO MINT';
 
     return (
@@ -147,7 +146,7 @@ export const MintingItem: React.FC<MintingItemProps> = ({
                 className='mt-4 mb-4'
                 fontSizeRem={2}
                 weiPrice={baseInformation.mint.weiCost}
-                network={network}
+                symbol={minting.priceSymbol}
                 fitToHeight={34}
             />
             <ToMintButton onClick={handleClick}>{buttonText}</ToMintButton>

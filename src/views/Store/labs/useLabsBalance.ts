@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, utils } from "ethers";
 import { useEffect, useState } from "react";
 import useUser from "../../../api/account/useUser";
 import { abi } from "../../../api/stores/abi";
@@ -32,9 +32,9 @@ export const useLabsBalance = (): UseLabsBalanceResult => {
                 new ethers.Contract(labsContract, abi, user.getSignerOrProvider(networkId))
             );
 
-            const balance = await wrapper.balanceOf(walletAddress);
+            const balance = await wrapper.getBalance(walletAddress);
 
-            setBalance(weiToNumber(balance, LABS_TOKEN));
+            setBalance(+utils.formatEther(balance));
             setIsLoading(false);
         }
     }

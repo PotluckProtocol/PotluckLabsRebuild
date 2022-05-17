@@ -6,6 +6,7 @@ const ICON_MAP: { [networkId: number]: string } = {
 
     // Fantom
     250: '/images/Networks/fantom.svg',
+    4002: '/images/Networks/fantom.svg',
 
     // Avalanche
     43114: '/images/Networks/avalanche.svg'

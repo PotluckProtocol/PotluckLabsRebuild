@@ -44,12 +44,14 @@ export type ProjectBaseInformationRaw = {
 
     // Minting if any
     mint?: {
+        priceErc20Token?: string;
         weiCost: string;
         gasLimit: number;
         maxPerTx: number;
         mintImage: string;
         noWhitelist?: boolean;
         forceEndedState?: boolean;
+        noReveal?: boolean;
     }
 
     externalMintLocation?: {

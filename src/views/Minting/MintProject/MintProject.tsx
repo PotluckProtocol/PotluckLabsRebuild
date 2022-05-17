@@ -15,7 +15,7 @@ import { Reveal } from "./Reveal";
 import useUser from "../../../api/account/useUser";
 import { toast } from "react-toastify";
 import { InsufficientMintingBalanceError } from "../../../api/minting/MintingContractWrapper";
-import { BigNumber, ethers } from "ethers";
+import { BigNumber, ethers, utils } from "ethers";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -137,19 +137,28 @@ export const MintProject: React.FC<MintProjectProps> = ({
         init();
     }, [contractAddress, walletAddress, baseInformation]);
 
-    const handleMintClick = async () => {
+    const doMint = async () => {
         try {
             const res = await mintingContext.mint(mintAmount);
             if (Array.isArray(res.tokenIds)) {
                 setMintedTokenIds([...mintedTokenIds, ...res.tokenIds]);
-                setIsRevealButtonVisible(true);
+                if (!baseInformation.mint?.noReveal) {
+                    setIsRevealButtonVisible(true);
+                }
             }
         } catch (e: any) {
             if (e instanceof InsufficientMintingBalanceError) {
                 toast('Insufficient wallet balance', { type: 'error', theme: 'colored' });
             }
         }
+    }
 
+    const doApproval = async () => {
+        try {
+            await mintingContext.approve(mintAmount);
+        } catch (e: any) {
+            toast('Approval failed', { type: 'error', theme: 'colored' });
+        }
     }
 
     const handleAmountChange = (value: number) => {
@@ -166,15 +175,13 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
     const network = resolveNetwork(baseInformation.network);
 
-    const getCost = (amount: number) => {
-
+    const getCost = (amount: number): string => {
         if (baseInformation?.mint?.weiCost) {
-            const bigNumber = BigNumber.from(baseInformation.mint.weiCost);
-            return weiToDisplayCost(
-                bigNumber.mul(amount).toString(),
-                network,
-                { decimals: network.symbol === 'AVAX' ? 1 : 0 }
-            )
+            const symbol = mintingContext.priceSymbol;
+            const decimals = symbol === 'AVAX' ? 1 : 0
+            const totalAmount = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
+
+            return (+utils.formatEther(totalAmount)).toFixed(decimals) + ' ' + symbol;
         } else {
             return '';
         }
@@ -191,16 +198,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
     const isConnected = !!user.account;
     const wrongNetwork = network.networkId !== user.account?.network.networkId;
 
-    let mintButtonText = 'Mint';
-    if (soldOut) {
-        mintButtonText = 'SOLD OUT!';
-    } else if (!isConnected) {
-        mintButtonText = 'Not connected';
-    } else if (wrongNetwork) {
-        mintButtonText = 'Wrong network';
-    }
-
-    const mintButtonDisabled = (
+    let mintButtonDisabled = (
         !isConnected ||
         !isMintableState ||
         wrongNetwork ||
@@ -208,6 +206,31 @@ export const MintProject: React.FC<MintProjectProps> = ({
         mintAmount === 0 ||
         mintingContext.isMintInProgress
     );
+
+    let mintButtonHandler: () => void = doMint;
+    let mintButtonText = 'Mint';
+    if (soldOut) {
+        mintButtonText = 'SOLD OUT!';
+    } else if (!isConnected) {
+        mintButtonText = 'Not connected';
+    } else if (wrongNetwork) {
+        mintButtonText = 'Wrong network';
+    } else if (mintingContext.isRequiringApproval) {
+
+        // If mint is based on any ERC20 token, not native
+
+        const totalPrice = mintingContext.countTotalPrice(mintAmount);
+        if (mintingContext.isApproving) {
+            mintButtonDisabled = true;
+            mintButtonText = 'Approving...';
+        } else if (totalPrice.gt(mintingContext.balance)) {
+            mintButtonDisabled = true;
+            mintButtonText = 'Insufficient balance';
+        } else if (totalPrice.gt(mintingContext.allowance)) {
+            mintButtonText = 'Approve';
+            mintButtonHandler = doApproval;
+        }
+    }
 
     const info: ReactNode = (
         <>
@@ -230,6 +253,15 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <div className="md:hidden mb-4 flex justify-center">
                             <NetworkIcon size={50} networkId={network.networkId} />
                         </div>
+
+                        {!!baseInformation.mint?.priceErc20Token && (
+                            <InfoBox className="mb-3">
+                                <InfoBoxHeader>ERC20 token mint!</InfoBoxHeader>
+                                <InfoBoxContent>
+                                    This project is minted with ERC20 ({mintingContext.priceSymbol}) token. Approval is required before minting!
+                                </InfoBoxContent>
+                            </InfoBox>
+                        )}
 
                         {mintState === 'Open' && (
                             <InfoBox className="mb-3">
@@ -303,7 +335,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <LabelText>Price:</LabelText>
                         <StyledMintPrice
                             fontSizeRem={2.5}
-                            network={network}
+                            symbol={mintingContext.priceSymbol}
                             weiPrice={baseInformation.mint.weiCost}
                         />
 
@@ -314,7 +346,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         </div>
 
                         <div className="mt-6 md:hidden">
-                            <StyledRoundedButton disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
+                            <StyledRoundedButton disabled={mintButtonDisabled} onClick={mintButtonHandler}>{mintButtonText}</StyledRoundedButton>
                             <div>{info}</div>
 
                             {isRevealButtonVisible && (
@@ -330,7 +362,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                     <ImageContainer className="p-4 md:p-8 pt-0 md:pt-0 order-0 md:order-none">
                         <PositionedNetworkIcon className="hidden md:inline-block" size={40} networkId={network.networkId} />
                         <Image className="w-full md:w-auto rounded-xl" src={baseInformation.mint?.mintImage} />
-                        <StyledRoundedButton className="hidden md:inline-block" disabled={mintButtonDisabled} onClick={handleMintClick}>{mintButtonText}</StyledRoundedButton>
+                        <StyledRoundedButton className="hidden md:inline-block" disabled={mintButtonDisabled} onClick={mintButtonHandler}>{mintButtonText}</StyledRoundedButton>
                         <div className="hidden md:block">{info}</div>
                         {isRevealButtonVisible && (
                             <div className="hidden md:block">

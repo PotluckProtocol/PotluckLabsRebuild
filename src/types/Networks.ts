@@ -37,5 +37,14 @@ export const NETWORKS: Network[] = [
             name: 'Polygonscan',
             url: 'https://polygonscan.com/'
         }
+    }, {
+        name: 'Fantom Testnet',
+        symbol: 'FTM',
+        networkId: 4002,
+        decimals: 18,
+        blockchainExplorer: {
+            name: 'FTMScan',
+            url: 'https://testnet.ftmscan.com/'
+        }
     }
 ]

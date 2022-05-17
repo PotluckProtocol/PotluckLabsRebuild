@@ -881,6 +881,30 @@
         ]
     },
     {
+        "name": "Potluck Invaders",
+        "symbol": "PLIV",
+        "contractAddress": "0x76607a8dFa0599bB0A0359305F110012FC32F2be",
+        "coverImage": "/images/projects/potluckinvaders/cover.png",
+        "network": "FTM",
+        "artistId": "notanumber",
+        "releaseDate": "2022-05-17T17:00:00.000Z",
+        "description": [
+            "Potluck Invaders is based on Love Invaders, an interactive NFT created by Princess Tuti and n0t4number. Original music by Steven Vinyl.",
+            "First ever $LABS mint!"
+        ],
+        "maxSupply": 1000,
+        "images": [
+            "/images/projects/potluckinvaders/cover.png"
+        ],
+        "mint": {
+            "priceErc20Token": "0x623d0f6a58e563C8627Da26B567269A18555aa52",
+            "gasLimit": 350000,
+            "maxPerTx": 1,
+            "mintImage": "/images/projects/potluckinvaders/cover.png",
+            "weiCost": "100000000000000000000"
+        }
+    },
+    {
         "name": "Nekro Demonz",
         "internalId": "internal::ftm::nekro",
         "symbol": "",
