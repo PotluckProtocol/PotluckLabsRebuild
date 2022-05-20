@@ -1,6 +1,6 @@
 [
     {
-        "projectContractAddressOrName": "internal::ftm::nekro",
+        "projectContractAddressOrName": "0x0c60C064fd949E6CEAA0ef9F7E4511fe70eb4189",
         "type": "WHITELIST",
         "priceTokenContractAddress": "0x623d0f6a58e563C8627Da26B567269A18555aa52",
         "priceWei": "500000000000000000000",

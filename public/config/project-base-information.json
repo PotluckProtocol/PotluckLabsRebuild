@@ -906,9 +906,8 @@
     },
     {
         "name": "Nekro Demonz",
-        "internalId": "internal::ftm::nekro",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "NKDZ",
+        "contractAddress": "0x0c60C064fd949E6CEAA0ef9F7E4511fe70eb4189",
         "coverImage": "/images/projects/nekrodemonzftm/cover.png",
         "network": "FTM",
         "artistId": "nekrofux",
@@ -923,7 +922,13 @@
             "/images/projects/nekrodemonzftm/image04.png",
             "/images/projects/nekrodemonzftm/image05.png",
             "/images/projects/nekrodemonzftm/image06.png"
-        ]
+        ],
+        "mint": {
+            "gasLimit": 320000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/nekrodemonzftm/mint.gif",
+            "weiCost": "30000000000000000000"
+        }
     },
     {
         "name": "Nekro Demonz",
@@ -938,7 +943,7 @@
         "maxSupply": 222,
         "externalMintLocation": {
             "name": "Campfire",
-            "url": "https://campfire.exchange"
+            "url": "https://campfire.exchange/collections/0xbef231d0138547c77807aa9145a91d09e99a2667/minting"
         },
         "images": [
             "/images/projects/nekrodemonzavax/image01.png",
