@@ -2,7 +2,7 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import useUser from "../../api/account/useUser";
-import { MutateContext } from "../../api/mutate/MutateContext";
+import { MAX_SERUMS_IDS_LOADED, MutateContext } from "../../api/mutate/MutateContext";
 import { ProjectBaseInformation } from "../../api/project-base-information/ProjectBaseInformation";
 import { RoundedButton } from "../../components/RoundedButton";
 import Select, { Options } from 'react-select';
@@ -99,6 +99,7 @@ export const Mutate: React.FC<MutateProps> = ({
     const [revealedImageUrl, setRevealedImageUrl] = useState<string | null>(null);
     const mutateContext = useContext(MutateContext);
     const [loadedRevealImageError, loadedRevealImageSrc, resetLoadedReveal] = useLoadImageBackground(revealedImageUrl);
+    const hasMoreIdsThanVisible = mutateContext.serumBalance > MAX_SERUMS_IDS_LOADED;
 
     const walletAddress = user.account?.walletAddress;
     const serumNotation = (baseInformation.mutate?.serumUnitNotation)
@@ -138,8 +139,8 @@ export const Mutate: React.FC<MutateProps> = ({
         // Button click will approve
         if (!isApproved) {
             try {
-            const approved = await mutateContext.approveAll();
-            setIsApproved(approved);
+                const approved = await mutateContext.approveAll();
+                setIsApproved(approved);
             } catch (e) {
                 console.log('Approving failed', e);
             }
@@ -218,6 +219,9 @@ export const Mutate: React.FC<MutateProps> = ({
             <>
                 <div className="my-3">
                     You have {mutateContext.serumIds.length} {fixedSerumNotation}.
+                    {hasMoreIdsThanVisible && (
+                        <p>{`For performance reasons we list only your first ${MAX_SERUMS_IDS_LOADED} ${serumNotation}s`}</p>
+                    )}
                 </div>
 
                 <div className={containerClasses}>

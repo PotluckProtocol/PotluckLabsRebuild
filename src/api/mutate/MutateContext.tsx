@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import useUser from "../account/useUser";
 import { ProjectBaseInformationContext } from "../project-base-information/ProjectBaseInformationContext";
 import { MutateContractWrapper } from "./MutateContractWrapper";
@@ -11,6 +11,8 @@ export type InitMutate = {
     serumContractAddress: string;
 }
 
+export const MAX_SERUMS_IDS_LOADED = 10;
+
 export type MutateContextType = {
     init: (opts: InitMutate) => Promise<void>;
     approveAll: () => Promise<boolean>;
@@ -21,6 +23,7 @@ export type MutateContextType = {
     isMutating: boolean;
     isInitialized: boolean;
 
+    serumBalance: number;
     serumIds: number[];
 }
 
@@ -33,6 +36,7 @@ export const MutateProvider: React.FC = ({ children }) => {
     const [isApproving, setIsApproving] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
     const [isMutating, setIsMutating] = useState(false);
+    const [serumBalance, setSerumBalance] = useState(0);
     const [serumIds, setSerumIds] = useState<number[]>([]);
     const [mutateWrapper, setMutateWrapper] = useState<MutateContractWrapper>();
 
@@ -47,8 +51,10 @@ export const MutateProvider: React.FC = ({ children }) => {
             return;
         }
 
-        const serumIds = await mutateWrapper.getSerumIds(walletAddress);
-        setSerumIds(serumIds);
+        const { ids, totalBalance } = await mutateWrapper.getSerumIds(walletAddress, MAX_SERUMS_IDS_LOADED);
+
+        setSerumIds(ids);
+        setSerumBalance(totalBalance);
     }
 
     const init = async (opts: InitMutate): Promise<void> => {
@@ -82,10 +88,20 @@ export const MutateProvider: React.FC = ({ children }) => {
             return { succeed: false };
         }
 
+        const { walletAddress } = user.account;
+
         setIsMutating(true);
         try {
-            const res = await mutateWrapper.mutate(user.account.walletAddress, serumTokenId);
-            await getSerumIds(mutateWrapper, user.account.walletAddress);
+            const res = await mutateWrapper.mutate(walletAddress, serumTokenId);
+
+            const newSerumIds = serumIds.filter(id => id !== serumTokenId);
+            setSerumBalance(serumBalance - 1);
+            setSerumIds(newSerumIds);
+
+            if (newSerumIds.length === 0) {
+                await getSerumIds(mutateWrapper, walletAddress);
+            }
+
             return res;
         } finally {
             setIsMutating(false);
@@ -126,7 +142,8 @@ export const MutateProvider: React.FC = ({ children }) => {
         isApproving,
         isMutating,
         isInitialized,
-        serumIds
+        serumIds,
+        serumBalance
     }
 
     return (

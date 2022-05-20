@@ -74,18 +74,18 @@ export class MutateContractWrapper extends EventEmitter {
         }
     }
 
-    public async getSerumIds(account: string): Promise<number[]> {
-        const serumBalance = await this.serumContract.balanceOf(account);
-
+    public async getSerumIds(account: string, maxCount?: number): Promise<{ ids: number[], totalBalance: number }> {
+        const serumBalance = Number(await this.serumContract.balanceOf(account));
+        const count = typeof maxCount === 'number' ? Math.min(maxCount, serumBalance) : serumBalance;
         const ids: number[] = [];
 
-        for (let i = 0; i < Number(serumBalance); i++) {
+        for (let i = 0; i < count; i++) {
             const tokenId = await this.serumContract.tokenOfOwnerByIndex(account, i);
 
             ids.push(Number(tokenId));
         }
 
-        return ids;
+        return { ids, totalBalance: serumBalance };
     }
 
     public clearListeners(): void {
