@@ -46,3 +46,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#walletconnect-qrcode-modal .walletconnect-modal__base {
+  background: rgb(3, 26, 18);
+  background: linear-gradient(0deg, rgba(3, 26, 18, 1) 0%, rgba(12, 105, 71, 1) 100%);
+}
+
+
+#walletconnect-qrcode-modal .walletconnect-qrcode__text {
+  color: #fff;
+}
+
+#walletconnect-qrcode-text+div {
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+#walletconnect-qrcode-modal .walletconnect-modal__mobile__toggle_selector {
+  background: #39a27b;
+  color: white;
+}
+
+#walletconnect-qrcode-modal .walletconnect-modal__mobile__toggle {
+  background: #063021;
+  color: white;
+}
+
+#walletconnect-qrcode-modal .walletconnect-modal__footer a {
+  color: white;
+}
+
+#walletconnect-qrcode-modal .walletconnect-connect__button__text {
+  color: white;
+}
+
+#walletconnect-qrcode-modal .walletconnect-search__input {
+  color: black;
+}

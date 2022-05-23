@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
-import { AccountContext } from "../api/account/AccountContext";
+import { AccountContext, WalletType } from "../api/account/AccountContext";
 import Button from "./Button";
+import { ChooseWalletModal } from "./ChooseWalletModal";
 import { NetworkIcon } from "./NetworkIcon";
 
 const toShortWallet = (walletAddr: string): string => {
@@ -40,13 +41,19 @@ const NetworkButton = styled(Button)`
 
 export const ConnectWalletButton: React.FC = () => {
     const accountContext = useContext(AccountContext);
+    const [showChooseWalletModal, setShowChooseWalletModal] = useState(false);
 
     const handleButtonClick = () => {
         if (accountContext.account) {
             accountContext.disconnect();
         } else {
-            accountContext.connect();
+            setShowChooseWalletModal(true);
         }
+    }
+
+    const handleWalletTypeChosen = (walletType: WalletType) => {
+        accountContext.connect(walletType);
+        setShowChooseWalletModal(false);
     }
 
     let connectButtonText = 'Connect Wallet';
@@ -71,6 +78,8 @@ export const ConnectWalletButton: React.FC = () => {
                     </NetworkButton>
                 )}
             </ButtonGroup>
+
+            {showChooseWalletModal && (<ChooseWalletModal onClose={() => setShowChooseWalletModal(false)} onWalletChosen={handleWalletTypeChosen} />)}
         </div>
     )
 }
