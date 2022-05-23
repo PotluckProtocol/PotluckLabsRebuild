@@ -952,5 +952,29 @@
             "/images/projects/nekrodemonzavax/image03.png",
             "/images/projects/nekrodemonzavax/image04.png"
         ]
+    },
+    {
+        "name": "Potluck Community Collection",
+        "symbol": "PCMC",
+        "contractAddress": "0x487d4ff88a126D55A68CA99B58908176591A4f1A",
+        "coverImage": "/images/projects/communitycollection/cover.png",
+        "network": "FTM",
+        "artistId": "community",
+        "releaseDate": "2022-05-23T20:00:00.000Z",
+        "description": "Collection of Community Artists Tribute pieces to various Potluck Labs Collections.",
+        "maxSupply": 148,
+        "images": [
+            "/images/projects/communitycollection/image02.png",
+            "/images/projects/communitycollection/image03.png",
+            "/images/projects/communitycollection/image04.png",
+            "/images/projects/communitycollection/image05.png",
+            "/images/projects/communitycollection/image06.png"
+        ],
+        "mint": {
+            "gasLimit": 320000,
+            "maxPerTx": 1,
+            "mintImage": "/images/projects/communitycollection/mint.gif",
+            "weiCost": "55000000000000000000"
+        }
     }
 ]
