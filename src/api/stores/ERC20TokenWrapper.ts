@@ -40,28 +40,10 @@ export class ERC20TokenWrapper extends EventEmitter {
 
     public async transfer(to: string, amountWei: string): Promise<void> {
         try {
-            const feeData = await this.contract.provider.getFeeData();
+            const gasLimit = await this.contract.estimateGas.transfer(to, amountWei);
+            const gasPrice = await this.contract.provider.getGasPrice();
 
-
-            /** We must resolve the fee data ourselves as mobile metamask has 
-              * problems sending erc20 tokens without site suggested data.
-              * @see https://github.com/MetaMask/metamask-mobile/issues/3999 
-              */
-            let maxPriorityFeePerGas: BigNumber | undefined;
-            let maxFeePerGas: BigNumber | undefined;
-            if (feeData.maxFeePerGas && feeData.maxPriorityFeePerGas) {
-                const halfOfFeePerGas = feeData.maxFeePerGas.div(BigNumber.from(2));
-                maxFeePerGas = feeData.maxFeePerGas;
-                maxPriorityFeePerGas = halfOfFeePerGas.gt(feeData.maxPriorityFeePerGas)
-                    ? halfOfFeePerGas
-                    : maxPriorityFeePerGas
-            }
-
-            const tx = await this.contract.transfer(to, amountWei, {
-                maxFeePerGas,
-                maxPriorityFeePerGas
-            });
-
+            const tx = await this.contract.transfer(to, amountWei, { gasPrice, gasLimit });
             await tx.wait();
         } catch (e) {
             console.log('Tranfer failed', e);
