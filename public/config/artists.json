@@ -135,5 +135,12 @@
     {
         "id": "community",
         "name": "Potluck Community Artists"
+    },
+    {
+        "id": "sickinvidual",
+        "name": "SICKINDIVIDUAL",
+        "social": {
+            "twitter": "https://twitter.com/FelipeUrteaga"
+        }
     }
 ]

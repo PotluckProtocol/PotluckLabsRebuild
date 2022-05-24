@@ -974,7 +974,28 @@
             "gasLimit": 320000,
             "maxPerTx": 1,
             "mintImage": "/images/projects/communitycollection/mint.gif",
-            "weiCost": "55000000000000000000"
+            "weiCost": "55000000000000000000",
+            "forceEndedState": true
         }
+    },
+    {
+        "name": "Obsession",
+        "internalId": "internal::ftm::obsession",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/obsessionftm/cover.png",
+        "network": "FTM",
+        "artistId": "sickinvidual",
+        "releaseDate": "2022-05-27T20:00:00.000Z",
+        "whitelistDate": "2022-05-27T19:30:00.000Z",
+        "description": "TBA",
+        "maxSupply": 900,
+        "images": [
+            "/images/projects/obsessionftm/image01.png",
+            "/images/projects/obsessionftm/image02.png",
+            "/images/projects/obsessionftm/image03.png",
+            "/images/projects/obsessionftm/image04.png",
+            "/images/projects/obsessionftm/image05.png"
+        ]
     }
 ]
