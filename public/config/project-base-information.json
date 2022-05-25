@@ -997,5 +997,27 @@
             "/images/projects/obsessionftm/image04.png",
             "/images/projects/obsessionftm/image05.png"
         ]
+    },
+    {
+        "name": "Obsession",
+        "internalId": "internal::avax::obsession",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/obsessionavax/cover.png",
+        "network": "AVAX",
+        "artistId": "sickinvidual",
+        "releaseDate": "2022-05-27T20:00:00.000Z",
+        "description": "TBA",
+        "maxSupply": 300,
+        "images": [
+            "/images/projects/obsessionavax/image01.png",
+            "/images/projects/obsessionavax/image02.png",
+            "/images/projects/obsessionavax/image03.png",
+            "/images/projects/obsessionavax/image04.png"
+        ],
+        "externalMintLocation": {
+            "name": "Campfire",
+            "url": "https://campfire.exchange"
+        }
     }
 ]

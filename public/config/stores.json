@@ -2,7 +2,17 @@
     {
         "projectContractAddressOrName": "internal::ftm::obsession",
         "type": "WHITELIST",
+        "network": "FTM",
         "priceTokenContractAddress": "0x623d0f6a58e563C8627Da26B567269A18555aa52",
+        "priceWei": "500000000000000000000",
+        "targetWalletAddress": "0xC53D36a078217247F9Ef13f10D18BE906C1BC32b",
+        "saleEndsOn": "2022-05-25T20:00:00.000Z"
+    },
+    {
+        "projectContractAddressOrName": "internal::avax::obsession",
+        "type": "WHITELIST",
+        "network": "AVAX",
+        "priceTokenContractAddress": "0xEd37405dE14e39f72e4A405DE32B6B90C96B97e5",
         "priceWei": "500000000000000000000",
         "targetWalletAddress": "0xC53D36a078217247F9Ef13f10D18BE906C1BC32b",
         "saleEndsOn": "2022-05-25T20:00:00.000Z"
