@@ -62,6 +62,10 @@ code {
   margin: 0 auto;
 }
 
+#walletconnect-qrcode-text+div svg {
+  box-shadow: rgb(34 233 161 / 68%) 1px 1px 40px 1px;
+}
+
 #walletconnect-qrcode-modal .walletconnect-modal__mobile__toggle_selector {
   background: #39a27b;
   color: white;
