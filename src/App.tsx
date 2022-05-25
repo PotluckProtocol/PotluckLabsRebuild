@@ -34,32 +34,15 @@ const StyledExternalLinkIcon = styled(BiLinkExternal)`
 
 const App = () => {
 
-    const user = useUser();
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    const [showHint, setShowHint] = useState(false);
     const baseInformationContext = useContext(ProjectBaseInformationContext);
 
-    useEffect(() => {
-        const handle = setTimeout(() => {
-            setShowHint(true);
-        }, 3000);
-
-        return () => {
-            clearTimeout(handle);
-        }
-    }, []);
-
-    if (!baseInformationContext.isInitialized || !user.isInitialized) {
+    if (!baseInformationContext.isInitialized) {
         return (
             <>
                 <div className="flex justify-center mt-12">
                     <Loading width={150} size={8} />
                 </div>
-                {showHint && (
-                    <SmallText className="px-6 text-center flex justify-center mt-12">
-                        Uuh ooh, maybe your wallet extension is locked?
-                    </SmallText>
-                )}
             </>
         )
     }

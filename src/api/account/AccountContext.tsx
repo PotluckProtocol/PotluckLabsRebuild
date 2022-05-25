@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import { resolveNetwork } from "../network/resolveNetwork";
 import { Account } from "./Account"
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { toast } from "react-toastify";
 
 export type WalletType = 'MetaMask' | 'WalletConnect';
 
@@ -13,7 +14,6 @@ export type AccountContextType = {
     disconnect: () => Promise<void>;
     isConnecting: boolean;
     isInitialized: boolean;
-    walletConnectUri: string | null;
 }
 
 const WALLET_CONNECT_KEY = 'walletconnect';
@@ -24,7 +24,6 @@ export const AccountContext = createContext<AccountContextType>(null as any);
 export const AccountProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
     const [account, setAccount] = useState<Account | null>(null);
-    const [walletConnectUri, setWalletConnectUri] = useState<string | null>(null);
     const [connecting, setConnecting] = useState<boolean>(false);
     const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
@@ -49,7 +48,8 @@ export const AccountProvider: React.FC<PropsWithChildren<{}>> = ({ children }) =
             if (walletType === 'MetaMask') {
                 const isMetaMask = (window as any).ethereum?.isMetaMask;
                 if (!isMetaMask) {
-                    //err                
+                    toast('No MetaMask found', { type: 'error', theme: 'colored' });
+                    return;
                 }
 
                 walletProvider = (window as any).ethereum as any;
@@ -123,8 +123,7 @@ export const AccountProvider: React.FC<PropsWithChildren<{}>> = ({ children }) =
         isConnecting: connecting,
         isInitialized,
         connect,
-        disconnect,
-        walletConnectUri
+        disconnect
     }
 
     return (
