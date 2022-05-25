@@ -131,5 +131,16 @@
         "social": {
             "twitter": "https://twitter.com/n0t4numb3r"
         }
+    },
+    {
+        "id": "community",
+        "name": "Potluck Community Artists"
+    },
+    {
+        "id": "sickinvidual",
+        "name": "SICKINDIVIDUAL",
+        "social": {
+            "twitter": "https://twitter.com/FelipeUrteaga"
+        }
     }
 ]

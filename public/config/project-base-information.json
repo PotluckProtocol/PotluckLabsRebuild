@@ -952,5 +952,72 @@
             "/images/projects/nekrodemonzavax/image03.png",
             "/images/projects/nekrodemonzavax/image04.png"
         ]
+    },
+    {
+        "name": "Potluck Community Collection",
+        "symbol": "PCMC",
+        "contractAddress": "0x487d4ff88a126D55A68CA99B58908176591A4f1A",
+        "coverImage": "/images/projects/communitycollection/cover.png",
+        "network": "FTM",
+        "artistId": "community",
+        "releaseDate": "2022-05-23T20:00:00.000Z",
+        "description": "Collection of Community Artists Tribute pieces to various Potluck Labs Collections.",
+        "maxSupply": 148,
+        "images": [
+            "/images/projects/communitycollection/image02.png",
+            "/images/projects/communitycollection/image03.png",
+            "/images/projects/communitycollection/image04.png",
+            "/images/projects/communitycollection/image05.png",
+            "/images/projects/communitycollection/image06.png"
+        ],
+        "mint": {
+            "gasLimit": 320000,
+            "maxPerTx": 1,
+            "mintImage": "/images/projects/communitycollection/mint.gif",
+            "weiCost": "55000000000000000000",
+            "forceEndedState": true
+        }
+    },
+    {
+        "name": "Obsession",
+        "internalId": "internal::ftm::obsession",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/obsessionftm/cover.png",
+        "network": "FTM",
+        "artistId": "sickinvidual",
+        "releaseDate": "2022-05-27T20:00:00.000Z",
+        "whitelistDate": "2022-05-27T19:30:00.000Z",
+        "description": "TBA",
+        "maxSupply": 900,
+        "images": [
+            "/images/projects/obsessionftm/image01.png",
+            "/images/projects/obsessionftm/image02.png",
+            "/images/projects/obsessionftm/image03.png",
+            "/images/projects/obsessionftm/image04.png",
+            "/images/projects/obsessionftm/image05.png"
+        ]
+    },
+    {
+        "name": "Obsession",
+        "internalId": "internal::avax::obsession",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/obsessionavax/cover.png",
+        "network": "AVAX",
+        "artistId": "sickinvidual",
+        "releaseDate": "2022-05-27T20:00:00.000Z",
+        "description": "TBA",
+        "maxSupply": 300,
+        "images": [
+            "/images/projects/obsessionavax/image01.png",
+            "/images/projects/obsessionavax/image02.png",
+            "/images/projects/obsessionavax/image03.png",
+            "/images/projects/obsessionavax/image04.png"
+        ],
+        "externalMintLocation": {
+            "name": "Campfire",
+            "url": "https://campfire.exchange"
+        }
     }
 ]

@@ -40,7 +40,10 @@ export class ERC20TokenWrapper extends EventEmitter {
 
     public async transfer(to: string, amountWei: string): Promise<void> {
         try {
-            const tx = await this.contract.transfer(to, amountWei);
+            const gasLimit = await this.contract.estimateGas.transfer(to, amountWei);
+            const gasPrice = await this.contract.provider.getGasPrice();
+
+            const tx = await this.contract.transfer(to, amountWei, { gasPrice, gasLimit });
             await tx.wait();
         } catch (e) {
             console.log('Tranfer failed', e);

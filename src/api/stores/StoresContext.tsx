@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { Store } from "./Store";
+import { resolveNetwork } from "../network/resolveNetwork";
+import { RawStore, Store } from "./Store";
 
 export type StoresContextType = {
     isInitialized: boolean;
@@ -15,11 +16,12 @@ export const StoresProvider: React.FC = ({ children }) => {
     useEffect(() => {
         const getConfigs = async () => {
             const res = await fetch('/config/stores.json')
-            const configs = await res.json() as any[];
+            const configs = await res.json() as RawStore[];
 
             // Replace string dates with Date objects
             const hydratedConfigs = configs.map(config => ({
                 ...config,
+                network: resolveNetwork(config.network),
                 saleEndsOn: new Date(config.saleEndsOn)
             }));
 

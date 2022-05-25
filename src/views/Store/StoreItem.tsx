@@ -158,7 +158,7 @@ export const StoreItem: React.FC<StoreProps> = ({
     }
 
     const itemPriceNumeric = weiToNumber(storeConfig.priceWei, LABS_TOKEN);
-    const isWrongNetwork = user.account?.network.networkId !== 250;
+    const isWrongNetwork = user.account?.network.networkId !== storeConfig.network.networkId;
     const nowMs = Date.now();
     const saleActive = storeConfig.saleEndsOn.valueOf() > nowMs;
     const accountHasEnoughBalance = accountLabsBalance >= itemPriceNumeric;
@@ -198,15 +198,13 @@ export const StoreItem: React.FC<StoreProps> = ({
                 <BuyButton className='mt-2' disabled={buyButtonDisabled} onClick={handleClick}>{isBuying ? 'Buying...' : 'Buy'}</BuyButton>
 
                 <Disclaimer className='mt-2'>$LABS are sent into Potluck Labs wallet directly. Whitelist spot will be available on mint.</Disclaimer>
-
-
             </Container>
 
             {isWrongNetwork && (
                 <Shroud className="text-center flex justify-center items-center">
                     <div>
-                        <NetworkIcon className="inline-block" networkId={250} />
-                        <div className="mt-6">Currently only available on Fantom Opera</div>
+                        <NetworkIcon className="inline-block" networkId={storeConfig.network.networkId} />
+                        <div className="mt-6">Available on {storeConfig.network.name}</div>
                     </div>
                 </Shroud>
             )}
