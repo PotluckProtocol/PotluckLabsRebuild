@@ -1000,7 +1000,8 @@
             "gasLimit": 320000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/obsessionftm/mint.gif",
-            "weiCost": "30000000000000000000"
+            "weiCost": "30000000000000000000",
+            "forceEndedState": true
         }
     },
     {
