@@ -110,7 +110,7 @@ export const Project: React.FC = () => {
     }
 
     let comingSoonHeader: ReactNode;
-    if (!isMinting && !baseInformation.contractAddress) {
+    if (!isMinting && (!baseInformation.contractAddress || baseInformation.externalMintLocation)) {
         let timePart: ReactNode = <div>Public mint coming soon!</div>;
         if (baseInformation.releaseDate) {
             const m = moment(baseInformation.releaseDate)

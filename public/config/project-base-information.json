@@ -980,34 +980,38 @@
     },
     {
         "name": "Obsession",
-        "internalId": "internal::ftm::obsession",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "OBSS",
+        "contractAddress": "0x96AE96b5f9068DCb6A532018Ee60fFcdD4F33085",
         "coverImage": "/images/projects/obsessionftm/cover.png",
         "network": "FTM",
         "artistId": "sickinvidual",
         "releaseDate": "2022-05-27T20:00:00.000Z",
         "whitelistDate": "2022-05-27T19:30:00.000Z",
-        "description": "TBA",
-        "maxSupply": 900,
+        "description": "Psychedelic Creatures of the SickIndividual world enchanted by the beauty and power of the Fantom and Avalanche Jewels. Paying tribute to 15 artists of both worlds and paying tribute to cultural influences of our childhood. 1200 piece Omnichain collection split between Fantom and Avalanche.",
+        "maxSupply": 901,
         "images": [
             "/images/projects/obsessionftm/image01.png",
             "/images/projects/obsessionftm/image02.png",
             "/images/projects/obsessionftm/image03.png",
             "/images/projects/obsessionftm/image04.png",
             "/images/projects/obsessionftm/image05.png"
-        ]
+        ],
+        "mint": {
+            "gasLimit": 320000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/obsessionftm/mint.gif",
+            "weiCost": "30000000000000000000"
+        }
     },
     {
         "name": "Obsession",
-        "internalId": "internal::avax::obsession",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "OBSS",
+        "contractAddress": "0x19a166CA2a735851A08fDd7732d105E97Ce64903",
         "coverImage": "/images/projects/obsessionavax/cover.png",
         "network": "AVAX",
         "artistId": "sickinvidual",
         "releaseDate": "2022-05-27T20:00:00.000Z",
-        "description": "TBA",
+        "description": "Psychedelic Creatures of the SickIndividual world enchanted by the beauty and power of the Fantom and Avalanche Jewels. Paying tribute to 15 artists of both worlds and paying tribute to cultural influences of our childhood. 1200 piece Omnichain collection split between Fantom and Avalanche.",
         "maxSupply": 300,
         "images": [
             "/images/projects/obsessionavax/image01.png",
@@ -1017,7 +1021,7 @@
         ],
         "externalMintLocation": {
             "name": "Campfire",
-            "url": "https://campfire.exchange"
+            "url": "https://campfire.exchange/collections/0x19a166CA2a735851A08fDd7732d105E97Ce64903/minting"
         }
     }
 ]
