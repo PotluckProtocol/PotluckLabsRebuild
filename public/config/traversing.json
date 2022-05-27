@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Nekro Demonz",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x0c60C064fd949E6CEAA0ef9F7E4511fe70eb4189"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0xbef231d0138547c77807aa9145a91d09e99a2667"
+            }
+        ]
+    }
+]
