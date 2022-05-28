@@ -1,6 +1,7 @@
 [
     {
-        "name": "Nekro Demonz",
+        "id": "nekrodemonz",
+        "projectName": "Nekro Demonz",
         "chains": [
             {
                 "network": "FTM",
@@ -9,6 +10,20 @@
             {
                 "network": "AVAX",
                 "contractAddress": "0xbef231d0138547c77807aa9145a91d09e99a2667"
+            }
+        ]
+    },
+    {
+        "id": "obsession",
+        "projectName": "Obsession",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x96AE96b5f9068DCb6A532018Ee60fFcdD4F33085"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x19a166CA2a735851A08fDd7732d105E97Ce64903"
             }
         ]
     }

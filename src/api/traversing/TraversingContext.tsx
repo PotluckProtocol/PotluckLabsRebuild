@@ -12,7 +12,8 @@ export type InitTraversing = {
 }
 
 export type TraversingContextType = {
-    currentlyTraversingTokenIds: number[];
+    isInitialized: boolean;
+    currentlyTraversingTokens: { tokenId: number, targetNetworkId: number }[];
     walletTokens: LoadedToken[];
     walletBalances: BalanceMap;
     init: (opts: InitTraversing) => Promise<void>;
@@ -34,14 +35,14 @@ type LoadedToken = { tokenId: number, currentNetworkId: number };
 export const TraversingProvider: React.FC = ({ children }) => {
 
     const user = useUser();
-    const [currentlyTraversingTokenIds, setCurrentlyTraversingTokenIds] = useState<number[]>([]);
+    const [currentlyTraversingTokens, setCurrentlyTraversingTokens] = useState<TraversingContextType['currentlyTraversingTokens']>([]);
     const [isInitialized, setIsInitialized] = useState(false);
     const [contractMap, setContractMap] = useState<ContractMap>({});
     const [balanceMap, setBalanceMap] = useState<BalanceMap>({});
     const [loadedTokens, setLoadedTokens] = useState<LoadedToken[]>([]);
     const [traversingOptions, setTraversingOptions] = useState<Traversing>();
 
-    const loadTokenIds = async (contract: Contract, walletAddress: string, networkId: number) => {
+    const loadTokenIds = async (contract: Contract, walletAddress: string, networkId: number): Promise<{ balance: number, tokenIds: number[] }> => {
         const balance = Number(await contract.balanceOf(walletAddress));
 
         const tokenIds: number[] = [];
@@ -50,35 +51,9 @@ export const TraversingProvider: React.FC = ({ children }) => {
             tokenIds.push(res);
         }
 
-        const newLoadedTokens = [...loadedTokens];
-
-        let tokensChanged = false;
-        tokenIds.forEach(tokenId => {
-            const token = newLoadedTokens.find(item => item.tokenId === tokenId);
-            if (token) {
-                if (token.currentNetworkId !== networkId) {
-                    token.currentNetworkId = networkId;
-                    tokensChanged = true;
-                }
-            } else {
-                newLoadedTokens.push({ tokenId, currentNetworkId: networkId });
-                tokensChanged = true;
-            }
-        });
-
-        if (tokensChanged) {
-            setLoadedTokens(newLoadedTokens);
-        }
-
-        let balancesChanged = false;
-        const newBalanceMap = { ...balanceMap };
-        if (newBalanceMap[networkId] !== balance) {
-            newBalanceMap[networkId] = balance;
-            balancesChanged = true;
-        }
-
-        if (balancesChanged) {
-            setBalanceMap(newBalanceMap);
+        return {
+            balance,
+            tokenIds
         }
     }
 
@@ -91,19 +66,34 @@ export const TraversingProvider: React.FC = ({ children }) => {
         const { walletAddress } = user.account;
 
         const contractMap: ContractMap = {};
+        const balanceMap: BalanceMap = {};
+        const loadedTokens: LoadedToken[] = [];
 
         const initChain = async (chain: Chain) => {
             const networkId = chain.network.networkId;
             const signerOrProvider = user.getSignerOrProvider(networkId);
             const contract = new ethers.Contract(chain.contractAddress, abi, signerOrProvider);
             contractMap[networkId] = contract;
-            await loadTokenIds(contract, walletAddress, networkId)
+
+            const { balance, tokenIds } = await loadTokenIds(contract, walletAddress, networkId);
+
+            loadedTokens.push(
+                ...tokenIds.map(id => ({
+                    tokenId: id,
+                    currentNetworkId: networkId
+                }))
+            );
+
+            balanceMap[networkId] = balance;
         }
 
         const initChainPromises = opts.traversing.chains.map(initChain);
 
         await Promise.all(initChainPromises);
 
+
+        setLoadedTokens(loadedTokens.sort((i1, i2) => i1.tokenId - i2.tokenId));
+        setBalanceMap(balanceMap);
         setContractMap(contractMap);
         setTraversingOptions(opts.traversing);
         setIsInitialized(true);
@@ -111,7 +101,7 @@ export const TraversingProvider: React.FC = ({ children }) => {
 
     const traverseChains = async (tokenId: number, targetNetworkId: number): Promise<boolean> => {
 
-        if (currentlyTraversingTokenIds.includes(tokenId)) {
+        if (!!currentlyTraversingTokens.find(item => item.tokenId === tokenId)) {
             console.log(`Traversing: Token ${tokenId} already traversing.`);
             return false;
         }
@@ -145,7 +135,7 @@ export const TraversingProvider: React.FC = ({ children }) => {
             return false;
         }
 
-        setCurrentlyTraversingTokenIds([...currentlyTraversingTokenIds, tokenId]);
+        setCurrentlyTraversingTokens([...currentlyTraversingTokens, { tokenId, targetNetworkId }]);
         try {
             const traversingFeees = await getTraversingFees({
                 currentTokenContractAddress: currentNetworkContract.address,
@@ -172,12 +162,13 @@ export const TraversingProvider: React.FC = ({ children }) => {
                 return false;
             }
         } finally {
-            setCurrentlyTraversingTokenIds(currentlyTraversingTokenIds.filter(id => id !== tokenId));
+            setCurrentlyTraversingTokens(currentlyTraversingTokens.filter(item => item.tokenId !== tokenId));
         }
     }
 
     const contextValue: TraversingContextType = {
-        currentlyTraversingTokenIds,
+        isInitialized,
+        currentlyTraversingTokens,
         walletBalances: balanceMap,
         walletTokens: loadedTokens,
         init,

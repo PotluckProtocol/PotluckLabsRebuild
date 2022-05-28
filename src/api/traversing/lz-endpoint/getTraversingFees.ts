@@ -9,8 +9,6 @@ export type GetTraversingFeesOpts = {
     targetTraversingChainId: number;
 }
 
-const FEE_MULTIPLY_FACTOR = 1.2;
-
 /**
  * Estimates traversing fees by asking them from the layer 0 endpoint contract.
  */
@@ -41,14 +39,7 @@ export const getTraversingFees = async (opts: GetTraversingFeesOpts): Promise<Bi
             adapterParams
         );
 
-        /**
-         * Increase fees by multiplying the returned fees FEE_MULTIPLY_FACTOR. This ensures there is
-         * enough fees in all circumstances. Non-used fees are returned into calling wallet, so no
-         * extra is lost.
-         */
-        const increasedFee = BigNumber.from(fees).mul(FEE_MULTIPLY_FACTOR);
-
-        return increasedFee;
+        return fees;
     } catch (e) {
         console.log('Fetching traversing fees failed', e);
         throw e;

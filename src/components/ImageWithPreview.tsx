@@ -56,6 +56,12 @@ export const ImageWithPreview: React.FC<ImageWithPreviewProps> = (props) => {
         }
     }, [isOpen]);
 
+    const {
+        wrapperClassName,
+        wrapperStyle,
+        ...imageProps
+    } = props;
+
     const handleButtonClick = () => {
         setIsOpen(true);
     }
@@ -63,12 +69,6 @@ export const ImageWithPreview: React.FC<ImageWithPreviewProps> = (props) => {
     const handleCloseButtonClick = () => {
         setIsOpen(false);
     }
-
-    const {
-        wrapperClassName,
-        wrapperStyle,
-        ...imageProps
-    } = props;
 
     const a = (
         <>

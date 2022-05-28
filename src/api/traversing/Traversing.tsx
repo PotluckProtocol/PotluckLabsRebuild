@@ -6,5 +6,7 @@ export type Chain = {
 }
 
 export type Traversing = {
+    id: string;
+    projectName: string;
     chains: Chain[];
 }
