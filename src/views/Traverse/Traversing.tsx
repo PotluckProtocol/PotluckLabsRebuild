@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom";
 import Select from "react-select";
 import styled from "styled-components";
+import useUser from "../../api/account/useUser";
 import { Traversing as TraversingItem } from "../../api/traversing/Traversing";
 import { TraversingProvider } from "../../api/traversing/TraversingContext";
 import { TraversingInfoContext } from "../../api/traversing/TraversingInfoContext"
+import { ConnectWalletButton } from "../../components/ConnectWalletButton";
 import { TraverseProject } from "./TraverseProject";
 
 
@@ -35,6 +37,7 @@ const createOption = (item: TraversingItem): Option => {
 }
 
 export const Traversing: React.FC = () => {
+    const user = useUser();
     const [queryParams, setQueryParams] = useSearchParams();
     const [selectedOption, setSelectedOption] = useState<Option | null>(null);
     const traversingInfoContext = useContext(TraversingInfoContext);
@@ -49,6 +52,15 @@ export const Traversing: React.FC = () => {
             }
         }
     }, [traverseId]);
+
+    if (!user.account) {
+        return (
+            <div className="mt-8">
+                <div className="mb-4 text-center">Connect your wallet to traverse...</div>
+                <ConnectWalletButton />
+            </div>
+        )
+    }
 
     const handleProjectSelectChange: any = (option: Option) => {
         setSelectedOption({ ...option });
