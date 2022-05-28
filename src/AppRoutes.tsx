@@ -7,6 +7,7 @@ import { MutateWrapper } from "./views/Mutate/MutateWrapper";
 import { MintingProvider } from "./api/minting/MintingContext";
 import { StoreListing } from "./views/Store/StoreListing";
 import { StoresProvider } from "./api/stores/StoresContext";
+import { TraverseWrapper } from "./views/Traverse/Wrapper";
 
 export const AppRoutes: React.FC = () => {
     return (
@@ -23,6 +24,7 @@ export const AppRoutes: React.FC = () => {
                     </StoresProvider>
                 }
             />
+            <Route path="traverse" element={<TraverseWrapper />} />
             <Route path="mutate" element={<MutateWrapper />} />
             <Route path="mutatess" element={<MutateWrapper />} />
         </Routes>

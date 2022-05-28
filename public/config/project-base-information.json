@@ -935,7 +935,7 @@
         "name": "Nekro Demonz",
         "internalId": "internal::avax::nekro",
         "symbol": "",
-        "contractAddress": "",
+        "contractAddress": "0xbef231d0138547c77807aa9145a91d09e99a2667",
         "coverImage": "/images/projects/nekrodemonzavax/cover.png",
         "network": "AVAX",
         "artistId": "nekrofux",

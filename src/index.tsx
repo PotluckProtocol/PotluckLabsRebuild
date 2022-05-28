@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { AccountProvider } from './api/account/AccountContext';
 import { ProjectBaseInformationProvider } from './api/project-base-information/ProjectBaseInformationContext';
 import { BrowserRouter } from 'react-router-dom';
+import { TraversingInfoProvider } from './api/traversing/TraversingInfoContext';
 
 console.log('Application initializing');
 
@@ -13,9 +14,11 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ProjectBaseInformationProvider>
-        <AccountProvider>
-          <App />
-        </AccountProvider>
+        <TraversingInfoProvider>
+          <AccountProvider>
+            <App />
+          </AccountProvider>
+        </TraversingInfoProvider>
       </ProjectBaseInformationProvider>
     </BrowserRouter>
   </React.StrictMode>,
