@@ -1024,5 +1024,40 @@
             "name": "Campfire",
             "url": "https://campfire.exchange/collections/0x19a166CA2a735851A08fDd7732d105E97Ce64903/minting"
         }
+    },
+    {
+        "name": "Potluck Realm Elves",
+        "internalId": "internal::ftm::elves",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/elvesftm/cover.png",
+        "network": "FTM",
+        "artistId": "mash_ow",
+        "releaseDate": "2022-06-03T20:00:00.000Z",
+        "whitelistDate": "2022-06-03T19:30:00.000Z",
+        "description": "TBA",
+        "maxSupply": 900,
+        "images": [
+            "/images/projects/elvesftm/cover.png"
+        ]
+    },
+    {
+        "name": "Potluck Realm Elves",
+        "internalId": "internal::avax::elves",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/elvesavax/cover.png",
+        "network": "AVAX",
+        "artistId": "mash_ow",
+        "releaseDate": "2022-06-03T20:00:00.000Z",
+        "description": "TBA",
+        "maxSupply": 350,
+        "images": [
+            "/images/projects/elvesavax/cover.png"
+        ],
+        "externalMintLocation": {
+            "name": "Campfire",
+            "url": "https://campfire.exchange"
+        }
     }
 ]
