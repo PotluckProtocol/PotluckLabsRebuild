@@ -68,7 +68,6 @@ export const Traversing: React.FC = () => {
     }
 
     const options: Option[] = traversingInfos.map(createOption);
-    console.log('selected', selectedOption);
     return (
         <div className="mr-6">
 
