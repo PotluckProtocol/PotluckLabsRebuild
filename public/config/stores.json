@@ -9,7 +9,7 @@
         "saleEndsOn": "2022-06-01T20:00:00.000Z"
     },
     {
-        "projectContractAddressOrName": "internal::ftm::elves",
+        "projectContractAddressOrName": "internal::avax::elves",
         "type": "WHITELIST",
         "network": "AVAX",
         "priceTokenContractAddress": "0xEd37405dE14e39f72e4A405DE32B6B90C96B97e5",
