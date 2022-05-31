@@ -14,6 +14,10 @@ export const TRAVERSING_CHAIN_MAP: TraversingChainInfo[] = [{
     network: 'AVAX',
     traverseChainId: 6,
     endpoint: '0x3c2269811836af69497E5F486A85D7316753cf62'
+}, {
+    network: 'MATIC',
+    traverseChainId: 9,
+    endpoint: '0x3c2269811836af69497E5F486A85D7316753cf62'
 }]
 
 export const getTraversingChainInfo = (networkId: number): TraversingChainInfo | null => {

@@ -1,5 +1,23 @@
 [
     {
+        "id": "acidcat",
+        "projectName": "AcidCat",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xa81c9D00D29Afdc83b7e788a29Ec96A5BD81A8EA"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x794dD7AdfD4508057AB4C182BCB3C0231c55345D"
+            },
+            {
+                "network": "MATIC",
+                "contractAddress": "0x3dd927A8E88ED180249Dffe8FC83d505695D6e15"
+            }
+        ]
+    },
+    {
         "id": "cyberfantomic",
         "projectName": "Cyberfantomic",
         "chains": [

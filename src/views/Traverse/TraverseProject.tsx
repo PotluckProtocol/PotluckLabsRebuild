@@ -164,7 +164,7 @@ export const TraverseProject: React.FC<TraverseProjectProps> = ({
                                         traversingInfo?.chains.filter(chain => chain.network.networkId !== token.currentNetworkId).map(chain => {
                                             const clickHandler = createTraverseHandler(token.tokenId, chain.network.networkId, token.currentNetworkId);
                                             return (
-                                                <Button variant="outlined" disabled={isTraversing} onClick={clickHandler}>
+                                                <Button className="mr-2 mb-2" variant="outlined" disabled={isTraversing} onClick={clickHandler}>
                                                     <div className="flex items-center">
                                                         <NetworkIcon className="inline-block mr-2" networkId={chain.network.networkId} size={25} />
                                                         <span>{chain.network.name}</span>
@@ -239,7 +239,7 @@ export const TraverseProject: React.FC<TraverseProjectProps> = ({
                                             traversingInfo?.chains.filter(chain => chain.network.networkId !== token.currentNetworkId).map(chain => {
                                                 const clickHandler = createTraverseHandler(token.tokenId, chain.network.networkId, token.currentNetworkId);
                                                 return (
-                                                    <Button variant="outlined" disabled={isTraversing} onClick={clickHandler}>
+                                                    <Button className="mr-2" variant="outlined" disabled={isTraversing} onClick={clickHandler}>
                                                         <div className="flex items-center">
                                                             <NetworkIcon className="inline-block mr-2" networkId={chain.network.networkId} size={25} />
                                                             <span>{chain.network.name}</span>
