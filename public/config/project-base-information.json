@@ -1035,10 +1035,14 @@
         "artistId": "mash_ow",
         "releaseDate": "2022-06-03T20:00:00.000Z",
         "whitelistDate": "2022-06-03T19:30:00.000Z",
-        "description": "TBA",
-        "maxSupply": 900,
+        "description": "In the mystic lands of the Potluck Realm emerges a new force. The Elf, she contains both Magical Power and Supernatural beauty. She fights with a fierceness that strikes fear in the heart of her enemies, but also loves with incomparable passion.",
+        "maxSupply": 700,
         "images": [
-            "/images/projects/elvesftm/cover.png"
+            "/images/projects/elvesftm/image01.png",
+            "/images/projects/elvesftm/image02.png",
+            "/images/projects/elvesftm/image03.png",
+            "/images/projects/elvesftm/image04.png",
+            "/images/projects/elvesftm/image05.png"
         ]
     },
     {
@@ -1046,14 +1050,18 @@
         "internalId": "internal::avax::elves",
         "symbol": "",
         "contractAddress": "",
-        "coverImage": "/images/projects/elvesavax/cover.png",
+        "coverImage": "/images/projects/elvesavax/image01.png",
         "network": "AVAX",
         "artistId": "mash_ow",
         "releaseDate": "2022-06-03T20:00:00.000Z",
-        "description": "TBA",
+        "description": "In the mystic lands of the Potluck Realm emerges a new force. The Elf, she contains both Magical Power and Supernatural beauty. She fights with a fierceness that strikes fear in the heart of her enemies, but also loves with incomparable passion.",
         "maxSupply": 350,
         "images": [
-            "/images/projects/elvesavax/cover.png"
+            "/images/projects/elvesavax/image01.png",
+            "/images/projects/elvesavax/image02.png",
+            "/images/projects/elvesavax/image03.png",
+            "/images/projects/elvesavax/image04.png",
+            "/images/projects/elvesavax/image05.png"
         ],
         "externalMintLocation": {
             "name": "Campfire",

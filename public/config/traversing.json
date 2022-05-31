@@ -1,5 +1,33 @@
 [
     {
+        "id": "cyberfantomic",
+        "projectName": "Cyberfantomic",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x5612f86D1c0Cf420B8217f08d55dB209311A7948"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0xbdcc8a9461ED33eED78B1943c404471218696629"
+            }
+        ]
+    },
+    {
+        "id": "huntersofevil",
+        "projectName": "Hunters Of Evil",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xD813DA9995C753145927e25b8ecc18E6bF2b6AE0"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0xc991Eb54dEa1CC20d5B945AEA63ffE69192CB3CF"
+            }
+        ]
+    },
+    {
         "id": "nekrodemonz",
         "projectName": "Nekro Demonz",
         "chains": [
