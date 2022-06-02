@@ -75,6 +75,7 @@ export const TraverseProject: React.FC<TraverseProjectProps> = ({
     const traversingInfoContext = useContext(TraversingInfoContext);
     const traversingContext = useContext(TraversingContext);
     const traversingInfo = traversingInfoContext.getTraversingInfo(id);
+    const traversingInfoId = traversingInfo?.id;
 
     const walletAddress = user.account?.walletAddress;
     const walletNetworkId = user.account?.network.networkId;
@@ -87,7 +88,7 @@ export const TraverseProject: React.FC<TraverseProjectProps> = ({
         }
 
         init();
-    }, [walletAddress, walletNetworkId, traversingInfo]);
+    }, [walletAddress, walletNetworkId, traversingInfoId]);
 
     if (!traversingContext.isInitialized) {
         return (
