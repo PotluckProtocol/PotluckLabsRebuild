@@ -142,5 +142,12 @@
         "social": {
             "twitter": "https://twitter.com/FelipeUrteaga"
         }
+    },
+    {
+        "id": "forexus",
+        "name": "Forexus",
+        "social": {
+            "twitter": "https://twitter.com/0x_forexus"
+        }
     }
 ]
