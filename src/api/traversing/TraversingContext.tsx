@@ -40,7 +40,6 @@ export const TraversingProvider: React.FC = ({ children }) => {
     const [contractMap, setContractMap] = useState<ContractMap>({});
     const [balanceMap, setBalanceMap] = useState<BalanceMap>({});
     const [loadedTokens, setLoadedTokens] = useState<LoadedToken[]>([]);
-    const [traversingOptions, setTraversingOptions] = useState<Traversing>();
 
     const loadTokenIds = async (contract: Contract, walletAddress: string, networkId: number): Promise<{ balance: number, tokenIds: number[] }> => {
         const balance = Number(await contract.balanceOf(walletAddress));
@@ -58,6 +57,7 @@ export const TraversingProvider: React.FC = ({ children }) => {
     }
 
     const init = async (opts: InitTraversing) => {
+        setIsInitialized(false);
 
         if (!user.account) {
             return;
@@ -91,11 +91,9 @@ export const TraversingProvider: React.FC = ({ children }) => {
 
         await Promise.all(initChainPromises);
 
-
         setLoadedTokens(loadedTokens.sort((i1, i2) => i1.tokenId - i2.tokenId));
         setBalanceMap(balanceMap);
         setContractMap(contractMap);
-        setTraversingOptions(opts.traversing);
         setIsInitialized(true);
     }
 
