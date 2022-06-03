@@ -72,5 +72,19 @@
                 "contractAddress": "0x19a166CA2a735851A08fDd7732d105E97Ce64903"
             }
         ]
+    },
+    {
+        "id": "potluckrealmelves",
+        "projectName": "Potluck Realm Elves",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x7Cca36B5F8fc47d8bA4CEc8c4004Bd0d7518B3FB"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x01244851d026343C1E660aEbFcDB1af31360f383"
+            }
+        ]
     }
 ]
