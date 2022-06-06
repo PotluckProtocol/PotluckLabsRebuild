@@ -1090,5 +1090,46 @@
             "name": "Campfire",
             "url": "https://campfire.exchange/collections/0x01244851d026343C1E660aEbFcDB1af31360f383/minting"
         }
+    },
+    {
+        "name": "Bot Squad Chickens",
+        "internalId": "internal::ftm::bschickens",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/botsquadchickens/image05.png",
+        "network": "FTM",
+        "artistId": "botboy",
+        "releaseDate": "2022-06-10T20:00:00.000Z",
+        "whitelistDate": "2022-06-10T19:30:00.000Z",
+        "description": "The crew is here! Join in on the heist and follow the driver, the thief, and the muscle as they pull off the crime of the century.",
+        "maxSupply": 800,
+        "images": [
+            "/images/projects/botsquadchickens/image01.png",
+            "/images/projects/botsquadchickens/image02.png",
+            "/images/projects/botsquadchickens/image03.png",
+            "/images/projects/botsquadchickens/image05.png"
+        ]
+    },
+    {
+        "name": "Bot Squad Chickens",
+        "internalId": "internal::avax::bschickens",
+        "symbol": "",
+        "contractAddress": "",
+        "coverImage": "/images/projects/botsquadchickens/image04.png",
+        "network": "AVAX",
+        "artistId": "botboy",
+        "releaseDate": "2022-06-10T20:00:00.000Z",
+        "description": "The crew is here! Join in on the heist and follow the driver, the thief, and the muscle as they pull off the crime of the century.",
+        "maxSupply": 600,
+        "images": [
+            "/images/projects/botsquadchickens/image01.png",
+            "/images/projects/botsquadchickens/image02.png",
+            "/images/projects/botsquadchickens/image03.png",
+            "/images/projects/botsquadchickens/image04.png"
+        ],
+        "externalMintLocation": {
+            "name": "Campfire",
+            "url": "https://campfire.exchange"
+        }
     }
 ]
