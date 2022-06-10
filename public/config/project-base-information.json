@@ -1093,9 +1093,8 @@
     },
     {
         "name": "Bot Squad Chickens",
-        "internalId": "internal::ftm::bschickens",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "BSCS",
+        "contractAddress": "0xF88b3020AE6C58B4382E01955F7e5c5c3Dd192FC",
         "coverImage": "/images/projects/botsquadchickens/image05.png",
         "network": "FTM",
         "artistId": "botboy",
@@ -1108,13 +1107,18 @@
             "/images/projects/botsquadchickens/image02.png",
             "/images/projects/botsquadchickens/image03.png",
             "/images/projects/botsquadchickens/image05.png"
-        ]
+        ],
+        "mint": {
+            "gasLimit": 320000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/botsquadchickens/ftm/mint.gif",
+            "weiCost": "30000000000000000000"
+        }
     },
     {
         "name": "Bot Squad Chickens",
-        "internalId": "internal::avax::bschickens",
-        "symbol": "",
-        "contractAddress": "",
+        "symbol": "BSCS",
+        "contractAddress": "0x15046B30401A445a3AE73FA4cbCb03D208ffE822",
         "coverImage": "/images/projects/botsquadchickens/image04.png",
         "network": "AVAX",
         "artistId": "botboy",
@@ -1129,7 +1133,7 @@
         ],
         "externalMintLocation": {
             "name": "Campfire",
-            "url": "https://campfire.exchange"
+            "url": "https://campfire.exchange/collections/0x15046B30401A445a3AE73FA4cbCb03D208ffE822/minting"
         }
     }
 ]

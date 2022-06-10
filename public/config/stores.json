@@ -1,6 +1,6 @@
 [
     {
-        "projectContractAddressOrName": "internal::ftm::bschickens",
+        "projectContractAddressOrName": "0xF88b3020AE6C58B4382E01955F7e5c5c3Dd192FC",
         "type": "WHITELIST",
         "network": "FTM",
         "priceTokenContractAddress": "0x623d0f6a58e563C8627Da26B567269A18555aa52",
@@ -9,7 +9,7 @@
         "saleEndsOn": "2022-06-08T20:00:00.000Z"
     },
     {
-        "projectContractAddressOrName": "internal::avax::bschickens",
+        "projectContractAddressOrName": "0x15046B30401A445a3AE73FA4cbCb03D208ffE822",
         "type": "WHITELIST",
         "network": "AVAX",
         "priceTokenContractAddress": "0xEd37405dE14e39f72e4A405DE32B6B90C96B97e5",
