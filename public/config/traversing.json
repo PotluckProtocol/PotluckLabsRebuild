@@ -18,6 +18,20 @@
         ]
     },
     {
+        "id": "botsquadchickens",
+        "projectName": "Bot Squad Chickens",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xF88b3020AE6C58B4382E01955F7e5c5c3Dd192FC"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x15046B30401A445a3AE73FA4cbCb03D208ffE822"
+            }
+        ]
+    },
+    {
         "id": "cyberfantomic",
         "projectName": "Cyberfantomic",
         "chains": [
