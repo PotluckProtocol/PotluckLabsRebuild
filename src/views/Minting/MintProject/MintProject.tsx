@@ -16,6 +16,7 @@ import useUser from "../../../api/account/useUser";
 import { toast } from "react-toastify";
 import { InsufficientMintingBalanceError } from "../../../api/minting/MintingContractWrapper";
 import { BigNumber, ethers, utils } from "ethers";
+import { useTokenPriceInUSD } from "../../../hooks/useTokenPriceInUSD/useTokenPriceInUSD";
 
 export type MintProjectProps = {
     contractAddress: string;
@@ -96,12 +97,19 @@ const InfoBoxContent = styled.div`
     font-size: 0.9rem;
 `;
 
+const TotalUSDPrice = styled.span`
+    font-size: .7rem;
+    margin-left: .3rem;
+`;
+
 export const MintProject: React.FC<MintProjectProps> = ({
     contractAddress
 }) => {
     const user = useUser();
     const baseInformation = useContext(ProjectBaseInformationContext)
         .getConfig(contractAddress);
+    const network = resolveNetwork(baseInformation.network);
+
 
     const [mintAmount, setMintAmount] = useState(1);
     const [isInitializing, setIsInitializing] = useState(false);
@@ -109,8 +117,10 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
     const [isRevealButtonVisible, setIsRevealButtonVisible] = useState(false);
     const [mintedTokenIds, setMintedTokenIds] = useState<number[]>([]);
+    const tokenUSDPrice = useTokenPriceInUSD(network.symbol as any);
 
     const walletAddress = user.account?.walletAddress;
+    const hasUSDPrice = (typeof tokenUSDPrice === 'number') && !baseInformation?.mint?.priceErc20Token;
 
     useEffect(() => {
         const init = async () => {
@@ -173,8 +183,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
         return <div>Initializing</div>;
     }
 
-    const network = resolveNetwork(baseInformation.network);
-
     const getCost = (amount: number): string => {
         if (baseInformation?.mint?.weiCost) {
             const symbol = mintingContext.priceSymbol;
@@ -182,6 +190,15 @@ export const MintProject: React.FC<MintProjectProps> = ({
             const totalAmount = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
 
             return (+utils.formatEther(totalAmount)).toFixed(decimals) + ' ' + symbol;
+        } else {
+            return '';
+        }
+    }
+
+    const getUsdCost = (amount: number): string => {
+        if (typeof tokenUSDPrice === 'number' && !baseInformation?.mint?.priceErc20Token && baseInformation?.mint?.weiCost) {
+            const totalPriceWei = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
+            return '$' + ((+utils.formatEther(totalPriceWei)) * tokenUSDPrice).toFixed(2);
         } else {
             return '';
         }
@@ -237,7 +254,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
             {(isConnected && wrongNetwork) && (<p>Change your network to <b>{network.name}</b>.</p>)}
             {(mintingContext.isMintInProgress) && (<p>Minting in progress.</p>)}
         </>
-    )
+    );
 
     return (
         <div>
@@ -337,12 +354,16 @@ export const MintProject: React.FC<MintProjectProps> = ({
                             fontSizeRem={2.5}
                             symbol={mintingContext.priceSymbol}
                             weiPrice={baseInformation.mint.weiCost}
+                            usdPricePerUnit={hasUSDPrice ? tokenUSDPrice : undefined}
                         />
 
                         <div className="mt-3">
                             <LabelText>Amount:</LabelText>
                             <AmountSelector min={0} max={maxPerTx} value={maxPerTx === 0 ? 0 : mintAmount} onAmountChange={handleAmountChange} />
-                            <div className="mt-3">Price in total: {getCost(mintAmount)}</div>
+                            <div className="mt-3">
+                                Price in total: {getCost(mintAmount)}
+                                {hasUSDPrice && (<TotalUSDPrice>({getUsdCost(mintAmount)})</TotalUSDPrice>)}
+                            </div>
                         </div>
 
                         <div className="mt-6 md:hidden">

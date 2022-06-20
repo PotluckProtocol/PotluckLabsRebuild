@@ -1136,5 +1136,47 @@
             "name": "Campfire",
             "url": "https://campfire.exchange/collections/0x15046B30401A445a3AE73FA4cbCb03D208ffE822/minting"
         }
+    },
+    {
+        "name": "Arbiters of the Deep",
+        "internalId": "internal::ftm::arbiters",
+        "coverImage": "/images/projects/arbitersofthedeep/image05.png",
+        "network": "FTM",
+        "artistId": ["menes", "minded"],
+        "releaseDate": "2022-06-22T20:00:00.000Z",
+        "whitelistDate": "2022-06-22T19:30:00.000Z",
+        "description":[
+            "Deep within the labyrinthine like cave system, among the glowing stalagmites of unrefined ore and noxious moss, there sat a throne. With all the impending doom of the unsetting Sun, this moonless and crypt like dungeon was largely undiscovered. Even the creatures were mostly unaware of these powerful cryptids.",
+            "Dragon Humanoid Cycloptic Cave Dwellers could be the simplest scientific term given to them.  A bestial mastery, ordained to a species high on the food chain.  They once ruled the skies, earth and subterrain equally and uncontested.",
+            "Now forsaken and pushed back to the cave ; there was only one pursuit amongst the warring clans of the Arbiters.  To restore their rightful rule of the Lands, and  seek the power of Gods."
+        ],
+        "maxSupply": 555,
+        "images": [
+            "/images/projects/arbitersofthedeep/image01.png",
+            "/images/projects/arbitersofthedeep/image02.png",
+            "/images/projects/arbitersofthedeep/image03.png",
+            "/images/projects/arbitersofthedeep/image04.png"
+        ]
+    },
+    {
+        "name": "Arbiters of the Deep",
+        "internalId": "internal::avax::arbiters",
+        "coverImage": "/images/projects/arbitersofthedeep/image10.png",
+        "network": "AVAX",
+        "artistId": ["menes", "minded"],
+        "releaseDate": "2022-06-22T20:00:00.000Z",
+        "whitelistDate": "2022-06-22T19:30:00.000Z",
+        "description":[
+            "Deep within the labyrinthine like cave system, among the glowing stalagmites of unrefined ore and noxious moss, there sat a throne. With all the impending doom of the unsetting Sun, this moonless and crypt like dungeon was largely undiscovered. Even the creatures were mostly unaware of these powerful cryptids.",
+            "Dragon Humanoid Cycloptic Cave Dwellers could be the simplest scientific term given to them.  A bestial mastery, ordained to a species high on the food chain.  They once ruled the skies, earth and subterrain equally and uncontested.",
+            "Now forsaken and pushed back to the cave ; there was only one pursuit amongst the warring clans of the Arbiters.  To restore their rightful rule of the Lands, and  seek the power of Gods."
+        ],
+        "maxSupply": 555,
+        "images": [
+            "/images/projects/arbitersofthedeep/image06.png",
+            "/images/projects/arbitersofthedeep/image07.png",
+            "/images/projects/arbitersofthedeep/image08.png",
+            "/images/projects/arbitersofthedeep/image09.png"
+        ]
     }
 ]

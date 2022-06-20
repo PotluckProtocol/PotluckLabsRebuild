@@ -18,6 +18,20 @@
         ]
     },
     {
+        "id": "beenz",
+        "projectName": "Beenz On Acid",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xcB846f2d2Cf754314803D01DE1c43a08ec8c9B4c"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x92618C4C8ef2534242CabED0614aB8B89eF2DC52"
+            }
+        ]
+    },
+    {
         "id": "botsquadchickens",
         "projectName": "Bot Squad Chickens",
         "chains": [

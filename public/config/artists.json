@@ -149,5 +149,19 @@
         "social": {
             "twitter": "https://twitter.com/0x_forexus"
         }
+    },
+    {
+        "id": "menes",
+        "name": "MENESthePharaoh",
+        "social": {
+            "twitter": "https://twitter.com/MENESthePharaoh"
+        }
+    },
+    {
+        "id": "minded",
+        "name": "MrMinded",
+        "social": {
+            "twitter": "https://twitter.com/MisterMinded"
+        }
     }
 ]

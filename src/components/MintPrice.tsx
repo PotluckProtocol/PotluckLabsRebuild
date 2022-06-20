@@ -9,10 +9,16 @@ export type MintPriceProps = {
     fitToHeight?: number,
     symbol: string;
     weiPrice: number | string;
+    usdPricePerUnit?: number;
 }
 
 const Price = styled.span`
     margin-right: .35rem;
+`;
+
+const USD = styled.span`
+    color: white; 
+    margin-left: .35rem;
 `;
 
 export const MintPrice: React.FC<MintPriceProps> = ({
@@ -20,10 +26,13 @@ export const MintPrice: React.FC<MintPriceProps> = ({
     fontSizeRem,
     fitToHeight,
     symbol,
-    weiPrice
+    weiPrice,
+    usdPricePerUnit
 }) => {
     const decimals = symbol === 'AVAX' ? 1 : 0;
-    const price = (+utils.formatEther(BigNumber.from(weiPrice))).toFixed(decimals);
+    const priceNumeric = +utils.formatEther(BigNumber.from(weiPrice));
+    const price = priceNumeric.toFixed(decimals);
+    const usdPrice = (typeof usdPricePerUnit === 'number') ? (usdPricePerUnit * priceNumeric) : undefined;
 
     const symbolFontSize = fontSizeRem - 0.5;
     const priceFontSize = fontSizeRem;
@@ -32,6 +41,9 @@ export const MintPrice: React.FC<MintPriceProps> = ({
         <>
             <Price style={{ fontSize: `${priceFontSize}rem`, lineHeight: `${priceFontSize}rem` }}>{price}</Price>
             <span style={{ fontSize: `${symbolFontSize}rem`, lineHeight: `${symbolFontSize}rem` }}>{symbol}</span>
+            {typeof usdPrice === 'number' && (
+                <USD>(${usdPrice.toFixed(2)})</USD>
+            )}
         </>
     )
 
