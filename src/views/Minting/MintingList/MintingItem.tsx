@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { MintingContext } from '../../../api/minting/MintingContext';
-import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
+import { ProjectBaseInformation, SingletonProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
 import { RoundedButton } from '../../../components/RoundedButton';
 import { TextFit } from '../../../components/TextFit';
 import { MintStateBadge } from '../../../components/MintStateBadge';
@@ -10,11 +10,10 @@ import useUser from '../../../api/account/useUser';
 import { resolveNetwork } from '../../../api/network/resolveNetwork';
 import { MintPrice } from '../../../components/MintPrice';
 import { NetworkIcon } from '../../../components/NetworkIcon';
-import { resolveIdentInfo } from '../../../api/project-base-information/ProjectBaseInformationContext';
 import moment, { Moment } from 'moment';
 
 export type MintingItemProps = {
-    baseInformation: ProjectBaseInformation;
+    singletonBaseInfo: SingletonProjectBaseInformation;
 }
 
 const StyledContainer = styled.div`
@@ -72,7 +71,7 @@ const DateText = styled.span`
 `;
 
 export const MintingItem: React.FC<MintingItemProps> = ({
-    baseInformation
+    singletonBaseInfo
 }) => {
     const [isInitialized, setIsInitialized] = useState(false);
     const navigate = useNavigate();
@@ -80,10 +79,10 @@ export const MintingItem: React.FC<MintingItemProps> = ({
     const user = useUser();
 
     const walletAddress = user.account?.walletAddress;
-    const hasContract = !!baseInformation.contractAddress;
-    const hasMintSpec = !!baseInformation.mint;
+    const hasContract = !!singletonBaseInfo.contractAddress;
+    const hasMintSpec = !!singletonBaseInfo.mint;
 
-    const releaseDate: Moment | null = (baseInformation.releaseDate) ? moment(baseInformation.releaseDate).utc() : null;
+    const releaseDate: Moment | null = (singletonBaseInfo.releaseDate) ? moment(singletonBaseInfo.releaseDate).utc() : null;
 
     const isUpcoming = releaseDate && releaseDate.isAfter(new Date());
 
@@ -95,7 +94,7 @@ export const MintingItem: React.FC<MintingItemProps> = ({
 
             try {
                 await minting.init({
-                    contractAddress: baseInformation.contractAddress,
+                    contractAddress: singletonBaseInfo.contractAddress,
                     liveMintingCount: false
                 });
             } catch (e) {
@@ -106,27 +105,27 @@ export const MintingItem: React.FC<MintingItemProps> = ({
             }
         }
 
-        if (!baseInformation.contractAddress) {
+        if (!singletonBaseInfo.contractAddress) {
             setIsInitialized(true);
             return;
         }
 
         init();
-    }, [baseInformation.contractAddress, walletAddress]);
+    }, [singletonBaseInfo.contractAddress, walletAddress]);
 
     if (!isInitialized) {
         return <div>Loading</div>;
     }
 
-    if (!baseInformation.mint) {
+    if (!singletonBaseInfo.mint) {
         return null;
     }
 
     const handleClick = () => {
-        navigate(`/projects/${resolveIdentInfo(baseInformation)}`);
+        navigate(`/projects/${singletonBaseInfo.id}?chain=${singletonBaseInfo.chain}`);
     }
 
-    const network = resolveNetwork(baseInformation.network);
+    const network = resolveNetwork(singletonBaseInfo.chain);
     const buttonText = (isUpcoming && minting.mintState === 'NotStarted') ? 'OPEN' : 'TO MINT';
 
     return (
@@ -134,18 +133,18 @@ export const MintingItem: React.FC<MintingItemProps> = ({
             {isUpcoming && (
                 <DateText>{releaseDate.format('MMMM Do')}</DateText>
             )}
-            <StyledHeader className="flex items-center" height={100}>{baseInformation.name}</StyledHeader>
+            <StyledHeader className="flex items-center" height={100}>{singletonBaseInfo.name}</StyledHeader>
             <StyledImageContainer className="mb-2">
                 {minting.mintState !== 'NotStarted' && (
                     <StyledMintStateBadge mintState={minting.mintState} />
                 )}
-                <StyledImage src={baseInformation.mint?.mintImage} />
+                <StyledImage src={singletonBaseInfo.mint?.mintImage} />
                 <PositionedNetworkIcon networkId={network.networkId} size={35} />
             </StyledImageContainer>
             <StyledPrice
                 className='mt-4 mb-4'
                 fontSizeRem={2}
-                weiPrice={baseInformation.mint.weiCost}
+                weiPrice={singletonBaseInfo.mint.weiCost}
                 symbol={minting.priceSymbol}
                 fitToHeight={34}
             />

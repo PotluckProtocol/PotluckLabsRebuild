@@ -1,20 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { Network } from "../../types/Networks";
 import { Artist } from "../artists/Artist";
-import { resolveNetwork } from "../network/resolveNetwork";
-import { ProjectBaseInformation, ProjectBaseInformationRaw } from "./ProjectBaseInformation";
-
-export const createConfigNameIdent = (name: string, network: Network): string => {
-    return `${network.symbol.toLocaleLowerCase()}-${name.replaceAll(' ', '-')}`;
-}
-
-export const resolveIdentInfo = (baseInformation: ProjectBaseInformation): string => {
-    if (baseInformation.contractAddress) {
-        return baseInformation.contractAddress;
-    } else {
-        return createConfigNameIdent(baseInformation.name, resolveNetwork(baseInformation.network));
-    }
-}
+import { getSingletonProjectBaseInformation } from "./getSingletonProjectBaseInformation";
+import { ProjectBaseInformation, ProjectBaseInformationRaw, ProjectChain, SingletonProjectBaseInformation } from "./ProjectBaseInformation";
 
 export const isContract = (contractAddressOrNameIdent: string): boolean => contractAddressOrNameIdent.startsWith('0x');
 
@@ -24,6 +11,8 @@ export type ProjectBaseInformationContextType = {
     isInitialized: boolean;
     getConfig(contractAddressOrNameIdent: string): ProjectBaseInformation;
     getConfigs(): ProjectBaseInformation[];
+    getSingletonConfig(contractAddress: string): SingletonProjectBaseInformation;
+    getSingletonConfigs(): SingletonProjectBaseInformation[];
 }
 
 export const ProjectBaseInformationContext = createContext<ProjectBaseInformationContextType>(null as any);
@@ -35,7 +24,7 @@ export const ProjectBaseInformationProvider: React.FC = ({ children }) => {
     useEffect(() => {
         const getConfig = async () => {
             const [configRes, artistsRes] = await Promise.all([
-                fetch('/config/project-base-information.json'),
+                fetch('/config/project-base-information-v2.json'),
                 fetch('/config/artists.json')
             ]);
 
@@ -67,18 +56,16 @@ export const ProjectBaseInformationProvider: React.FC = ({ children }) => {
         getConfig();
     }, []);
 
-    const getConfig = (contractAddressOrIdentName: string): ProjectBaseInformation => {
+    const getConfig = (contractAddressOrId: string): ProjectBaseInformation => {
         const item = baseInformation.find(item => {
-            if (isContract(contractAddressOrIdentName)) {
-                return item.contractAddress === contractAddressOrIdentName
-            } else if (isInternalId(contractAddressOrIdentName)) {
-                return item.internalId === contractAddressOrIdentName
+            if (isContract(contractAddressOrId)) {
+                return Object.values(item.chains).map(chain => chain.contractAddress).includes(contractAddressOrId);
             } else {
-                return createConfigNameIdent(item.name, resolveNetwork(item.network)) === contractAddressOrIdentName;
+                return item.id === contractAddressOrId;
             }
         });
         if (!item) {
-            throw new Error(`Could not find base information for ${contractAddressOrIdentName}`);
+            throw new Error(`Could not find base information for ${contractAddressOrId}`);
         }
         return item;
     }
@@ -87,10 +74,34 @@ export const ProjectBaseInformationProvider: React.FC = ({ children }) => {
         return baseInformation;
     }
 
+    const getSingletonConfig = (contractAddress: string): SingletonProjectBaseInformation => {
+        for (const baseInfo of baseInformation) {
+            for (const chain of Object.keys(baseInfo.chains)) {
+                const projectChain = chain as ProjectChain;
+                const chainInfo = baseInfo.chains[projectChain];
+                if (chainInfo?.contractAddress === contractAddress) {
+                    return getSingletonProjectBaseInformation(baseInfo, projectChain)
+                }
+            }
+        }
+
+        throw new Error(`Could not find singleton base information for ${contractAddress}`);
+    }
+
+    const getSingletonConfigs = (): SingletonProjectBaseInformation[] => {
+        return baseInformation.flatMap(baseInfo => {
+            return Object.keys(baseInfo.chains).map(
+                chain => getSingletonProjectBaseInformation(baseInfo, chain as ProjectChain)
+            );
+        })
+    }
+
     const contextValue: ProjectBaseInformationContextType = {
         isInitialized,
         getConfigs,
-        getConfig
+        getConfig,
+        getSingletonConfig,
+        getSingletonConfigs
     }
 
     return (

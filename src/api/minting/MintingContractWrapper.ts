@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import EventEmitter from "events";
 import { assureIpfsUrl } from "../../utils/assure-ipfs-url";
-import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
+import { ProjectBaseInformation, SingletonProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 
 export class InsufficientMintingBalanceError extends Error {
     constructor(msg?: string) {
@@ -32,7 +32,7 @@ export class MintingContractWrapper extends EventEmitter {
 
     constructor(
         private contract: ethers.Contract,
-        private projectBaseInformation: ProjectBaseInformation,
+        private singletonBaseInfo: SingletonProjectBaseInformation,
         private opts: MintingContractWrapperOpts
     ) {
         super();
@@ -41,7 +41,7 @@ export class MintingContractWrapper extends EventEmitter {
 
     public async mint(amount: number, fromWallet: string, fastMint: boolean = false): Promise<{ succeed: boolean, tokenIds?: number[] }> {
 
-        const { mint } = this.projectBaseInformation;
+        const { mint } = this.singletonBaseInfo;
         if (!mint) {
             return { succeed: false };
         }
@@ -60,11 +60,11 @@ export class MintingContractWrapper extends EventEmitter {
              * This contract has mint method without amount.
              * @todo remove me after AVAX SuperSerum is sold out.
              */
-            if (this.projectBaseInformation.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
+            if (this.singletonBaseInfo.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
                 await this.waitTx(this.contract.mint({ value: totalCostWei, gasLimit: totalGasLimit }));
             } else {
                 // If erc20 mint no need for sending value as it is not payable method
-                const value = (this.projectBaseInformation.mint?.priceErc20Token) ? undefined : totalCostWei;
+                const value = (this.singletonBaseInfo.mint?.priceErc20Token) ? undefined : totalCostWei;
                 await this.waitTx(this.contract.mint(amount, { value, gasLimit: totalGasLimit }));
             }
 
@@ -111,8 +111,8 @@ export class MintingContractWrapper extends EventEmitter {
     }
 
     public async getMaxSupply(): Promise<number> {
-        if (typeof this.projectBaseInformation.maxSupply === 'number') {
-            return this.projectBaseInformation.maxSupply;
+        if (typeof this.singletonBaseInfo.initialSupply === 'number') {
+            return this.singletonBaseInfo.initialSupply;
         } else {
             return Number(this.contract.maxSupply());
         }
@@ -149,9 +149,9 @@ export class MintingContractWrapper extends EventEmitter {
             this.emit(MINT_STATE_CHANGED_EVENT, state);
         }
 
-        const maxSupply = this.projectBaseInformation.maxSupply;
+        const maxSupply = this.singletonBaseInfo.initialSupply;
         const endedState = (
-            this.projectBaseInformation.mint?.forceEndedState ||
+            this.singletonBaseInfo.mint?.forceEndedState ||
             this.lastMintedSupply >= maxSupply
         );
 
@@ -190,7 +190,7 @@ export class MintingContractWrapper extends EventEmitter {
 
         for (const tokenId of tokenIds) {
             let tokenUri = await this.getTokenUri(tokenId);
-            tokenUri = assureIpfsUrl(tokenUri, this.projectBaseInformation.overrideIpfsGateway || undefined);
+            tokenUri = assureIpfsUrl(tokenUri, this.singletonBaseInfo.overrideIpfsGateway || undefined);
             const metadataResponse = await fetch(tokenUri);
             const metadata = await metadataResponse.json();
 
@@ -234,7 +234,7 @@ export class MintingContractWrapper extends EventEmitter {
 
     private init() {
 
-        if (!this.projectBaseInformation.mint) {
+        if (!this.singletonBaseInfo.mint) {
             throw new Error('Minting project base information must contain mint specification');
         }
 
@@ -244,7 +244,7 @@ export class MintingContractWrapper extends EventEmitter {
             }, LIVE_MINTING_COUNT_INTERVAL_MS);
         }
 
-        if (!this.projectBaseInformation.mint.forceEndedState && this.opts.liveMintStateRefresh) {
+        if (!this.singletonBaseInfo.mint.forceEndedState && this.opts.liveMintStateRefresh) {
             this.liveStateInterval = setInterval(() => {
                 this.getMintState();
             }, LIVE_MINT_STATE_INTERVAL_MS);

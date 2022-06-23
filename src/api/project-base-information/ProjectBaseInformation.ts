@@ -10,19 +10,41 @@ export type ProjectArtist = {
     }
 }
 
+export type ProjectChain = 'FTM' | 'AVAX' | 'MATIC';
+
+export type MintOptions = {
+    priceErc20Token?: string;
+    weiCost: string;
+    gasLimit: number;
+    maxPerTx: number;
+    mintImage: string;
+    noWhitelist?: boolean;
+    forceEndedState?: boolean;
+    noReveal?: boolean;
+}
+
+export type ExternalMintOptions = {
+    name: string;
+    url: string;
+}
+
+export type ChainProjectInformation = {
+    contractAddress: string;
+    initialSupply: number;
+    mint?: MintOptions;
+    externalMintLocation?: ExternalMintOptions;
+}
+
 export type ProjectBaseInformationRaw = {
     // Base info
+    id: string;
     name: string;
     symbol: string;
-    contractAddress: string;
     coverImage: string;
-    network: 'FTM' | 'AVAX' | 'MATIC';
-    maxSupply: number;
     releaseDate: string;
     whitelistDate?: string;
 
-    // For projects without contract
-    internalId?: string;
+    chains: Partial<Record<ProjectChain, ChainProjectInformation>>;
 
     // Specific information
     artistId?: string | string[];
@@ -42,23 +64,6 @@ export type ProjectBaseInformationRaw = {
         }
     }
 
-    // Minting if any
-    mint?: {
-        priceErc20Token?: string;
-        weiCost: string;
-        gasLimit: number;
-        maxPerTx: number;
-        mintImage: string;
-        noWhitelist?: boolean;
-        forceEndedState?: boolean;
-        noReveal?: boolean;
-    }
-
-    externalMintLocation?: {
-        name: string;
-        url: string;
-    }
-
     // Mutate if any
     mutate?: {
         targetContractAddress: string;
@@ -71,3 +76,13 @@ export type ProjectBaseInformationRaw = {
 export type ProjectBaseInformation = Omit<ProjectBaseInformationRaw, 'artistId'> & {
     artists?: Artist[];
 }
+
+export type SingletonProjectBaseInformation = (
+    Omit<ProjectBaseInformation, 'chains'> & {
+        chain: ProjectChain;
+        contractAddress: string;
+        initialSupply: number;
+        mint?: MintOptions;
+        externalMintLocation?: ExternalMintOptions;
+    }
+);

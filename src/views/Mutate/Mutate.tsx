@@ -3,7 +3,7 @@ import { ReactNode, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import useUser from "../../api/account/useUser";
 import { MutateContext } from "../../api/mutate/MutateContext";
-import { ProjectBaseInformation } from "../../api/project-base-information/ProjectBaseInformation";
+import { ProjectBaseInformation, SingletonProjectBaseInformation } from "../../api/project-base-information/ProjectBaseInformation";
 import { RoundedButton } from "../../components/RoundedButton";
 import Select, { Options } from 'react-select';
 import { TextFit } from "../../components/TextFit";
@@ -18,7 +18,7 @@ import classNames from "classnames";
  */
 
 export type MutateProps = {
-    baseInformation: ProjectBaseInformation;
+    singletonBaseInfo: SingletonProjectBaseInformation;
 }
 
 const Container = styled.div`
@@ -89,7 +89,7 @@ const simpleTextContent = (text: string): ReactNode => {
 }
 
 export const Mutate: React.FC<MutateProps> = ({
-    baseInformation
+    singletonBaseInfo
 }) => {
     const user = useUser();
     const [isInitialized, setIsInitialized] = useState<boolean>(false);
@@ -101,15 +101,15 @@ export const Mutate: React.FC<MutateProps> = ({
     const [loadedRevealImageError, loadedRevealImageSrc, resetLoadedReveal] = useLoadImageBackground(revealedImageUrl);
 
     const walletAddress = user.account?.walletAddress;
-    const serumNotation = (baseInformation.mutate?.serumUnitNotation)
-        ? baseInformation.mutate.serumUnitNotation
+    const serumNotation = (singletonBaseInfo.mutate?.serumUnitNotation)
+        ? singletonBaseInfo.mutate.serumUnitNotation
         : 'Serum';
 
     useEffect(() => {
         const init = async () => {
             try {
                 await mutateContext.init({
-                    serumContractAddress: baseInformation.contractAddress
+                    serumContractAddress: singletonBaseInfo.contractAddress
                 });
             } catch (e) {
                 console.log(e);
@@ -118,7 +118,7 @@ export const Mutate: React.FC<MutateProps> = ({
         }
 
         init();
-    }, [baseInformation, walletAddress])
+    }, [singletonBaseInfo, walletAddress])
 
     // Fetch user approved status on this serum contract
     useEffect(() => {
@@ -138,8 +138,8 @@ export const Mutate: React.FC<MutateProps> = ({
         // Button click will approve
         if (!isApproved) {
             try {
-            const approved = await mutateContext.approveAll();
-            setIsApproved(approved);
+                const approved = await mutateContext.approveAll();
+                setIsApproved(approved);
             } catch (e) {
                 console.log('Approving failed', e);
             }
@@ -167,7 +167,7 @@ export const Mutate: React.FC<MutateProps> = ({
         setSelectedSerumId(Number(option.value));
     }
 
-    if (!baseInformation.mutate) {
+    if (!singletonBaseInfo.mutate) {
         return null;
     }
 
@@ -250,13 +250,13 @@ export const Mutate: React.FC<MutateProps> = ({
 
     const coverImageUrl = (revealedImageUrl && loadedRevealImageSrc)
         ? loadedRevealImageSrc
-        : baseInformation.coverImage;
+        : singletonBaseInfo.coverImage;
 
     const coverImageFaded = (mutateContext.isMutating || (mutateContextEnabled && !loadedRevealImageSrc));
 
     return (
         <div>
-            <SubTitle height={30} className="px-6 mt-2 mb-8">{baseInformation.name}</SubTitle>
+            <SubTitle height={30} className="px-6 mt-2 mb-8">{singletonBaseInfo.name}</SubTitle>
 
             <Container>
                 <CoverImageWarpper>

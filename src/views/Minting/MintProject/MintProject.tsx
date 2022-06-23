@@ -106,9 +106,9 @@ export const MintProject: React.FC<MintProjectProps> = ({
     contractAddress
 }) => {
     const user = useUser();
-    const baseInformation = useContext(ProjectBaseInformationContext)
-        .getConfig(contractAddress);
-    const network = resolveNetwork(baseInformation.network);
+    const singletonBaseInfo = useContext(ProjectBaseInformationContext)
+        .getSingletonConfig(contractAddress);
+    const network = resolveNetwork(singletonBaseInfo.chain);
 
 
     const [mintAmount, setMintAmount] = useState(1);
@@ -120,13 +120,13 @@ export const MintProject: React.FC<MintProjectProps> = ({
     const tokenUSDPrice = useTokenPriceInUSD(network.symbol as any);
 
     const walletAddress = user.account?.walletAddress;
-    const hasUSDPrice = (typeof tokenUSDPrice === 'number') && !baseInformation?.mint?.priceErc20Token;
+    const hasUSDPrice = (typeof tokenUSDPrice === 'number') && !singletonBaseInfo?.mint?.priceErc20Token;
 
     useEffect(() => {
         const init = async () => {
             setIsInitializing(true);
 
-            if (!baseInformation.mint) {
+            if (!singletonBaseInfo.mint) {
                 return;
             }
 
@@ -145,14 +145,14 @@ export const MintProject: React.FC<MintProjectProps> = ({
         }
 
         init();
-    }, [contractAddress, walletAddress, baseInformation]);
+    }, [contractAddress, walletAddress, singletonBaseInfo]);
 
     const doMint = async () => {
         try {
             const res = await mintingContext.mint(mintAmount);
             if (Array.isArray(res.tokenIds)) {
                 setMintedTokenIds([...mintedTokenIds, ...res.tokenIds]);
-                if (!baseInformation.mint?.noReveal) {
+                if (!singletonBaseInfo.mint?.noReveal) {
                     setIsRevealButtonVisible(true);
                 }
             }
@@ -175,7 +175,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
         setMintAmount(value);
     }
 
-    if (!baseInformation.mint) {
+    if (!singletonBaseInfo.mint) {
         return null;
     }
 
@@ -184,10 +184,10 @@ export const MintProject: React.FC<MintProjectProps> = ({
     }
 
     const getCost = (amount: number): string => {
-        if (baseInformation?.mint?.weiCost) {
+        if (singletonBaseInfo?.mint?.weiCost) {
             const symbol = mintingContext.priceSymbol;
             const decimals = symbol === 'AVAX' ? 1 : 0
-            const totalAmount = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
+            const totalAmount = BigNumber.from(singletonBaseInfo.mint.weiCost).mul(amount);
 
             return (+utils.formatEther(totalAmount)).toFixed(decimals) + ' ' + symbol;
         } else {
@@ -196,8 +196,8 @@ export const MintProject: React.FC<MintProjectProps> = ({
     }
 
     const getUsdCost = (amount: number): string => {
-        if (typeof tokenUSDPrice === 'number' && !baseInformation?.mint?.priceErc20Token && baseInformation?.mint?.weiCost) {
-            const totalPriceWei = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
+        if (typeof tokenUSDPrice === 'number' && !singletonBaseInfo?.mint?.priceErc20Token && singletonBaseInfo?.mint?.weiCost) {
+            const totalPriceWei = BigNumber.from(singletonBaseInfo.mint.weiCost).mul(amount);
             return '$' + ((+utils.formatEther(totalPriceWei)) * tokenUSDPrice).toFixed(2);
         } else {
             return '';
@@ -207,8 +207,8 @@ export const MintProject: React.FC<MintProjectProps> = ({
     let { mintState, whitelistCount } = mintingContext;
     const isWhitelistState = mintState === 'WhitelistOpen';
     const maxPerTx = (isWhitelistState)
-        ? Math.min(whitelistCount, baseInformation.mint.maxPerTx)
-        : baseInformation.mint.maxPerTx;
+        ? Math.min(whitelistCount, singletonBaseInfo.mint.maxPerTx)
+        : singletonBaseInfo.mint.maxPerTx;
 
     const soldOut = mintState === 'Ended';
     const isMintableState = mintState === 'Open' || isWhitelistState;
@@ -260,7 +260,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
         <div>
             <MintingContainer className="p-2">
                 <div className="mb-4 px-4">
-                    <MintHeader height={100} className="flex items-center justify-center">{baseInformation.name}</MintHeader>
+                    <MintHeader height={100} className="flex items-center justify-center">{singletonBaseInfo.name}</MintHeader>
                 </div>
 
                 <div className="grid grid-cols-1 md:flex">
@@ -271,7 +271,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                             <NetworkIcon size={50} networkId={network.networkId} />
                         </div>
 
-                        {!!baseInformation.mint?.priceErc20Token && (
+                        {!!singletonBaseInfo.mint?.priceErc20Token && (
                             <InfoBox className="mb-3">
                                 <InfoBoxHeader>ERC20 token mint!</InfoBoxHeader>
                                 <InfoBoxContent>
@@ -301,13 +301,13 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         {mintState === 'NotStarted' && (
                             <InfoBox className="mb-3">
                                 <InfoBoxHeader>Launching soon!</InfoBoxHeader>
-                                {baseInformation.whitelistDate && (
+                                {singletonBaseInfo.whitelistDate && (
                                     <InfoBoxContent className="mb-2">
-                                        Whitelist presale starts on {`${moment(baseInformation.whitelistDate).utc().format('MMMM Do, h:mm A')} UTC`}
+                                        Whitelist presale starts on {`${moment(singletonBaseInfo.whitelistDate).utc().format('MMMM Do, h:mm A')} UTC`}
                                     </InfoBoxContent>
                                 )}
                                 <InfoBoxContent>
-                                    Public sale starts on {`${moment(baseInformation.releaseDate).utc().format('MMMM Do, h:mm A')} UTC`}
+                                    Public sale starts on {`${moment(singletonBaseInfo.releaseDate).utc().format('MMMM Do, h:mm A')} UTC`}
                                 </InfoBoxContent>
                             </InfoBox>
                         )}
@@ -321,7 +321,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                                         : <>Connect your wallet to see your eligibility for the presale whitelist.</>}
                                 </InfoBoxContent>
                                 <InfoBoxContent className="mt-2">
-                                    Public sale starts on {`${moment(baseInformation.releaseDate).utc().format('MMMM Do, h:mm A')} UTC`}
+                                    Public sale starts on {`${moment(singletonBaseInfo.releaseDate).utc().format('MMMM Do, h:mm A')} UTC`}
                                 </InfoBoxContent>
                             </InfoBox>
                         )}
@@ -329,10 +329,10 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         {!['NotStarted', 'Ended'].includes(mintState) && (
                             <>
                                 <LabelText>Minted:</LabelText>
-                                <ProgressBar min={0} height={8} max={baseInformation.maxSupply} value={mintingContext.mintCount} />
+                                <ProgressBar min={0} height={8} max={singletonBaseInfo.initialSupply} value={mintingContext.mintCount} />
                                 <div className="flex justify-between">
                                     <div />
-                                    <MintCount>{Math.min(mintingContext.mintCount, baseInformation.maxSupply)} / {baseInformation.maxSupply}</MintCount>
+                                    <MintCount>{Math.min(mintingContext.mintCount, singletonBaseInfo.initialSupply)} / {singletonBaseInfo.initialSupply}</MintCount>
                                 </div>
                             </>
                         )}
@@ -341,10 +341,10 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         {mintState === 'Ended' && (
                             <>
                                 <LabelText>Minted:</LabelText>
-                                <ProgressBar min={0} height={8} max={baseInformation.maxSupply} value={baseInformation.maxSupply} />
+                                <ProgressBar min={0} height={8} max={singletonBaseInfo.initialSupply} value={singletonBaseInfo.initialSupply} />
                                 <div className="flex justify-between">
                                     <div />
-                                    <MintCount>{baseInformation.maxSupply} / {baseInformation.maxSupply}</MintCount>
+                                    <MintCount>{singletonBaseInfo.initialSupply} / {singletonBaseInfo.initialSupply}</MintCount>
                                 </div>
                             </>
                         )}
@@ -353,7 +353,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <StyledMintPrice
                             fontSizeRem={2.5}
                             symbol={mintingContext.priceSymbol}
-                            weiPrice={baseInformation.mint.weiCost}
+                            weiPrice={singletonBaseInfo.mint.weiCost}
                             usdPricePerUnit={hasUSDPrice ? tokenUSDPrice : undefined}
                         />
 
@@ -374,7 +374,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                                 <Reveal
                                     className="mb-10"
                                     tokenIds={mintedTokenIds}
-                                    shadowImage={baseInformation.coverImage}
+                                    shadowImage={singletonBaseInfo.coverImage}
                                 />
                             )}
                         </div>
@@ -382,7 +382,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
                     <ImageContainer className="p-4 md:p-8 pt-0 md:pt-0 order-0 md:order-none">
                         <PositionedNetworkIcon className="hidden md:inline-block" size={40} networkId={network.networkId} />
-                        <Image className="w-full md:w-auto rounded-xl" src={baseInformation.mint?.mintImage} />
+                        <Image className="w-full md:w-auto rounded-xl" src={singletonBaseInfo.mint?.mintImage} />
                         <StyledRoundedButton className="hidden md:inline-block" disabled={mintButtonDisabled} onClick={mintButtonHandler}>{mintButtonText}</StyledRoundedButton>
                         <div className="hidden md:block">{info}</div>
                         {isRevealButtonVisible && (
@@ -390,7 +390,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                                 <Reveal
                                     className="mb-10"
                                     tokenIds={mintedTokenIds}
-                                    shadowImage={baseInformation.coverImage}
+                                    shadowImage={singletonBaseInfo.coverImage}
                                 />
                             </div>
                         )}

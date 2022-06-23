@@ -50,14 +50,14 @@ export const MutateWrapper: React.FC = () => {
             <Title className="my-2 mb-8">Mutate</Title>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-6">
                 {contractAddresses.map(contractAddress => {
-                    const baseInformation = baseInformationContext.getConfig(contractAddress);
-                    const network = resolveNetwork(baseInformation.network);
+                    const singletonBaseInfo = baseInformationContext.getSingletonConfig(contractAddress);
+                    const network = resolveNetwork(singletonBaseInfo.chain);
                     const isDisabled = network.networkId !== accountNetworkId;
 
                     const isConnected = !!user.account;
 
-                    const serumNotation = (baseInformation.mutate?.serumUnitNotation)
-                        ? baseInformation.mutate.serumUnitNotation
+                    const serumNotation = (singletonBaseInfo.mutate?.serumUnitNotation)
+                        ? singletonBaseInfo.mutate.serumUnitNotation
                         : 'Serum';
 
                     let shroudText: string;
@@ -71,7 +71,7 @@ export const MutateWrapper: React.FC = () => {
                         <div key={contractAddress} className="relative">
                             <Container disabled={isDisabled}>
                                 <MutateProvider >
-                                    <Mutate baseInformation={baseInformation} />
+                                    <Mutate singletonBaseInfo={singletonBaseInfo} />
                                 </MutateProvider>
                             </Container>
 

@@ -58,7 +58,8 @@ export const MutateProvider: React.FC = ({ children }) => {
             throw new Error(`Project baseInformation does not contain mutate spec`);
         }
 
-        const signerOrProvider = user.getSignerOrProvider(resolveNetwork(baseInformation.network).networkId);
+        const network = resolveNetwork(Object.keys(baseInformation.chains)[0]);
+        const signerOrProvider = user.getSignerOrProvider(network.networkId);
 
         const serumContract = new ethers.Contract(opts.serumContractAddress, serumAbi, signerOrProvider);
         const targetContract = new ethers.Contract(baseInformation.mutate.targetContractAddress, targetAbi, signerOrProvider);

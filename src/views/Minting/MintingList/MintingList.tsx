@@ -16,7 +16,7 @@ const NetworkHeader = styled.h2`
 `;
 
 export const MintingList: React.FC = () => {
-    const configs = useContext(ProjectBaseInformationContext).getConfigs();
+    const configs = useContext(ProjectBaseInformationContext).getSingletonConfigs();
     const allMinting = configs.filter(item => item.mint && !item.mint.forceEndedState);
 
     const now = Date.now();
@@ -34,7 +34,7 @@ export const MintingList: React.FC = () => {
                             return (
                                 <div key={index} className='mx-auto sm:mx-0'>
                                     <MintingProvider>
-                                        <MintingItem baseInformation={item} />
+                                        <MintingItem singletonBaseInfo={item} />
                                     </MintingProvider>
                                 </div>
                             )
@@ -50,7 +50,7 @@ export const MintingList: React.FC = () => {
                     return (
                         <div key={index} className='mx-auto sm:mx-0'>
                             <MintingProvider>
-                                <MintingItem baseInformation={item} />
+                                <MintingItem singletonBaseInfo={item} />
                             </MintingProvider>
                         </div>
                     )
