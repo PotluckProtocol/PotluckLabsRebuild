@@ -1197,5 +1197,49 @@
             "name": "Campfire",
             "url": "https://campfire.exchange/collections/0x1F3b159b608989CA5c265eE80C4EB446F0864Dd8/minting"
         }
+    },
+    {
+        "name": "Ghoulish Divas",
+        "contractAddress": "",
+        "symbol": "",
+        "internalId": "internal::ftm::divas",
+        "coverImage": "/images/projects/ghoulishdivas/image02.jpg",
+        "network": "FTM",
+        "artistId": "",
+        "releaseDate": "2022-06-29T20:00:00.000Z",
+        "whitelistDate": "2022-06-29T19:30:00.000Z",
+        "description": [
+            "The Ghoulish Divas (Fantomized X Potluck Collab):",
+            "There was once a group of beautiful women, said to be the Goddesses of the Potluck Realm. Who, desiring youth above all else, discovered mysterious vials that had fallen from the FantomGates. Believing these vials were sent from the Gods and contained the fountain of youth, they consumed them at once. 733 women were changed in an instant. Horrifically mutated into something so dark, so vial... but also granted immortality in this grotesque state. The Ghoulish Divas now wander the realm in perpetuity caged in their own prison of flesh."
+        ],
+        "maxSupply": 400,
+        "images": [
+            "/images/projects/ghoulishdivas/image01.jpg",
+            "/images/projects/ghoulishdivas/image02.jpg",
+            "/images/projects/ghoulishdivas/image03.jpg",
+            "/images/projects/ghoulishdivas/image04.jpg"
+        ]
+    },
+    {
+        "name": "Ghoulish Divas",
+        "contractAddress": "",
+        "symbol": "",
+        "internalId": "internal::avax::divas",
+        "coverImage": "/images/projects/ghoulishdivas/image03.jpg",
+        "network": "AVAX",
+        "artistId": "",
+        "releaseDate": "2022-06-29T20:00:00.000Z",
+        "whitelistDate": "2022-06-29T19:30:00.000Z",
+        "description": [
+            "The Ghoulish Divas (Fantomized X Potluck Collab):",
+            "There was once a group of beautiful women, said to be the Goddesses of the Potluck Realm. Who, desiring youth above all else, discovered mysterious vials that had fallen from the FantomGates. Believing these vials were sent from the Gods and contained the fountain of youth, they consumed them at once. 733 women were changed in an instant. Horrifically mutated into something so dark, so vial... but also granted immortality in this grotesque state. The Ghoulish Divas now wander the realm in perpetuity caged in their own prison of flesh."
+        ],
+        "maxSupply": 333,
+        "images": [
+            "/images/projects/ghoulishdivas/image01.jpg",
+            "/images/projects/ghoulishdivas/image02.jpg",
+            "/images/projects/ghoulishdivas/image03.jpg",
+            "/images/projects/ghoulishdivas/image04.jpg"
+        ]
     }
 ]
