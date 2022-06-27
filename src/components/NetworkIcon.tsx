@@ -1,6 +1,6 @@
 
 
-const ICON_MAP: { [networkId: number]: string } = {
+export const ICON_MAP: { [networkId: number]: string } = {
     // Matic
     137: '/images/network-icons/matic.svg',
 

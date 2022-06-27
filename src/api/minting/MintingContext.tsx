@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useContext } from "react";
-import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
+import { ProjectBaseInformation, SingletonProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 import { ProjectBaseInformationContext } from "../project-base-information/ProjectBaseInformationContext";
 import { MINTED_COUNT_CHANGED_EVENT, MintingContractWrapper, MintState, MINT_STATE_CHANGED_EVENT, WHITELIST_COUNT_CHANGED_EVENT } from "./MintingContractWrapper";
 import { resolveNetwork } from "../network/resolveNetwork";
@@ -95,12 +95,12 @@ export const MintingProvider: React.FC = ({ children }) => {
     }
 
     const countTotalPrice = (amount: number): BigNumber => {
-        const baseInfo = baseInformationContext.getConfig(contractAddress);
+        const baseInfo = baseInformationContext.getSingletonConfig(contractAddress);
         return BigNumber.from(baseInfo.mint?.weiCost || 0).mul(amount);
     }
 
     const init = async (opts: InitMinting) => {
-        const baseInformation = baseInformationContext.getConfig(opts.contractAddress) as ProjectBaseInformation;
+        const baseInformation = baseInformationContext.getSingletonConfig(opts.contractAddress) as SingletonProjectBaseInformation;
 
         if (!baseInformation.mint) {
             return;
@@ -131,7 +131,7 @@ export const MintingProvider: React.FC = ({ children }) => {
             }
         }
 
-        const network = resolveNetwork(baseInformation.network);
+        const network = resolveNetwork(baseInformation.chain);
         const signerOrProvider = user.getSignerOrProvider(network.networkId);
         if (baseInformation.mint.priceErc20Token) {
             const erc20Contract = new ethers.Contract(

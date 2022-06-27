@@ -26,13 +26,13 @@ export const StoreProvider: React.FC = ({ children }) => {
     const init = async (storeConfig: Store) => {
         console.log('Init store', storeConfig.projectContractAddressOrName);
 
-        const baseInformation = projectBaseInfoContext.getConfig(storeConfig.projectContractAddressOrName);
+        const baseInformation = projectBaseInfoContext.getSingletonConfig(storeConfig.projectContractAddressOrName);
 
         const priceErc20TokenContract = new ethers.Contract(
             storeConfig.priceTokenContractAddress,
             abi,
             user.getSignerOrProvider(
-                resolveNetwork(baseInformation.network).networkId
+                resolveNetwork(baseInformation.chain).networkId
             )
         )
         const wrapper = new ERC20TokenWrapper(priceErc20TokenContract);

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import useUser from "../account/useUser";
-import { ProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
+import { ProjectBaseInformation, SingletonProjectBaseInformation } from "../project-base-information/ProjectBaseInformation";
 import { MintingContext, MintingContextType } from "./MintingContext";
 
 export type UseMintingOpts = {
@@ -13,7 +13,7 @@ export type UseMintingResult = {
     isInitialized: boolean;
 }
 
-export const useMinting = (baseInformation: ProjectBaseInformation, opts: UseMintingOpts = {}): UseMintingResult => {
+export const useMinting = (baseInformation: SingletonProjectBaseInformation, opts: UseMintingOpts = {}): UseMintingResult => {
 
     const [isInitialized, setIsInitialized] = useState(false);
     const mintingContext = useContext(MintingContext);

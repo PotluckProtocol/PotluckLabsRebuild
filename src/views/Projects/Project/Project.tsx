@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 import styled from "styled-components";
 import moment from 'moment';
@@ -13,6 +13,9 @@ import { ArtistsBio } from "./ArtistsBio";
 import { Attributions } from "./Attributions";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { SecMarketLink } from "./SecMarketLink";
+import { ProjectBaseInformationContext } from "../../../api/project-base-information/ProjectBaseInformationContext";
+import { useProjectBasicMintInfo } from "../../../hooks/useProjectBasicMintInfo";
+import { ProjectChain } from "../../../api/project-base-information/ProjectBaseInformation";
 
 const DEFAULT_ROADMAP_IMAGE_PATH = '/images/main_roadmap.png';
 
@@ -72,12 +75,13 @@ const fixUrl = (url: string, path: string): string => {
 
 export const Project: React.FC = () => {
     const { contractAddressOrNameIdent } = useParams<RouteParams>();
-    const baseInformation = useProjectBaseInformation(contractAddressOrNameIdent || '');
+    const baseInformationContext = useContext(ProjectBaseInformationContext);
+    const baseInformation = baseInformationContext.getConfig(contractAddressOrNameIdent || '');
     const artistsTabVisible = !!baseInformation.artists?.length;
     const [queryParams, setQueryParams] = useSearchParams();
     const [selectedTab, setSelectedTab] = useState('');
 
-    const isMinting = useIsMinting(contractAddressOrNameIdent || '');
+    const [isLoadingBasicMintInfo, basicMintInfoMap] = useProjectBasicMintInfo(baseInformation.id);
 
     useEffect(() => {
         if (queryParams.has('tab')) {
@@ -105,38 +109,47 @@ export const Project: React.FC = () => {
         ? baseInformation.roadmapImage
         : DEFAULT_ROADMAP_IMAGE_PATH;
 
-    if (isMinting === null) {
+    if (isLoadingBasicMintInfo) {
         return <div>Loading</div>
     }
 
+    const isMinting = Object.keys(basicMintInfoMap)
+        .map(chain => {
+            const mintState = basicMintInfoMap[chain as ProjectChain]?.mintState;
+            return mintState === 'Open' || mintState === 'WhitelistOpen';
+        })
+        .filter(Boolean)
+        .length > 0;
+
+
     let comingSoonHeader: ReactNode;
-    if (!isMinting && (!baseInformation.contractAddress || baseInformation.externalMintLocation)) {
-        let timePart: ReactNode = <div>Public mint coming soon!</div>;
-        if (baseInformation.releaseDate) {
-            const m = moment(baseInformation.releaseDate)
-            const strTime = `${m.utc().format('MMMM Do YYYY, h:mm A')} UTC`;
-            timePart = (
-                <div>
-                    <div>Public mint on</div>
-                    <div>{strTime}</div>
-                    {baseInformation.externalMintLocation && (
-                        <div>
-                            On <ExternalLink href={baseInformation.externalMintLocation.url}>{baseInformation.externalMintLocation.name}</ExternalLink>
-                        </div>
-                    )}
-                </div>
+    /*
+            if (!isMinting && (!baseInformation.contractAddress || baseInformation.externalMintLocation)) {
+            let timePart: ReactNode = <div>Public mint coming soon!</div>;
+            if (baseInformation.releaseDate) {
+                const m = moment(baseInformation.releaseDate)
+                const strTime = `${m.utc().format('MMMM Do YYYY, h:mm A')} UTC`;
+                timePart = (
+                    <div>
+                        <div>Public mint on</div>
+                        <div>{strTime}</div>
+                        {baseInformation.externalMintLocation && (
+                            <div>
+                                On <ExternalLink href={baseInformation.externalMintLocation.url}>{baseInformation.externalMintLocation.name}</ExternalLink>
+                            </div>
+                        )}
+                    </div>
+                );
+            }
+    
+            comingSoonHeader = (
+                <ComingSoonHeader>
+                    {timePart}
+                </ComingSoonHeader>
             );
         }
+        */
 
-        comingSoonHeader = (
-            <ComingSoonHeader>
-                {timePart}
-            </ComingSoonHeader>
-        );
-    }
-
-    const { blockchainExplorer } = resolveNetwork(baseInformation.network);
-    const showBlockchainExplorerLink = !!baseInformation.contractAddress;
     const showSecondaryLink = !!baseInformation.secondaryMarketplace?.NFTKey;
 
     let secondaryLink: ReactNode;
@@ -148,6 +161,27 @@ export const Project: React.FC = () => {
                 </SecMarketLink>
             )
         }
+    }
+
+    const renderBlockchainExplorerLinks = () => {
+        return (
+            <>
+                {Object.keys(baseInformation.chains).map(chain => {
+                    const chainInfo = baseInformation.chains[chain as ProjectChain];
+                    if (!chainInfo?.contractAddress) {
+                        return null;
+                    }
+
+                    const { blockchainExplorer } = resolveNetwork(chain);
+                    return (
+                        <a key={chain} href={fixUrl(blockchainExplorer.url, `address/${chainInfo.contractAddress}`)} target="_blank">
+                            <ExternalButton>{blockchainExplorer.name}</ExternalButton>
+                        </a>
+                    );
+                })}
+            </>
+        );
+
     }
 
     return (
@@ -179,16 +213,10 @@ export const Project: React.FC = () => {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12">
                 <div>
                     { /* Section for external links (explorer, marketlace etc) */}
-                    {(showBlockchainExplorerLink || showSecondaryLink) && (
-                        <div className="flex gap-4 mb-4">
-                            {showBlockchainExplorerLink && (
-                                <a href={fixUrl(blockchainExplorer.url, `address/${baseInformation.contractAddress}`)} target="_blank">
-                                    <ExternalButton>{blockchainExplorer.name}</ExternalButton>
-                                </a>
-                            )}
-                            {secondaryLink}
-                        </div>
-                    )}
+                    <div className="flex gap-4 mb-4">
+                        {renderBlockchainExplorerLinks()}
+                        {secondaryLink}
+                    </div>
 
                     {baseInformation.loreAudio && (
                         <div className="mb-6">

@@ -3,14 +3,15 @@ import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import { useMinting } from "../../../api/minting/useMinting"
 import { resolveNetwork } from "../../../api/network/resolveNetwork"
-import { ProjectBaseInformation } from "../../../api/project-base-information/ProjectBaseInformation"
-import { resolveIdentInfo } from "../../../api/project-base-information/ProjectBaseInformationContext"
+import { SingletonProjectBaseInformation, ProjectBaseInformation, ProjectChain } from "../../../api/project-base-information/ProjectBaseInformation"
+import { MultipleNetworkIcons } from "../../../components/MultipleNetworkIcons"
 import { NetworkIcon } from "../../../components/NetworkIcon"
 import { TextFit } from "../../../components/TextFit"
+import { useProjectBasicMintInfo } from "../../../hooks/useProjectBasicMintInfo"
 
 export type ProjectItemProps = {
     baseInformation: ProjectBaseInformation;
-    onMintStateResolved: (contractAddress: string, isCurrentlyMinting: boolean) => void;
+    onMintStateResolved: (projectId: string, isCurrentlyMinting: boolean) => void;
 }
 
 const NavLinkContainer = styled(NavLink)`
@@ -70,32 +71,53 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
     baseInformation,
     onMintStateResolved
 }) => {
-    const projectNavPart = resolveIdentInfo(baseInformation);
-    const { isInitialized: mintingIsInitialized, mintingContext } = useMinting(baseInformation);
-    const mintState = mintingContext?.mintState;
+    //  const { isInitialized: mintingIsInitialized, mintingContext } = useMinting(baseInformation);
+    const [isLoadingBasicMintInfo, mintInfoMap] = useProjectBasicMintInfo(baseInformation.id);
+
+    const mintStatusArray = Object.keys(mintInfoMap || {})
+        .map(chain => mintInfoMap?.[chain as ProjectChain]?.mintState)
+        .filter(Boolean);
 
     useEffect(() => {
-        const mintStateOpen = mintingContext && (mintingContext.mintState === 'WhitelistOpen' || mintingContext.mintState === 'Open');
-        if (mintingIsInitialized && baseInformation.contractAddress && mintStateOpen) {
-            onMintStateResolved(baseInformation.contractAddress, true);
+        if (isLoadingBasicMintInfo) {
+            return;
         }
-    }, [mintingIsInitialized, mintState]);
 
-    if (!mintingIsInitialized) {
+        const mintStateOpen = (mintStatusArray.includes('WhitelistOpen') || mintStatusArray.includes('Open'));
+        if (mintStateOpen) {
+            onMintStateResolved(baseInformation.id, true);
+        }
+    }, [isLoadingBasicMintInfo, mintInfoMap]);
+
+    if (isLoadingBasicMintInfo) {
         return null;
     }
 
-    const showMintingCount = (
-        mintingContext &&
-        ['WhitelistOpen', 'Open'].includes(mintingContext.mintState)
-    );
+    let supplyAcrossAllChains = 0;
+    Object.keys(baseInformation.chains).forEach(chain => {
+        const chainInfo = baseInformation.chains[chain as ProjectChain];
+        supplyAcrossAllChains += chainInfo?.initialSupply || 0;
+    });
+
+    const showMintingCount = (mintStatusArray.includes('WhitelistOpen') || mintStatusArray.includes('Open'));
+
     let leftToBeMinted: number = 0;
     if (showMintingCount) {
-        leftToBeMinted = baseInformation.maxSupply - mintingContext.mintCount;
+        let mintedTotalAcrossAllChains = 0;
+        Object.keys(mintInfoMap).forEach(chain => {
+            const chainInfo = mintInfoMap[chain as ProjectChain];
+            if (chainInfo) {
+                mintedTotalAcrossAllChains += chainInfo.mintCount;
+            }
+        });
+
+        leftToBeMinted = supplyAcrossAllChains - mintedTotalAcrossAllChains;
     }
 
+    const networkIds = Object.keys(baseInformation.chains).map(chain => resolveNetwork(chain).networkId);
+
     return (
-        <NavLinkContainer to={`/projects/${projectNavPart}`}>
+        <NavLinkContainer to={`/projects/${baseInformation.id}`}>
             <CoverImage src={baseInformation.coverImage} />
             {(showMintingCount && leftToBeMinted > 0) && (
                 <PositionedMintingBadge>
@@ -103,11 +125,11 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
                     <span style={{ fontSize: '.7rem', lineHeight: '.7rem' }}>&nbsp;left</span>
                 </PositionedMintingBadge>
             )}
-            <PositionedNetworkIcon size={35} networkId={resolveNetwork(baseInformation.network).networkId} />
+            <MultipleNetworkIcons size={35} networkIds={networkIds} />
             <Content>
                 <Title height={30} className="my-2">{baseInformation.name}</Title>
                 <div className="flex items-end justify-end">
-                    <ItemCountLabel>{baseInformation.maxSupply === -1 ? (<>TBA</>) : (<><b>{baseInformation.maxSupply}</b> pieces</>)}</ItemCountLabel>
+                    <ItemCountLabel>{supplyAcrossAllChains === 0 ? (<>TBA</>) : (<><b>{supplyAcrossAllChains}</b> pieces</>)}</ItemCountLabel>
                 </div>
             </Content>
         </NavLinkContainer>
