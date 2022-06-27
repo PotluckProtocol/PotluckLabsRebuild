@@ -18,6 +18,20 @@
         ]
     },
     {
+        "id": "arbiters",
+        "projectName": "Arbiters of the Deep",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xA923bBFB33BBB1fB7306B2781336F75dACB1A62f"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x1F3b159b608989CA5c265eE80C4EB446F0864Dd8"
+            }
+        ]
+    },
+    {
         "id": "beenz",
         "projectName": "Beenz On Acid",
         "chains": [
