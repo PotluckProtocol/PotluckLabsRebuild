@@ -63,8 +63,15 @@ const Title = styled(TextFit)`
     color: #1bf2a4;
 `;
 
+const ItemCountLabelSpacer = styled.div`
+    height: 20px;
+`;
+
 const ItemCountLabel = styled.div`
     font-size: .8rem;
+    position: absolute;
+    bottom: .5rem;
+    right: 1rem;
 `;
 
 export const ProjectItem: React.FC<ProjectItemProps> = ({
@@ -128,9 +135,9 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
             <MultipleNetworkIcons size={35} networkIds={networkIds} />
             <Content>
                 <Title height={30} className="my-2">{baseInformation.name}</Title>
-                <div className="flex items-end justify-end">
+                <ItemCountLabelSpacer className="flex items-end justify-end">
                     <ItemCountLabel>{supplyAcrossAllChains === 0 ? (<>TBA</>) : (<><b>{supplyAcrossAllChains}</b> pieces</>)}</ItemCountLabel>
-                </div>
+                </ItemCountLabelSpacer>
             </Content>
         </NavLinkContainer>
     )

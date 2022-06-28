@@ -89,6 +89,11 @@ const App = () => {
                                     Claim $LABS <StyledExternalLinkIcon />
                                 </div>
                             </MenuItem>
+                            <MenuItem path="https://potluck-protocol.myshopify.com/" onNavigate={closeMenu}>
+                                <div className="flex items-center">
+                                    Potluck Store <StyledExternalLinkIcon />
+                                </div>
+                            </MenuItem>
                             <MenuItem path="https://thecoffin.potluckprotocol.com/" onNavigate={closeMenu}>
                                 <div className="flex items-center">
                                     Stake NFTs <StyledExternalLinkIcon />
