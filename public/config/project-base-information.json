@@ -1203,7 +1203,7 @@
         "contractAddress": "",
         "symbol": "",
         "internalId": "internal::ftm::divas",
-        "coverImage": "/images/projects/ghoulishdivas/image02.jpg",
+        "coverImage": "/images/projects/ghoulishdivas/image05.jpg",
         "network": "FTM",
         "artistId": "",
         "releaseDate": "2022-06-29T20:00:00.000Z",
@@ -1215,8 +1215,8 @@
         "maxSupply": 400,
         "images": [
             "/images/projects/ghoulishdivas/image01.jpg",
-            "/images/projects/ghoulishdivas/image02.jpg",
-            "/images/projects/ghoulishdivas/image03.jpg",
+            "/images/projects/ghoulishdivas/image05.jpg",
+            "/images/projects/ghoulishdivas/image06.jpg",
             "/images/projects/ghoulishdivas/image04.jpg"
         ]
     },
@@ -1225,7 +1225,7 @@
         "contractAddress": "",
         "symbol": "",
         "internalId": "internal::avax::divas",
-        "coverImage": "/images/projects/ghoulishdivas/image03.jpg",
+        "coverImage": "/images/projects/ghoulishdivas/image06.jpg",
         "network": "AVAX",
         "artistId": "",
         "releaseDate": "2022-06-29T20:00:00.000Z",
@@ -1237,8 +1237,8 @@
         "maxSupply": 333,
         "images": [
             "/images/projects/ghoulishdivas/image01.jpg",
-            "/images/projects/ghoulishdivas/image02.jpg",
-            "/images/projects/ghoulishdivas/image03.jpg",
+            "/images/projects/ghoulishdivas/image05.jpg",
+            "/images/projects/ghoulishdivas/image06.jpg",
             "/images/projects/ghoulishdivas/image04.jpg"
         ]
     }
