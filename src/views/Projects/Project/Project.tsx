@@ -1,10 +1,7 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 import styled from "styled-components";
-import moment from 'moment';
 import { Artist } from "../../../api/artists/Artist";
-import { useIsMinting } from "../../../api/minting/useIsMinting";
-import useProjectBaseInformation from "../../../api/project-base-information/useProjectBaseInformation";
 import { ImageCarousel } from "../../../components/ImageCarousel";
 import { ImageWithPreview } from "../../../components/ImageWithPreview";
 import { Tab, Tabs } from "../../../components/Tabs"
@@ -16,6 +13,7 @@ import { SecMarketLink } from "./SecMarketLink";
 import { ProjectBaseInformationContext } from "../../../api/project-base-information/ProjectBaseInformationContext";
 import { useProjectBasicMintInfo } from "../../../hooks/useProjectBasicMintInfo";
 import { ProjectChain } from "../../../api/project-base-information/ProjectBaseInformation";
+import { MintingPart } from "./MintingPart";
 
 const DEFAULT_ROADMAP_IMAGE_PATH = '/images/main_roadmap.png';
 
@@ -33,12 +31,6 @@ const Paragraph = styled.p`
     text-align: justify;
 `;
 
-const ComingSoonHeader = styled.p`
-    font-size: 3rem;
-    text-align: center;
-    margin: 0 0 3rem;
-`;
-
 const ExternalButton = styled.button`
     border: 1px solid #1bf2a4;
     background: none;
@@ -48,10 +40,7 @@ const ExternalButton = styled.button`
     border-radius: .5rem;
 `;
 
-const ExternalLink = styled.a`
-    color: #00f69d;
-    text-decoration: underline;
-`;
+
 
 type RouteParams = {
     contractAddressOrNameIdent: string;
@@ -122,44 +111,16 @@ export const Project: React.FC = () => {
         .length > 0;
 
 
-    let comingSoonHeader: ReactNode;
-    /*
-            if (!isMinting && (!baseInformation.contractAddress || baseInformation.externalMintLocation)) {
-            let timePart: ReactNode = <div>Public mint coming soon!</div>;
-            if (baseInformation.releaseDate) {
-                const m = moment(baseInformation.releaseDate)
-                const strTime = `${m.utc().format('MMMM Do YYYY, h:mm A')} UTC`;
-                timePart = (
-                    <div>
-                        <div>Public mint on</div>
-                        <div>{strTime}</div>
-                        {baseInformation.externalMintLocation && (
-                            <div>
-                                On <ExternalLink href={baseInformation.externalMintLocation.url}>{baseInformation.externalMintLocation.name}</ExternalLink>
-                            </div>
-                        )}
-                    </div>
+
+    const renderSecondaryMarketLinks = () => {
+        if (baseInformation.secondaryMarketplace?.NFTKey) {
+            if (baseInformation.secondaryMarketplace?.NFTKey) {
+                return (
+                    <SecMarketLink nftKey={baseInformation.secondaryMarketplace.NFTKey}>
+                        <ExternalButton>NFTKey</ExternalButton>
+                    </SecMarketLink>
                 );
             }
-    
-            comingSoonHeader = (
-                <ComingSoonHeader>
-                    {timePart}
-                </ComingSoonHeader>
-            );
-        }
-        */
-
-    const showSecondaryLink = !!baseInformation.secondaryMarketplace?.NFTKey;
-
-    let secondaryLink: ReactNode;
-    if (showSecondaryLink) {
-        if (baseInformation.secondaryMarketplace?.NFTKey) {
-            secondaryLink = (
-                <SecMarketLink nftKey={baseInformation.secondaryMarketplace.NFTKey}>
-                    <ExternalButton>NFTKey</ExternalButton>
-                </SecMarketLink>
-            )
         }
     }
 
@@ -186,15 +147,7 @@ export const Project: React.FC = () => {
 
     return (
         <>
-            {baseInformation.contractAddress && (
-                <div className="mb-10">
-                    <MintProjectWrapper
-                        contractAddress={baseInformation.contractAddress}
-                    />
-                </div>
-            )}
-
-            {comingSoonHeader}
+            <MintingPart baseInformation={baseInformation} />
 
             {(baseInformation.images || []).length > 0 && (
                 <div className="mb-10">
@@ -215,7 +168,7 @@ export const Project: React.FC = () => {
                     { /* Section for external links (explorer, marketlace etc) */}
                     <div className="flex gap-4 mb-4">
                         {renderBlockchainExplorerLinks()}
-                        {secondaryLink}
+                        {renderSecondaryMarketLinks()}
                     </div>
 
                     {baseInformation.loreAudio && (

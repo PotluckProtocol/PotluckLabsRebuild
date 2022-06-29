@@ -1,8 +1,21 @@
 import styled from "styled-components";
 import { NetworkIcon } from "./NetworkIcon";
 
-const Container = styled.div`
+type ContainerProps = {
+    iconCount: number;
+    size: number;
+}
+
+const Container = styled.div<ContainerProps>`
     position: relative;
+    height: ${props => props.size}px;
+    width: ${props => props.size * props.iconCount}px;
+`;
+
+const PositionedNetworkIcon = styled<any>(NetworkIcon)`
+    position: absolute;
+    right: ${props => props.index * 15}px;
+    top: 0;
 `;
 
 export type MultipleNetworkIconsProps = {
@@ -17,9 +30,9 @@ export const MultipleNetworkIcons: React.FC<MultipleNetworkIconsProps> = ({
     size
 }) => {
     return (
-        <Container className={className}>
+        <Container size={size || 35} iconCount={networkIds.length} className={className}>
             {networkIds.map((networkId, index) => (
-                <NetworkIcon key={index} networkId={networkId} size={size} />
+                <PositionedNetworkIcon index={index} key={index} networkId={networkId} size={size} />
             ))}
         </Container>
     );

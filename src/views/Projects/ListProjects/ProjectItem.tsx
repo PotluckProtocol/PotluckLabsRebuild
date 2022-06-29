@@ -1,11 +1,9 @@
 import { useEffect } from "react"
 import { NavLink } from "react-router-dom"
 import styled from "styled-components"
-import { useMinting } from "../../../api/minting/useMinting"
 import { resolveNetwork } from "../../../api/network/resolveNetwork"
-import { SingletonProjectBaseInformation, ProjectBaseInformation, ProjectChain } from "../../../api/project-base-information/ProjectBaseInformation"
+import { ProjectBaseInformation, ProjectChain } from "../../../api/project-base-information/ProjectBaseInformation"
 import { MultipleNetworkIcons } from "../../../components/MultipleNetworkIcons"
-import { NetworkIcon } from "../../../components/NetworkIcon"
 import { TextFit } from "../../../components/TextFit"
 import { useProjectBasicMintInfo } from "../../../hooks/useProjectBasicMintInfo"
 
@@ -27,7 +25,7 @@ const NavLinkContainer = styled(NavLink)`
     }
 `;
 
-const PositionedNetworkIcon = styled(NetworkIcon)`
+const PositionedMultipleNetworkIcons = styled(MultipleNetworkIcons)`
     display: inline-block;
     position: absolute;
     right: 0.35rem;
@@ -78,7 +76,6 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
     baseInformation,
     onMintStateResolved
 }) => {
-    //  const { isInitialized: mintingIsInitialized, mintingContext } = useMinting(baseInformation);
     const [isLoadingBasicMintInfo, mintInfoMap] = useProjectBasicMintInfo(baseInformation.id);
 
     const mintStatusArray = Object.keys(mintInfoMap || {})
@@ -132,7 +129,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
                     <span style={{ fontSize: '.7rem', lineHeight: '.7rem' }}>&nbsp;left</span>
                 </PositionedMintingBadge>
             )}
-            <MultipleNetworkIcons size={35} networkIds={networkIds} />
+            <PositionedMultipleNetworkIcons className={'absolute'} size={35} networkIds={networkIds} />
             <Content>
                 <Title height={30} className="my-2">{baseInformation.name}</Title>
                 <ItemCountLabelSpacer className="flex items-end justify-end">
