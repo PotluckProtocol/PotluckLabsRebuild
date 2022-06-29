@@ -1,6 +1,6 @@
 [
     {
-        "projectContractAddressOrName": "internal::ftm::divas",
+        "projectContractAddressOrName": "0xAf01EDC305a11e6a765765b3E2C3d16f9466C10A",
         "type": "WHITELIST",
         "network": "FTM",
         "priceTokenContractAddress": "0x623d0f6a58e563C8627Da26B567269A18555aa52",
