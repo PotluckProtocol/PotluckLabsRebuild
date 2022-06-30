@@ -30,6 +30,10 @@ export const useProjectBasicMintInfo = (projectId: string): ([true, null] | [fal
                 async (chain) => {
                     const projectChain = chain as ProjectChain;
                     const chainInfo = baseInformation.chains[projectChain] as ChainProjectInformation;
+                    if (!chainInfo.contractAddress) {
+                        return;
+                    }
+
                     const contract = new ethers.Contract(
                         chainInfo.contractAddress,
                         abi,
@@ -42,7 +46,7 @@ export const useProjectBasicMintInfo = (projectId: string): ([true, null] | [fal
                     );
 
                     const [mintCount, mintState] = await Promise.all([
-                        mintingWrapper.getMaxSupply(),
+                        mintingWrapper.getMintedCount(),
                         mintingWrapper.getMintState()
                     ]);
 
@@ -53,7 +57,7 @@ export const useProjectBasicMintInfo = (projectId: string): ([true, null] | [fal
                 }
             );
 
-            await fetchPromises;
+            await Promise.all(fetchPromises);
             setBasicInfoMap(newBasicInfoMap);
             setIsLoading(false);
         }

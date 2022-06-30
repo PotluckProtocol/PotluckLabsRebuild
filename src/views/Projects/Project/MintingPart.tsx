@@ -7,6 +7,7 @@ import { resolveNetwork } from "../../../api/network/resolveNetwork";
 import { ChainProjectInformation, ProjectBaseInformation, ProjectChain } from "../../../api/project-base-information/ProjectBaseInformation"
 import { NetworkIcon } from "../../../components/NetworkIcon";
 import { MintProjectWrapper } from "../../Minting/MintProject/MintProjectWrapper";
+import { ExternalMint } from "./ExternalMint";
 
 export type MintingPartProps = {
     baseInformation: ProjectBaseInformation;
@@ -29,16 +30,6 @@ const TabItemButton = styled.button<TabItemButtomProps>`
     padding: .4rem .75rem;
 `;
 
-const ComingSoonHeader = styled.p`
-    font-size: 3rem;
-    text-align: center;
-    margin: 0 0 3rem;
-`;
-
-const ExternalLink = styled.a`
-    color: #00f69d;
-    text-decoration: underline;
-`;
 
 export const MintingPart: React.FC<MintingPartProps> = ({
     baseInformation,
@@ -54,7 +45,7 @@ export const MintingPart: React.FC<MintingPartProps> = ({
 
     const renderTabs = () => {
         return (
-            <ul className="flex justify-center items-center" role="tablist">
+            <ul className="flex justify-center items-center mb-6" role="tablist">
                 {networks.map((network) => {
                     const chain = resolveChain(network.networkId);
                     return (
@@ -79,32 +70,13 @@ export const MintingPart: React.FC<MintingPartProps> = ({
                     contractAddress={chainInfo.contractAddress}
                 />
             );
-        } else {
-            let timePart: ReactNode = <div>Public mint coming soon!</div>;
-            if (baseInformation.releaseDate) {
-                const m = moment(baseInformation.releaseDate)
-                timePart = (
-                    <>
-                        <div>Public mint on</div>
-                        <div>{`${m.utc().format('MMMM Do YYYY, h:mm A')} UTC`}</div>
-                    </>
-                );
-
-                if (chainInfo.externalMintLocation) {
-                    timePart = (
-                        <>
-                            {timePart}
-                            <div>
-                                On <ExternalLink href={chainInfo.externalMintLocation.url}>{chainInfo.externalMintLocation.name}</ExternalLink>
-                            </div>
-                        </>
-                    );
-                }
-            }
-
+        } else if (chainInfo.externalMintLocation) {
             return (
-                <ComingSoonHeader>{timePart}</ComingSoonHeader>
-            );
+                <ExternalMint
+                    externalMint={chainInfo.externalMintLocation}
+                    releaseDate={new Date(baseInformation.releaseDate)}
+                />
+            )
         }
     }
 

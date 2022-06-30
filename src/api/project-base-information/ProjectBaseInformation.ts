@@ -12,6 +12,8 @@ export type ProjectArtist = {
 
 export type ProjectChain = 'FTM' | 'AVAX' | 'MATIC';
 
+export type CrossChainType = 'traverse' | 'bridge' | 'none';
+
 export type MintOptions = {
     priceErc20Token?: string;
     weiCost: string;
@@ -25,6 +27,7 @@ export type MintOptions = {
 
 export type ExternalMintOptions = {
     name: string;
+    image: string;
     url: string;
 }
 
@@ -44,6 +47,7 @@ export type ProjectBaseInformationRaw = {
     releaseDate: string;
     whitelistDate?: string;
 
+    crossChainType?: CrossChainType;
     chains: Partial<Record<ProjectChain, ChainProjectInformation>>;
 
     // Specific information

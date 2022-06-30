@@ -233,18 +233,13 @@ export class MintingContractWrapper extends EventEmitter {
     }
 
     private init() {
-
-        if (!this.singletonBaseInfo.mint) {
-            throw new Error('Minting project base information must contain mint specification');
-        }
-
         if (this.opts.liveMintingCount) {
             this.liveMintingInterval = setInterval(() => {
                 this.getMintedCount();
             }, LIVE_MINTING_COUNT_INTERVAL_MS);
         }
 
-        if (!this.singletonBaseInfo.mint.forceEndedState && this.opts.liveMintStateRefresh) {
+        if (!this.singletonBaseInfo.mint?.forceEndedState && this.opts.liveMintStateRefresh) {
             this.liveStateInterval = setInterval(() => {
                 this.getMintState();
             }, LIVE_MINT_STATE_INTERVAL_MS);

@@ -3,10 +3,11 @@
         "id": "arbiters-of-the-deep",
         "name": "Arbiters of the Deep",
         "symbol": "AOTD",
+        "crossChainType": "traverse",
         "chains": {
             "FTM": {
                 "contractAddress": "0xA923bBFB33BBB1fB7306B2781336F75dACB1A62f",
-                "initialSupply": 555,
+                "initialSupply": 556,
                 "mint": {
                     "gasLimit": 320000,
                     "maxPerTx": 5,
@@ -16,10 +17,11 @@
                 }
             },
             "AVAX": {
-                "contractAddress": "0xA923bBFB33BBB1fB7306B2781336F75dACB1A62f",
-                "initialSupply": 555,
+                "contractAddress": "0x1F3b159b608989CA5c265eE80C4EB446F0864Dd8",
+                "initialSupply": 556,
                 "externalMintLocation": {
                     "name": "Campfire",
+                    "image": "/images/partners/campfire.png",
                     "url": "https://campfire.exchange/collections/0x1F3b159b608989CA5c265eE80C4EB446F0864Dd8/minting"
                 }
             }
@@ -41,6 +43,32 @@
             "/images/projects/arbitersofthedeep/image02.png",
             "/images/projects/arbitersofthedeep/image03.png",
             "/images/projects/arbitersofthedeep/image04.png"
+        ]
+    },
+    {
+        "id": "test",
+        "name": "Test",
+        "symbol": "TEST",
+        "crossChainType": "traverse",
+        "chains": {
+            "FTM": {
+                "initialSupply": 1111
+            },
+            "AVAX": {
+                "initialSupply": 1111
+            }
+        },
+        "coverImage": "/images/projects/arbitersofthedeep/image03.png",
+        "artistId": [],
+        "releaseDate": "2022-07-12T20:00:00.000Z",
+        "whitelistDate": "2022-07-12T19:30:00.000Z",
+        "description": [
+            "Deep within the labyrinthine like cave system, among the glowing stalagmites of unrefined ore and noxious moss, there sat a throne. With all the impending doom of the unsetting Sun, this moonless and crypt like dungeon was largely undiscovered. Even the creatures were mostly unaware of these powerful cryptids.",
+            "Dragon Humanoid Cycloptic Cave Dwellers could be the simplest scientific term given to them.  A bestial mastery, ordained to a species high on the food chain.  They once ruled the skies, earth and subterrain equally and uncontested.",
+            "Now forsaken and pushed back to the cave ; there was only one pursuit amongst the warring clans of the Arbiters.  To restore their rightful rule of the Lands, and  seek the power of Gods."
+        ],
+        "images": [
+            "/images/projects/arbitersofthedeep/image01.png"
         ]
     }
 ]

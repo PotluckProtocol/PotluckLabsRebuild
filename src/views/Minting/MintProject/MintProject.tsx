@@ -110,7 +110,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
         .getSingletonConfig(contractAddress);
     const network = resolveNetwork(singletonBaseInfo.chain);
 
-
     const [mintAmount, setMintAmount] = useState(1);
     const [isInitializing, setIsInitializing] = useState(false);
     const mintingContext = useContext(MintingContext);
@@ -145,7 +144,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
         }
 
         init();
-    }, [contractAddress, walletAddress, singletonBaseInfo]);
+    }, [contractAddress, walletAddress]);
 
     const doMint = async () => {
         try {

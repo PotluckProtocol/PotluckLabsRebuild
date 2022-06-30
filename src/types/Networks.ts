@@ -3,6 +3,7 @@ import { Token } from "./Token";
 export type Network = Token & {
     name: string;
     networkId: number;
+    primaryColor: string;
     blockchainExplorer: {
         name: string;
         url: string;
@@ -15,6 +16,7 @@ export const NETWORKS: Network[] = [
         symbol: 'FTM',
         networkId: 250,
         decimals: 18,
+        primaryColor: '#25b6ea',
         blockchainExplorer: {
             name: 'FTMScan',
             url: 'https://ftmscan.com/'
@@ -24,6 +26,7 @@ export const NETWORKS: Network[] = [
         symbol: 'AVAX',
         networkId: 43114,
         decimals: 18,
+        primaryColor: '#e84142',
         blockchainExplorer: {
             name: 'Snowtrace',
             url: 'https://snowtrace.io/'
@@ -33,6 +36,7 @@ export const NETWORKS: Network[] = [
         symbol: 'MATIC',
         networkId: 137,
         decimals: 18,
+        primaryColor: '#000',
         blockchainExplorer: {
             name: 'Polygonscan',
             url: 'https://polygonscan.com/'
@@ -42,6 +46,7 @@ export const NETWORKS: Network[] = [
         symbol: 'FTM',
         networkId: 4002,
         decimals: 18,
+        primaryColor: '#25b6ea',
         blockchainExplorer: {
             name: 'FTMScan',
             url: 'https://testnet.ftmscan.com/'

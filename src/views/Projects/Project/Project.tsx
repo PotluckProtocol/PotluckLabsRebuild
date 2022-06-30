@@ -5,7 +5,6 @@ import { Artist } from "../../../api/artists/Artist";
 import { ImageCarousel } from "../../../components/ImageCarousel";
 import { ImageWithPreview } from "../../../components/ImageWithPreview";
 import { Tab, Tabs } from "../../../components/Tabs"
-import { MintProjectWrapper } from "../../Minting/MintProject/MintProjectWrapper";
 import { ArtistsBio } from "./ArtistsBio";
 import { Attributions } from "./Attributions";
 import { resolveNetwork } from "../../../api/network/resolveNetwork";
@@ -14,6 +13,12 @@ import { ProjectBaseInformationContext } from "../../../api/project-base-informa
 import { useProjectBasicMintInfo } from "../../../hooks/useProjectBasicMintInfo";
 import { ProjectChain } from "../../../api/project-base-information/ProjectBaseInformation";
 import { MintingPart } from "./MintingPart";
+import { ChainDistribution, ChainDistributionProps } from "../../../components/ChainDistribution/ChainDistribution";
+import moment from "moment";
+import { getChainInfos } from "../../../api/project-base-information/getChainInfos";
+import { sum } from "lodash";
+import { MintState } from "../../../api/minting/MintingContractWrapper";
+import { getCrossChainMintState } from "./getCrossChainMintState";
 
 const DEFAULT_ROADMAP_IMAGE_PATH = '/images/main_roadmap.png';
 
@@ -40,7 +45,19 @@ const ExternalButton = styled.button`
     border-radius: .5rem;
 `;
 
+const ChainDistributionContainer = styled.div`
+    max-width: 650px;
+`;
 
+const ComingSoonHeader = styled.p`
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 0 3rem;
+`;
+
+const MaxSupply = styled.div`
+    font-size: 1.2rem;
+`;
 
 type RouteParams = {
     contractAddressOrNameIdent: string;
@@ -72,6 +89,8 @@ export const Project: React.FC = () => {
 
     const [isLoadingBasicMintInfo, basicMintInfoMap] = useProjectBasicMintInfo(baseInformation.id);
 
+    const hasAllChainContractAddresses = !getChainInfos(baseInformation).find(item => !item.chainInfo.contractAddress);
+
     useEffect(() => {
         if (queryParams.has('tab')) {
             setSelectedTab(queryParams.get('tab') as string);
@@ -102,15 +121,32 @@ export const Project: React.FC = () => {
         return <div>Loading</div>
     }
 
-    const isMinting = Object.keys(basicMintInfoMap)
-        .map(chain => {
-            const mintState = basicMintInfoMap[chain as ProjectChain]?.mintState;
-            return mintState === 'Open' || mintState === 'WhitelistOpen';
-        })
-        .filter(Boolean)
-        .length > 0;
+    const maxSupply = sum(getChainInfos(baseInformation).map(item => item.chainInfo.initialSupply));
+    const crossChainMintState = hasAllChainContractAddresses ? getCrossChainMintState(basicMintInfoMap, maxSupply) : 'None';
 
+    const renderMintingPart = () => {
+        if (crossChainMintState === 'SoldOut') {
+            return;
+        }
 
+        const hasAnyMintingInfo = getChainInfos(baseInformation)
+            .filter(item => !!item.chainInfo.mint || !!item.chainInfo.externalMintLocation)
+            .length > 0;
+
+        if (hasAnyMintingInfo) {
+            return (
+                <MintingPart baseInformation={baseInformation} className='mb-6' />
+            )
+        } else if (baseInformation.releaseDate) {
+            const m = moment(baseInformation.releaseDate)
+            return (
+                <ComingSoonHeader>
+                    <div>Public mint on</div>
+                    <div>{`${m.utc().format('MMMM Do YYYY, h:mm A')} UTC`}</div>
+                </ComingSoonHeader>
+            );
+        }
+    }
 
     const renderSecondaryMarketLinks = () => {
         if (baseInformation.secondaryMarketplace?.NFTKey) {
@@ -142,12 +178,49 @@ export const Project: React.FC = () => {
                 })}
             </>
         );
+    }
 
+    const renderChainDistribution = () => {
+        if (!hasAllChainContractAddresses) {
+            return;
+        }
+
+        const chains = Object.keys(baseInformation.chains);
+        if (chains.length <= 1) {
+            return;
+        }
+
+        let total: number = 0;
+        chains.forEach(chain => {
+            total += baseInformation.chains[chain as ProjectChain]?.initialSupply || 0;
+        });
+
+        const chainItems: ChainDistributionProps['chains'] = [];
+        Object.keys(basicMintInfoMap).forEach(chain => {
+            const projectChain = chain as ProjectChain;
+            const networkId = resolveNetwork(chain).networkId;
+            const mintCount = basicMintInfoMap[projectChain]?.mintCount || 0;
+            chainItems.push({
+                networkId,
+                count: mintCount
+            });
+        });
+
+        return (
+            <ChainDistributionContainer className="mb-4 mx-auto">
+                <p className="text-center mb-2">Chain distribution</p>
+                <ChainDistribution
+                    chains={chainItems}
+                    height={30}
+                    maxSupply={total}
+                />
+            </ChainDistributionContainer>
+        )
     }
 
     return (
         <>
-            <MintingPart baseInformation={baseInformation} />
+            {renderMintingPart()}
 
             {(baseInformation.images || []).length > 0 && (
                 <div className="mb-10">
@@ -155,13 +228,15 @@ export const Project: React.FC = () => {
                     <ImageCarousel
                         images={baseInformation.images || []}
                         startFromIndex={getMiddleIndex(baseInformation.images?.length || 0)}
-                        height={isMinting ? 250 : 500}
+                        height={crossChainMintState === 'Minting' ? 250 : 500}
                         changeImageAfterMs={5000}
                     />
                 </div>
             )}
 
             <Title>{baseInformation.name}</Title>
+
+            {renderChainDistribution()}
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12">
                 <div>
@@ -178,6 +253,9 @@ export const Project: React.FC = () => {
                             </audio>
                         </div>
                     )}
+
+                    <MaxSupply className="mb-3">Total supply: {maxSupply}</MaxSupply>
+
                     <div>{description}</div>
                 </div>
                 <div>
