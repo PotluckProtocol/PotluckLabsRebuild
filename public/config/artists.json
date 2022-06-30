@@ -163,5 +163,12 @@
         "social": {
             "twitter": "https://twitter.com/MisterMinded"
         }
+    },
+    {
+        "id": "bonono",
+        "name": "Bonono",
+        "social": {
+            "twitter": "https://twitter.com/Bononof"
+        }
     }
 ]

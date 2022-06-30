@@ -1222,7 +1222,8 @@
             "gasLimit": 320000,
             "maxPerTx": 3,
             "mintImage": "/images/projects/ghoulishdivas/mint.gif",
-            "weiCost": "65000000000000000000"
+            "weiCost": "65000000000000000000",
+            "forceEndedState": true
         }
     },
     {
@@ -1250,5 +1251,39 @@
             "name": "Campfire",
             "url": "https://campfire.exchange/collections/0x61cf0d0a26e8e2d42b8f737a186e984b917e60a3/minting"
         }
+    },
+    {
+        "name": "Roboto",
+        "internalId": "internal::ftm::roboto",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/roboto/image01.png",
+        "network": "FTM",
+        "artistId": "bonono",
+        "releaseDate": "2022-07-02T20:00:00.000Z",
+        "whitelistDate": "2022-07-02T19:30:00.000Z",
+        "description": [],
+        "maxSupply": 444,
+        "images": [
+            "/images/projects/roboto/image01.png",
+            "/images/projects/roboto/image02.png"
+        ]
+    },
+    {
+        "name": "Roboto",
+        "internalId": "internal::avax::roboto",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/roboto/image02.png",
+        "network": "AVAX",
+        "artistId": "bonono",
+        "releaseDate": "2022-07-02T20:00:00.000Z",
+        "whitelistDate": "2022-07-02T19:30:00.000Z",
+        "description": [],
+        "maxSupply": 444,
+        "images": [
+            "/images/projects/roboto/image01.png",
+            "/images/projects/roboto/image02.png"
+        ]
     }
 ]
