@@ -7,7 +7,7 @@ export type ProviderOrSigner = ethers.providers.Provider | ethers.Signer;
 
 const PUBLIC_PROVIDER_MAP: any = {
     137: new ethers.providers.JsonRpcProvider('https://rpc-mainnet.matic.network'),
-    250: new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/'),
+    250: new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/fantom/'),
     4002: new ethers.providers.JsonRpcProvider('https://rpc.testnet.fantom.network/'),
     43114: new ethers.providers.JsonRpcProvider('https://api.avax.network/ext/bc/C/rpc')
 }
