@@ -1329,5 +1329,47 @@
             "name": "Campfire",
             "url": "https://campfire.exchange/collections/0x89877b4715DBaC837269eF26f77eb8287A033172/minting"
         }
+    },
+    {
+        "name": "Shamanic Tribe",
+        "internalId": "internal::ftm::shamanic",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/shamanictribe/image01.png",
+        "network": "FTM",
+        "artistId": "tunc",
+        "releaseDate": "2022-07-08T20:00:00.000Z",
+        "whitelistDate": "2022-07-08T19:30:00.000Z",
+        "description": [
+            "TBA"
+        ],
+        "maxSupply": 750,
+        "images": [
+            "/images/projects/shamanictribe/image02.png",
+            "/images/projects/shamanictribe/image03.png",
+            "/images/projects/shamanictribe/image04.png",
+            "/images/projects/shamanictribe/image05.png"
+        ]
+    },
+    {
+        "name": "Shamanic Tribe",
+        "internalId": "internal::avax::shamanic",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/shamanictribe/image05.png",
+        "network": "AVAX",
+        "artistId": "tunc",
+        "releaseDate": "2022-07-08T20:00:00.000Z",
+        "whitelistDate": "2022-07-08T19:30:00.000Z",
+        "description": [
+            "TBA"
+        ],
+        "maxSupply": 750,
+        "images": [
+            "/images/projects/shamanictribe/image07.png",
+            "/images/projects/shamanictribe/image08.png",
+            "/images/projects/shamanictribe/image09.png",
+            "/images/projects/shamanictribe/image10.png"
+        ]
     }
 ]
