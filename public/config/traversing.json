@@ -128,5 +128,19 @@
                 "contractAddress": "0x01244851d026343C1E660aEbFcDB1af31360f383"
             }
         ]
+    },
+    {
+        "id": "roboto",
+        "projectName": "Roboto",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xAc1c9E4033a6Fa42aB4F86B7BF8A6580F8756A30"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x89877b4715DBaC837269eF26f77eb8287A033172"
+            }
+        ]
     }
 ]
