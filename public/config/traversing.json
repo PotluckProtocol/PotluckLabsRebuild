@@ -74,6 +74,20 @@
         ]
     },
     {
+        "id": "evilbeanz",
+        "projectName": "Evil Beanz",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x29324964C8dE551C767F6b4267A67A3c30bc2240"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x11CeA873dD8aDB5feb97875C317c771D887629FC"
+            }
+        ]
+    },
+    {
         "id": "huntersofevil",
         "projectName": "Hunters Of Evil",
         "chains": [
