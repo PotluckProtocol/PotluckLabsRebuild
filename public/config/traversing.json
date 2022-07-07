@@ -88,6 +88,20 @@
         ]
     },
     {
+        "id": "divas",
+        "projectName": "Ghoulish Divas",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xAf01EDC305a11e6a765765b3E2C3d16f9466C10A"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x61CF0D0a26e8e2D42b8f737a186e984B917e60A3"
+            }
+        ]
+    },
+    {
         "id": "huntersofevil",
         "projectName": "Hunters Of Evil",
         "chains": [

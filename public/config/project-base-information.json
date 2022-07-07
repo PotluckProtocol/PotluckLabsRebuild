@@ -1228,9 +1228,8 @@
     },
     {
         "name": "Ghoulish Divas",
-        "contractAddress": "",
-        "symbol": "",
-        "internalId": "internal::avax::divas",
+        "contractAddress": "0x61CF0D0a26e8e2D42b8f737a186e984B917e60A3",
+        "symbol": "GSDV",
         "coverImage": "/images/projects/ghoulishdivas/image06.jpg",
         "network": "AVAX",
         "artistId": "",
