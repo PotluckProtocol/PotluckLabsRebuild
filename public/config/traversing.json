@@ -170,5 +170,19 @@
                 "contractAddress": "0x89877b4715DBaC837269eF26f77eb8287A033172"
             }
         ]
+    },
+    {
+        "id": "shamanictribe",
+        "projectName": "Shamanic Tribe",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x3fB9db410034eE46f531dD802c94215A29e5f0e4"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x67604d697EF878e3B380b44A4854A7c20A68678a"
+            }
+        ]
     }
 ]

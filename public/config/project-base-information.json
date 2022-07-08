@@ -1288,7 +1288,8 @@
             "gasLimit": 320000,
             "maxPerTx": 3,
             "mintImage": "/images/projects/roboto/mint.gif",
-            "weiCost": "55000000000000000000"
+            "weiCost": "55000000000000000000",
+            "forceEndedState": true
         }
     },
     {
@@ -1331,16 +1332,17 @@
     },
     {
         "name": "Shamanic Tribe",
-        "internalId": "internal::ftm::shamanic",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0x3fB9db410034eE46f531dD802c94215A29e5f0e4",
+        "symbol": "STRB",
         "coverImage": "/images/projects/shamanictribe/image01.png",
         "network": "FTM",
         "artistId": "tunc",
         "releaseDate": "2022-07-08T20:00:00.000Z",
         "whitelistDate": "2022-07-08T19:30:00.000Z",
         "description": [
-            "TBA "
+            "It had been 7 long months at sea on a giant ship for The Lost Shamanic Tribe of the Old World. They had fled their lands during the massive flood and since then the tribe was searching for a new home. However, on the first day of the new year, one of the Void Angels got a message from The Shaman, saying he was waiting for them to come and live on The Island.  The Void Angel announced the big news to everyone and the ship sailed right to The Island.",
+            "This was a big day for The Island as well. The Shaman gathered every islander and they all went to the beach. They set a big fire and around it formed a giant drum circle. One of the Islanders, IlluminatiCongo stood up, walked to the fire and began to chant in ancient words. Some other free sprits jumped to their toes and started dancing. They all got united in a single groove and right at the moment they all synchronized, the giant ship appeared on the horizon.",
+            "The Islanders danced until the ship had arrived. And when The Shamanic Tribe landed on the beach, they all joined the groove and the party went on for seven days and seven nights."
         ],
         "maxSupply": 750,
         "images": [
@@ -1348,20 +1350,27 @@
             "/images/projects/shamanictribe/image03.png",
             "/images/projects/shamanictribe/image04.png",
             "/images/projects/shamanictribe/image05.png"
-        ]
+        ],
+        "mint": {
+            "gasLimit": 350000,
+            "maxPerTx": 3,
+            "mintImage": "/images/projects/shamanictribe/mint.gif",
+            "weiCost": "30000000000000000000"
+        }
     },
     {
         "name": "Shamanic Tribe",
-        "internalId": "internal::avax::shamanic",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0x67604d697EF878e3B380b44A4854A7c20A68678a",
+        "symbol": "STRB",
         "coverImage": "/images/projects/shamanictribe/image05.png",
         "network": "AVAX",
         "artistId": "tunc",
         "releaseDate": "2022-07-08T20:00:00.000Z",
         "whitelistDate": "2022-07-08T19:30:00.000Z",
         "description": [
-            "TBA"
+            "It had been 7 long months at sea on a giant ship for The Lost Shamanic Tribe of the Old World. They had fled their lands during the massive flood and since then the tribe was searching for a new home. However, on the first day of the new year, one of the Void Angels got a message from The Shaman, saying he was waiting for them to come and live on The Island.  The Void Angel announced the big news to everyone and the ship sailed right to The Island.",
+            "This was a big day for The Island as well. The Shaman gathered every islander and they all went to the beach. They set a big fire and around it formed a giant drum circle. One of the Islanders, IlluminatiCongo stood up, walked to the fire and began to chant in ancient words. Some other free sprits jumped to their toes and started dancing. They all got united in a single groove and right at the moment they all synchronized, the giant ship appeared on the horizon.",
+            "The Islanders danced until the ship had arrived. And when The Shamanic Tribe landed on the beach, they all joined the groove and the party went on for seven days and seven nights."
         ],
         "maxSupply": 750,
         "images": [
@@ -1369,6 +1378,12 @@
             "/images/projects/shamanictribe/image08.png",
             "/images/projects/shamanictribe/image09.png",
             "/images/projects/shamanictribe/image10.png"
-        ]
+        ],
+        "mint": {
+            "gasLimit": 375000,
+            "maxPerTx": 3,
+            "mintImage": "/images/projects/shamanictribe/mint.gif",
+            "weiCost": "450000000000000000"
+        }
     }
 ]

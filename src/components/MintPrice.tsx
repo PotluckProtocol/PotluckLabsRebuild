@@ -29,7 +29,7 @@ export const MintPrice: React.FC<MintPriceProps> = ({
     weiPrice,
     usdPricePerUnit
 }) => {
-    const decimals = symbol === 'AVAX' ? 1 : 0;
+    const decimals = symbol === 'AVAX' ? 2 : 0;
     const priceNumeric = +utils.formatEther(BigNumber.from(weiPrice));
     const price = priceNumeric.toFixed(decimals);
     const usdPrice = (typeof usdPricePerUnit === 'number') ? (usdPricePerUnit * priceNumeric) : undefined;
