@@ -74,6 +74,20 @@
         ]
     },
     {
+        "id": " dgnzaddictions",
+        "projectName": " Dgnz Addictions",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xa6377C4Dd8D6758A7062130099E2C989A32dc657"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x9c9f683062ecE504D5e1b792AA94d9b6a584ab56"
+            }
+        ]
+    },
+    {
         "id": "evilbeanz",
         "projectName": "Evil Beanz",
         "chains": [

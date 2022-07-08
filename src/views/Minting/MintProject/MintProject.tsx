@@ -186,7 +186,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
     const getCost = (amount: number): string => {
         if (baseInformation?.mint?.weiCost) {
             const symbol = mintingContext.priceSymbol;
-            const decimals = symbol === 'AVAX' ? 1 : 0
+            const decimals = symbol === 'AVAX' ? 2 : 0
             const totalAmount = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
 
             return (+utils.formatEther(totalAmount)).toFixed(decimals) + ' ' + symbol;
