@@ -1352,10 +1352,11 @@
             "/images/projects/shamanictribe/image05.png"
         ],
         "mint": {
-            "gasLimit": 350000,
+            "gasLimit": 400000,
             "maxPerTx": 3,
             "mintImage": "/images/projects/shamanictribe/mint.gif",
-            "weiCost": "30000000000000000000"
+            "weiCost": "30000000000000000000",
+            "forceEndedState": true
         }
     },
     {
@@ -1380,10 +1381,11 @@
             "/images/projects/shamanictribe/image10.png"
         ],
         "mint": {
-            "gasLimit": 375000,
+            "gasLimit": 425000,
             "maxPerTx": 3,
             "mintImage": "/images/projects/shamanictribe/mint.gif",
-            "weiCost": "450000000000000000"
+            "weiCost": "450000000000000000",
+            "forceEndedState": true
         }
     }
 ]
