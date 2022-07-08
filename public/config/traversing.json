@@ -198,5 +198,19 @@
                 "contractAddress": "0x67604d697EF878e3B380b44A4854A7c20A68678a"
             }
         ]
+    },
+    {
+        "id": "shamanictribechants",
+        "projectName": "Shamanic Tribe Chants",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xfa440bb8adaad422137d7e0113eda2136b83dc3b"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x595384a322bFCb4BB32B0C5248113442C1a25134"
+            }
+        ]
     }
 ]
