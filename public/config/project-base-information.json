@@ -1387,5 +1387,59 @@
             "weiCost": "450000000000000000",
             "forceEndedState": true
         }
+    },
+    {
+        "name": "Bit Killas",
+        "contractAddress": "0x37cA384bc7Dcf7aa2b71D30Af2b6F09e5746d2AC",
+        "symbol": "BTKZ",
+        "coverImage": "/images/projects/bitkillas/ftmcover.jpg",
+        "network": "FTM",
+        "artistId": "danetron",
+        "releaseDate": "2022-07-20T20:00:00.000Z",
+        "whitelistDate": "2022-07-20T19:30:00.000Z",
+        "description": [
+            "The BitWorld Max Prison is a dangerous place and its bloodthirsty inmates have just escaped! These blood hungry maniacs are on the loose and they’ve got to be stopped. Is there any way to capture all of these evil Bit Killas or is the world doomed to their murderous rampage?"
+        ],
+        "maxSupply": 800,
+        "images": [
+            "/images/projects/bitkillas/image01.png",
+            "/images/projects/bitkillas/image02.png",
+            "/images/projects/bitkillas/image03.png",
+            "/images/projects/bitkillas/image04.png",
+            "/images/projects/bitkillas/image05.png"
+        ],
+        "mint": {
+            "gasLimit": 450000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/bitkillas/mint.gif",
+            "weiCost": "30000000000000000000"
+        }
+    },
+    {
+        "name": "Bit Killas",
+        "contractAddress": "0x219EA18f9f150507a0481bA4E809ea36fb7057fF",
+        "symbol": "BTKZ",
+        "coverImage": "/images/projects/bitkillas/avaxcover.jpg",
+        "network": "AVAX",
+        "artistId": "danetron",
+        "releaseDate": "2022-07-20T20:00:00.000Z",
+        "whitelistDate": "2022-07-20T19:30:00.000Z",
+        "description": [
+            "The BitWorld Max Prison is a dangerous place and its bloodthirsty inmates have just escaped! These blood hungry maniacs are on the loose and they’ve got to be stopped. Is there any way to capture all of these evil Bit Killas or is the world doomed to their murderous rampage?"
+        ],
+        "maxSupply": 400,
+        "images": [
+            "/images/projects/bitkillas/image06.png",
+            "/images/projects/bitkillas/image07.png",
+            "/images/projects/bitkillas/image08.png",
+            "/images/projects/bitkillas/image09.png",
+            "/images/projects/bitkillas/image10.png"
+        ],
+        "mint": {
+            "gasLimit": 450000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/bitkillas/mint.gif",
+            "weiCost": "350000000000000000"
+        }
     }
 ]
