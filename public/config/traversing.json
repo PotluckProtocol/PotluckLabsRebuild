@@ -46,6 +46,20 @@
         ]
     },
     {
+        "id": "bitkillas",
+        "projectName": "Bit Killas",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x37cA384bc7Dcf7aa2b71D30Af2b6F09e5746d2AC"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x219EA18f9f150507a0481bA4E809ea36fb7057fF"
+            }
+        ]
+    },
+    {
         "id": "botsquadchickens",
         "projectName": "Bot Squad Chickens",
         "chains": [
