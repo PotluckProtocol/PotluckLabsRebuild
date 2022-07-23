@@ -1412,7 +1412,8 @@
             "gasLimit": 450000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/bitkillas/mint.gif",
-            "weiCost": "30000000000000000000"
+            "weiCost": "30000000000000000000",
+            "forceEndedState": true
         }
     },
     {
@@ -1439,7 +1440,8 @@
             "gasLimit": 450000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/bitkillas/mint.gif",
-            "weiCost": "350000000000000000"
+            "weiCost": "350000000000000000",
+            "forceEndedState": true
         }
     }
 ]
