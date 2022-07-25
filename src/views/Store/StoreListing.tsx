@@ -43,6 +43,10 @@ export const StoreListing: React.FC = () => {
                 Connected wallet has <LabsBalanceText className='mx-2'>{labs.isLoading ? <Loading width={20} /> : labs.balance.toFixed(2)}</LabsBalanceText> $LABS
             </AccountBalance>
 
+            <p className="mb-12 text-center">
+                <b>Warning:</b> Having Whitelist spots doesn’t guarantee you a mint as there might be more Whitelist spots than possible mints.
+            </p>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {
                     storeConfigs.map((configItem, index) => {
