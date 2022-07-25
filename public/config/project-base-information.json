@@ -1443,5 +1443,37 @@
             "weiCost": "350000000000000000",
             "forceEndedState": true
         }
+    },
+    {
+        "internalId": "internal::ftm::cosmicfrens",
+        "name": "Cosmic Frens",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/cosmicfrens/ftmcover.jpg",
+        "network": "FTM",
+        "artistId": "",
+        "releaseDate": "2022-07-29T20:00:00.000Z",
+        "whitelistDate": "2022-07-29T19:30:00.000Z",
+        "description": [],
+        "maxSupply": 1111,
+        "images": [
+            "/images/projects/cosmicfrens/ftmcover.jpg"
+        ]
+    },
+    {
+        "internalId": "internal::avax::cosmicfrens",
+        "name": "Cosmic Frens",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/cosmicfrens/avaxcover.png",
+        "network": "AVAX",
+        "artistId": "",
+        "releaseDate": "2022-07-29T20:00:00.000Z",
+        "whitelistDate": "2022-07-29T19:30:00.000Z",
+        "description": [],
+        "maxSupply": 1111,
+        "images": [
+            "/images/projects/cosmicfrens/avaxcover.png"
+        ]
     }
 ]
