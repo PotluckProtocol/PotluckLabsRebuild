@@ -1445,35 +1445,59 @@
         }
     },
     {
-        "internalId": "internal::ftm::cosmicfrens",
         "name": "Cosmic Frens",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0x3396d660653612Ba06Ea9259316aad2E962F964c",
+        "symbol": "CSFR",
         "coverImage": "/images/projects/cosmicfrens/ftmcover.jpg",
         "network": "FTM",
         "artistId": "",
         "releaseDate": "2022-07-29T20:00:00.000Z",
         "whitelistDate": "2022-07-29T19:30:00.000Z",
-        "description": [],
+        "description": [
+            "Cosmic Frens travel the Acidverse, hopping through black holes and mystical portals into other dimensions spreading positivity, magic and love along the way."
+        ],
         "maxSupply": 1111,
         "images": [
-            "/images/projects/cosmicfrens/ftmcover.jpg"
-        ]
+            "/images/projects/cosmicfrens/image06.png",
+            "/images/projects/cosmicfrens/image07.png",
+            "/images/projects/cosmicfrens/image08.png",
+            "/images/projects/cosmicfrens/image09.png",
+            "/images/projects/cosmicfrens/image10.png"
+        ],
+        "mint": {
+            "gasLimit": 450000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/cosmicfrens/mint.gif",
+            "weiCost": "30000000000000000000",
+            "forceEndedState": true
+        }
     },
     {
-        "internalId": "internal::avax::cosmicfrens",
         "name": "Cosmic Frens",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0xDd63aE5e25f4994aa1727c8d233D10104e5a9f59",
+        "symbol": "CSFR",
         "coverImage": "/images/projects/cosmicfrens/avaxcover.png",
         "network": "AVAX",
         "artistId": "",
         "releaseDate": "2022-07-29T20:00:00.000Z",
         "whitelistDate": "2022-07-29T19:30:00.000Z",
-        "description": [],
+        "description": [
+            "Cosmic Frens travel the Acidverse, hopping through black holes and mystical portals into other dimensions spreading positivity, magic and love along the way."
+        ],
         "maxSupply": 1111,
         "images": [
-            "/images/projects/cosmicfrens/avaxcover.png"
-        ]
+            "/images/projects/cosmicfrens/image01.png",
+            "/images/projects/cosmicfrens/image02.png",
+            "/images/projects/cosmicfrens/image03.png",
+            "/images/projects/cosmicfrens/image04.png",
+            "/images/projects/cosmicfrens/image05.png"
+        ],
+        "mint": {
+            "gasLimit": 450000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/cosmicfrens/mint.gif",
+            "weiCost": "450000000000000000",
+            "forceEndedState": true
+        }
     }
 ]

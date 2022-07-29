@@ -74,6 +74,20 @@
         ]
     },
     {
+        "id": "cosmicfrens",
+        "projectName": "Cosmic Frens",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x3396d660653612Ba06Ea9259316aad2E962F964c"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0xDd63aE5e25f4994aa1727c8d233D10104e5a9f59"
+            }
+        ]
+    },
+    {
         "id": "cyberfantomic",
         "projectName": "Cyberfantomic",
         "chains": [

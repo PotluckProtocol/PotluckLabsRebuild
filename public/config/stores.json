@@ -1,6 +1,6 @@
 [
     {
-        "projectContractAddressOrName": "internal::ftm::cosmicfrens",
+        "projectContractAddressOrName": "0x3396d660653612Ba06Ea9259316aad2E962F964c",
         "type": "WHITELIST",
         "network": "FTM",
         "priceTokenContractAddress": "0x623d0f6a58e563C8627Da26B567269A18555aa52",
@@ -9,7 +9,7 @@
         "saleEndsOn": "2022-07-27T19:00:00.000Z"
     },
     {
-        "projectContractAddressOrName": "internal::avax::cosmicfrens",
+        "projectContractAddressOrName": "0xDd63aE5e25f4994aa1727c8d233D10104e5a9f59",
         "type": "WHITELIST",
         "network": "AVAX",
         "priceTokenContractAddress": "0xEd37405dE14e39f72e4A405DE32B6B90C96B97e5",
