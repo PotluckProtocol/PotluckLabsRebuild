@@ -1499,5 +1499,37 @@
             "weiCost": "450000000000000000",
             "forceEndedState": true
         }
+    },
+    {
+        "name": "Onis Retribution",
+        "internalId": "internal::ftm::onis",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/onisretribution/ftmcover.png",
+        "network": "FTM",
+        "artistId": "",
+        "releaseDate": "",
+        "whitelistDate": "",
+        "description": [
+            "TBA"
+        ],
+        "maxSupply": -1,
+        "images": []
+    },
+    {
+        "name": "Onis Retribution",
+        "internalId": "internal::avax::onis",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/onisretribution/avaxcover.png",
+        "network": "AVAX",
+        "artistId": "",
+        "releaseDate": "",
+        "whitelistDate": "",
+        "description": [
+            "TBA"
+        ],
+        "maxSupply": -1,
+        "images": []
     }
 ]
