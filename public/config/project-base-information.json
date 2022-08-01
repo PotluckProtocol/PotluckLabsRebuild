@@ -1508,12 +1508,12 @@
         "coverImage": "/images/projects/onisretribution/ftmcover.png",
         "network": "FTM",
         "artistId": "",
-        "releaseDate": "",
-        "whitelistDate": "",
+        "releaseDate": "2022-08-02T20:00:00.000Z",
+        "whitelistDate": "2022-08-02T19:30:00.000Z",
         "description": [
             "TBA"
         ],
-        "maxSupply": -1,
+        "maxSupply": 444,
         "images": []
     },
     {
@@ -1524,12 +1524,56 @@
         "coverImage": "/images/projects/onisretribution/avaxcover.png",
         "network": "AVAX",
         "artistId": "",
-        "releaseDate": "",
-        "whitelistDate": "",
+        "releaseDate": "2022-08-02T20:00:00.000Z",
+        "whitelistDate": "2022-08-02T19:30:00.000Z",
         "description": [
             "TBA"
         ],
-        "maxSupply": -1,
+        "maxSupply": 444,
         "images": []
+    },
+    {
+        "name": "Evil Family",
+        "internalId": "internal::ftm::evilfamily",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/evilfamily/ftmcover.png",
+        "network": "FTM",
+        "artistId": "evilbeard",
+        "releaseDate": "2022-08-05T20:00:00.000Z",
+        "whitelistDate": "2022-08-05T19:30:00.000Z",
+        "description": [
+            "Papa pulled the truck over and turned to look at his Wife, she was asleep and was still covered in blood. Evan and Evie were the in back also sleeping soundlessly. Buttercup was sat in the middle with his head on Papa’s lap. They were all together again, something that Papa thought was never gonna be possible again, he took a deep sigh and took his packet of smokes out of his top pocket, he lit one and took a long deep drag. They were almost clear, almost free, if they could just cross the Canadian Border they’d be set, free to start over. But what if his Dark Passenger wanted more blood? More flesh? Had he created his family’s Dark Passenger’s? Or were they just all cut from the same cloth? Maybe that’s why he and Mama were soul mates, maybe that’s why they had brought to life 2 children many people have called monsters. He finished his smoke and flicked the butt out of the window, checked the magazine in his Glock, put the truck into drive and headed for the border. They’d make it, no matter how many lives they’d have to take to do it…"
+        ],
+        "maxSupply": 800,
+        "images": [
+            "/images/projects/evilfamily/image01.png",
+            "/images/projects/evilfamily/image02.png",
+            "/images/projects/evilfamily/image03.png",
+            "/images/projects/evilfamily/image04.png",
+            "/images/projects/evilfamily/image05.png"
+        ]
+    },
+    {
+        "name": "Evil Family",
+        "internalId": "internal::avax::evilfamily",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/evilfamily/avaxcover.png",
+        "network": "AVAX",
+        "artistId": "evilbeard",
+        "releaseDate": "2022-08-05T20:00:00.000Z",
+        "whitelistDate": "2022-08-05T19:30:00.000Z",
+        "description": [
+            "Papa pulled the truck over and turned to look at his Wife, she was asleep and was still covered in blood. Evan and Evie were the in back also sleeping soundlessly. Buttercup was sat in the middle with his head on Papa’s lap. They were all together again, something that Papa thought was never gonna be possible again, he took a deep sigh and took his packet of smokes out of his top pocket, he lit one and took a long deep drag. They were almost clear, almost free, if they could just cross the Canadian Border they’d be set, free to start over. But what if his Dark Passenger wanted more blood? More flesh? Had he created his family’s Dark Passenger’s? Or were they just all cut from the same cloth? Maybe that’s why he and Mama were soul mates, maybe that’s why they had brought to life 2 children many people have called monsters. He finished his smoke and flicked the butt out of the window, checked the magazine in his Glock, put the truck into drive and headed for the border. They’d make it, no matter how many lives they’d have to take to do it…"
+        ],
+        "maxSupply": 500,
+        "images": [
+            "/images/projects/evilfamily/image01.png",
+            "/images/projects/evilfamily/image02.png",
+            "/images/projects/evilfamily/image03.png",
+            "/images/projects/evilfamily/image04.png",
+            "/images/projects/evilfamily/image05.png"
+        ]
     }
 ]

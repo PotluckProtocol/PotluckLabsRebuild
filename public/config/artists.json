@@ -177,5 +177,12 @@
         "social": {
             "twitter": "https://twitter.com/tuncsuerdas"
         }
+    },
+    {
+        "id": "evilbeard",
+        "name": "EvilBeard",
+        "social": {
+            "twitter": "https://twitter.com/E6LBEARD"
+        }
     }
 ]
