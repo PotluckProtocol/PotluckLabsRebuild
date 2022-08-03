@@ -186,6 +186,20 @@
         ]
     },
     {
+        "id": "onis",
+        "projectName": "Onis Retribution",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x02A1CBe325fb5B831ad90D6cfB04bc053B6Ba070"
+            }
+        ]
+    },
+    {
         "id": "potluckrealmelves",
         "projectName": "Potluck Realm Elves",
         "chains": [

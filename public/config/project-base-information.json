@@ -1502,9 +1502,8 @@
     },
     {
         "name": "Onis Retribution",
-        "internalId": "internal::ftm::onis",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4",
+        "symbol": "ONIS",
         "coverImage": "/images/projects/onisretribution/ftmcover.png",
         "network": "FTM",
         "artistId": "",
@@ -1518,9 +1517,8 @@
     },
     {
         "name": "Onis Retribution",
-        "internalId": "internal::avax::onis",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0x02A1CBe325fb5B831ad90D6cfB04bc053B6Ba070",
+        "symbol": "ONIS",
         "coverImage": "/images/projects/onisretribution/avaxcover.png",
         "network": "AVAX",
         "artistId": "",
