@@ -130,6 +130,20 @@
         ]
     },
     {
+        "id": "evilfamily",
+        "projectName": "Evil Family",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xC8F5187f34B8405f7C74cb35f467EfdF81711C0D"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0x2541EE506cE0e338c1ae5b25Af9265907C6Ff906"
+            }
+        ]
+    },
+    {
         "id": "divas",
         "projectName": "Ghoulish Divas",
         "chains": [
