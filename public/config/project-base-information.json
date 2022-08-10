@@ -1586,5 +1586,37 @@
             "mintImage": "/images/projects/evilfamily/mint.gif",
             "weiCost": "350000000000000000"
         }
+    },
+    {
+        "name": "Paint Huffing Degenerates 2",
+        "internalId": "internal::ftm::huffing2",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/painthuffing2/ftmcover.png",
+        "network": "FTM",
+        "artistId": "mazochist",
+        "releaseDate": "2022-08-16T20:00:00.000Z",
+        "whitelistDate": "2022-08-16T19:30:00.000Z",
+        "description": [],
+        "maxSupply": 1111,
+        "images": [
+            "/images/projects/painthuffing2/ftmcover.png"
+        ]
+    },
+    {
+        "name": "Paint Huffing Degenerates 2",
+        "internalId": "internal::avax::huffing2",
+        "contractAddress": "",
+        "symbol": "",
+        "coverImage": "/images/projects/painthuffing2/avaxcover.png",
+        "network": "AVAX",
+        "artistId": "mazochist",
+        "releaseDate": "2022-08-16T20:00:00.000Z",
+        "whitelistDate": "2022-08-16T19:30:00.000Z",
+        "description": [],
+        "maxSupply": 1111,
+        "images": [
+            "/images/projects/painthuffing2/avaxcover.png"
+        ]
     }
 ]
