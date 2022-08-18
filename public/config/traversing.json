@@ -214,6 +214,20 @@
         ]
     },
     {
+        "id": "huffing2",
+        "projectName": "Paint Huffing Degenerates 2",
+        "chains": [
+            {
+                "network": "FTM",
+                "contractAddress": "0xb891d26911A6733b23248fdCF733af075e092338"
+            },
+            {
+                "network": "AVAX",
+                "contractAddress": "0xb6540aaD696D07Cea8d56c58506969f6D943A00f"
+            }
+        ]
+    },
+    {
         "id": "potluckrealmelves",
         "projectName": "Potluck Realm Elves",
         "chains": [

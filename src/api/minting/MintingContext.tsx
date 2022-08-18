@@ -222,7 +222,8 @@ export const MintingProvider: React.FC = ({ children }) => {
                 return { succeed: false };
             }
 
-            const res = await mintingWrapper.mint(amount, walletAddress);
+            const mintOpts = mintState === 'WhitelistOpen' ? { whitelistMint: true } : {};
+            const res = await mintingWrapper.mint(amount, walletAddress, mintOpts);
 
             if (res.succeed && typeof afterSuccessfulMintCallback === 'function') {
                 afterSuccessfulMintCallback();

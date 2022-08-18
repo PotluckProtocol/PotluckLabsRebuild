@@ -1589,34 +1589,56 @@
     },
     {
         "name": "Paint Huffing Degenerates 2",
-        "internalId": "internal::ftm::huffing2",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0xb891d26911A6733b23248fdCF733af075e092338",
+        "symbol": "PHDT",
         "coverImage": "/images/projects/painthuffing2/ftmcover.png",
         "network": "FTM",
         "artistId": "mazochist",
         "releaseDate": "2022-08-16T20:00:00.000Z",
         "whitelistDate": "2022-08-16T19:30:00.000Z",
-        "description": [],
+        "description": [
+            "The only constant is change... OG PhD boomers, you need to make way for the new generation of Paint Huffing Degens! they've spread like a disease and multiplied by the millions by now. They're meaner, uglier and hornier than ever before! Still Huffing and Puffing till they blow all their brain cells away. New Huff city (previously known as New Huffington) has never seen such chaos and utter madness... Rioting, looting, setting fires and flipping cars is just your average tuesday night in PhD land. The city sign reads 'welcome to New Huff City! ...there's still time to turn around' ...better be quick about it though, they'll steal your wheels while you shift in reverse."
+        ],
         "maxSupply": 1111,
         "images": [
-            "/images/projects/painthuffing2/ftmcover.png"
-        ]
+            "/images/projects/painthuffing2/ftm1.png",
+            "/images/projects/painthuffing2/ftm2.png",
+            "/images/projects/painthuffing2/ftm3.png",
+            "/images/projects/painthuffing2/ftm4.png"
+        ],
+        "mint": {
+            "gasLimit": 450000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/painthuffing2/mintftm.gif",
+            "weiCost": "35000000000000000000",
+            "whitelistWeiCost": "30000000000000000000"
+        }
     },
     {
         "name": "Paint Huffing Degenerates 2",
-        "internalId": "internal::avax::huffing2",
-        "contractAddress": "",
-        "symbol": "",
+        "contractAddress": "0xb6540aaD696D07Cea8d56c58506969f6D943A00f",
+        "symbol": "PHDT",
         "coverImage": "/images/projects/painthuffing2/avaxcover.png",
         "network": "AVAX",
         "artistId": "mazochist",
         "releaseDate": "2022-08-16T20:00:00.000Z",
         "whitelistDate": "2022-08-16T19:30:00.000Z",
-        "description": [],
+        "description": [
+            "The only constant is change... OG PhD boomers, you need to make way for the new generation of Paint Huffing Degens! they've spread like a disease and multiplied by the millions by now. They're meaner, uglier and hornier than ever before! Still Huffing and Puffing till they blow all their brain cells away. New Huff city (previously known as New Huffington) has never seen such chaos and utter madness... Rioting, looting, setting fires and flipping cars is just your average tuesday night in PhD land. The city sign reads 'welcome to New Huff City! ...there's still time to turn around' ...better be quick about it though, they'll steal your wheels while you shift in reverse."
+        ],
         "maxSupply": 1111,
         "images": [
-            "/images/projects/painthuffing2/avaxcover.png"
-        ]
+            "/images/projects/painthuffing2/avax1.png",
+            "/images/projects/painthuffing2/avax2.png",
+            "/images/projects/painthuffing2/avax3.png",
+            "/images/projects/painthuffing2/avax4.png"
+        ],
+        "mint": {
+            "gasLimit": 450000,
+            "maxPerTx": 5,
+            "mintImage": "/images/projects/painthuffing2/mintavax.gif",
+            "weiCost": "450000000000000000",
+            "whitelistWeiCost": "400000000000000000"
+        }
     }
 ]

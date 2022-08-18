@@ -46,6 +46,7 @@ export type ProjectBaseInformationRaw = {
     mint?: {
         priceErc20Token?: string;
         weiCost: string;
+        whitelistWeiCost?: string;
         gasLimit: number;
         maxPerTx: number;
         mintImage: string;

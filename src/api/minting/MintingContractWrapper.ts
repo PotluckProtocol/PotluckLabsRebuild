@@ -24,6 +24,11 @@ export type MintingContractWrapperOpts = {
     hasWhitelist?: boolean;
 }
 
+export type MintOpts = {
+    fastMint?: boolean;
+    whitelistMint?: boolean;
+}
+
 export class MintingContractWrapper extends EventEmitter {
 
     private lastMintedSupply: number = 0;
@@ -39,16 +44,24 @@ export class MintingContractWrapper extends EventEmitter {
         this.init();
     }
 
-    public async mint(amount: number, fromWallet: string, fastMint: boolean = false): Promise<{ succeed: boolean, tokenIds?: number[] }> {
+    public async mint(amount: number, fromWallet: string, opts: MintOpts = {}): Promise<{ succeed: boolean, tokenIds?: number[] }> {
 
         const { mint } = this.projectBaseInformation;
         if (!mint) {
             return { succeed: false };
         }
 
-        const bigNumber = ethers.BigNumber.from(mint.weiCost);
+        const { fastMint, whitelistMint } = opts;
+
+        let price: ethers.BigNumber;
+        if (whitelistMint && mint.whitelistWeiCost) {
+            price = ethers.BigNumber.from(mint.whitelistWeiCost);
+        } else {
+            price = ethers.BigNumber.from(mint.weiCost);
+        }
+
         const totalGasLimit = String(amount * mint.gasLimit);
-        const totalCostWei = String(bigNumber.mul(amount));
+        const totalCostWei = String(price.mul(amount));
 
         try {
 
@@ -63,8 +76,12 @@ export class MintingContractWrapper extends EventEmitter {
             if (this.projectBaseInformation.contractAddress === '0x246CBfEfd5B70D74335F0aD25E660Ba1e2259858') {
                 await this.waitTx(this.contract.mint({ value: totalCostWei, gasLimit: totalGasLimit }));
             } else {
+                let value: string | undefined;
                 // If erc20 mint no need for sending value as it is not payable method
-                const value = (this.projectBaseInformation.mint?.priceErc20Token) ? undefined : totalCostWei;
+                if (!mint.priceErc20Token) {
+                    value = totalCostWei;
+                }
+
                 await this.waitTx(this.contract.mint(amount, { value, gasLimit: totalGasLimit }));
             }
 
@@ -136,7 +153,12 @@ export class MintingContractWrapper extends EventEmitter {
     public async getWhitelistCount(walletAddress: string): Promise<number> {
         let wlCount: number = 0;
         if (this.opts.hasWhitelist) {
-            wlCount = Number(await this.contract.whiteListed(walletAddress));
+            try {
+                wlCount = Number(await this.contract.isWhitelisted(walletAddress));
+            } catch (e) {
+                console.log('Fallback into older whitelist function');
+                wlCount = Number(await this.contract.whiteListed(walletAddress));
+            }
         }
 
         this.emit(WHITELIST_COUNT_CHANGED_EVENT, wlCount);

@@ -110,7 +110,6 @@ export const MintProject: React.FC<MintProjectProps> = ({
         .getConfig(contractAddress);
     const network = resolveNetwork(baseInformation.network);
 
-
     const [mintAmount, setMintAmount] = useState(1);
     const [isInitializing, setIsInitializing] = useState(false);
     const mintingContext = useContext(MintingContext);
@@ -121,6 +120,18 @@ export const MintProject: React.FC<MintProjectProps> = ({
 
     const walletAddress = user.account?.walletAddress;
     const hasUSDPrice = (typeof tokenUSDPrice === 'number') && !baseInformation?.mint?.priceErc20Token;
+
+    const shouldUseWhitelistMintPrice = (
+        !!baseInformation.mint?.whitelistWeiCost &&
+        mintingContext.mintState === 'WhitelistOpen' &&
+        mintingContext.whitelistCount > 0
+    );
+
+    const mintPriceWei: string = (
+        shouldUseWhitelistMintPrice
+            ? baseInformation.mint?.whitelistWeiCost
+            : baseInformation.mint?.weiCost
+    ) || '';
 
     useEffect(() => {
         const init = async () => {
@@ -184,10 +195,10 @@ export const MintProject: React.FC<MintProjectProps> = ({
     }
 
     const getCost = (amount: number): string => {
-        if (baseInformation?.mint?.weiCost) {
+        if (mintPriceWei) {
             const symbol = mintingContext.priceSymbol;
             const decimals = symbol === 'AVAX' ? 2 : 0
-            const totalAmount = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
+            const totalAmount = BigNumber.from(mintPriceWei).mul(amount);
 
             return (+utils.formatEther(totalAmount)).toFixed(decimals) + ' ' + symbol;
         } else {
@@ -196,8 +207,8 @@ export const MintProject: React.FC<MintProjectProps> = ({
     }
 
     const getUsdCost = (amount: number): string => {
-        if (typeof tokenUSDPrice === 'number' && !baseInformation?.mint?.priceErc20Token && baseInformation?.mint?.weiCost) {
-            const totalPriceWei = BigNumber.from(baseInformation.mint.weiCost).mul(amount);
+        if (typeof tokenUSDPrice === 'number' && !baseInformation?.mint?.priceErc20Token && mintPriceWei) {
+            const totalPriceWei = BigNumber.from(mintPriceWei).mul(amount);
             return '$' + ((+utils.formatEther(totalPriceWei)) * tokenUSDPrice).toFixed(2);
         } else {
             return '';
@@ -353,7 +364,7 @@ export const MintProject: React.FC<MintProjectProps> = ({
                         <StyledMintPrice
                             fontSizeRem={2.5}
                             symbol={mintingContext.priceSymbol}
-                            weiPrice={baseInformation.mint.weiCost}
+                            weiPrice={mintPriceWei}
                             usdPricePerUnit={hasUSDPrice ? tokenUSDPrice : undefined}
                         />
 
