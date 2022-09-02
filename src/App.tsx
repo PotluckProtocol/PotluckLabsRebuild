@@ -96,7 +96,12 @@ const App = () => {
                             </MenuItem>
                             <MenuItem path="https://thecoffin.potluckprotocol.com/" onNavigate={closeMenu}>
                                 <div className="flex items-center">
-                                    Stake NFTs <StyledExternalLinkIcon />
+                                    The Coffin (Stake) <StyledExternalLinkIcon />
+                                </div>
+                            </MenuItem>
+                            <MenuItem path="https://therewarder.potluckprotocol.com/" onNavigate={closeMenu}>
+                                <div className="flex items-center">
+                                    The Rewarder (Stake) <StyledExternalLinkIcon />
                                 </div>
                             </MenuItem>
                             <MenuItem path="/team" onNavigate={closeMenu}>Team</MenuItem>
