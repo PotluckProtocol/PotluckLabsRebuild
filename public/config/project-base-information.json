@@ -1545,7 +1545,7 @@
         "description": [
             "Papa pulled the truck over and turned to look at his Wife, she was asleep and was still covered in blood. Evan and Evie were the in back also sleeping soundlessly. Buttercup was sat in the middle with his head on Papa’s lap. They were all together again, something that Papa thought was never gonna be possible again, he took a deep sigh and took his packet of smokes out of his top pocket, he lit one and took a long deep drag. They were almost clear, almost free, if they could just cross the Canadian Border they’d be set, free to start over. But what if his Dark Passenger wanted more blood? More flesh? Had he created his family’s Dark Passenger’s? Or were they just all cut from the same cloth? Maybe that’s why he and Mama were soul mates, maybe that’s why they had brought to life 2 children many people have called monsters. He finished his smoke and flicked the butt out of the window, checked the magazine in his Glock, put the truck into drive and headed for the border. They’d make it, no matter how many lives they’d have to take to do it…"
         ],
-        "maxSupply": 800,
+        "maxSupply": 550,
         "images": [
             "/images/projects/evilfamily/image01.png",
             "/images/projects/evilfamily/image02.png",
@@ -1557,7 +1557,9 @@
             "gasLimit": 450000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/evilfamily/mint.gif",
-            "weiCost": "25000000000000000000"
+            "weiCost": "25000000000000000000",
+            "forceEndedState": true
+
         }
     },
     {
@@ -1572,7 +1574,7 @@
         "description": [
             "Papa pulled the truck over and turned to look at his Wife, she was asleep and was still covered in blood. Evan and Evie were the in back also sleeping soundlessly. Buttercup was sat in the middle with his head on Papa’s lap. They were all together again, something that Papa thought was never gonna be possible again, he took a deep sigh and took his packet of smokes out of his top pocket, he lit one and took a long deep drag. They were almost clear, almost free, if they could just cross the Canadian Border they’d be set, free to start over. But what if his Dark Passenger wanted more blood? More flesh? Had he created his family’s Dark Passenger’s? Or were they just all cut from the same cloth? Maybe that’s why he and Mama were soul mates, maybe that’s why they had brought to life 2 children many people have called monsters. He finished his smoke and flicked the butt out of the window, checked the magazine in his Glock, put the truck into drive and headed for the border. They’d make it, no matter how many lives they’d have to take to do it…"
         ],
-        "maxSupply": 500,
+        "maxSupply": 200,
         "images": [
             "/images/projects/evilfamily/image01.png",
             "/images/projects/evilfamily/image02.png",
@@ -1584,7 +1586,9 @@
             "gasLimit": 450000,
             "maxPerTx": 5,
             "mintImage": "/images/projects/evilfamily/mint.gif",
-            "weiCost": "350000000000000000"
+            "weiCost": "350000000000000000",
+            "forceEndedState": true
+
         }
     },
     {
@@ -1599,7 +1603,7 @@
         "description": [
             "The only constant is change... OG PhD boomers, you need to make way for the new generation of Paint Huffing Degens! they've spread like a disease and multiplied by the millions by now. They're meaner, uglier and hornier than ever before! Still Huffing and Puffing till they blow all their brain cells away. New Huff city (previously known as New Huffington) has never seen such chaos and utter madness... Rioting, looting, setting fires and flipping cars is just your average tuesday night in PhD land. The city sign reads 'welcome to New Huff City! ...there's still time to turn around' ...better be quick about it though, they'll steal your wheels while you shift in reverse."
         ],
-        "maxSupply": 1111,
+        "maxSupply": 600,
         "images": [
             "/images/projects/painthuffing2/ftm1.png",
             "/images/projects/painthuffing2/ftm2.png",
@@ -1611,7 +1615,8 @@
             "maxPerTx": 5,
             "mintImage": "/images/projects/painthuffing2/mintftm.gif",
             "weiCost": "35000000000000000000",
-            "whitelistWeiCost": "30000000000000000000"
+            "whitelistWeiCost": "30000000000000000000",
+            "forceEndedState": true
         }
     },
     {
@@ -1626,7 +1631,7 @@
         "description": [
             "The only constant is change... OG PhD boomers, you need to make way for the new generation of Paint Huffing Degens! they've spread like a disease and multiplied by the millions by now. They're meaner, uglier and hornier than ever before! Still Huffing and Puffing till they blow all their brain cells away. New Huff city (previously known as New Huffington) has never seen such chaos and utter madness... Rioting, looting, setting fires and flipping cars is just your average tuesday night in PhD land. The city sign reads 'welcome to New Huff City! ...there's still time to turn around' ...better be quick about it though, they'll steal your wheels while you shift in reverse."
         ],
-        "maxSupply": 1111,
+        "maxSupply": 200,
         "images": [
             "/images/projects/painthuffing2/avax1.png",
             "/images/projects/painthuffing2/avax2.png",
@@ -1638,7 +1643,8 @@
             "maxPerTx": 5,
             "mintImage": "/images/projects/painthuffing2/mintavax.gif",
             "weiCost": "450000000000000000",
-            "whitelistWeiCost": "400000000000000000"
+            "whitelistWeiCost": "400000000000000000",
+            "forceEndedState": true
         }
     }
 ]
