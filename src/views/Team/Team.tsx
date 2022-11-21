@@ -1,13 +1,9 @@
 import { Member, MemberProps } from "./Member"
 
-/**
- * @todo Read members from json file
- */
-
 const MEMBERS: MemberProps[] = [{
     name: 'Tinfoil Realist',
     image: '/images/team/TinfoilRealist.png',
-    twitterUrl: 'https://twitter.com/TinFoilRealist_'
+    twitterUrl: 'https://twitter.com/TinfoilRealist0'
 }, {
     name: 'True Voodoo',
     image: '/images/team/TrueVoodoo.png',
@@ -15,7 +11,7 @@ const MEMBERS: MemberProps[] = [{
 }, {
     name: 'Plot Twist',
     image: '/images/team/PlotTwist.png',
-    twitterUrl: 'https://www.twitter.com/PlotTwistFTM'
+    twitterUrl: 'https://twitter.com/PlotTwistNFT'
 }, {
     name: 'Dracula Presley',
     image: '/images/team/DraculaPresley.png',
