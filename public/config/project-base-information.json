@@ -1559,7 +1559,6 @@
             "mintImage": "/images/projects/evilfamily/mint.gif",
             "weiCost": "25000000000000000000",
             "forceEndedState": true
-
         }
     },
     {
@@ -1588,7 +1587,6 @@
             "mintImage": "/images/projects/evilfamily/mint.gif",
             "weiCost": "350000000000000000",
             "forceEndedState": true
-
         }
     },
     {
@@ -1646,5 +1644,12 @@
             "whitelistWeiCost": "400000000000000000",
             "forceEndedState": true
         }
+    },
+    {
+        "name": "Heretix",
+        "internalId": "internal::heretixftm",
+        "coverImage": "/images/projects/heretix/heretix.jpeg",
+        "network": "FTM",
+        "hideInProjects": true
     }
 ]
